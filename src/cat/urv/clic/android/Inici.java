@@ -17,7 +17,8 @@ public class Inici extends Activity implements OnClickListener {
         Button nextButton = (Button) findViewById(R.id.next);
         nextButton.setOnClickListener( this );       
     }
-
+//COMENTARI PUSH
+    //ALGUN CANVI
     // Captura i gesti— dels events dels botons
 	public void onClick(View v) {
 		Intent intent = new Intent(this, LlistaClics.class);
