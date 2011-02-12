@@ -14,6 +14,7 @@ public class LlistaClics extends ListActivity {
 //        super.onCreate(savedInstanceState);
 //        setContentView(R.layout.llista);
 //    }
+    //COMENTARI
     
     //HOLA!
     private Object[] fruits = {"Orange", "Apple", "Pear"}; 
