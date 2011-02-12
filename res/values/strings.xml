@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Clic</string>
+    <string name="hello">Pantalla principal de l\'aplicacio</string>
+    <string name="next">Continuar</string>    
+    <string name="button01">Clic Primer</string>
+    <string name="button02">Clic Segon</string>
+    <string name="button03">Clic Tercer</string>
+</resources>
