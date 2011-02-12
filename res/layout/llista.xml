@@ -8,11 +8,11 @@
     
     
     <TextView 
-    	android:text="TextView" 
     	android:id="@+id/listItem" 
     	android:layout_width="fill_parent" 
     	android:layout_height="fill_parent"
-    />
+    	>
+    </TextView>
    
 	
 </LinearLayout>

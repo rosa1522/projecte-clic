@@ -16,6 +16,9 @@
         			android:label="@string/app_name"
 					android:theme="@android:style/Theme.NoTitleBar">
         </activity>
+        <activity android:name=".LlistaClics"
+        			android:label="@string/app_name">
+        </activity>
     </application>
     <uses-sdk android:minSdkVersion="8" />
 </manifest> 

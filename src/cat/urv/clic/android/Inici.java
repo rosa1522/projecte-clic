@@ -15,7 +15,10 @@ public class Inici extends Activity implements OnClickListener {
         setContentView(R.layout.main);
         
         Button nextButton = (Button) findViewById(R.id.next);
-        nextButton.setOnClickListener( this );       
+        nextButton.setOnClickListener( this );  
+        
+        Button nextButtonView = (Button) findViewById(R.id.vistaweb);
+        nextButtonView.setOnClickListener( this );   
     }
 
     // Captura i gesti— dels events dels botons

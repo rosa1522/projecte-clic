@@ -1,5 +1,6 @@
 package cat.urv.clic.android;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -16,16 +17,17 @@ public class LlistaClics extends ListActivity {
     
     
     private Object[] fruits = {"Orange", "Apple", "Pear"}; 
-    private ArrayAdapter<TextView> adp = null; 
+    private ArrayAdapter adp = null; 
     
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    	
-    	adp = new ArrayAdapter(this,R.id.listItem,fruits); 
+           	
+        adp = new ArrayAdapter(this,R.id.listItem,fruits); 
     	setListAdapter(adp); 
-    	setContentView(R.layout.llista); 
+    	
+    	setContentView(R.layout.llista);
+    	
     }
     
 }
