@@ -12,7 +12,7 @@
             </intent-filter>
         </activity>
         <uses-permission android:name="android.permission.INTERNET" />
-        <activity android:name="WebView"
+        <activity android:name=".VistaWeb"
         			android:label="@string/app_name"
 					android:theme="@android:style/Theme.NoTitleBar">
         </activity>

@@ -2,11 +2,10 @@ package cat.urv.clic.android;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.webkit.*;
+import android.webkit.WebView;
 
-public class WebView extends Activity {
+public class VistaWeb extends Activity {
 	
-	private WebView web;
 	/** Called when the activity is first created. */
 	/* @Override
    	public void onCreate(Bundle savedInstanceState) {
@@ -18,9 +17,9 @@ public class WebView extends Activity {
         super.onCreate(savedInstanceState);
     	setContentView(R.layout.webview);
     	
-    	//web = (WebView) findViewById(R.id.webView);
+    	WebView web = (WebView) findViewById(R.id.webView);
         
-        //web.getSettings().setJavaScriptEnabled(true);
-        //web.loadUrl("http://www.google.com");
+        web.getSettings().setJavaScriptEnabled(true);
+        web.loadUrl("http://www.google.com");
     }
 }
