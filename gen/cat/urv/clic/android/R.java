@@ -14,7 +14,7 @@ public final class R {
         public static final int icon=0x7f020000;
     }
     public static final class id {
-        public static final int listItem=0x7f050000;
+        public static final int listView1=0x7f050000;
         public static final int next=0x7f050001;
         public static final int vistaweb=0x7f050002;
         public static final int webView=0x7f050003;
@@ -31,5 +31,6 @@ public final class R {
         public static final int button03=0x7f040005;
         public static final int hello=0x7f040001;
         public static final int next=0x7f040002;
+        public static final int vistaweb=0x7f040006;
     }
 }

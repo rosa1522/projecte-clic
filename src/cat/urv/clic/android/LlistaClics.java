@@ -1,33 +1,22 @@
 package cat.urv.clic.android;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 
 public class LlistaClics extends ListActivity {
-    /** Called when the activity is first created. */
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.llista);
-//    }
-    //COMENTARI
-    
-    //HOLA!
-    private Object[] fruits = {"Orange", "Apple", "Pear"}; 
-    private ArrayAdapter adp = null; 
+
+    private String[] fruits = new String[]{"Orange", "Apple", "Pear"}; 
+    private ArrayAdapter<String> adp; 
     
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
-           	
-        adp = new ArrayAdapter(this,R.id.listItem,fruits); 
-    	setListAdapter(adp); 
-    	
-    	setContentView(R.layout.llista);
+    	super.onCreate(savedInstanceState);
+
+        adp = new ArrayAdapter<String>(this,R.id.listView1,fruits); 
+    	setListAdapter(adp);
     	
     }
     

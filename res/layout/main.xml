@@ -17,7 +17,7 @@
 		/>
 		
    	<Button 
-   		android:text="Button"
+   		android:text="@string/vistaweb"
    		android:id="@+id/vistaweb" 
    		android:layout_width="wrap_content" 
    		android:layout_height="wrap_content">
