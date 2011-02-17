@@ -18,7 +18,7 @@ public class VistaWeb extends Activity {
     	setContentView(R.layout.webview);
     	
     	WebView web = (WebView) findViewById(R.id.webView);
-        
+    	WebView.enablePlatformNotifications();
         web.getSettings().setJavaScriptEnabled(true);
         web.loadUrl("http://www.google.com");
     }

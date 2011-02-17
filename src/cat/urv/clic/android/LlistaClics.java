@@ -15,7 +15,7 @@ public class LlistaClics extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
 
-        adp = new ArrayAdapter<String>(this,R.id.listView1,fruits); 
+        adp = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,fruits); 
     	setListAdapter(adp);
     	
     }
