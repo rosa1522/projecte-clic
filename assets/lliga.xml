@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<liga tipo="Champions League">
+  <equipo>
+    <club valoracion="10" ciudad="Bilbao">Athletic Club Bilbao</club>
+    <presidente>Uria</presidente>
+    <plantilla>
+      <nombre>Julen Guerrero</nombre>
+      <nombre>Joseba Etxeberria</nombre>
+      <nombre>Ismael Urzaiz</nombre>
+    </plantilla>
+  </equipo>
+  <equipo>
+    <!-- no os piqueis ;-) -->
+    <club valoracion="5" ciudad="Madrid">Real Madrid</club>
+    <presidente>Mandamas</presidente>
+    <plantilla>
+      <!-- no pongo nombres propios por si acaso -->
+      <nombre>Bota de oro</nombre>
+      <nombre>Milloneti</nombre>
+      <nombre>Canterano quemado</nombre>
+    </plantilla>
+    <conextranjeros/>
+  </equipo>
+  <arbitros>
+    <nombre>No doy una</nombre>
+    <nombre>Rafanomejodas</nombre>
+  </arbitros>
+</liga>

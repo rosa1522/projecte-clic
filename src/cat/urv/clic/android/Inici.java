@@ -28,7 +28,9 @@ public class Inici extends Activity implements OnClickListener {
 		{
 			intent = new Intent(this, LlistaClics.class);
 		}else if (v.getId() == R.id.vistaweb) {
-			intent = new Intent(this, VistaWeb.class);
+			//intent = new Intent(this, VistaWeb.class);
+			//intent = new Intent(this, Vista.class);
+			intent = new Intent(this, Prova.class);
 		}
 		
 		startActivity(intent);		
