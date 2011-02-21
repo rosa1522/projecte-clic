@@ -3,6 +3,8 @@ package cat.urv.clic.android;
 import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
+
 
 public class VistaWeb extends Activity {
 	
@@ -21,5 +23,24 @@ public class VistaWeb extends Activity {
     	WebView.enablePlatformNotifications();
         web.getSettings().setJavaScriptEnabled(true);
         web.loadUrl("http://www.google.com");
+        
+        /*
+        final WebView webview = (WebView)findViewById(R.id.webView);  
+        // JavaScript must be enabled if you want it to work, obviously 
+        webview.getSettings().setJavaScriptEnabled(true);  
+          
+        // WebViewClient must be set BEFORE calling loadUrl! 
+        webview.setWebViewClient(new WebViewClient() {  
+            @Override  
+            public void onPageFinished(WebView view, String url)  
+            {  
+                webview.loadUrl("javascript:(function() { " +  
+                        "document.getElementsByTagName('body')[0].style.color = 'red'; " +  
+                        "})()");  
+            }  
+        });  
+          
+        webview.loadUrl("http://code.google.com/android");  
+        */
     }
 }
