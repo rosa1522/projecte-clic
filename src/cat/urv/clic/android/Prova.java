@@ -51,14 +51,8 @@ public class Prova extends ListActivity {
     
     public void onClick(View v) {
 		Intent intent = null;
-		if (v.getId() == R.id.next)
-		{
-			intent = new Intent(this, LlistaClics.class);
-		}else if (v.getId() == R.id.vistaweb) {
-			//intent = new Intent(this, VistaWeb.class);
-			//intent = new Intent(this, Vista.class);
-			intent = new Intent(this, Prova.class);
-		}
+		
+		intent = new Intent(this, VistaWeb.class);
 		
 		startActivity(intent);		
 	}

@@ -24,8 +24,14 @@ public class Inici extends Activity implements OnClickListener {
     // Captura i gestió dels events dels botons
 	public void onClick(View v) {
 		Intent intent = null;
-	
-		intent = new Intent(this, VistaWeb.class);
+		if (v.getId() == R.id.next)
+		{
+			intent = new Intent(this, LlistaClics.class);
+		}else if (v.getId() == R.id.vistaweb) {
+			//intent = new Intent(this, VistaWeb.class);
+			//intent = new Intent(this, Vista.class);
+			intent = new Intent(this, Prova.class);
+		}
 		
 		startActivity(intent);		
 	}
