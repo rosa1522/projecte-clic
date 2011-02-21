@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<granja nom="M.Rosa i Aina">
-  <parcela>
-      <nom>Ovella</nom>
-      <nom>Vaca</nom>
-      <nom>Porquet</nom>
-  </parcela>
-</granja>

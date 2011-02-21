@@ -7,7 +7,9 @@ import org.jdom.input.*;
 import org.jdom.output.*;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 
 public class Prova extends ListActivity {
@@ -46,4 +48,18 @@ public class Prova extends ListActivity {
             e.printStackTrace();
          }
     }
+    
+    public void onClick(View v) {
+		Intent intent = null;
+		if (v.getId() == R.id.next)
+		{
+			intent = new Intent(this, LlistaClics.class);
+		}else if (v.getId() == R.id.vistaweb) {
+			//intent = new Intent(this, VistaWeb.class);
+			//intent = new Intent(this, Vista.class);
+			intent = new Intent(this, Prova.class);
+		}
+		
+		startActivity(intent);		
+	}
 }
