@@ -24,7 +24,7 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 
 	private ArrayAdapter<String> adp; 
 	private List<String> jocs = new ArrayList<String>();
-	  
+	Intent intent = null;
 	  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,14 +59,16 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	        }
 	        adp = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,jocs); 
 	        list.setAdapter(adp);       
-        
+        	        
+			intent = new Intent(this, DescripcioJoc.class);	
 	        
 	        // Clic de la llista
 	        OnItemClickListener onClic = new OnItemClickListener(){
 	        						public void onItemClick(AdapterView<?> arg0, View v, int i,long id) {
 	        							String str = list.getItemAtPosition(i).toString();
-	        							System.out.println("***********ENTRA");
-	        							System.out.println(str);
+	        					        							
+	        							DescripcioJoc.name = str;
+	        							startActivity(intent);	        		
 	        						}};
 	        list.setOnItemClickListener(onClic);
         }catch (Exception e){
