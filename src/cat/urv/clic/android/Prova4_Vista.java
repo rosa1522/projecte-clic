@@ -11,7 +11,7 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class Vista extends Activity {
+public class Prova4_Vista extends Activity {
 	private WebView webView;
 	private EditText urlField;
 	private Button goButton;

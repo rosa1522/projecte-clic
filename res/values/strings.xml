@@ -3,9 +3,7 @@
     <string name="app_name">Clic</string>
     <string name="hello">Pantalla principal de l\'aplicacio</string>
     <string name="next">Llista</string>    
-    <string name="button01">Clic Primer</string>
-    <string name="button02">Clic Segon</string>
-    <string name="button03">Clic Tercer</string>
-    <string name="go_button">Go</string><string name="vistaweb">Vista web</string>
+    <string name="afegirjoc">Afegir joc</string><string name="vistaweb">Vista web</string>
+    <string name="go_button">endavant</string>
     
 </resources>

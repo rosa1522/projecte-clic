@@ -3,7 +3,6 @@ package cat.urv.clic.android;
 import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 
 public class VistaWeb extends Activity {
