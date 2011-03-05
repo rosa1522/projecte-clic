@@ -4,7 +4,6 @@
      <provider android:name=".LocalFileContentProvider"
           android:authorities="cat.urv.clic.android.html5"
       />
-   
     <application android:icon="@drawable/icon" android:label="@string/app_name">
         <activity android:name=".IniciAplicacio"
                   android:label="@string/app_name">

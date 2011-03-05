@@ -44,6 +44,18 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	        InputStream is = getAssets().open("jocs.xml");
 	        Document doc=builder.build(is);
 	
+	        /*<jclic nom="Aplicacions jclic">
+	        <jocs>
+	            <nom>El Nadal</nom>
+	            <nom>Els Colors</nom>
+	            <nom>Dinosaures</nom>
+	            <nom>El Carter</nom>
+	            <nom>Pirates</nom>
+	            <nom>Peixos</nom>
+	            <nom>Tot just comencem</nom>
+	        </jocs>
+	      </jclic>*/
+	        
 	        Element raiz=doc.getRootElement();	//s'agafa l'element arrel
 	        
 	        List<?> parcela=raiz.getChildren("jocs");   
