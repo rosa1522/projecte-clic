@@ -14,14 +14,14 @@ public class Joc {
 	private Integer identificador;
 	private String nom;
 	private Date dataPublicacio;
-	private List<idioma> llengua;
-	private List<nivell> nivellJoc;
-	private List<area> areaJoc;
+	private List<String> llengua;
+	private List<String> nivellJoc;
+	private List<String> areaJoc;
 	private Boolean descarregat;
 	private String ruta;
 	
-	public Joc (Integer identificador, String nom, Date dataPublicacio,List<idioma> llengua, List<nivell> nivellJoc, 
-			List<area> areaJoc, String ruta) {
+	public Joc (Integer identificador, String nom, Date dataPublicacio,List<String> llengua, List<String> nivellJoc, 
+			List<String> areaJoc, String ruta) {
 		this.identificador = identificador;
 		this.nom = nom;
 		this.dataPublicacio = dataPublicacio;
@@ -41,13 +41,13 @@ public class Joc {
 	public Date getDataPublicacio() {
 		return dataPublicacio;
 	}
-	public List<idioma> getLlengua() {
+	public List<String> getLlengua() {
 		return llengua;
 	}
-	public List<nivell> getNivellJoc() {
+	public List<String> getNivellJoc() {
 		return nivellJoc;
 	}
-	public List<area> getAreaJoc() {
+	public List<String> getAreaJoc() {
 		return areaJoc;
 	}
 	public String getRuta() {

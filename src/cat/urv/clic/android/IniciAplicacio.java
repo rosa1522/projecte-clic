@@ -1,6 +1,7 @@
 package cat.urv.clic.android;
 
 import java.io.InputStream;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -21,9 +22,9 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class IniciAplicacio extends Activity implements OnClickListener{
-
+	
 	private ArrayAdapter<String> adp; 
-	private List<String> jocs = new ArrayList<String>();
+	private HashJocs llistaJocs = new HashJocs();
 	Intent intent = null;
 	  
     @Override
@@ -31,11 +32,11 @@ public class IniciAplicacio extends Activity implements OnClickListener{
     	try {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.inici);
-	        
+	        System.out.println("INICI APLICACIO 11111111111111111");
 	        // Botó
 	        Button bAfegirJoc = (Button) findViewById(R.id.afegirjoc);
 	        bAfegirJoc.setOnClickListener( this );  
-        
+	        System.out.println("INICI APLICACIO 22222222222222222222");
 	        // Llista
 	        final ListView list = (ListView) findViewById(R.id.list);
 	        
@@ -43,7 +44,7 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	        
 	        InputStream is = getAssets().open("jocs.xml");
 	        Document doc=builder.build(is);
-	
+	        System.out.println("INICI APLICACIO 3333333333333333333333333");
 	        /*<jclic nom="Aplicacions jclic">
 	        <jocs>
 	            <nom>El Nadal</nom>
@@ -55,21 +56,49 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	            <nom>Tot just comencem</nom>
 	        </jocs>
 	      </jclic>*/
-	        
+	        System.out.println("INICI APLICACIO 44444444444444444444444");
 	        Element raiz=doc.getRootElement();	//s'agafa l'element arrel
 	        
-	        List<?> parcela=raiz.getChildren("jocs");   
-	        Iterator<?> i = parcela.iterator();
+	        List<?> joc = raiz.getChildren("joc");   
+	        Iterator<?> i = joc.iterator();
+	        System.out.println("INICI APLICACIO 5555555555555555"); 
 	        while (i.hasNext()){
 	            	Element e= (Element)i.next(); //primer fill que tingui com a nom "jocs"
-	            	List<?> noms=e.getChildren("nom");
-	            	Iterator<?> ii = noms.iterator();
+	            	Integer identificador = Integer.valueOf(e.getChild("identificador").getText());
+	            	String nom = e.getChild("nom").getText();
+	            	Date dataPublicacio = Date.valueOf(e.getChild("dataPublicacio").getText());
+	            	
+	            	   System.out.println("INICI APLICACIO 666666666666666666666"); 
+	            	List<String> idiomes = new ArrayList<String>();
+	            	Iterator<?> ii = e.getChildren("llengua").iterator();
 	            	while (ii.hasNext()){
 	            		Element ee= (Element)ii.next();
-	        	   	 	jocs.add(ee.getText());
+	        	   	 	idiomes.add(ee.getText());
 	            	}
+	            	
+	            	List<String> nivells =  new ArrayList<String>();
+	            	ii = e.getChildren("nivellJoc").iterator();
+	            	while (ii.hasNext()){
+	            		Element ee= (Element)ii.next();
+	        	   	 	nivells.add(ee.getText());
+	            	}
+	            	
+	            	List<String> arees = new ArrayList<String>();
+	            	ii = e.getChildren("area").iterator();
+	            	while (ii.hasNext()){
+	            		Element ee= (Element)ii.next();
+	        	   	 	arees.add(ee.getText());
+	            	}
+	            	
+	            	String ruta = e.getChild("ruta").getText();
+	            	
+	            	Joc dadesJoc = new Joc(identificador, nom, dataPublicacio, idiomes, nivells, arees, ruta);
+	            	this.llistaJocs.afegirJoc(identificador, dadesJoc);
 	        }
-	        adp = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,jocs); 
+	        
+	        System.out.println("INICI APLICACIO");
+	        
+	        adp = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, this.llistaJocs.construirLlistaJocs()); 
 	        list.setAdapter(adp);       
         	        
 			intent = new Intent(this, DescripcioJoc.class);	
