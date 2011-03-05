@@ -28,8 +28,8 @@ public class Joc {
 		this.llengua = llengua;
 		this.nivellJoc = nivellJoc;
 		this.areaJoc = areaJoc;
-		this.descarregat = false;    // ƒs cert si el joc estˆ descarregat al m˜bil.
-		this.ruta = ruta;		 // Path d'on es trobarˆ l'arxiu del joc comprimit.
+		this.descarregat = false;    // Es cert si el joc esta descarregat al mobil.
+		this.ruta = ruta;		 // Path d'on es trobara l'arxiu del joc comprimit.
 	}
 	
 	public Integer getIdentificador() {

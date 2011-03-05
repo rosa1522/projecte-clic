@@ -32,7 +32,7 @@ public class IniciAplicacio extends Activity implements OnClickListener{
     	try {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.inici);
-	        // Botó
+	        // Boto
 	        Button bAfegirJoc = (Button) findViewById(R.id.afegirjoc);
 	        bAfegirJoc.setOnClickListener( this );  
 	        // Llista
@@ -119,7 +119,7 @@ public class IniciAplicacio extends Activity implements OnClickListener{
     }
    
     
-    // Clic del botó
+    // Clic del boto
 	public void onClick(View v) {
 		Intent intent = null;
 		intent = new Intent(this, VistaWeb.class);			
