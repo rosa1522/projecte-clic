@@ -19,7 +19,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
+import android.widget.SimpleCursorAdapter;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.SimpleAdapter;
 
 public class IniciAplicacio extends Activity implements OnClickListener{
 	
@@ -65,7 +67,6 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	            	String nom = e.getChild("nom").getText();
 	            	System.out.println("APLICACIO" + nom);
 	            	Date dataPublicacio = Date.valueOf(e.getChild("dataPublicacio").getText());
-	            	System.out.println("DATA" + dataPublicacio);
 	            	
 	            	// Llengua
 	            	List<String> idiomes = new ArrayList<String>();
@@ -74,7 +75,7 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	            		Element ee= (Element)iLlengua.next();
 	        	   	 	idiomes.add(ee.getText());
 	            	}
-	            	System.out.println("PASSA" + nom);
+
 	            	// Nivell
 	            	List<String> nivells =  new ArrayList<String>();
 	            	Iterator<?> iNivell = e.getChildren("nivellJoc").iterator();
@@ -82,7 +83,7 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	            		Element ee= (Element)iNivell.next();
 	        	   	 	nivells.add(ee.getText());
 	            	}
-	            	System.out.println("PASSA2" + nom);
+
 	            	// Àrea
 	            	List<String> arees = new ArrayList<String>();
 	            	Iterator<?>iArea = e.getChildren("area").iterator();
@@ -92,7 +93,7 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	            	}
 	            	
 	            	String ruta = e.getChild("ruta").getText();
-	            	System.out.println("PASSA3" + nom);
+	        
 	            	Joc dadesJoc = new Joc(identificador, nom, dataPublicacio, idiomes, nivells, arees, ruta);
 	            	this.llistaJocs.afegirJoc(identificador, dadesJoc);
 	        }
@@ -101,7 +102,7 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	        
 	        adp = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, this.llistaJocs.construirLlistaJocs()); 
 	        list.setAdapter(adp);       
-        	        
+	   	
 			intent = new Intent(this, DescripcioJoc.class);	
 	        
 	        // Clic de la llista

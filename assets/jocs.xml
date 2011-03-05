@@ -31,7 +31,7 @@
 	  	<area>
 	  		<nom>llengues</nom>
 	  	</area>
-	  	<enllaç>http://clic.xtec.cat/db/act_ca.jsp?id=3315</enllaç>  	
+	  	<ruta>http://clic.xtec.cat/db/act_ca.jsp?id=3315</ruta>  	
 	</joc>
 	
 	<joc>
@@ -49,7 +49,7 @@
 	  		<nom>matematiques</nom>
 	  		<nom>cienciesSocials</nom>
 	  	</area>
-	  	<enllaç>http://clic.xtec.cat/db/act_ca.jsp?id=1092</enllaç>  	
+	  	<ruta>http://clic.xtec.cat/db/act_ca.jsp?id=1092</ruta>  	
 	</joc>
 	 
 </jclic>
