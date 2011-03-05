@@ -32,11 +32,9 @@ public class IniciAplicacio extends Activity implements OnClickListener{
     	try {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.inici);
-	        System.out.println("INICI APLICACIO 11111111111111111");
 	        // Botó
 	        Button bAfegirJoc = (Button) findViewById(R.id.afegirjoc);
 	        bAfegirJoc.setOnClickListener( this );  
-	        System.out.println("INICI APLICACIO 22222222222222222222");
 	        // Llista
 	        final ListView list = (ListView) findViewById(R.id.list);
 	        
@@ -44,7 +42,6 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	        
 	        InputStream is = getAssets().open("jocs.xml");
 	        Document doc=builder.build(is);
-	        System.out.println("INICI APLICACIO 3333333333333333333333333");
 	        /*<jclic nom="Aplicacions jclic">
 	        <jocs>
 	            <nom>El Nadal</nom>
@@ -56,47 +53,51 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	            <nom>Tot just comencem</nom>
 	        </jocs>
 	      </jclic>*/
-	        System.out.println("INICI APLICACIO 44444444444444444444444");
 	        Element raiz=doc.getRootElement();	//s'agafa l'element arrel
 	        
 	        List<?> joc = raiz.getChildren("joc");   
 	        Iterator<?> i = joc.iterator();
-	        System.out.println("INICI APLICACIO 5555555555555555"); 
-	        while (i.hasNext()){
+
+	        while (i.hasNext()){		       
 	            	Element e= (Element)i.next(); //primer fill que tingui com a nom "jocs"
+	            	 
 	            	Integer identificador = Integer.valueOf(e.getChild("identificador").getText());
 	            	String nom = e.getChild("nom").getText();
+	            	System.out.println("APLICACIO" + nom);
 	            	Date dataPublicacio = Date.valueOf(e.getChild("dataPublicacio").getText());
+	            	System.out.println("DATA" + dataPublicacio);
 	            	
-	            	   System.out.println("INICI APLICACIO 666666666666666666666"); 
+	            	// Llengua
 	            	List<String> idiomes = new ArrayList<String>();
-	            	Iterator<?> ii = e.getChildren("llengua").iterator();
-	            	while (ii.hasNext()){
-	            		Element ee= (Element)ii.next();
+	            	Iterator<?> iLlengua = e.getChildren("llengua").iterator();
+	            	while (iLlengua.hasNext()){
+	            		Element ee= (Element)iLlengua.next();
 	        	   	 	idiomes.add(ee.getText());
 	            	}
-	            	
+	            	System.out.println("PASSA" + nom);
+	            	// Nivell
 	            	List<String> nivells =  new ArrayList<String>();
-	            	ii = e.getChildren("nivellJoc").iterator();
-	            	while (ii.hasNext()){
-	            		Element ee= (Element)ii.next();
+	            	Iterator<?> iNivell = e.getChildren("nivellJoc").iterator();
+	            	while (iNivell.hasNext()){
+	            		Element ee= (Element)iNivell.next();
 	        	   	 	nivells.add(ee.getText());
 	            	}
-	            	
+	            	System.out.println("PASSA2" + nom);
+	            	// Àrea
 	            	List<String> arees = new ArrayList<String>();
-	            	ii = e.getChildren("area").iterator();
-	            	while (ii.hasNext()){
-	            		Element ee= (Element)ii.next();
+	            	Iterator<?>iArea = e.getChildren("area").iterator();
+	            	while (iArea.hasNext()){
+	            		Element ee= (Element)iArea.next();
 	        	   	 	arees.add(ee.getText());
 	            	}
 	            	
 	            	String ruta = e.getChild("ruta").getText();
-	            	
+	            	System.out.println("PASSA3" + nom);
 	            	Joc dadesJoc = new Joc(identificador, nom, dataPublicacio, idiomes, nivells, arees, ruta);
 	            	this.llistaJocs.afegirJoc(identificador, dadesJoc);
 	        }
 	        
-	        System.out.println("INICI APLICACIO");
+
 	        
 	        adp = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, this.llistaJocs.construirLlistaJocs()); 
 	        list.setAdapter(adp);       

@@ -3,7 +3,7 @@
 	<joc>
 		<identificador>3649</identificador>
 		<nom>El Nadal</nom>
-	  	<dataPublicacio>23/11/10</dataPublicacio>
+	  	<dataPublicacio>2010-11-23</dataPublicacio>
 	  	<llengua>
 	  		<nom>catala</nom>
 	  		<nom>frances</nom>
@@ -20,7 +20,7 @@
 	<joc>
 		<identificador>3315</identificador>
 		<nom>Els Colors</nom>
-	  	<dataPublicacio>19/06/06</dataPublicacio>
+	  	<dataPublicacio>2006-06-19</dataPublicacio>
 	  	<llengua>
 	  		<nom>catala</nom>
 	  		<nom>angles</nom>
@@ -37,7 +37,7 @@
 	<joc>
 		<identificador>1092</identificador>
 		<nom>Dinosaures</nom>
-	  	<dataPublicacio>20/02/01</dataPublicacio>
+	  	<dataPublicacio>2001-02-20</dataPublicacio>
 	  	<llengua>
 	  		<nom>italia</nom>
 	  	</llengua>
