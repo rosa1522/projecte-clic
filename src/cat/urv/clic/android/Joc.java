@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Joc {
 
-	enum idioma{ alemany, angles, araucà, basc, caló, català, espanyol, esperanto, francès, gallec, grec, italià,
-		llatí, occità, portuguès, rumanès, suec, xinès }
+	enum idioma{ alemany, angles, arauca, basc, calo, catala, espanyol, esperanto, frances, gallec, grec, italia,
+		llati, occita, portugues, rumanes, suec, xines }
 	enum nivell { infantil, primaria, secundaria, batxillerat }
 	enum area { llengues, matematiques, cienciesSocials, cienciesExperimentals, musica, visualIplastica, educacioFisica,
 		tecnologies, diversos }
