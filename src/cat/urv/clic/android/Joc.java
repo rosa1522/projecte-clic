@@ -18,10 +18,10 @@ public class Joc {
 	private nivell nivellJoc;
 	private List<area> areaJoc;
 	private Boolean descarregat;
-	private String enllaç;
+	private String ruta;
 	
 	public Joc (Integer identificador, String nom, Date dataPublicacio,List<idioma> llengua, nivell nivellJoc, 
-			List<area> areaJoc, String enllaç) {
+			List<area> areaJoc, String ruta) {
 		this.identificador = identificador;
 		this.nom = nom;
 		this.dataPublicacio = dataPublicacio;
@@ -29,7 +29,7 @@ public class Joc {
 		this.nivellJoc = nivellJoc;
 		this.areaJoc = areaJoc;
 		this.descarregat = false;    // És cert si el joc està descarregat al mòbil.
-		this.enllaç = enllaç;		 // Path d'on es trobarà l'arxiu del joc comprimit.
+		this.ruta = ruta;		 // Path d'on es trobarà l'arxiu del joc comprimit.
 	}
 	
 	public Integer getIdentificador() {
@@ -50,8 +50,8 @@ public class Joc {
 	public List<area> getAreaJoc() {
 		return areaJoc;
 	}
-	public String getEnllaç() {
-		return enllaç;
+	public String getRuta() {
+		return ruta;
 	}
 	
 }
