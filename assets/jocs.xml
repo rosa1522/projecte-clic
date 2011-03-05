@@ -1,12 +1,33 @@
 <?xml version="1.0"?>
 <jclic nom="Aplicacions jclic">
-  <jocs>
-      <nom>El Nadal</nom>
-      <nom>Els Colors</nom>
-      <nom>Dinosaures</nom>
-      <nom>El Carter</nom>
-      <nom>Pirates</nom>
-      <nom>Peixos</nom>
-      <nom>Tot just comencem</nom>
-  </jocs>
+	<joc>
+		<identificador>3649</identificador>
+		<nom>El Nadal</nom>
+	  	<dataPublicacio>23/11/10</dataPublicacio>
+	  	<llengua>catala</llengua>
+	  	<nivellJoc>infantil</nivellJoc>
+	  	<area>llengues</area>	
+	  	<enllaç>http://clic.xtec.cat/db/act_ca.jsp?id=3649</enllaç>  	
+	</joc>
+	
+	<joc>
+		<identificador>3315</identificador>
+		<nom>Els Colors</nom>
+	  	<dataPublicacio>19/06/06</dataPublicacio>
+	  	<llengua>catala</llengua>
+	  	<nivellJoc>infantil</nivellJoc>
+	  	<area>llengues</area>	
+	  	<enllaç>http://clic.xtec.cat/db/act_ca.jsp?id=3315</enllaç>  	
+	</joc>
+	
+	<joc>
+		<identificador>1092</identificador>
+		<nom>Dinosaures</nom>
+	  	<dataPublicacio>20/02/01</dataPublicacio>
+	  	<llengua>angles</llengua>
+	  	<nivellJoc>primaria</nivellJoc>
+	  	<area>matematiques</area>	
+	  	<enllaç>http://clic.xtec.cat/db/act_ca.jsp?id=1092</enllaç>  	
+	</joc>
+	 
 </jclic>

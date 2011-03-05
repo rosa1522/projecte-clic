@@ -64,7 +64,7 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	        
 	        // Clic de la llista
 	        OnItemClickListener onClic = new OnItemClickListener(){
-	        						public void onItemClick(AdapterView<?> arg0, View v, int i,long id) {
+	        						public void onItemClick(AdapterView<?> arg0, View v, int i, long id) {
 	        							String str = list.getItemAtPosition(i).toString();
 	        					        							
 	        							DescripcioJoc.name = str;
