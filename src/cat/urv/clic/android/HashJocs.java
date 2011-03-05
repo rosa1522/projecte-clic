@@ -21,12 +21,15 @@ public class HashJocs {
 		this.jocs.remove(id);
 	}
 	
-	public List<String> llistarJocs(){
+	public List<String> construirLlistaJocs(){
+		System.out.println("ESTEM AQUIIIIIIIIIIIIIIIIIIIIIIII");
 		List<String> llistaJocs = new ArrayList<String>();
 		Enumeration<Joc> j = jocs.elements();
 		if (j.hasMoreElements()){
 			llistaJocs.add(j.nextElement().getNom());  
+			System.out.println(j.nextElement().getNom());
 		}
+		
 		return llistaJocs;
 	}
 	
