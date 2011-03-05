@@ -22,12 +22,11 @@ public class HashJocs {
 	}
 	
 	public List<String> construirLlistaJocs(){
-		System.out.println("ESTEM AQUIIIIIIIIIIIIIIIIIIIIIIII");
+    	System.out.println("PASSA3 JOCS " +jocs.size());
 		List<String> llistaJocs = new ArrayList<String>();
 		Enumeration<Joc> j = jocs.elements();
-		if (j.hasMoreElements()){
+		while (j.hasMoreElements()){
 			llistaJocs.add(j.nextElement().getNom());  
-			System.out.println(j.nextElement().getNom());
 		}
 		
 		return llistaJocs;
