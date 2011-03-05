@@ -4,5 +4,6 @@
 	<classpathentry kind="lib" path="/Users/ainadeltio/Documents/Git/jdom/build/jdom.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="src" path="html5"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

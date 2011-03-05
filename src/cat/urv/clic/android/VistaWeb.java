@@ -1,9 +1,9 @@
 package cat.urv.clic.android;
 
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
-
 
 public class VistaWeb extends Activity {
 	
@@ -13,16 +13,16 @@ public class VistaWeb extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.llista);
     }*/
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     	setContentView(R.layout.webview);
     	
     	WebView web = (WebView) findViewById(R.id.webView);
-    	WebView.enablePlatformNotifications();
         web.getSettings().setJavaScriptEnabled(true);
-        web.loadUrl("http://www.google.com");
-        
+        //web.loadUrl("http://www.google.com");
+        web.loadUrl("content://html5/index.html");
         /*
         final WebView webview = (WebView)findViewById(R.id.webView);  
         // JavaScript must be enabled if you want it to work, obviously 
