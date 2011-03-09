@@ -22,7 +22,7 @@ public class VistaWeb extends Activity {
     	WebView web = (WebView) findViewById(R.id.webView);
         web.getSettings().setJavaScriptEnabled(true);
         //web.loadUrl("http://www.google.com");
-        web.loadUrl("content://html5/index.html");
+        web.loadUrl("file:///data/data/cat.urv.clic.android/files/pagina_web/index.html");
         /*
         final WebView webview = (WebView)findViewById(R.id.webView);  
         // JavaScript must be enabled if you want it to work, obviously 
