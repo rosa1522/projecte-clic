@@ -1,11 +1,11 @@
 package cat.urv.clic.android;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
 import android.app.Activity;
@@ -25,9 +26,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
-import android.widget.SimpleCursorAdapter;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.SimpleAdapter;
 
 public class IniciAplicacio extends Activity implements OnClickListener{
 	
@@ -45,62 +44,12 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	        bAfegirJoc.setOnClickListener( this );  
 	        // Llista
 	        final ListView list = (ListView) findViewById(R.id.list);
-	        
-	        SAXBuilder builder=new SAXBuilder(false); 
-	        
+	        	        
 	        // Creem el fitxer dels jocs ja descarregats
 	        exportarJocsDescarregatsXML();     
 	        
-	        //InputStream is = getAssets().open("jocs.xml");
-	        FileInputStream is = openFileInput("jocs_descarregats.xml");
-	        
-	        InputStreamReader isr = new InputStreamReader(is);
-	        
-	        Document doc=builder.build(isr);
-	        Element raiz=doc.getRootElement();	//s'agafa l'element arrel
-	        
-	        List<?> joc = raiz.getChildren("joc");   
-	        Iterator<?> i = joc.iterator();
-
-	        while (i.hasNext()){
-	            	Element e= (Element)i.next(); //primer fill que tingui com a nom "jocs"
-	            	 
-	            	Integer identificador = Integer.valueOf(e.getChild("identificador").getText());
-	            	String nom = e.getChild("nom").getText();
-	            	System.out.println("APLICACIO" + nom);
-	            	Date dataPublicacio = Date.valueOf(e.getChild("dataPublicacio").getText());
-	            	
-	            	// Llengua
-	            	List<String> idiomes = new ArrayList<String>();
-	            	Iterator<?> iLlengua = e.getChildren("llengua").iterator();
-	            	while (iLlengua.hasNext()){
-	            		Element ee= (Element)iLlengua.next();
-	        	   	 	idiomes.add(ee.getText());
-	            	}
-
-	            	// Nivell
-	            	List<String> nivells =  new ArrayList<String>();
-	            	Iterator<?> iNivell = e.getChildren("nivellJoc").iterator();
-	            	while (iNivell.hasNext()){
-	            		Element ee= (Element)iNivell.next();
-	        	   	 	nivells.add(ee.getText());
-	            	}
-
-	            	// Àrea
-	            	List<String> arees = new ArrayList<String>();
-	            	Iterator<?>iArea = e.getChildren("area").iterator();
-	            	while (iArea.hasNext()){
-	            		Element ee= (Element)iArea.next();
-	        	   	 	arees.add(ee.getText());
-	            	}
-	            	
-	            	String ruta = e.getChild("ruta").getText();
-	        
-	            	Joc dadesJoc = new Joc(identificador, nom, dataPublicacio, idiomes, nivells, arees, ruta);
-	            	this.llistaJocs.afegirJoc(identificador, dadesJoc);
-	        }
-	        
-
+	        //llegirFitxerJocsXML("jocs.xml",false);
+	        llegirFitxerJocsXML("jocs_descarregats.xml",true);
 	        
 	        adp = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, this.llistaJocs.construirLlistaJocs()); 
 	        list.setAdapter(adp);       
@@ -120,36 +69,87 @@ public class IniciAplicacio extends Activity implements OnClickListener{
             e.printStackTrace();
         }
     }
-   
-    
+       
     // Clic del boto
 	public void onClick(View v) {
 		Intent intent = null;
 		intent = new Intent(this, VistaWeb.class);			
 		startActivity(intent);		
 	}
+		
+	public void llegirFitxerJocsXML(String nomFitxer, boolean fitxerIntern){
+		
+		Document doc = null;
+		InputStreamReader isr;
+                                
+		try {
+			SAXBuilder builder = new SAXBuilder(false);
+			
+			// Obrim el fixer de diferent manera si tenim el tenim guardat al mòbil o no
+			if (fitxerIntern) {
+				FileInputStream is = openFileInput(nomFitxer);
+				isr = new InputStreamReader(is);
+			}else{
+				InputStream is = getAssets().open(nomFitxer);	
+				isr = new InputStreamReader(is);
+			}
+			 	
+	        doc = builder.build(isr);
+					
+	        Element raiz = doc.getRootElement();	// S'agafa l'element arrel
+	        
+	        List<?> joc = raiz.getChildren("joc");   
+	        Iterator<?> i = joc.iterator();
 	
-	public void exportarJocsDescarregats(){
-		try { 
-
-		//Creamos una cadena para guardarla en el archivo 
-		String Cadena_Guardar = new String("Hello Android"); 
-
-		//Iniciamos un objeto tipo FileOutputStream con el nombre que le vamos //a dar al archivo y los permisos que va a tener 
-		FileOutputStream fOut = openFileOutput("jocs_descarregats.xml", MODE_WORLD_READABLE); 
-
-		//Iniciamos un objeto tipo OutputStreamWrite que es el que nos va a //permitir escribir la cadena en el archivo antes creado
-		OutputStreamWriter osw = new OutputStreamWriter(fOut); 
-
-		//Escribimos la cadena 
-		osw.write(Cadena_Guardar); 
-
-		//Nos aseguramos que todo quedo guardado y luego cerramos 
-		osw.flush(); 
-		osw.close();
-		} 
-		catch (IOException ioe) { }
+	        while (i.hasNext()){
+	            	Element e= (Element)i.next(); // Primer fill que tingui com a nom "jocs"
+	            	 
+	            	Integer identificador = Integer.valueOf(e.getChild("identificador").getText());
+	            	String nom = e.getChild("nom").getText();
+	            	Date dataPublicacio = Date.valueOf(e.getChild("dataPublicacio").getText());
+	            	
+	            	// Llengua
+	            	List<String> idiomes = new ArrayList<String>();
+	            	Iterator<?> iLlengua = e.getChildren("llengua").iterator();
+	            	while (iLlengua.hasNext()){
+	            		Element ee= (Element)iLlengua.next();
+	        	   	 	idiomes.add(ee.getText());
+	            	}
+	
+	            	// Nivell
+	            	List<String> nivells =  new ArrayList<String>();
+	            	Iterator<?> iNivell = e.getChildren("nivellJoc").iterator();
+	            	while (iNivell.hasNext()){
+	            		Element ee= (Element)iNivell.next();
+	        	   	 	nivells.add(ee.getText());
+	            	}
+	
+	            	// Àrea
+	            	List<String> arees = new ArrayList<String>();
+	            	Iterator<?>iArea = e.getChildren("area").iterator();
+	            	while (iArea.hasNext()){
+	            		Element ee= (Element)iArea.next();
+	        	   	 	arees.add(ee.getText());
+	            	}
+	            	
+	            	String ruta = e.getChild("ruta").getText();
+	        
+	            	Joc dadesJoc = new Joc(identificador, nom, dataPublicacio, idiomes, nivells, arees, ruta);
+	            	this.llistaJocs.afegirJoc(identificador, dadesJoc);
+	        }
+		} catch (FileNotFoundException e1) {
+			// MOSTRAR UN MISSATGE PER AVISAR QUE NO S'HA POGUT LLEGIR EL FITXER
+			e1.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JDOMException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
 	}
+
 
 	public void exportarJocsDescarregatsXML() {
 	   try{
