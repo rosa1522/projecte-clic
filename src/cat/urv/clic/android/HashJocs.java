@@ -3,6 +3,7 @@ package cat.urv.clic.android;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 
 public class HashJocs {
@@ -22,7 +23,6 @@ public class HashJocs {
 	}
 	
 	public List<String> construirLlistaJocs(){
-    	System.out.println("PASSA3 JOCS " +jocs.size());
 		List<String> llistaNomsJocs = new ArrayList<String>();
 		Enumeration<Joc> j = jocs.elements();
 		while (j.hasMoreElements()){
@@ -33,7 +33,6 @@ public class HashJocs {
 	}
 	
 	public List<Integer> llistaIdentificadorJocs(){
-    	System.out.println("PASSA3 JOCS " +jocs.size());
 		List<Integer> llistaIdJocs = new ArrayList<Integer>();
 		Enumeration<Joc> j = jocs.elements();
 		while (j.hasMoreElements()){
@@ -43,9 +42,25 @@ public class HashJocs {
 		return llistaIdJocs;
 	}
 	
+	public List<String> canviLlistaIdNom(List<Integer> llistaId){
+		List<String> llistaNoms = new ArrayList<String>();
+		Iterator<Integer> it = llistaId.iterator();
+		while(it.hasNext()){
+			llistaNoms.add(this.jocs.get(it.next()).getNom());
+		}
+		return llistaNoms;
+	}
+
+	public boolean existeixJoc(Integer id){
+		return (this.jocs.containsKey(id));
+	}
 	
 	public Joc cercarJoc(Integer id){
 		return this.jocs.get(id);
+	}
+	
+	public Integer midaHash(){
+		return this.jocs.size();
 	}
 	
 }

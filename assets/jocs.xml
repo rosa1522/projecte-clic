@@ -16,7 +16,22 @@
 	  	</area>	
 	  	<ruta>http://clic.xtec.cat/db/act_ca.jsp?id=3649</ruta>  	
 	</joc>
-	
+	<joc>
+		<identificador>1234</identificador>
+		<nom>La Pascua</nom>
+	  	<dataPublicacio>2010-11-23</dataPublicacio>
+	  	<llengua>
+	  		<nom>catala</nom>
+	  		<nom>frances</nom>
+	  	</llengua>
+	  	<nivellJoc>
+	  		<nom>infantil</nom>
+	  	</nivellJoc>
+	  	<area>
+	  		<nom>musica</nom>
+	  	</area>	
+	  	<ruta>http://clic.xtec.cat/db/act_ca.jsp?id=3649</ruta>  	
+	</joc>
 	<joc>
 		<identificador>3315</identificador>
 		<nom>Els Colors</nom>

@@ -21,7 +21,7 @@ public class Joc {
 	private String ruta;
 	
 	public Joc (Integer identificador, String nom, Date dataPublicacio,List<String> llengua, List<String> nivellJoc, 
-			List<String> areaJoc, String ruta) {
+			List<String> areaJoc, String ruta, Boolean descarregat) {
 		this.identificador = identificador;
 		this.nom = nom;
 		this.dataPublicacio = dataPublicacio;	// Format de la data ANY-MES-DIA i separat amb guions
@@ -30,8 +30,12 @@ public class Joc {
 		this.areaJoc = areaJoc;
 		this.descarregat = false;    // Es cert si el joc esta descarregat al mobil.
 		this.ruta = ruta;		 // Path d'on es trobara l'arxiu del joc comprimit.
+		this.descarregat = descarregat;
 	}
 	
+	public Boolean getDescarregat() {
+		return descarregat;
+	}
 	public Integer getIdentificador() {
 		return identificador;
 	}

@@ -1,5 +1,6 @@
 package cat.urv.clic.android;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -28,12 +29,16 @@ import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemClickListener;
 
+//import cat.urv.clic.android.GestioFitxers;
+
 public class IniciAplicacio extends Activity implements OnClickListener{
 	
 	private ArrayAdapter<String> adp; 
-	private HashJocs llistaJocs = new HashJocs();
-	Intent intent = null;
-	  
+	protected HashJocs llistaJocs = new HashJocs();
+	protected List<String> llistaNoDescarregats = new ArrayList<String>();
+	private Intent intent = null;
+	//private GestioFitxers gestiofitxers = new GestioFitxers();
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	try {
@@ -43,20 +48,18 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	        Button bAfegirJoc = (Button) findViewById(R.id.afegirjoc);
 	        bAfegirJoc.setOnClickListener( this );  
 	        // Llista
-	        final ListView list = (ListView) findViewById(R.id.list);
-	        	        
-	        // Creem el fitxer dels jocs ja descarregats
-	        exportarJocsDescarregatsXML();     
-	        
-	        llegirFitxerJocsXML("jocs.xml",false);
-	        //llegirFitxerJocsXML("jocs_descarregats.xml",true);
+	        final ListView list = (ListView) findViewById(R.id.list_descarregats);
+	        	                
+	        //llegirFitxerJocsXML("jocs.xml",false,llistaJocs);
+	        llegirFitxerJocsXML("jocs_descarregats.xml", true, this.llistaJocs,this.llistaNoDescarregats);
+	        System.out.println("MIDA  "+ this.llistaJocs.midaHash());
 	        
 	        adp = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, this.llistaJocs.construirLlistaJocs()); 
 	        list.setAdapter(adp);       
 	   	
-			intent = new Intent(this, DescripcioJoc.class);	
-			
+						
 	        // Clic de la llista
+	        intent = new Intent(this, DescripcioJoc.class);	
 	        OnItemClickListener onClic = new OnItemClickListener(){
 	        						public void onItemClick(AdapterView<?> arg0, View v, int i, long id) {
 	        							String str = list.getItemAtPosition(i).toString();
@@ -65,6 +68,11 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	        							startActivity(intent);	        		
 	        						}};
 	        list.setOnItemClickListener(onClic);
+	        
+	        // Creem el fitxer dels jocs ja descarregats
+	        exportarJocsDescarregatsXML(this.llistaJocs);     
+	        
+	        
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -73,27 +81,28 @@ public class IniciAplicacio extends Activity implements OnClickListener{
     // Clic del boto
 	public void onClick(View v) {
 		Intent intent = null;
-		intent = new Intent(this, VistaWeb.class);			
+		intent = new Intent(this, LlistaJocsJClic.class);			
 		startActivity(intent);		
 	}
 		
-	public void llegirFitxerJocsXML(String nomFitxer, boolean fitxerIntern){
-		
+	public void llegirFitxerJocsXML(String nomFitxer, boolean fitxerIntern, HashJocs llistaJocs, List<String> llistaNoDescarregats){
 		Document doc = null;
-		InputStreamReader isr;
+		InputStreamReader isr = null;
                                 
-		try {
-			SAXBuilder builder = new SAXBuilder(false);
-			
+		try {			
 			// Obrim el fixer de diferent manera si tenim el tenim guardat al mòbil o no
 			if (fitxerIntern) {
-				FileInputStream is = openFileInput(nomFitxer);
-				isr = new InputStreamReader(is);
+				// Comprovem que existeixi el fitxer amb els jocs descarregats
+				//File f = new File(getFilesDir()+nomFitxer); // FALLA! BUSCAR ERROR!
+				//if (f.exists()){
+					FileInputStream is = openFileInput(nomFitxer);
+					isr = new InputStreamReader(is);
+					//	}
 			}else{
-				InputStream is = getAssets().open(nomFitxer);	
+				InputStream is = getAssets().open(nomFitxer);									
 				isr = new InputStreamReader(is);
 			}
-			 	
+			SAXBuilder builder = new SAXBuilder(false);
 	        doc = builder.build(isr);
 					
 	        Element raiz = doc.getRootElement();	// S'agafa l'element arrel
@@ -124,7 +133,7 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	        	   	 	nivells.add(ee.getText());
 	            	}
 	
-	            	// Àrea
+	            	// Area
 	            	List<String> arees = new ArrayList<String>();
 	            	Iterator<?>iArea = e.getChildren("area").iterator();
 	            	while (iArea.hasNext()){
@@ -133,12 +142,26 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	            	}
 	            	
 	            	String ruta = e.getChild("ruta").getText();
+	            	
+	            	Boolean descarregat;
+	            	if (fitxerIntern) {
+	            		descarregat = true;
+	            	}else{
+	            		descarregat = true;
+	    			}
 	        
-	            	Joc dadesJoc = new Joc(identificador, nom, dataPublicacio, idiomes, nivells, arees, ruta);
-	            	this.llistaJocs.afegirJoc(identificador, dadesJoc);
+	            	Joc dadesJoc = new Joc(identificador, nom, dataPublicacio, idiomes, nivells, arees, ruta, descarregat);
+	            	// Afegim el joc si esta al fitxer intern o si no es troba a la taula de hash.
+	            	if (fitxerIntern){
+	            		llistaJocs.afegirJoc(identificador, dadesJoc);
+	            	}else if(!llistaJocs.existeixJoc(identificador)){
+	            		llistaJocs.afegirJoc(identificador, dadesJoc);
+	            		llistaNoDescarregats.add(nom);
+	            	}
 	        }
 		} catch (FileNotFoundException e1) {
 			// MOSTRAR UN MISSATGE PER AVISAR QUE NO S'HA POGUT LLEGIR EL FITXER
+			System.out.println("ENTRA A L'EXCEPCIO DE LLEGIR FITXER");
 			e1.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -150,67 +173,66 @@ public class IniciAplicacio extends Activity implements OnClickListener{
         
 	}
 
-
-	public void exportarJocsDescarregatsXML() {
+	public void exportarJocsDescarregatsXML(HashJocs llistaJocs) {
 	   try{
-		   PrintStream ps = new PrintStream(new FileOutputStream("/data/data/cat.urv.clic.android/files/jocs_descarregats.xml",false));
-		   
-		   List<Integer> llistaId = this.llistaJocs.llistaIdentificadorJocs();
+		   PrintStream ps = new PrintStream(new FileOutputStream(getFilesDir()+"/jocs_descarregats.xml",false));
+		   System.out.println("MIDA funcio  "+ this.llistaJocs.midaHash());
+		   List<Integer> llistaId = llistaJocs.llistaIdentificadorJocs();
 			 
 		   ps.println("<?xml version='1.0' encoding='utf-8'?>");
 		   ps.println("<jclic nom='Aplicacions jclic'>");
 		   
 		   Iterator<Integer> it = llistaId.iterator();
 		   while (it.hasNext()){
-			    ps.println("<joc>");
-			    
 			   	Integer id = it.next();   
-			   	Joc joc = this.llistaJocs.cercarJoc(id);
-			   	
-				ps.print("<identificador>");
-				ps.print(joc.getIdentificador());
-				ps.println("</identificador>");
-				 
-				ps.print("<nom>");
-				ps.print(joc.getNom());
-				ps.println("</nom>");
-				
-				ps.print("<dataPublicacio>");
-				ps.print(joc.getDataPublicacio());
-				ps.println("</dataPublicacio>");
-				 
-				ps.print("<llengua>");
-				Iterator<String> itLlengua = joc.getLlengua().iterator();
-				while (itLlengua.hasNext()){
+			   	Joc joc = llistaJocs.cercarJoc(id);
+			   	if(joc.getDescarregat()){
+				   	ps.println("<joc>");
+					ps.print("<identificador>");
+					ps.print(joc.getIdentificador());
+					ps.println("</identificador>");
+					 
 					ps.print("<nom>");
-					ps.print(itLlengua.next().toString());
+					ps.print(joc.getNom());
 					ps.println("</nom>");
-				}
-				ps.println("</llengua>");
-				 
-				ps.print("<nivellJoc>");
-				Iterator<String> itNivell = joc.getNivellJoc().iterator();
-				while (itNivell.hasNext()){
-					ps.print("<nom>");
-					ps.print(itNivell.next().toString());
-					ps.println("</nom>");
-				}
-				ps.println("</nivellJoc>");
-				 
-				ps.print("<area>");
-				Iterator<String> itArea = joc.getAreaJoc().iterator();
-				while (itArea.hasNext()){
-					ps.print("<nom>");
-					ps.print(itArea.next().toString());
-					ps.println("</nom>");
-				}
-				ps.println("</area>");
-				 
-				ps.print("<ruta>");
-				ps.print(joc.getRuta());
-				ps.println("</ruta>");
-				 
-				ps.println("</joc>");
+					
+					ps.print("<dataPublicacio>");
+					ps.print(joc.getDataPublicacio());
+					ps.println("</dataPublicacio>");
+					 
+					ps.print("<llengua>");
+					Iterator<String> itLlengua = joc.getLlengua().iterator();
+					while (itLlengua.hasNext()){
+						ps.print("<nom>");
+						ps.print(itLlengua.next().toString());
+						ps.println("</nom>");
+					}
+					ps.println("</llengua>");
+					 
+					ps.print("<nivellJoc>");
+					Iterator<String> itNivell = joc.getNivellJoc().iterator();
+					while (itNivell.hasNext()){
+						ps.print("<nom>");
+						ps.print(itNivell.next().toString());
+						ps.println("</nom>");
+					}
+					ps.println("</nivellJoc>");
+					 
+					ps.print("<area>");
+					Iterator<String> itArea = joc.getAreaJoc().iterator();
+					while (itArea.hasNext()){
+						ps.print("<nom>");
+						ps.print(itArea.next().toString());
+						ps.println("</nom>");
+					}
+					ps.println("</area>");
+					 
+					ps.print("<ruta>");
+					ps.print(joc.getRuta());
+					ps.println("</ruta>");
+					 
+					ps.println("</joc>");
+			   	}
 		   }
 		   ps.println("</jclic>");
 	   }catch (Exception e){
