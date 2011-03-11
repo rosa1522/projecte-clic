@@ -33,7 +33,7 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	
 	private ArrayAdapter<String> adp; 
 	private HashJocs llistaJocs = new HashJocs();
-	Intent intent = null;
+	private Intent intent = null;
 	  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,71 +128,72 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 		intent = new Intent(this, VistaWeb.class);			
 		startActivity(intent);		
 	}
-	
-	public void exportarJocsDescarregats(){
-		try { 
-
-		//Creamos una cadena para guardarla en el archivo 
-		String Cadena_Guardar = new String("Hello Android"); 
-
-		//Iniciamos un objeto tipo FileOutputStream con el nombre que le vamos //a dar al archivo y los permisos que va a tener 
-		FileOutputStream fOut = openFileOutput("jocs_descarregats.xml", MODE_WORLD_READABLE); 
-
-		//Iniciamos un objeto tipo OutputStreamWrite que es el que nos va a //permitir escribir la cadena en el archivo antes creado
-		OutputStreamWriter osw = new OutputStreamWriter(fOut); 
-
-		//Escribimos la cadena 
-		osw.write(Cadena_Guardar); 
-
-		//Nos aseguramos que todo quedo guardado y luego cerramos 
-		osw.flush(); 
-		osw.close();
-		} 
-		catch (IOException ioe) { }
-	}
 
 	public void exportarJocsDescarregatsXML() {
 	   try{
-		 PrintStream ps=new PrintStream( new FileOutputStream("/data/data/cat.urv.clic.android/files/jocs_descarregats.xml",false));
-	     ps.println("<?xml version='1.0' encoding='utf-8'?>");
-	     ps.println("<jclic nom='Aplicacions jclic'>");
-	     ps.println("<joc>");
-	     
-	     ps.print("<identificador>");
-	     ps.print(4343);
-	     ps.println("</identificador>");
-	     
-	     ps.print("<nom>");
-	     ps.print("aina");
-	     ps.println("</nom>");
-	    
-	     ps.print("<dataPublicacio>");
-	     ps.print("2011-08-08");
-	     ps.println("</dataPublicacio>");
-	     
-	     ps.print("<llengua>");
-	     ps.print("aina");
-	     ps.println("</llengua>");
-	     
-	     ps.print("<nivellJoc>");
-	     ps.print("aina");
-	     ps.println("</nivellJoc>");
-	     
-	     ps.print("<area>");
-	     ps.print("aina");
-	     ps.println("</area>");
-	     
-	     ps.print("<ruta>");
-	     ps.print("aina");
-	     ps.println("</ruta>");
-	     
-	     ps.println("</joc>");
-	     ps.println("</jclic>");
-	     
-	     }catch (Exception e){
-	      System.out.println(e.getMessage());
-	     }	     
-		
+		   PrintStream ps = new PrintStream(new FileOutputStream("/data/data/cat.urv.clic.android/files/jocs_descarregats.xml",false));
+		   
+		   List<Integer> llistaId = this.llistaJocs.llistaIdentificadorJocs();
+			 
+		   ps.println("<?xml version='1.0' encoding='utf-8'?>");
+		   ps.println("<jclic nom='Aplicacions jclic'>");
+		   
+		   Iterator<Integer> it = llistaId.iterator();
+		   while (it.hasNext()){
+			    ps.println("<joc>");
+			    
+			   	Integer id = it.next();   
+			   	Joc joc = this.llistaJocs.cercarJoc(id);
+			   	
+				ps.print("<identificador>");
+				ps.print(joc.getIdentificador());
+				ps.println("</identificador>");
+				 
+				ps.print("<nom>");
+				ps.print(joc.getNom());
+				ps.println("</nom>");
+				
+				ps.print("<dataPublicacio>");
+				ps.print(joc.getDataPublicacio());
+				ps.println("</dataPublicacio>");
+				 
+				ps.print("<llengua>");
+				Iterator<String> itLlengua = joc.getLlengua().iterator();
+				while (itLlengua.hasNext()){
+					ps.print("<nom>");
+					ps.print(itLlengua.next().toString());
+					ps.println("</nom>");
+				}
+				ps.println("</llengua>");
+				 
+				ps.print("<nivellJoc>");
+				Iterator<String> itNivell = joc.getNivellJoc().iterator();
+				while (itNivell.hasNext()){
+					ps.print("<nom>");
+					ps.print(itNivell.next().toString());
+					ps.println("</nom>");
+				}
+				ps.println("</nivellJoc>");
+				 
+				ps.print("<area>");
+				Iterator<String> itArea = joc.getAreaJoc().iterator();
+				while (itArea.hasNext()){
+					ps.print("<nom>");
+					ps.print(itArea.next().toString());
+					ps.println("</nom>");
+				}
+				ps.println("</area>");
+				 
+				ps.print("<ruta>");
+				ps.print(joc.getRuta());
+				ps.println("</ruta>");
+				 
+				ps.println("</joc>");
+		   }
+		   ps.println("</jclic>");
+	   }catch (Exception e){
+		   System.out.println(e.getMessage());
+	   }	     
 	}
 }
 
