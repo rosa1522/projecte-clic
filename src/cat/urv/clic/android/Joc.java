@@ -24,7 +24,7 @@ public class Joc {
 			List<String> areaJoc, String ruta) {
 		this.identificador = identificador;
 		this.nom = nom;
-		this.dataPublicacio = dataPublicacio;
+		this.dataPublicacio = dataPublicacio;	// Format de la data ANY-MES-DIA i separat amb guions
 		this.llengua = llengua;
 		this.nivellJoc = nivellJoc;
 		this.areaJoc = areaJoc;

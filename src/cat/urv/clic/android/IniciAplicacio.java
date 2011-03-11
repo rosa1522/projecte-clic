@@ -1,6 +1,12 @@
 package cat.urv.clic.android;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintStream;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -42,25 +48,21 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	        
 	        SAXBuilder builder=new SAXBuilder(false); 
 	        
-	        InputStream is = getAssets().open("jocs.xml");
-	        Document doc=builder.build(is);
-	        /*<jclic nom="Aplicacions jclic">
-	        <jocs>
-	            <nom>El Nadal</nom>
-	            <nom>Els Colors</nom>
-	            <nom>Dinosaures</nom>
-	            <nom>El Carter</nom>
-	            <nom>Pirates</nom>
-	            <nom>Peixos</nom>
-	            <nom>Tot just comencem</nom>
-	        </jocs>
-	      </jclic>*/
+	        // Creem el fitxer dels jocs ja descarregats
+	        exportarJocsDescarregatsXML();     
+	        
+	        //InputStream is = getAssets().open("jocs.xml");
+	        FileInputStream is = openFileInput("jocs_descarregats.xml");
+	        
+	        InputStreamReader isr = new InputStreamReader(is);
+	        
+	        Document doc=builder.build(isr);
 	        Element raiz=doc.getRootElement();	//s'agafa l'element arrel
 	        
 	        List<?> joc = raiz.getChildren("joc");   
 	        Iterator<?> i = joc.iterator();
 
-	        while (i.hasNext()){		       
+	        while (i.hasNext()){
 	            	Element e= (Element)i.next(); //primer fill que tingui com a nom "jocs"
 	            	 
 	            	Integer identificador = Integer.valueOf(e.getChild("identificador").getText());
@@ -104,7 +106,7 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	        list.setAdapter(adp);       
 	   	
 			intent = new Intent(this, DescripcioJoc.class);	
-	        
+			
 	        // Clic de la llista
 	        OnItemClickListener onClic = new OnItemClickListener(){
 	        						public void onItemClick(AdapterView<?> arg0, View v, int i, long id) {
@@ -125,6 +127,72 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 		Intent intent = null;
 		intent = new Intent(this, VistaWeb.class);			
 		startActivity(intent);		
+	}
+	
+	public void exportarJocsDescarregats(){
+		try { 
+
+		//Creamos una cadena para guardarla en el archivo 
+		String Cadena_Guardar = new String("Hello Android"); 
+
+		//Iniciamos un objeto tipo FileOutputStream con el nombre que le vamos //a dar al archivo y los permisos que va a tener 
+		FileOutputStream fOut = openFileOutput("jocs_descarregats.xml", MODE_WORLD_READABLE); 
+
+		//Iniciamos un objeto tipo OutputStreamWrite que es el que nos va a //permitir escribir la cadena en el archivo antes creado
+		OutputStreamWriter osw = new OutputStreamWriter(fOut); 
+
+		//Escribimos la cadena 
+		osw.write(Cadena_Guardar); 
+
+		//Nos aseguramos que todo quedo guardado y luego cerramos 
+		osw.flush(); 
+		osw.close();
+		} 
+		catch (IOException ioe) { }
+	}
+
+	public void exportarJocsDescarregatsXML() {
+	   try{
+		 PrintStream ps=new PrintStream( new FileOutputStream("/data/data/cat.urv.clic.android/files/jocs_descarregats.xml",false));
+	     ps.println("<?xml version='1.0' encoding='utf-8'?>");
+	     ps.println("<jclic nom='Aplicacions jclic'>");
+	     ps.println("<joc>");
+	     
+	     ps.print("<identificador>");
+	     ps.print(4343);
+	     ps.println("</identificador>");
+	     
+	     ps.print("<nom>");
+	     ps.print("aina");
+	     ps.println("</nom>");
+	    
+	     ps.print("<dataPublicacio>");
+	     ps.print("2011-08-08");
+	     ps.println("</dataPublicacio>");
+	     
+	     ps.print("<llengua>");
+	     ps.print("aina");
+	     ps.println("</llengua>");
+	     
+	     ps.print("<nivellJoc>");
+	     ps.print("aina");
+	     ps.println("</nivellJoc>");
+	     
+	     ps.print("<area>");
+	     ps.print("aina");
+	     ps.println("</area>");
+	     
+	     ps.print("<ruta>");
+	     ps.print("aina");
+	     ps.println("</ruta>");
+	     
+	     ps.println("</joc>");
+	     ps.println("</jclic>");
+	     
+	     }catch (Exception e){
+	      System.out.println(e.getMessage());
+	     }	     
+		
 	}
 }
 
