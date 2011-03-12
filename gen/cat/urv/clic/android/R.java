@@ -14,7 +14,6 @@ public final class R {
         public static final int descargar=0x7f020000;
         public static final int download=0x7f020001;
         public static final int icon=0x7f020002;
-        public static final int star_big_on=0x7f020003;
     }
     public static final class id {
         public static final int afegirjoc=0x7f060004;
