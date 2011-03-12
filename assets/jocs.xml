@@ -17,8 +17,8 @@
 	  	<ruta>http://clic.xtec.cat/db/act_ca.jsp?id=3649</ruta>  	
 	</joc>
 	<joc>
-		<identificador>1234</identificador>
-		<nom>La Pascua</nom>
+		<identificador>2333</identificador>
+		<nom>La Primavera</nom>
 	  	<dataPublicacio>2010-11-23</dataPublicacio>
 	  	<llengua>
 	  		<nom>catala</nom>
@@ -31,6 +31,23 @@
 	  		<nom>musica</nom>
 	  	</area>	
 	  	<ruta>http://clic.xtec.cat/db/act_ca.jsp?id=3649</ruta>  	
+	</joc>
+	
+	<joc>
+		<identificador>1234</identificador>
+		<nom>La Pasqua</nom>
+	  	<dataPublicacio>2006-06-19</dataPublicacio>
+	  	<llengua>
+	  		<nom>catala</nom>
+	  		<nom>angles</nom>
+	  	</llengua>
+	  	<nivellJoc>
+	  		<nom>primaria</nom>
+	  	</nivellJoc>
+	  	<area>
+	  		<nom>llengues</nom>
+	  	</area>
+	  	<ruta>http://clic.xtec.cat/db/act_ca.jsp?id=3315</ruta>  	
 	</joc>
 	<joc>
 		<identificador>3315</identificador>
@@ -48,7 +65,7 @@
 	  	</area>
 	  	<ruta>http://clic.xtec.cat/db/act_ca.jsp?id=3315</ruta>  	
 	</joc>
-	
+		
 	<joc>
 		<identificador>1092</identificador>
 		<nom>Dinosaures</nom>
