@@ -48,8 +48,7 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	        Button bAfegirJoc = (Button) findViewById(R.id.afegirjoc);
 	        bAfegirJoc.setOnClickListener( this );  
 	        // Llista
-	        final ListView list = (ListView) findViewById(R.id.list_descarregats);
-	        	                
+	        final ListView list = (ListView) findViewById(R.id.list_descarregats);         
 	        //llegirFitxerJocsXML("jocs.xml",false,llistaJocs);
 	        llegirFitxerJocsXML("jocs_descarregats.xml", true, this.llistaJocs,this.llistaNoDescarregats);
 	        System.out.println("MIDA  "+ this.llistaJocs.midaHash());
