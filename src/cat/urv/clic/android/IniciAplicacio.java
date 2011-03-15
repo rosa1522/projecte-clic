@@ -67,10 +67,7 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 	        							startActivity(intent);	        		
 	        						}};
 	        list.setOnItemClickListener(onClic);
-	        
-	        // Creem el fitxer dels jocs ja descarregats
-	        exportarJocsDescarregatsXML(this.llistaJocs);     
-	        
+	                
 	        
         }catch (Exception e){
             e.printStackTrace();
@@ -82,6 +79,16 @@ public class IniciAplicacio extends Activity implements OnClickListener{
 		Intent intent = null;
 		intent = new Intent(this, LlistaJocsJClic.class);			
 		startActivity(intent);		
+	}
+	
+	@Override
+	public void onDestroy(){
+		super.onDestroy();
+		// Fer que grabi els jocs que ens hem descarregat al fitxer inter de jocs_descarregats.xml
+        exportarJocsDescarregatsXML(this.llistaJocs);   
+        
+		System.out.println("ENTRA AL ONDESTROY");
+		
 	}
 		
 	public void llegirFitxerJocsXML(String nomFitxer, boolean fitxerIntern, HashJocs llistaJocs, List<String> llistaNoDescarregats){
