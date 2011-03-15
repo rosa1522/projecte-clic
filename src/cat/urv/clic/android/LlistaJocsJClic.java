@@ -55,9 +55,9 @@ public class LlistaJocsJClic extends IniciAplicacio {
 	        intent = new Intent(this, DescripcioJoc.class);	
 	        OnItemClickListener onClic = new OnItemClickListener(){
 	        						public void onItemClick(AdapterView<?> arg0, View v, int i, long id) {
-	        							String str = list.getItemAtPosition(i).toString();
+	        							Integer str = (Integer) list.getItemAtPosition(i);
 	        					        							
-	        							DescripcioJoc.name = str;
+	        							DescripcioJoc.identificador = str;
 	        							startActivity(intent);	        		
 	        						}};
 	        list.setOnItemClickListener(onClic);        

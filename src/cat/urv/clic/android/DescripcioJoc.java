@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Iterator;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -20,19 +21,37 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class DescripcioJoc extends Activity implements OnClickListener{
+public class DescripcioJoc extends LlistaJocsJClic{
 	
 	// ARREGLAR LA VARIABLE
-	public static String name;
+	public static Integer identificador;
 	private Intent intent = null;
-
+	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.descripciojoc);
         
+        Joc joc = this.llistaJocs.cercarJoc(identificador);
+        
         TextView text = (TextView) findViewById(R.id.titolJoc);
-        text.setText(name);  
+        text.setText(joc.getNom());  
+        
+        text = (TextView) findViewById(R.id.dataPublicacio);
+        text.setText(joc.getDataPublicacio().toString());  
+        
+        Iterator<String> it = joc.getLlengua().iterator();
+        while(it.hasNext()){
+        	
+        }
+        text = (TextView) findViewById(R.id.llengua);
+       // text.setText();  
+ 
+        text = (TextView) findViewById(R.id.nivellJoc);
+       // text.setText();  
+        
+        text = (TextView) findViewById(R.id.areaJoc);
+        //text.setText(joc.getAreaJoc());  
         
         // Boto
         ImageButton bInstalarJoc = (ImageButton) findViewById(R.id.instalar);
@@ -40,8 +59,7 @@ public class DescripcioJoc extends Activity implements OnClickListener{
     
         
         descarregarFitxer("http://clic.xtec.cat/projects/dinosaur/jclic/dinosaur.jclic.zip","dinosaures");
-        descomprimirFitxer("dinosaures");
-	
+        descomprimirFitxer("dinosaures"); 
 	}
 	
     // Clic del boto

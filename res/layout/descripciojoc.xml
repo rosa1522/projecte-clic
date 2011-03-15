@@ -3,6 +3,10 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+<TableLayout 
+    android:layout_width="wrap_content" 
+    android:id="@+id/tableLayout1" 
+    android:layout_height="match_parent">
 
 	<TextView 
 		android:text="TextView" 
@@ -10,15 +14,43 @@
 		android:layout_width="wrap_content" 
 		android:layout_height="wrap_content">
 	</TextView>
-       
-     <ImageButton
-            style="@android:style/Widget.Button.Inset"
-            android:id="@+id/instalar " 
-            android:src="@drawable/download"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dip"
-            android:layout_gravity="bottom"
-            android:padding="35dip"
-        />
+	
+	<TextView 
+		android:text="TextView" 
+		android:id="@+id/dataPublicacio" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content">
+	</TextView>
+	
+	<TextView 
+		android:text="TextView" 
+		android:id="@+id/llengua" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content">
+	</TextView>
+	
+	<TextView 
+		android:text="TextView" 
+		android:id="@+id/nivellJoc" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content">
+	</TextView>
+	
+	<TextView 
+		android:text="TextView" 
+		android:id="@+id/areaJoc" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content">
+	</TextView>
+<ImageButton
+       style="@android:style/Widget.Button.Inset"
+       android:id="@+id/instalar " 
+       android:src="@drawable/download"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginRight="5dip"
+       android:layout_gravity="bottom"
+       android:padding="35dip"
+/>
+</TableLayout>
 </LinearLayout>
