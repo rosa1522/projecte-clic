@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="cat.urv.clic.android">
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <application android:icon="@drawable/icon" android:label="@string/app_name">
+    <application android:icon="@drawable/icon" android:label="@string/app_name" android:name=".ClicApplication">
         <activity android:name=".IniciAplicacio"
                   android:label="@string/app_name">
             <intent-filter>
@@ -9,35 +9,36 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>     
-
         <activity android:name=".LlistaJocsJClic"
         			android:label="@string/app_name"
 					android:theme="@android:style/Theme.NoTitleBar">
         </activity> 
-        
         <activity android:name=".DescripcioJoc"
         			android:label="@string/app_name"
 					android:theme="@android:style/Theme.NoTitleBar">
         </activity> 
-
-        <activity android:name="Prova4_Vista"
-        			android:label="@string/app_name"
-					android:theme="@android:style/Theme.NoTitleBar">
-        </activity>
         <activity android:name=".VistaWeb"
         			android:label="@string/app_name"
 					android:theme="@android:style/Theme.NoTitleBar">
         </activity>
-        <activity android:name="Prova1_LlistaClics"
+        
+        
+        
+        <activity android:name=".Prova4_Vista"
+        			android:label="@string/app_name"
+					android:theme="@android:style/Theme.NoTitleBar">
+        </activity>
+
+        <activity android:name=".Prova1_LlistaClics"
         			android:label="@string/app_name">
         </activity>
-        <activity android:name="Prova5_LlistaJocs"
+        <activity android:name=".Prova5_LlistaJocs"
         			android:label="@string/app_name">
         </activity>
-        <activity android:name="Prova2_ClicarLlista"
+        <activity android:name=".Prova2_ClicarLlista"
         			android:label="@string/app_name">
         </activity>
-        <activity android:name="Prova3_Inici"
+        <activity android:name=".Prova3_Inici"
         		  android:label="@string/app_name">
         </activity>
     </application>
