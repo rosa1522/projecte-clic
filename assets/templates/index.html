@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<title>HTML 5</title>
+
+	<!-- BASE CODE -->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="viewport" content="width=device-width; height=device-height; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+
+	<style>
+		body { background: black; margin:0px; } 
+		#canvas { border:1px solid black; top:0px; left:0px; background: white;}
+	</style>		
+</head>
+<body>	
+	<canvas id="canvas" width="1021" height="685"></canvas>
+	
+	<script>
+		//Save the browser type and set the canvas size
+		var ipad=false;
+		var android=false;
+		if ( navigator.userAgent.match(/iPad/i) != null) { ipad = true; }
+		else if ( navigator.userAgent.match(/Android/i) != null) { 
+			android = true; 
+			document.getElementById('canvas').width=650;
+			document.getElementById('canvas').height=320;			
+		}
+	</script>	 
+	 
+	<script src="./js/input.js"></script>
+	<script src="./js/typeface.js"></script>
+	<script src="./js/vector_battle_regular.typeface.js"></script>
+	<script src="./js/image.js"></script>
+	<script src="./js/game.js"></script>
+</body>
+</html>

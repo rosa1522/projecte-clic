@@ -1,32 +1,66 @@
 package cat.urv.clic.android;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
 public class HashJocs {
 
+	//NOU: Mantenim dues taules, aixi que podem accedir als objectes pel seu nom o pel seu id
 	private Hashtable<Integer,Joc> jocs;
+	private Hashtable<String,Joc> jocsNom;
 
 	public HashJocs() {
-		this.jocs = new Hashtable<Integer, Joc>();
+		jocs = new Hashtable<Integer, Joc>();
+		jocsNom = new Hashtable<String, Joc>();
 	}
 	
-	public void afegirJoc(Integer id, Joc joc){
-		this.jocs.put(id, joc);
+	public void afegirJoc(Joc joc){
+		jocs.put(joc.getIdentificador(), joc);
+		jocsNom.put(joc.getNom(), joc);
 	}
 	
+	//NOU: Ara totes les funcions les podem llençar pel nom o per l'id :)
 	public void esborrarJoc(Integer id){
-		this.jocs.remove(id);
+		String str = jocs.get(id).getNom();
+		jocs.remove(id);
+		jocsNom.remove(str);
+		
+	}
+
+	public void esborrarJoc(String str){
+		Integer id = jocs.get(str).getIdentificador();
+		jocs.remove(id);
+		jocsNom.remove(str);
+		
+	}
+
+	public boolean existeixJoc(Integer id){
+		return (jocs.containsKey(id));
+	}
+
+	public boolean existeixJoc(String str){
+		return (jocsNom.containsKey(str));
 	}
 	
-	public List<String> construirLlistaJocs(){
+	public Joc cercarJoc(Integer id){
+		return jocs.get(id);
+	}
+	
+	public Joc cercarJoc(String str){
+		return jocsNom.get(str);
+	}
+	
+	//NOU: Li passem cert o fals i nomes ens tornara aquells que estiguin descarregats o no
+	public List<String> construirLlistaJocs(boolean descarregats){
 		List<String> llistaNomsJocs = new ArrayList<String>();
-		Enumeration<Joc> j = jocs.elements();
-		while (j.hasMoreElements()){
-			llistaNomsJocs.add(j.nextElement().getNom());  
+		//Per iterar els elements d'un hash es millor fer-ho aixi (Enumerator es molt lent)
+		for(Joc j: jocs.values()){
+			if (j.getDescarregat() == descarregats)
+			{
+				llistaNomsJocs.add(j.getNom());
+			}
 		}
 		
 		return llistaNomsJocs;
@@ -34,9 +68,8 @@ public class HashJocs {
 	
 	public List<Integer> llistaIdentificadorJocs(){
 		List<Integer> llistaIdJocs = new ArrayList<Integer>();
-		Enumeration<Joc> j = jocs.elements();
-		while (j.hasMoreElements()){
-			llistaIdJocs.add(j.nextElement().getIdentificador());  
+		for(Joc j: jocs.values()){
+			llistaIdJocs.add(j.getIdentificador());  
 		}
 		
 		return llistaIdJocs;
@@ -50,17 +83,8 @@ public class HashJocs {
 		}
 		return llistaNoms;
 	}
-
-	public boolean existeixJoc(Integer id){
-		return (this.jocs.containsKey(id));
-	}
-	
-	public Joc cercarJoc(Integer id){
-		return this.jocs.get(id);
-	}
 	
 	public Integer midaHash(){
-		return this.jocs.size();
+		return jocs.size();
 	}
-	
 }

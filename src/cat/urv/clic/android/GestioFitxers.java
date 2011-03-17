@@ -1,23 +1,5 @@
 package cat.urv.clic.android;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
-
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -26,7 +8,10 @@ public class GestioFitxers extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
     }
-
+    
+    // TOT AIXO ESTA A UTILS ARA!!!
+    // NO HA D'ESTAR EN UN ACTIVITY!!
+/*
 	public void llegirFitxerJocsXML(String nomFitxer, boolean fitxerIntern, HashJocs llistaJocs){
 		
 		Document doc = null;
@@ -178,5 +163,5 @@ public class GestioFitxers extends Activity {
 	   }catch (Exception e){
 		   System.out.println(e.getMessage());
 	   }	    
-	}
+	}*/
 }

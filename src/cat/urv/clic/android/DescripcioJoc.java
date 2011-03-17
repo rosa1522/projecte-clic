@@ -17,22 +17,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class DescripcioJoc extends LlistaJocsJClic{
-	
-	// ARREGLAR LA VARIABLE
-	public static Integer identificador;
-	private Intent intent = null;
+public class DescripcioJoc extends Activity implements OnClickListener{
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.descripciojoc);
         
-        Joc joc = this.llistaJocs.cercarJoc(identificador);
+        //Aixi es com es captura la informaci— que esta dins l'intent
+        Bundle bundle = getIntent().getExtras();
+        Joc joc = ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc"));
         
         TextView text = (TextView) findViewById(R.id.titolJoc);
         text.setText(joc.getNom());  
