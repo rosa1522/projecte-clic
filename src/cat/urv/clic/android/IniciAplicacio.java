@@ -13,11 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-//IMPORTANT: Totes les activities han d'extendre directament activity, no feu herencies entre elles ;)
 public class IniciAplicacio extends Activity {
-	
-	
-	
+		
     @Override
     protected void onCreate(Bundle savedInstanceState) {
     	try {
@@ -51,7 +48,7 @@ public class IniciAplicacio extends Activity {
 	        		
 	        		int idJoc = ClicApplication.llistaJocs.cercarJoc(str).getIdentificador();
 	        		
-	        		//Per passar l'identificador a un altre activity ho fem aixi:
+	        		// Passem l'identificador a l'activity DescripcioJoc
         			intent.putExtra("idJoc",idJoc);
         			startActivity(intent);		        					        	
 	        	}

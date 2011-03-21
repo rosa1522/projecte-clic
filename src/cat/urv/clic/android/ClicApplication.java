@@ -3,14 +3,16 @@ package cat.urv.clic.android;
 import android.app.Application;
 
 public class ClicApplication extends Application {
-	//Ho posem en aquesta classe i sera accessible per totes les activities
+	// Posem la llista de jocs en aquesta classe i sera accessible per totes les activities
 	public static HashJocs llistaJocs;
 
 	@Override
 	public void onCreate() {
-		//Llegim tots els jocs existents que hi ha al fitxer jocs.xml i els posem com no descarregats
+		// Llegim tots els jocs existents que hi ha al fitxer jocs.xml i els posem com no descarregats
         llistaJocs = Utils.llegirFitxerJocsXML(getApplicationContext(), "jocs.xml");
+        
         System.out.println("MIDA  "+ llistaJocs.midaHash());
+        
         //FALTA FER: Llegim el fitxer descarregats.xml i marquem els jocs que hi hagi aqui com a descarregats
         //El fitxer descarregats.xml nomes ha de tenir codis, no cal guardar totes les dades
         super.onCreate();

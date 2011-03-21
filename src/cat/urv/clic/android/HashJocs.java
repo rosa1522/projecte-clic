@@ -7,7 +7,6 @@ import java.util.List;
 
 public class HashJocs {
 
-	//NOU: Mantenim dues taules, aixi que podem accedir als objectes pel seu nom o pel seu id
 	private Hashtable<Integer,Joc> jocs;
 	private Hashtable<String,Joc> jocsNom;
 
@@ -19,21 +18,18 @@ public class HashJocs {
 	public void afegirJoc(Joc joc){
 		jocs.put(joc.getIdentificador(), joc);
 		jocsNom.put(joc.getNom(), joc);
-	}
-	
-	//NOU: Ara totes les funcions les podem llençar pel nom o per l'id :)
+	}	
+
 	public void esborrarJoc(Integer id){
 		String str = jocs.get(id).getNom();
 		jocs.remove(id);
-		jocsNom.remove(str);
-		
+		jocsNom.remove(str);		
 	}
 
 	public void esborrarJoc(String str){
 		Integer id = jocs.get(str).getIdentificador();
 		jocs.remove(id);
-		jocsNom.remove(str);
-		
+		jocsNom.remove(str);		
 	}
 
 	public boolean existeixJoc(Integer id){
@@ -52,10 +48,9 @@ public class HashJocs {
 		return jocsNom.get(str);
 	}
 	
-	//NOU: Li passem cert o fals i nomes ens tornara aquells que estiguin descarregats o no
+	// Li passem cert o fals i nomes ens tornara aquells que estiguin descarregats o no
 	public List<String> construirLlistaJocs(boolean descarregats){
 		List<String> llistaNomsJocs = new ArrayList<String>();
-		//Per iterar els elements d'un hash es millor fer-ho aixi (Enumerator es molt lent)
 		for(Joc j: jocs.values()){
 			if (j.getDescarregat() == descarregats)
 			{
@@ -66,23 +61,23 @@ public class HashJocs {
 		return llistaNomsJocs;
 	}
 	
-	public List<Integer> llistaIdentificadorJocs(){
+/*	public List<Integer> llistaIdentificadorJocs(){
 		List<Integer> llistaIdJocs = new ArrayList<Integer>();
 		for(Joc j: jocs.values()){
 			llistaIdJocs.add(j.getIdentificador());  
 		}
 		
 		return llistaIdJocs;
-	}
+	}*/
 	
-	public List<String> canviLlistaIdNom(List<Integer> llistaId){
+/*	public List<String> canviLlistaIdNom(List<Integer> llistaId){
 		List<String> llistaNoms = new ArrayList<String>();
 		Iterator<Integer> it = llistaId.iterator();
 		while(it.hasNext()){
 			llistaNoms.add(this.jocs.get(it.next()).getNom());
 		}
 		return llistaNoms;
-	}
+	}*/
 	
 	public Integer midaHash(){
 		return jocs.size();

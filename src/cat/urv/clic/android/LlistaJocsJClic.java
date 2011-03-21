@@ -11,7 +11,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-//import cat.urv.clic.android.GestioFitxers;
 
 public class LlistaJocsJClic extends Activity{
 	
@@ -26,7 +25,7 @@ public class LlistaJocsJClic extends Activity{
 	        // Llista
 	        final ListView list = (ListView) findViewById(R.id.list_jocs);
 	        	                
-	        //Demanem la llista de jocs NO DESCARREGATS
+	        // Demanem la llista de jocs NO DESCARREGATS
 	        List<String> llistaJocs = ClicApplication.llistaJocs.construirLlistaJocs(false);	   
 	        ArrayAdapter<String> adp = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, llistaJocs);
 	        list.setAdapter(adp);     
@@ -40,7 +39,6 @@ public class LlistaJocsJClic extends Activity{
 	        		
 	        		int idJoc = ClicApplication.llistaJocs.cercarJoc(str).getIdentificador();
 	        		
-	        		//Per passar l'identificador a un altre activity ho fem aixi:
         			intent.putExtra("idJoc",idJoc);
         			startActivity(intent);		        					        	
 	        	}
