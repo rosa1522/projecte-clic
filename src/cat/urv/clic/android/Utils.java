@@ -27,8 +27,6 @@ import android.content.Context;
 
 public class Utils {
 	
-	
-
 	public static HashJocs llegirFitxerJocsXML(Context c, String nomFitxer){
 		Document doc = null;
 		InputStreamReader isr = null;
@@ -48,40 +46,40 @@ public class Utils {
 			Iterator<?> i = joc.iterator();
 
 			while (i.hasNext()){
-				Element e= (Element)i.next(); // Primer fill que tingui com a nom "jocs"
+            	Element e= (Element)i.next(); // Primer fill que tingui com a nom "jocs"
+            	 
+            	Integer identificador = Integer.valueOf(e.getChild("identificador").getText());
+            	String nom = e.getChild("nom").getText();
+            	Date dataPublicacio = Date.valueOf(e.getChild("dataPublicacio").getText());
+            	
+            	// Llengua
+            	List<String> llengues =  new ArrayList<String>();
+            	Iterator<?> iLlengua = e.getChild("llengua").getChildren().iterator();
+            	while (iLlengua.hasNext()){
+            		Element ee= (Element)iLlengua.next();
+            		llengues.add(ee.getText());
+            	}
 
-				Integer identificador = Integer.valueOf(e.getChild("identificador").getText());
-				String nom = e.getChild("nom").getText();
-				Date dataPublicacio = Date.valueOf(e.getChild("dataPublicacio").getText());
+            	// Nivell
+            	List<String> nivells =  new ArrayList<String>();
+            	Iterator<?> iNivell = e.getChild("nivellJoc").getChildren().iterator();
+            	while (iNivell.hasNext()){
+            		Element ee= (Element)iNivell.next();
+        	   	 	nivells.add(ee.getText());
+            	}
 
-				// Llengua
-				List<String> idiomes = new ArrayList<String>();
-				Iterator<?> iLlengua = e.getChildren("llengua").iterator();
-				while (iLlengua.hasNext()){
-					Element ee= (Element)iLlengua.next();
-					idiomes.add(ee.getText());
-				}
-
-				// Nivell
-				List<String> nivells =  new ArrayList<String>();
-				Iterator<?> iNivell = e.getChildren("nivellJoc").iterator();
-				while (iNivell.hasNext()){
-					Element ee= (Element)iNivell.next();
-					nivells.add(ee.getText());
-				}
-
-				// Area
-				List<String> arees = new ArrayList<String>();
-				Iterator<?>iArea = e.getChildren("area").iterator();
-				while (iArea.hasNext()){
-					Element ee= (Element)iArea.next();
-					arees.add(ee.getText());
-				}
-
-				String ruta = e.getChild("ruta").getText();
+            	// Area
+            	List<String> arees = new ArrayList<String>();
+            	Iterator<?>iArea = e.getChild("area").getChildren().iterator();
+            	while (iArea.hasNext()){
+            		Element ee= (Element)iArea.next();
+        	   	 	arees.add(ee.getText());
+            	}
+            	
+            	String ruta = e.getChild("ruta").getText();
 
 				// Afegim el joc
-				Joc dadesJoc = new Joc(identificador, nom, dataPublicacio, idiomes, nivells, arees, ruta, false);
+				Joc dadesJoc = new Joc(identificador, nom, dataPublicacio, llengues, nivells, arees, ruta, false);
 				llistaJocs.afegirJoc(dadesJoc);
 			}
 		} catch (FileNotFoundException e1) {
@@ -135,13 +133,12 @@ public class Utils {
 			   ps.println("<?xml version='1.0' encoding='utf-8'?>");
 			   ps.println("<jclic nom='Aplicacions jclic'>");
 			   
-			   Iterator<Integer> it = llistaId.iterator();
-			   while (it.hasNext()){
-				    ps.println("<joc>");
-				    
-				   	Integer id = it.next();   
-				   	Joc joc = llistaJocs.cercarJoc(id);
-				   	
+			    Iterator<Integer> it = llistaId.iterator();
+		   while (it.hasNext()){
+			   	Integer id = it.next();   
+			   	Joc joc = llistaJocs.cercarJoc(id);
+			   	if(joc.getDescarregat()){
+				   	ps.println("<joc>");
 					ps.print("<identificador>");
 					ps.print(joc.getIdentificador());
 					ps.println("</identificador>");
@@ -186,8 +183,9 @@ public class Utils {
 					ps.println("</ruta>");
 					 
 					ps.println("</joc>");
-			   }
-			   ps.println("</jclic>");
+			   	}
+		   }
+		   ps.println("</jclic>");
 		   }catch (Exception e){
 			   System.out.println(e.getMessage());
 		   }	    
