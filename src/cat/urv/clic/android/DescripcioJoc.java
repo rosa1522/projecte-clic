@@ -38,11 +38,12 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         text.setText(joc.getDataPublicacio().toString());  
         
         Iterator<String> it = joc.getLlengua().iterator();
+        String str = new String();
         while(it.hasNext()){
-        	
+        	System.out.println("11111LLENGUA: " + it.next().toString());
         }
         text = (TextView) findViewById(R.id.llengua);
-       // text.setText();  
+        text.setText(str);  
  
         text = (TextView) findViewById(R.id.nivellJoc);
        // text.setText();  
@@ -54,13 +55,13 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         ImageButton bInstalarJoc = (ImageButton) findViewById(R.id.instalar);
         bInstalarJoc.setOnClickListener( this );  
     
-        
-        descarregarFitxer("http://clic.xtec.cat/projects/dinosaur/jclic/dinosaur.jclic.zip","dinosaures");
-        descomprimirFitxer("dinosaures"); 
 	}
 	
     // Clic del boto
 	public void onClick(View v) {
+       // descarregarFitxer("http://clic.xtec.cat/projects/dinosaur/jclic/dinosaur.jclic.zip","dinosaures");
+       // descomprimirFitxer("dinosaures"); 
+        
 		Intent intent = null;
 		intent = new Intent(this, VistaWeb.class);			
 		startActivity(intent);		
