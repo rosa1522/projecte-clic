@@ -47,6 +47,11 @@ public class HashJocs {
 	public Joc cercarJoc(String str){
 		return jocsNom.get(str);
 	}
+
+	public void modificarJocADescarregat(Integer id){
+		jocs.get(id).setDescarregat(true);
+		jocsNom.get(jocs.get(id).getNom()).setDescarregat(true);
+	}
 	
 	// Li passem cert o fals i nomes ens tornara aquells que estiguin descarregats o no
 	public List<String> construirLlistaJocs(boolean descarregats){
@@ -59,6 +64,19 @@ public class HashJocs {
 		}
 		
 		return llistaNomsJocs;
+	}
+	
+	// Li passem cert o fals i nomes ens tornara aquells que estiguin descarregats o no
+	public List<Integer> construirLlistaIdJocs(boolean descarregats){
+		List<Integer> llistaIdJocs = new ArrayList<Integer>();
+		for(Joc j: jocs.values()){
+			if (j.getDescarregat() == descarregats)
+			{
+				llistaIdJocs.add(j.getIdentificador());
+			}
+		}
+		
+		return llistaIdJocs;
 	}
 	
 /*	public List<Integer> llistaIdentificadorJocs(){

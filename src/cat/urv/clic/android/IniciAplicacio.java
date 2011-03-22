@@ -16,7 +16,7 @@ import android.widget.ListView;
 public class IniciAplicacio extends Activity {
 		
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
     	try {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.inici);
@@ -58,5 +58,6 @@ public class IniciAplicacio extends Activity {
             e.printStackTrace();
         }
     }
+	
 }
 

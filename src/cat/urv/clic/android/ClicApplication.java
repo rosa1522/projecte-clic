@@ -11,10 +11,9 @@ public class ClicApplication extends Application {
 		// Llegim tots els jocs existents que hi ha al fitxer jocs.xml i els posem com no descarregats
         llistaJocs = Utils.llegirFitxerJocsXML(getApplicationContext(), "jocs.xml");
         
-        System.out.println("MIDA  "+ llistaJocs.midaHash());
-        
-        //FALTA FER: Llegim el fitxer descarregats.xml i marquem els jocs que hi hagi aqui com a descarregats
-        //El fitxer descarregats.xml nomes ha de tenir codis, no cal guardar totes les dades
+        // Llegim el fitxer descarregats.xml i marquem els jocs que hi hagi aqui com a descarregats
+        Utils.marcarJocsDescarregats(getApplicationContext());
+
         super.onCreate();
 	}
 

@@ -35,6 +35,9 @@ public class Joc {
 	
 	public Boolean getDescarregat() {
 		return descarregat;
+	}	
+	public void setDescarregat(Boolean descarregat) {
+		this.descarregat = descarregat;
 	}
 	public Integer getIdentificador() {
 		return identificador;

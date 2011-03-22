@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.Date;
@@ -83,116 +84,69 @@ public class Utils {
 				llistaJocs.afegirJoc(dadesJoc);
 			}
 		} catch (FileNotFoundException e1) {
-			// MOSTRAR UN MISSATGE PER AVISAR QUE NO S'HA POGUT LLEGIR EL FITXER
-			System.out.println("ENTRA A L'EXCEPCIO DE LLEGIR FITXER");
 			e1.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JDOMException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return llistaJocs;
 	}
+		
+	public static void marcarJocsDescarregats(Context c){
+		Document doc = null;
+		InputStreamReader isr = null;
 
+		try {			
+			FileInputStream is = c.openFileInput("descarregats.xml");									
+			isr = new InputStreamReader(is);
 
-//	public void exportarJocsDescarregatsXML(HashJocs llistaJocs) {
-//		try{
-//			PrintStream ps = new PrintStream(new FileOutputStream(getFilesDir()+"/jocs_descarregats.xml",false));
-//			System.out.println("MIDA funcio  "+ this.llistaJocs.midaHash());
-//			List<Integer> llistaId = llistaJocs.llistaIdentificadorJocs();
-//
-//			ps.println("<?xml version='1.0' encoding='utf-8'?>");
-//			ps.println("<jclic nom='Aplicacions jclic'>");
-//
-//			Iterator<Integer> it = llistaId.iterator();
-//			while (it.hasNext()){
-//				Integer id = it.next();   
-//				Joc joc = llistaJocs.cercarJoc(id);
-//				if(joc.getDescarregat()){
-//					ps.print("<identificador>");
-//					ps.print(joc.getIdentificador());
-//					ps.println("</identificador>");
-//					ps.println("</joc>");
-//				}
-//			}
-//			ps.println("</jclic>");
-//		}catch (Exception e){
-//			System.out.println(e.getMessage());
-//		}	    
-//	}
-	
-	
-	/*public void exportarJocsDescarregatsXML(HashJocs llistaJocs) {
-		   try{
-			   PrintStream ps = new PrintStream(new FileOutputStream(getFilesDir()+"/jocs_descarregats.xml",false));
-			   
-			   List<Integer> llistaId = llistaJocs.llistaIdentificadorJocs();
-				 
-			   ps.println("<?xml version='1.0' encoding='utf-8'?>");
-			   ps.println("<jclic nom='Aplicacions jclic'>");
-			   
-			    Iterator<Integer> it = llistaId.iterator();
-		   while (it.hasNext()){
-			   	Integer id = it.next();   
-			   	Joc joc = llistaJocs.cercarJoc(id);
-			   	if(joc.getDescarregat()){
-				   	ps.println("<joc>");
-					ps.print("<identificador>");
-					ps.print(joc.getIdentificador());
-					ps.println("</identificador>");
-					 
-					ps.print("<nom>");
-					ps.print(joc.getNom());
-					ps.println("</nom>");
-					
-					ps.print("<dataPublicacio>");
-					ps.print(joc.getDataPublicacio());
-					ps.println("</dataPublicacio>");
-					 
-					ps.print("<llengua>");
-					Iterator<String> itLlengua = joc.getLlengua().iterator();
-					while (itLlengua.hasNext()){
-						ps.print("<nom>");
-						ps.print(itLlengua.next().toString());
-						ps.println("</nom>");
-					}
-					ps.println("</llengua>");
-					 
-					ps.print("<nivellJoc>");
-					Iterator<String> itNivell = joc.getNivellJoc().iterator();
-					while (itNivell.hasNext()){
-						ps.print("<nom>");
-						ps.print(itNivell.next().toString());
-						ps.println("</nom>");
-					}
-					ps.println("</nivellJoc>");
-					 
-					ps.print("<area>");
-					Iterator<String> itArea = joc.getAreaJoc().iterator();
-					while (itArea.hasNext()){
-						ps.print("<nom>");
-						ps.print(itArea.next().toString());
-						ps.println("</nom>");
-					}
-					ps.println("</area>");
-					 
-					ps.print("<ruta>");
-					ps.print(joc.getRuta());
-					ps.println("</ruta>");
-					 
-					ps.println("</joc>");
-			   	}
-		   }
-		   ps.println("</jclic>");
-		   }catch (Exception e){
-			   System.out.println(e.getMessage());
-		   }	    
+			SAXBuilder builder = new SAXBuilder(false);
+			doc = builder.build(isr);
+
+			Element raiz = doc.getRootElement();	// S'agafa l'element arrel
+
+			List<?> identificadors = raiz.getChildren("id");   
+			Iterator<?> i = identificadors.iterator();
+
+			while (i.hasNext()){
+            	Element e= (Element)i.next();            	 
+            	ClicApplication.llistaJocs.modificarJocADescarregat(Integer.parseInt(e.getText()));            	
+			}
+		} catch (FileNotFoundException e1)  {
+			e1.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (JDOMException e) {
+			e.printStackTrace();
 		}
-	}*/
+	}
 	
-/*	private void descarregarFitxer(String ruta, String nomFitxer) {
+	public static void exportarJocsDescarregatsXML(Context c) {
+	    		
+		try{
+	    	PrintStream ps = new PrintStream(new FileOutputStream(c.getFilesDir()+"/descarregats.xml",false));
+			
+	    	List<Integer> llistaId = ClicApplication.llistaJocs.construirLlistaIdJocs(true);
+		 
+	    	ps.println("<?xml version='1.0' encoding='utf-8'?>");
+	    	ps.println("<descarregats>");
+		   
+	    	Iterator<Integer> it = llistaId.iterator();
+	    	while (it.hasNext()){
+	    		ps.print("<identificador>");
+				ps.print(it.next());
+				ps.println("</identificador>");
+	    	}
+	    	ps.println("</descarregats>");
+	    	ps.close();
+		   
+	   }catch (Exception e){
+		   System.out.println(e.getMessage());
+	   }	    
+	}
+	
+	public static void descarregarFitxer(Context c, String ruta, String nomFitxer) {
 		try {
 			// Url del joc
 			URL url = new URL(ruta);
@@ -203,7 +157,7 @@ public class Utils {
 			// S'obté l'inputStream del joc i s'obre el zip local
 			InputStream is = urlCon.getInputStream();
 			
-			File f = new File(getFilesDir() + "/" + nomFitxer + ".zip");
+			File f = new File(c.getFilesDir() + "/" + nomFitxer + ".zip");
 			FileOutputStream fos = new FileOutputStream(f);
 		
 			// Lectura del fitxer .zip
@@ -218,21 +172,21 @@ public class Utils {
 			is.close();
 			fos.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}	
-	}*/
+	}
 	
-/*	public void descomprimirFitxer(String nomFitxer){
+	public static void descomprimirFitxer(Context c, String nomFitxer){
 		final int BUFFER = 2048;
 		try {
 			BufferedOutputStream dest = null;
-			FileInputStream fis = new FileInputStream(getFilesDir()+ "/" + nomFitxer + ".zip");
+			FileInputStream fis = new FileInputStream(c.getFilesDir()+ "/" + nomFitxer + ".zip");
 			ZipInputStream zis = new ZipInputStream(new BufferedInputStream(fis));
 			ZipEntry entry;
 			
 			
 			// Creem la carpeta perquè es guardi els fitxers del zip
-			File directori = new File(getFilesDir()+ "/" + nomFitxer);
+			File directori = new File(c.getFilesDir()+ "/" + nomFitxer);
 			directori.mkdir();
 			
 			while((entry = zis.getNextEntry()) != null) {
@@ -248,7 +202,7 @@ public class Utils {
 					carpeta.mkdir();
 				}else{
 					// Escrivim els fitxers en local
-					FileOutputStream fos = new FileOutputStream(getFilesDir()+ "/" + nomFitxer + "/" +entry.getName());
+					FileOutputStream fos = new FileOutputStream(c.getFilesDir()+ "/" + nomFitxer + "/" +entry.getName());
 					dest = new BufferedOutputStream(fos, BUFFER);
 					while ((count = zis.read(data, 0, BUFFER)) != -1) {
 						dest.write(data, 0, count);
@@ -262,5 +216,5 @@ public class Utils {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}	
-	}*/
+	}
 }
