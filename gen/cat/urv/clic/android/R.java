@@ -16,23 +16,24 @@ public final class R {
         public static final int icon=0x7f020002;
     }
     public static final class id {
-        public static final int afegirjoc=0x7f060009;
+        public static final int afegirjoc=0x7f06000a;
         public static final int areaJoc=0x7f060006;
         public static final int dataPublicacio=0x7f060003;
-        public static final int go_button=0x7f06000e;
-        public static final int instalar =0x7f060007;
+        public static final int go_button=0x7f06000f;
+        public static final int instalar =0x7f060008;
         public static final int listView1=0x7f060000;
-        public static final int list_descarregats=0x7f060008;
-        public static final int list_jocs=0x7f06000a;
+        public static final int list_descarregats=0x7f060009;
+        public static final int list_jocs=0x7f06000b;
         public static final int llengua=0x7f060004;
-        public static final int next=0x7f06000b;
+        public static final int next=0x7f06000c;
         public static final int nivellJoc=0x7f060005;
         public static final int tableLayout1=0x7f060001;
+        public static final int tableLayout2=0x7f060007;
         public static final int titolJoc=0x7f060002;
-        public static final int url=0x7f06000d;
-        public static final int vistaweb=0x7f06000c;
-        public static final int webView=0x7f060010;
-        public static final int webview_compontent=0x7f06000f;
+        public static final int url=0x7f06000e;
+        public static final int vistaweb=0x7f06000d;
+        public static final int webView=0x7f060011;
+        public static final int webview_compontent=0x7f060010;
     }
     public static final class layout {
         public static final int clicarllista=0x7f030000;

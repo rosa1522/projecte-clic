@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
+    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 <TableLayout 
@@ -10,47 +11,59 @@
 
 	<TextView 
 		android:text="TextView" 
+		android:textSize="45sp"
 		android:id="@+id/titolJoc" 
 		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content">
-	</TextView>
+		android:layout_height="wrap_content"
+		android:padding="3dip"/>
 	
+	<View
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+        
 	<TextView 
 		android:text="TextView" 
+		android:textSize="25sp"
 		android:id="@+id/dataPublicacio" 
 		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content">
-	</TextView>
+		android:layout_height="wrap_content"
+		android:padding="3dip"/>
 	
 	<TextView 
 		android:text="TextView" 
+		android:textSize="25sp"
 		android:id="@+id/llengua" 
 		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content">
-	</TextView>
+		android:layout_height="wrap_content"
+		android:padding="3dip"/>
 	
 	<TextView 
 		android:text="TextView" 
+		android:textSize="25sp"
 		android:id="@+id/nivellJoc" 
 		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content">
-	</TextView>
+		android:layout_height="wrap_content"
+		android:padding="3dip"/>
 	
 	<TextView 
 		android:text="TextView" 
+		android:textSize="25sp"
 		android:id="@+id/areaJoc" 
 		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content">
-	</TextView>
-<ImageButton
-       style="@android:style/Widget.Button.Inset"
-       android:id="@+id/instalar " 
-       android:src="@drawable/download"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_marginRight="5dip"
-       android:layout_gravity="bottom"
-       android:padding="35dip"
-/>
+		android:layout_height="wrap_content"
+		android:padding="3dip"/>
+	
+<TableLayout
+	android:gravity="bottom"
+    android:id="@+id/tableLayout2" 
+    android:layout_height="match_parent">
+    <ImageButton android:id="@+id/instalar " 
+	    android:layout_width="wrap_content" 
+	    android:layout_gravity="center" 
+	    android:layout_height="wrap_content" 
+	    style="@android:style/Widget.Button.Inset" 
+	    android:src="@drawable/download">
+    </ImageButton>
+</TableLayout>
 </TableLayout>
 </LinearLayout>
