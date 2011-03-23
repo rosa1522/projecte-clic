@@ -180,7 +180,9 @@ public class Utils {
 		final int BUFFER = 2048;
 		try {
 			BufferedOutputStream dest = null;
-			FileInputStream fis = new FileInputStream(c.getFilesDir()+ "/" + nomFitxer + ".zip");
+			File fitxerZip = new File(c.getFilesDir()+ "/" + nomFitxer + ".zip");
+			FileInputStream fis = new FileInputStream(fitxerZip);
+			
 			ZipInputStream zis = new ZipInputStream(new BufferedInputStream(fis));
 			ZipEntry entry;
 			
@@ -210,9 +212,13 @@ public class Utils {
 					dest.flush();
 					dest.close();
 				}
-
 			}
 			zis.close();
+			fis.close();
+			
+			// Quan ja em descomprimit les dades eliminem el fitxer .zip
+			fitxerZip.delete();
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}	
