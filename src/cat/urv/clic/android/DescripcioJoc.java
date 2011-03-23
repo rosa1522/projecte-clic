@@ -28,7 +28,7 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         text.setText(joc.getNom());  
         
         text = (TextView) findViewById(R.id.dataPublicacio);
-        text.setText(joc.getDataPublicacio().toString());  
+        text.setText("Data: "+joc.getDataPublicacio().toString());  
 
         // Llengua
         Iterator<String> it = joc.getLlengua().iterator();
@@ -37,7 +37,7 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         	str = str + it.next().toString() + " ";
         }
         text = (TextView) findViewById(R.id.llengua);
-        text.setText(str);  
+        text.setText("Idioma: "+str);  
  
         // Nivell
         it = joc.getNivellJoc().iterator();
@@ -46,7 +46,7 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         	str = str + it.next().toString() + " ";
         }
         text = (TextView) findViewById(R.id.nivellJoc);
-        text.setText(str);  
+        text.setText("Nivell: "+str);  
         
         // Area
         it = joc.getAreaJoc().iterator();
@@ -55,7 +55,7 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         	str = str + it.next().toString() + " ";
         }
         text = (TextView) findViewById(R.id.areaJoc);
-        text.setText(str);  
+        text.setText("Ërea: "+str);  
         
         // Boto
         ImageButton bInstalarJoc = (ImageButton) findViewById(R.id.instalar);
