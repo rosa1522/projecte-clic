@@ -60,15 +60,17 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         // Boto
         ImageButton bInstalarJoc = (ImageButton) findViewById(R.id.instalar);
         bInstalarJoc.setOnClickListener( this );  
-        
-        
+                
     
 	}
 	
     // Clic del boto
 	public void onClick(View v) {
-		// Utils.descarregarFitxer(getApplicationContext(), "http://clic.xtec.cat/projects/dinosaur/jclic/dinosaur.jclic.zip", "dinosaures");
-        // Utils.descomprimirFitxer(getApplicationContext(), "dinosaures"); 
+		String nomJoc =  ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getNom();
+		String ruta =  ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getRuta();
+		
+		Utils.descarregarFitxer(getApplicationContext(), ruta, nomJoc);
+        Utils.descomprimirFitxer(getApplicationContext(), nomJoc); 
         
         // Marquem el joc com a descarregat a la llista
 		ClicApplication.llistaJocs.modificarJocADescarregat(this.bundle.getInt("idJoc"));
