@@ -3,6 +3,7 @@ package cat.urv.clic.android;
 import java.util.Iterator;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -55,7 +56,7 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         	str = str + it.next().toString() + " ";
         }
         text = (TextView) findViewById(R.id.areaJoc);
-        text.setText("Ërea: "+str);  
+        text.setText("Àrea: "+str);  
         
         // Boto
         ImageButton bInstalarJoc = (ImageButton) findViewById(R.id.instalar);
@@ -66,11 +67,14 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 	
     // Clic del boto
 	public void onClick(View v) {
-		String nomJoc =  ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getNom();
+			
+		String idJoc =  Integer.toString(bundle.getInt("idJoc"));
 		String ruta =  ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getRuta();
 		
-		Utils.descarregarFitxer(getApplicationContext(), ruta, nomJoc);
-        Utils.descomprimirFitxer(getApplicationContext(), nomJoc); 
+		Utils.descarregarFitxer(getApplicationContext(), ruta, idJoc);
+        Utils.descomprimirFitxer(getApplicationContext(), idJoc); 
+        
+        Utils.copiarFitxersJoc(getApplicationContext(),idJoc);
         
         // Marquem el joc com a descarregat a la llista
 		ClicApplication.llistaJocs.modificarJocADescarregat(this.bundle.getInt("idJoc"));

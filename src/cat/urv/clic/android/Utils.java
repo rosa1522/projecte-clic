@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.channels.FileChannel;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -146,7 +147,23 @@ public class Utils {
 	   }	    
 	}
 	
-	public static void descarregarFitxer(Context c, String ruta, String nomFitxer) {
+	public static void copiaFitxer_AssetsIntern(FileInputStream in, File out) throws IOException   {  
+		FileChannel inChannel = in.getChannel();  
+		FileChannel outChannel = new FileOutputStream(out).getChannel();  
+		
+		try {  
+			inChannel.transferTo(0, inChannel.size(),  outChannel);  
+		}   
+		catch (IOException e) {  
+			throw e;  
+		}  
+		finally {  
+			if (inChannel != null) inChannel.close();  
+			if (outChannel != null) outChannel.close();  
+		}  
+	}
+	
+	public static void descarregarFitxer(Context c, String ruta, String idJoc) {
 		try {
 			// Url del joc
 			URL url = new URL(ruta);
@@ -155,10 +172,10 @@ public class Utils {
 			URLConnection urlCon = url.openConnection();
 
 			// S'obté l'inputStream del joc i s'obre el zip local
-			InputStream is = urlCon.getInputStream();
+			InputStream is =  urlCon.getInputStream();
 			
-			File f = new File(c.getFilesDir() + "/" + nomFitxer + ".zip");
-			FileOutputStream fos = new FileOutputStream(f);
+			File fdesti = new File(c.getFilesDir() + "/" + idJoc + ".zip");
+			FileOutputStream fos = new FileOutputStream(fdesti);
 		
 			// Lectura del fitxer .zip
 			byte[] array = new byte[is.available()]; // Buffer temporal de lectura
@@ -171,16 +188,19 @@ public class Utils {
 			// Tanquem la connexio i el zip
 			is.close();
 			fos.close();
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}	
 	}
 	
-	public static void descomprimirFitxer(Context c, String nomFitxer){
+
+	
+	public static void descomprimirFitxer(Context c, String idJoc){
 		final int BUFFER = 2048;
 		try {
 			BufferedOutputStream dest = null;
-			File fitxerZip = new File(c.getFilesDir()+ "/" + nomFitxer + ".zip");
+			File fitxerZip = new File(c.getFilesDir()+ "/" + idJoc + ".zip");
 			FileInputStream fis = new FileInputStream(fitxerZip);
 			
 			ZipInputStream zis = new ZipInputStream(new BufferedInputStream(fis));
@@ -188,7 +208,7 @@ public class Utils {
 			
 			
 			// Creem la carpeta perquè es guardi els fitxers del zip
-			File directori = new File(c.getFilesDir()+ "/" + nomFitxer);
+			File directori = new File(c.getFilesDir()+ "/" + idJoc);
 			directori.mkdir();
 			
 			while((entry = zis.getNextEntry()) != null) {
@@ -204,7 +224,7 @@ public class Utils {
 					carpeta.mkdir();
 				}else{
 					// Escrivim els fitxers en local
-					FileOutputStream fos = new FileOutputStream(c.getFilesDir()+ "/" + nomFitxer + "/" +entry.getName());
+					FileOutputStream fos = new FileOutputStream(c.getFilesDir()+ "/" + idJoc + "/" +entry.getName());
 					dest = new BufferedOutputStream(fos, BUFFER);
 					while ((count = zis.read(data, 0, BUFFER)) != -1) {
 						dest.write(data, 0, count);
@@ -216,11 +236,28 @@ public class Utils {
 			zis.close();
 			fis.close();
 			
-			// Quan ja em descomprimit les dades eliminem el fitxer .zip
+			// Quan ja hem descomprimit les dades eliminem el fitxer .zip
 			fitxerZip.delete();
 			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}	
+	}
+	
+	public static void copiarFitxersJoc(Context c, String idJoc) {
+						
+		try {
+			FileInputStream forigen = c.openFileInput("index_assets.html");
+			File fdesti = new File(c.getFilesDir() + "/" + idJoc +"/index.html");		
+			copiaFitxer_AssetsIntern (forigen, fdesti);
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+
+
 	}
 }
