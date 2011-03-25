@@ -1,7 +1,8 @@
 // borrowed from typeface-0.14.js
 // http://typeface.neocracy.org
-Text = {
-  renderGlyph: function (ctx, face, char) {
+function Text() {
+	
+  this.renderGlyph = function (ctx, face, char) {
 
     var glyph = face.glyphs[char];
 
@@ -45,9 +46,9 @@ Text = {
     if (glyph.ha) {
       ctx.translate(glyph.ha, 0);
     }
-  },
+  };
 
-  renderText: function(text, size, x, y) {
+  this.renderText = function(text, size, x, y) {
     this.context.save();
 
     this.context.translate(x, y);
@@ -63,8 +64,8 @@ Text = {
     this.context.fill();
 
     this.context.restore();
-  },
+  };
 
-  context: null,
-  face: null
+  this.context = null;
+  this.face = null;
 };

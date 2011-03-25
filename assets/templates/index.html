@@ -3,34 +3,45 @@
 <head>
 	<title>HTML 5</title>
 
-	<!-- BASE CODE -->
-	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="viewport" content="width=device-width; height=device-height; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
 
 	<style>
 		body { background: black; margin:0px; } 
-		#canvas { border:1px solid black; top:0px; left:0px; background: white;}
+		#canvas { background: white; position: absolute; top:0px; left:0px; }
+		#canvasControl { background: #ccc; position: absolute; top:590px; left:0px; }
 	</style>		
 </head>
-<body>	
-	<canvas id="canvas" width="1021" height="685"></canvas>
+<body style="background: red;">	
+	<canvas id="canvas" width="1024" height="590"></canvas>
+	<canvas id="canvasControl" width="1024" height="100"></canvas>
+
 	
-	<script>
-		//Save the browser type and set the canvas size
-		var ipad=false;
-		var android=false;
-		if ( navigator.userAgent.match(/iPad/i) != null) { ipad = true; }
-		else if ( navigator.userAgent.match(/Android/i) != null) { 
-			android = true; 
-			document.getElementById('canvas').width=650;
-			document.getElementById('canvas').height=320;			
-		}
-	</script>	 
-	 
-	<script src="./js/input.js"></script>
-	<script src="./js/typeface.js"></script>
-	<script src="./js/vector_battle_regular.typeface.js"></script>
-	<script src="./js/image.js"></script>
-	<script src="./js/game.js"></script>
+	<!-- Shared Libraries -->
+	<!-- Fonts --> 
+	<script src="./js/lib_typeface.js"></script>
+	<!-- Images -->
+	<script src="./js/lib_image.js"></script>
+	<!-- Input Managers -->	
+	<script src="./js/lib_input_base.js"></script>
+	<script src="./js/lib_input_main.js"></script>
+	<script src="./js/lib_input_control.js"></script>	
+
+	<!-- Activity Templates -->
+	<script src="./js/activitat_puzzle_jordi.js"></script>
+	<script src="./js/activitat_puzzle.js"></script>
+
+	<!-- Fonts --> 
+	<script src="./fonts/vector_battle_regular.typeface.js"></script>
+	<script src="./fonts/helvetiker_bold.typeface.js"></script>
+	<script src="./fonts/helvetiker_bold_italic.typeface.js"></script>
+	<script src="./fonts/helvetiker_regular.typeface.js"></script>
+	<script src="./fonts/helvetiker_italic.typeface.js"></script>
+
+	<!-- Data -->
+	<script src="data1.js"></script>
+		
+	<!-- Main Code -->	
+	<script src="./js/base_ui.js"></script>
+	<script src="./js/base_main.js"></script>
 </body>
 </html>

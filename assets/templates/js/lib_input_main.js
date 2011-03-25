@@ -19,17 +19,6 @@ DragData = {
 // Work with the touch data in an iPad or an Android
 if ( navigator.userAgent.match(/(iPad|Android)/i) != null) 
 {
-	if ( navigator.userAgent.match(/iPad/i) != null) { ipad = true; }
-	else { android = true; }
-	
-	//Prevent the standard ones	
-	var fprevent=function(e) { e.preventDefault(); };
-	document.addEventListener('gesturestart',fprevent, false);
-	document.addEventListener('gesturechange', fprevent, false);
-	document.addEventListener('gestureend', fprevent, false);
-	document.addEventListener('touchstart', fprevent, false);
-	document.addEventListener('touchmove', fprevent, false);
-	document.addEventListener('touchend', fprevent, false);
 	//Add the new events
 	document.getElementById('canvas').addEventListener('touchstart',function (e) {
 		var changedTouches = e.changedTouches; //List only those that change
