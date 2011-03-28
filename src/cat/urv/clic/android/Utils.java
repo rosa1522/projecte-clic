@@ -12,7 +12,6 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.channels.FileChannel;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -107,11 +106,11 @@ public class Utils {
 
 			Element raiz = doc.getRootElement();	// S'agafa l'element arrel
 
-			List<?> identificadors = raiz.getChildren("id");   
+			List<?> identificadors = raiz.getChildren("identificador");   
 			Iterator<?> i = identificadors.iterator();
-
+			
 			while (i.hasNext()){
-            	Element e= (Element)i.next();            	 
+            	Element e= (Element)i.next();    
             	ClicApplication.llistaJocs.modificarJocADescarregat(Integer.parseInt(e.getText()));            	
 			}
 		} catch (FileNotFoundException e1)  {
@@ -125,9 +124,9 @@ public class Utils {
 	
 	public static void exportarJocsDescarregatsXML(Context c) {
 	    		
-		try{
+		try{			
 	    	PrintStream ps = new PrintStream(new FileOutputStream(c.getFilesDir()+"/descarregats.xml",false));
-			
+				
 	    	List<Integer> llistaId = ClicApplication.llistaJocs.construirLlistaIdJocs(true);
 		 
 	    	ps.println("<?xml version='1.0' encoding='utf-8'?>");
@@ -146,21 +145,22 @@ public class Utils {
 		   System.out.println(e.getMessage());
 	   }	    
 	}
-	
-	public static void copiaFitxer_AssetsIntern(FileInputStream in, File out) throws IOException   {  
-		FileChannel inChannel = in.getChannel();  
-		FileChannel outChannel = new FileOutputStream(out).getChannel();  
 		
-		try {  
-			inChannel.transferTo(0, inChannel.size(),  outChannel);  
-		}   
-		catch (IOException e) {  
-			throw e;  
-		}  
-		finally {  
-			if (inChannel != null) inChannel.close();  
-			if (outChannel != null) outChannel.close();  
-		}  
+	private static void copiaFitxer_InputStreamFile(InputStream in, File out) throws IOException   {  
+		
+		FileOutputStream fos = new FileOutputStream(out);
+
+		// Lectura del fitxer 
+		byte[] array = new byte[in.available()]; // Buffer temporal de lectura
+		int leido = in.read(array);
+		while (leido > 0) {
+			fos.write(array, 0, leido);
+			leido = in.read(array);
+		}		
+		
+		// Tanquem la connexio i el fitxer
+		in.close();
+		fos.close();
 	}
 	
 	public static void descarregarFitxer(Context c, String ruta, String idJoc) {
@@ -173,29 +173,15 @@ public class Utils {
 
 			// S'obté l'inputStream del joc i s'obre el zip local
 			InputStream is =  urlCon.getInputStream();
-			
-			File fdesti = new File(c.getFilesDir() + "/" + idJoc + ".zip");
-			FileOutputStream fos = new FileOutputStream(fdesti);
-		
-			// Lectura del fitxer .zip
-			byte[] array = new byte[is.available()]; // Buffer temporal de lectura
-			int leido = is.read(array);
-			while (leido > 0) {
-				fos.write(array, 0, leido);
-				leido = is.read(array);
-			}
 
-			// Tanquem la connexio i el zip
-			is.close();
-			fos.close();
+			File fdesti = new File(c.getFilesDir() + "/" + idJoc + ".zip");
+			copiaFitxer_InputStreamFile(is, fdesti);		
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}	
 	}
-	
-
-	
+		
 	public static void descomprimirFitxer(Context c, String idJoc){
 		final int BUFFER = 2048;
 		try {
@@ -205,8 +191,7 @@ public class Utils {
 			
 			ZipInputStream zis = new ZipInputStream(new BufferedInputStream(fis));
 			ZipEntry entry;
-			
-			
+						
 			// Creem la carpeta perquè es guardi els fitxers del zip
 			File directori = new File(c.getFilesDir()+ "/" + idJoc);
 			directori.mkdir();
@@ -243,13 +228,16 @@ public class Utils {
 			e.printStackTrace();
 		}	
 	}
-	
-	public static void copiarFitxersJoc(Context c, String idJoc) {
-						
+		
+	public static void creacioActivitat(Context c, String idJoc) {						
 		try {
-			FileInputStream forigen = c.openFileInput("index_assets.html");
-			File fdesti = new File(c.getFilesDir() + "/" + idJoc +"/index.html");		
-			copiaFitxer_AssetsIntern (forigen, fdesti);
+			// Copiem el index.html
+			InputStream forigen =  c.getAssets().open("index_assets.html");							
+			File fdesti = new File(c.getFilesDir() + "/" + idJoc +"/index.html");				
+			copiaFitxer_InputStreamFile (forigen, fdesti);
+			
+			// Generem el data1.js, data2.js, data2.js, ...
+			
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -257,7 +245,6 @@ public class Utils {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-
-
 	}
+	
 }

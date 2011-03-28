@@ -3,7 +3,6 @@ package cat.urv.clic.android;
 import java.util.Iterator;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -72,9 +71,9 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 		String ruta =  ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getRuta();
 		
 		Utils.descarregarFitxer(getApplicationContext(), ruta, idJoc);
-        Utils.descomprimirFitxer(getApplicationContext(), idJoc); 
-        
-        Utils.copiarFitxersJoc(getApplicationContext(),idJoc);
+		Utils.descomprimirFitxer(getApplicationContext(), idJoc);
+                
+        Utils.creacioActivitat(getApplicationContext(),idJoc);
         
         // Marquem el joc com a descarregat a la llista
 		ClicApplication.llistaJocs.modificarJocADescarregat(this.bundle.getInt("idJoc"));
@@ -82,9 +81,9 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 		// Sobreescribim el fitxer de jocs descarregats
 		Utils.exportarJocsDescarregatsXML(getApplicationContext());
 		
-		//Intent intent = null;
-		//intent = new Intent(this, VistaWeb.class);			
-		//startActivity(intent);		
+		Intent intent = null;
+		intent = new Intent(this, VistaWeb.class);			
+		startActivity(intent);		
 	}
 
 }

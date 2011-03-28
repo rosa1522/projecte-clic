@@ -14,7 +14,7 @@
 	  	<area>
 	  		<nom>musica</nom>
 	  	</area>	
-	  	<ruta>http://clic.xtec.cat/projects/bim_bam/jclic/bim_bam.jclic.zip</ruta>  	
+	  	<ruta>http://clic.xtec.cat/projects/nadal96/jclic/nadal96.jclic.zip</ruta>  	
 	</joc>
 	<joc>
 		<identificador>2333</identificador>
@@ -30,7 +30,7 @@
 	  	<area>
 	  		<nom>musica</nom>
 	  	</area>	
-	  	<ruta>http://clic.xtec.cat/db/act_ca.jsp?id=3649</ruta>  	
+	  	<ruta>http://clic.xtec.cat/projects/estacio2/jclic/estiu.jclic.zip</ruta>  	
 	</joc>
 	
 	<joc>
@@ -47,7 +47,7 @@
 	  	<area>
 	  		<nom>llengues</nom>
 	  	</area>
-	  	<ruta>http://clic.xtec.cat/db/act_ca.jsp?id=3315</ruta>  	
+	  	<ruta>http://clic.xtec.cat/projects/jlimpio/jclic/jlimpio.jclic.zip</ruta>  	
 	</joc>
 	<joc>
 		<identificador>3315</identificador>
@@ -63,7 +63,7 @@
 	  	<area>
 	  		<nom>llengues</nom>
 	  	</area>
-	  	<ruta>http://clic.xtec.cat/db/act_ca.jsp?id=3315</ruta>  	
+	  	<ruta>http://clic.xtec.cat/projects/color123/jclic/color123.jclic.zip</ruta>  	
 	</joc>
 		
 	<joc>
@@ -81,7 +81,7 @@
 	  		<nom>matematiques</nom>
 	  		<nom>cienciesSocials</nom>
 	  	</area>
-	  	<ruta>http://clic.xtec.cat/db/act_ca.jsp?id=1092</ruta>  	
+	  	<ruta>http://clic.xtec.cat/projects/dinos4/jclic/dinos4.jclic.zip</ruta>  	
 	</joc>
 	 
 </jclic>

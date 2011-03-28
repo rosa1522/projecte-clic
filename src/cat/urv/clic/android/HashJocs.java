@@ -2,7 +2,6 @@ package cat.urv.clic.android;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
 
 public class HashJocs {
