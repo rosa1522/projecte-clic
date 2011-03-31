@@ -3,6 +3,8 @@ package cat.urv.clic.android;
 import java.util.Iterator;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,9 +15,12 @@ import android.widget.TextView;
 
 public class DescripcioJoc extends Activity implements OnClickListener{
 	
+	ProgressDialog mDialog1;
 	private Bundle bundle;
 	private ImageButton bInstalarJoc;
 	
+	private static final int DIALOG1_KEY = 0;
+	 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +80,7 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 		// Si el joc no està instal·lat, l'hem de descarregat i canviar la imatge del botó perquè
 		// l'usuario torni a donar al botó per poder jugar
 		if (!ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getDescarregat()) {
+			showDialog(DIALOG1_KEY);
 			String idJoc =  Integer.toString(bundle.getInt("idJoc"));
 			String ruta =  ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getRuta();
 			
@@ -91,6 +97,8 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 			
 			// Canviar la imatge del botó
 			bInstalarJoc.setImageResource(R.drawable.play);
+			
+			//removeDialog(DIALOG1_KEY);
 		}else{
 			Intent intent = null;
 			intent = new Intent(this, VistaWeb.class);			
@@ -99,4 +107,17 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 	
 	}
 
+	 @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case DIALOG1_KEY: {
+                ProgressDialog dialog = new ProgressDialog(this);
+                dialog.setMessage("Siusplau esperi mentre es descarrega...");
+                dialog.setIndeterminate(true);
+                dialog.setCancelable(true);
+                return dialog;
+            }
+        }
+        return null;
+    }
 }
