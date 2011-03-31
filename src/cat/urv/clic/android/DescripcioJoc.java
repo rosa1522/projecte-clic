@@ -62,7 +62,6 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         bInstalarJoc = (ImageButton) findViewById(R.id.instalar);
         if (joc.getDescarregat()) {
         	// Si el joc ja el tenim descarregat li posem al boto la imatge de jugar
-        	System.out.println("ENTRA");
         	bInstalarJoc.setImageResource(R.drawable.descargar);
         };
         bInstalarJoc.setOnClickListener( this );  
