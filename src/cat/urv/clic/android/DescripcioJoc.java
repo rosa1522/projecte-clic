@@ -62,7 +62,7 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         bInstalarJoc = (ImageButton) findViewById(R.id.instalar);
         if (joc.getDescarregat()) {
         	// Si el joc ja el tenim descarregat li posem al boto la imatge de jugar
-        	bInstalarJoc.setImageResource(R.drawable.descargar);
+        	bInstalarJoc.setImageResource(R.drawable.play);
         };
         bInstalarJoc.setOnClickListener( this );  
                 
@@ -90,7 +90,7 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 			Utils.exportarJocsDescarregatsXML(getApplicationContext());
 			
 			// Canviar la imatge del botó
-			bInstalarJoc.setImageResource(R.drawable.descargar);
+			bInstalarJoc.setImageResource(R.drawable.play);
 		}else{
 			Intent intent = null;
 			intent = new Intent(this, VistaWeb.class);			
