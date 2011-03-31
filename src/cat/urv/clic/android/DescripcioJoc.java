@@ -14,6 +14,7 @@ import android.widget.TextView;
 public class DescripcioJoc extends Activity implements OnClickListener{
 	
 	private Bundle bundle;
+	private ImageButton bInstalarJoc;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,32 +59,45 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         text.setText("Àrea: "+str);  
         
         // Boto
-        ImageButton bInstalarJoc = (ImageButton) findViewById(R.id.instalar);
+        bInstalarJoc = (ImageButton) findViewById(R.id.instalar);
+        if (joc.getDescarregat()) {
+        	// Si el joc ja el tenim descarregat li posem al boto la imatge de jugar
+        	System.out.println("ENTRA");
+        	bInstalarJoc.setImageResource(R.drawable.descargar);
+        };
         bInstalarJoc.setOnClickListener( this );  
                 
     
-	}
+	}	
 	
     // Clic del boto
 	public void onClick(View v) {
+		
+		// Si el joc no està instal·lat, l'hem de descarregat i canviar la imatge del botó perquè
+		// l'usuario torni a donar al botó per poder jugar
+		if (!ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getDescarregat()) {
+			String idJoc =  Integer.toString(bundle.getInt("idJoc"));
+			String ruta =  ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getRuta();
 			
-		String idJoc =  Integer.toString(bundle.getInt("idJoc"));
-		String ruta =  ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getRuta();
-		
-		Utils.descarregarFitxer(getApplicationContext(), ruta, idJoc);
-		Utils.descomprimirFitxer(getApplicationContext(), idJoc);
-                
-        Utils.creacioActivitat(getApplicationContext(),idJoc);
-        
-        // Marquem el joc com a descarregat a la llista
-		ClicApplication.llistaJocs.modificarJocADescarregat(this.bundle.getInt("idJoc"));
-		
-		// Sobreescribim el fitxer de jocs descarregats
-		Utils.exportarJocsDescarregatsXML(getApplicationContext());
-		
-		Intent intent = null;
-		intent = new Intent(this, VistaWeb.class);			
-		startActivity(intent);		
+			Utils.descarregarFitxer(getApplicationContext(), ruta, idJoc);
+			Utils.descomprimirFitxer(getApplicationContext(), idJoc);
+	                
+	        Utils.creacioActivitat(getApplicationContext(),idJoc);
+	        
+	        // Marquem el joc com a descarregat a la llista
+			ClicApplication.llistaJocs.modificarJocADescarregat(this.bundle.getInt("idJoc"));
+			
+			// Sobreescribim el fitxer de jocs descarregats
+			Utils.exportarJocsDescarregatsXML(getApplicationContext());
+			
+			// Canviar la imatge del botó
+			bInstalarJoc.setImageResource(R.drawable.descargar);
+		}else{
+			Intent intent = null;
+			intent = new Intent(this, VistaWeb.class);			
+			startActivity(intent);	
+		}
+	
 	}
 
 }
