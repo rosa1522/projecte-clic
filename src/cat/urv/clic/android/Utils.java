@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -247,4 +248,93 @@ public class Utils {
 		}
 	}
 	
+	public static void llegirFitxerJClic(Context c, String nomFitxer){
+		Document doc = null;
+		InputStreamReader isr = null;
+		
+		try {			
+			InputStream is = c.getAssets().open(nomFitxer);									
+			isr = new InputStreamReader(is);
+
+			SAXBuilder builder = new SAXBuilder(false);
+			doc = builder.build(isr);
+
+			Element raiz = doc.getRootElement();	// S'agafa l'element arrel
+
+			Iterator<?> iActivities = raiz.getChild("activities").getChildren().iterator();
+        	
+			while (iActivities.hasNext()){
+            	Element activity = (Element)iActivities.next(); // Primer fill que tingui com a nom "activity"
+            	List<?> llistaAttrib = activity.getAttributes();
+            	Iterator<?> iAtrib = llistaAttrib.iterator();
+            	while(iAtrib.hasNext()){						//Atributs d'"activity"
+            		Attribute attrib = (Attribute) iAtrib.next();
+            		System.out.print(attrib.getName());
+            		System.out.println("  "+attrib.getValue());
+            	
+            	}
+            	//Element cells = activity.getChild("cells");		//Fill d'activity = "cells"
+            	Iterator<?> illistaChildrenActivity = activity.getChildren().iterator();
+            	while(illistaChildrenActivity.hasNext()){
+            		Element childActivity = (Element) illistaChildrenActivity.next();
+            		if((childActivity.getName().compareTo("cells")==0)||(childActivity.getName().compareTo("document")==0)){
+            			List<?> llistaAttribCells = childActivity.getAttributes();
+                    	Iterator<?> iAtribCells = llistaAttribCells.iterator();
+                    	while(iAtribCells.hasNext()){					//Atributs de "cells o document"
+                    		Attribute attrib = (Attribute) iAtribCells.next();
+                    		System.out.print(attrib.getName());
+                    		System.out.println("  "+attrib.getValue());
+                    	}
+        	     
+                    	List<?> llistaCells = childActivity.getChildren();		//Fills de "cells o document"
+                    	Iterator<?> iCells = llistaCells.iterator();
+                    	while(iCells.hasNext()){
+                    		Element valorCells = (Element)iCells.next();
+                    		List<?> llistaAttribChildrenCells = valorCells.getAttributes();
+                        	Iterator<?> iAtribChildrenCells = llistaAttribChildrenCells.iterator();
+                        	while(iAtribChildrenCells.hasNext()){		//Atributs dels fills de "cells"
+                        		Attribute attrib = (Attribute) iAtribChildrenCells.next();
+                        		System.out.print(attrib.getName());
+                        		System.out.println("  "+attrib.getValue());
+                        	}
+                        	if(valorCells.getChildren().size() != 0){		
+                        		List<?> llistaChildrenCell = valorCells.getChildren();	
+                        		Iterator<?> iChildrenCell = llistaChildrenCell.iterator();
+                        		while(iChildrenCell.hasNext()){
+                        			Element childrenCell = (Element) iChildrenCell.next();
+                        			List<?> llistaAttribChildrenCell =  childrenCell.getAttributes();
+                        			Iterator<?> iAtribChildrenCell = llistaAttribChildrenCell.iterator();
+                                	while(iAtribChildrenCell.hasNext()){					//Atributs dels fills "cell"
+                                		Attribute attrib = (Attribute) iAtribChildrenCell.next();
+                                		System.out.print(attrib.getName());
+                                		System.out.println("  "+attrib.getValue());
+                                	}
+                                	if(childrenCell.getChildren().size() != 0){		
+                                		List<?> llistaNetsCell = childrenCell.getChildren();	
+                                		Iterator<?> illistaNetsCell = llistaNetsCell.iterator();
+                                		while(illistaNetsCell.hasNext()){
+                                			Element netCell = (Element) illistaNetsCell.next();
+                                			List<?> llistaAttribNetCell =  netCell.getAttributes();
+                                			Iterator<?> illistaAttribNetCell = llistaAttribNetCell.iterator();
+                                        	while(illistaAttribNetCell.hasNext()){					//Atributs dels nets "cell"
+                                        		Attribute attrib = (Attribute) illistaAttribNetCell.next();
+                                        		System.out.print(attrib.getName());
+                                        		System.out.println("  "+attrib.getValue());
+                                        	}
+                                		}
+                                	}
+                        		}
+                        	}
+                    	}
+            		}
+            	}
+			}
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (JDOMException e) {
+			e.printStackTrace();
+		}
+	}
 }
