@@ -248,6 +248,31 @@ public class Utils {
 		}
 	}
 	
+	private static void recursiu(List<?> llista){
+	  	if(llista.size() != 0){		
+    		Iterator<?> iLlista = llista.iterator();
+    		while(iLlista.hasNext()){
+    			Element child = (Element) iLlista.next();
+    			List<?> llistaAttribChild =  child.getAttributes(); 	//Llegim els atributs
+    			if(llistaAttribChild.size()!=0){
+	    			Iterator<?> iAttribChild = llistaAttribChild.iterator();
+	            	while(iAttribChild.hasNext()){				
+	            		Attribute attrib = (Attribute) iAttribChild.next();
+	            		System.out.print(attrib.getName());
+	            		System.out.println("  "+attrib.getValue());
+	            	}
+    			}else{
+    				if(child.getText().getBytes().length!=0)
+    					System.out.println(child.getText());
+    			}
+	            	
+            	if(child.getChildren().size() != 0)
+            		recursiu(child.getChildren());			//Seguim llegint si hi ha descendents 
+    		}
+	  	}
+	  	
+	}
+	
 	public static void llegirFitxerJClic(Context c, String nomFitxer){
 		Document doc = null;
 		InputStreamReader isr = null;
@@ -261,9 +286,10 @@ public class Utils {
 
 			Element raiz = doc.getRootElement();	// S'agafa l'element arrel
 
-			Iterator<?> iActivities = raiz.getChild("activities").getChildren().iterator();
-        	
-			while (iActivities.hasNext()){
+			List<?> llistaActivities = raiz.getChild("activities").getChildren();
+			recursiu(llistaActivities);
+			
+			/*while (iActivities.hasNext()){
             	Element activity = (Element)iActivities.next(); // Primer fill que tingui com a nom "activity"
             	List<?> llistaAttrib = activity.getAttributes();
             	Iterator<?> iAtrib = llistaAttrib.iterator();
@@ -274,6 +300,7 @@ public class Utils {
             	
             	}
             	//Element cells = activity.getChild("cells");		//Fill d'activity = "cells"
+            	//if(activity.getChildren().size() != 0){	
             	Iterator<?> illistaChildrenActivity = activity.getChildren().iterator();
             	while(illistaChildrenActivity.hasNext()){
             		Element childActivity = (Element) illistaChildrenActivity.next();
@@ -286,6 +313,8 @@ public class Utils {
                     		System.out.println("  "+attrib.getValue());
                     	}
         	     
+                    	
+                    //	if(childActivity.getChildren().size() != 0){	
                     	List<?> llistaCells = childActivity.getChildren();		//Fills de "cells o document"
                     	Iterator<?> iCells = llistaCells.iterator();
                     	while(iCells.hasNext()){
@@ -297,6 +326,9 @@ public class Utils {
                         		System.out.print(attrib.getName());
                         		System.out.println("  "+attrib.getValue());
                         	}
+                        	
+                        	
+                        	
                         	if(valorCells.getChildren().size() != 0){		
                         		List<?> llistaChildrenCell = valorCells.getChildren();	
                         		Iterator<?> iChildrenCell = llistaChildrenCell.iterator();
@@ -309,6 +341,9 @@ public class Utils {
                                 		System.out.print(attrib.getName());
                                 		System.out.println("  "+attrib.getValue());
                                 	}
+                                	
+                                	
+                                	
                                 	if(childrenCell.getChildren().size() != 0){		
                                 		List<?> llistaNetsCell = childrenCell.getChildren();	
                                 		Iterator<?> illistaNetsCell = llistaNetsCell.iterator();
@@ -328,7 +363,7 @@ public class Utils {
                     	}
             		}
             	}
-			}
+			}*/
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (IOException e) {
