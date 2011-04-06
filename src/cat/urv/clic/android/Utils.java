@@ -20,17 +20,17 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import net.sf.json.xml.XMLSerializer;
+import net.sf.json.JSON;
+
+import org.apache.commons.io.IOUtils;
 
 import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.adapters.XML4JDOMAdapter;
 import org.jdom.input.SAXBuilder;
-import org.json.JSONObject;
 
 import android.content.Context;
-import org.json.*;
 
 
 public class Utils {
@@ -274,12 +274,7 @@ public class Utils {
 	        				fitxerData.println("dadesActivitat[" + indexActivitat + "] = {");
 	        			}else{
 	        				fitxerData.print("\"" + attrib.getName() + "\": " +attrib.getValue() + ",");
-	        			}
-	
-	            		JSONObject jsonObj;// = JSONObject.fromObject();
-	            XMLSerializer xml = new XMLSerializer();
-	           // xml.write(json)
-	            		
+	        			}		
 	            		
 	         
 /*	            		{"cells": {
@@ -321,6 +316,19 @@ public class Utils {
     		}
 	  	}
 	  	
+	}
+	
+	public static void convertXMLtoJSON(Context c) throws IOException {
+
+        //InputStream is = ConvertXMLtoJSON.class.getResourceAsStream("sample-xml.xml");
+        InputStream is = c.getAssets().open("p_nadal.jclic");		
+        String xml = IOUtils.toString(is);
+        
+        XMLSerializer xmlSerializer = new XMLSerializer(); 
+        JSON json = xmlSerializer.read( xml );  
+        
+        System.out.println(json.toString());
+
 	}
 	
 	public static void llegirFitxerJClic(Context c, String nomFitxer, Integer idJoc){

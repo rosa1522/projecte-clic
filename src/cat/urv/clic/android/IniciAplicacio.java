@@ -31,7 +31,11 @@ public class IniciAplicacio extends Activity {
 		    		startActivity(intentBoto);		
 		    	}	        	
 	        });  
-	        Utils.llegirFitxerJClic(getApplicationContext(), "p_nadal.jclic",123);
+	        System.out.println("111111111111");
+	        
+	        // Utils.llegirFitxerJClic(getApplicationContext(), "p_nadal.jclic",123);
+	        Utils.convertXMLtoJSON(getApplicationContext());
+	        System.out.println("22222222222222222");
 	        //////////////////////////////////////////
 	        // Llista
 	        final ListView list = (ListView) findViewById(R.id.list_descarregats);         
