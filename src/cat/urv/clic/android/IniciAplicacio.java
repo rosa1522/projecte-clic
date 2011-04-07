@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+
 public class IniciAplicacio extends Activity {
 		
     @Override
