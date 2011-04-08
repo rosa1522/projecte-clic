@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JClicProject name="p_nadal" version="0.1.3">
+ <settings>
+  <title>Flors i plantes de Nadal</title>
+  <revision description="created" date="11/9/10" />
+  <revision description="Publicació a la zonaClic (http://clic.xtec.cat)" date="12/17/10">
+   <author name="Equip Clic" mail="clic@xtec.net" organization="Àrea TIC - Departament d'Educació" />
+  </revision>
+  <author name="Maria Torres Español" mail="mtorre42@xtec.net" />
+  <organization name="ESC Gaspar de Portolà" mail="c5000778@centres.xtec.es" url="http://www.xtec.es/centres/c5000778" city="Balaguer" state="Catalunya" />
+  <language>català</language>
+  <description>
+   <p>Projecte d'activitats JClic per conèixer les flors i les plantes típiques del Nadal, treballar el vocabulari i algunes de les seves caràcteristiques.</p>
+   <p>&lt;ul&gt;</p>
+   <p>&lt;li&gt;grèvol</p>
+   <p>&lt;li&gt;avet</p>
+   <p>&lt;li&gt;poinsenttia</p>
+   <p>&lt;li&gt;...</p>
+   <p>&lt;/ul&gt;</p>
+  </description>
+  <descriptors area="Ciències experimentals, Llengües, Ciències socials" level="Infantil (3-6), Primària (6-12)">botànica, vocabulari, nadal</descriptors>
+ </settings>
+ <sequence>
+  <item id="INICI" name="PANTLLA D'INFORMACIO">
+   <jump action="STOP" id="back" />
+  </item>
+  <item id="MENU" name="PANTAL D'INFORM 2">
+   <jump action="STOP" id="forward" />
+  </item>
+  <item id="PUZZLES" name="avet puzzle">
+   <jump action="RETURN" id="back" />
+  </item>
+  <item name="vesc puzzle" />
+  <item name="PUZZLE MOLSA" />
+  <item name="galceran puzzle" />
+  <item name="poinsenttia puzzle" />
+  <item name="boix grevol puzzle" />
+  <item name="grevol blanc puzzle" />
+  <item name="boix ramon puzzle">
+   <jump action="RETURN" id="forward" />
+  </item>
+  <item id="JOCS D'ASSOCIACIO" name="ACTV EXPLORACIO">
+   <jump action="RETURN" id="back" />
+  </item>
+  <item name="ASSOC SIMPLE" />
+  <item name="joc de memoria" />
+  <item name="joc de menoria 2" />
+  <item name="ACTV IDENTIFICACIO" />
+  <item name="ACTV D'IDENTIFICACIÓ 2" />
+  <item name="SOPA DE LLETRES" />
+  <item name="RESPOSTA ESCRITA">
+   <jump action="RETURN" id="forward" />
+  </item>
+  <item id="ORDENA NOM" name="NOM MOLSA">
+   <jump action="RETURN" id="back" />
+  </item>
+  <item name="NOM PONSENTTIA" />
+  <item name="NOM GALZERAN" />
+  <item name="NOM AVET" />
+  <item name="NOM  VESC" />
+  <item name="NOM  BOIX GRÈVOL">
+   <jump action="RETURN" id="forward" />
+  </item>
+  <item id="UNA MICA MÉS" name="IDENTIFICAR ELEMENTS">
+   <jump action="RETURN" id="back" />
+  </item>
+  <item name="IDENTIFICAR ELEMENTS, VESC" />
+  <item name="IDENTIFICAR ELEMENTS, GALCERAN" />
+  <item name="IDENTIFICAR ELEMENTS, POINSENTTIA" />
+  <item name="IDENTIFICAR ELEMENTS, AVET" />
+  <item name="IDNETIFICAR ELEMENTS, GRÈVOL" />
+  <item name="asc complexa" />
+  <item name="ACT IDENTIFICACIO PROTEGIT">
+   <jump action="RETURN" id="forward" />
+  </item>
+ </sequence>
+ <activities>
+  <activity class="@puzzles.DoublePuzzle" name="NOM  BOIX GRÈVOL" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style>
+      <font family="Arial" size="28" />
+      <color foreground="0x336600" background="0xFFFFFF" />
+     </style>
+     <p>ORDENA EL NOM: BOIX GRÈVOL</p>
+    </cell>
+    <cell type="final">
+     <style>
+      <font family="Arial" size="28" />
+      <color foreground="0xCC3300" background="0xFFFFFF" />
+     </style>
+     <p>MOLT BÉ!</p>
+    </cell>
+   </messages>
+   <settings margin="8" dragCells="true" report="true" reportActions="false">
+    <container bgColor="0xFFFFFF">
+     <image name="acebo soriano.jpg" tiled="false" />
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0xFFFFFF" border="false">
+     <position x="100" y="-3" />
+    </window>
+   </settings>
+   <cells rows="1" cols="2" cellWidth="117.0" cellHeight="73.0" border="true">
+    <style borderStroke="2.1" markerStroke="2.7">
+     <font family="Arial" size="28" />
+     <color foreground="0x336600" background="0xFFFFFF" inactive="0xFFFFFF" border="0xCC3300" />
+    </style>
+    <shaper class="@Rectangular" cols="2" rows="1" />
+    <cell>
+     <p>BOIX</p>
+    </cell>
+    <cell>
+     <p>GRÈVOL</p>
+    </cell>
+   </cells>
+   <scramble times="31" />
+   <layout position="AB" />
+  </activity>
+  <activity class="@puzzles.DoublePuzzle" name="NOM GALZERAN" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style>
+      <font family="Arial" size="28" />
+      <color foreground="0x336600" background="0xFFFFFF" />
+     </style>
+     <p>ORDENA EL NOM: GALZERAN</p>
+    </cell>
+    <cell type="final">
+     <style>
+      <font family="Arial" size="28" />
+      <color foreground="0xCC3300" background="0xFFFFFF" />
+     </style>
+     <p>MOLT BÉ!</p>
+    </cell>
+   </messages>
+   <settings margin="8" dragCells="true" report="true" reportActions="false">
+    <container bgColor="0xFFFFFF">
+     <image name="nou.jpg" tiled="false" />
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0xFFFFFF" border="false">
+     <position x="0" y="0" />
+    </window>
+   </settings>
+   <cells rows="1" cols="3" cellWidth="97.0" cellHeight="52.0" border="true">
+    <style borderStroke="2.1" markerStroke="2.7">
+     <font family="Arial" size="28" />
+     <color foreground="0xCC3300" background="0xFFFFFF" inactive="0xFFFFFF" border="0x336600" />
+    </style>
+    <shaper class="@Rectangular" cols="3" rows="1" />
+    <cell>
+     <p>GAL</p>
+    </cell>
+    <cell>
+     <p>ZE</p>
+    </cell>
+    <cell>
+     <p>RAN</p>
+    </cell>
+   </cells>
+   <scramble times="31" />
+   <layout position="AB" />
+  </activity>
+  <activity class="@puzzles.DoublePuzzle" name="NOM MOLSA" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="28" />
+      <color foreground="0x336600" background="0xFFFFFF" border="0xFFFFFF" />
+     </style>
+     <p>ORDENA EL NOM: MOLSA.</p>
+    </cell>
+    <cell type="final">
+     <style>
+      <font family="Arial" size="28" />
+      <color foreground="0x336600" background="0xFFFFFF" />
+     </style>
+     <p>MOLT BÉ!</p>
+    </cell>
+   </messages>
+   <settings margin="8" dragCells="true" report="true" reportActions="false">
+    <container bgColor="0xFFFFFF">
+     <image name="molsa 016-resized.jpg" tiled="false" />
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0xFFFFFF" border="false">
+     <position x="70" y="0" />
+    </window>
+   </settings>
+   <cells rows="1" cols="5" cellWidth="64.0" cellHeight="64.0" border="true">
+    <style borderStroke="2.2" markerStroke="2.7">
+     <font family="Arial" size="22" />
+     <color foreground="0x336600" background="0xFFFFFF" inactive="0xFFFFFF" border="0x336600" />
+    </style>
+    <shaper class="@Rectangular" cols="5" rows="1" />
+    <cell>
+     <p>M</p>
+    </cell>
+    <cell>
+     <p>O</p>
+    </cell>
+    <cell>
+     <p>L</p>
+    </cell>
+    <cell>
+     <p>S</p>
+    </cell>
+    <cell>
+     <p>A</p>
+    </cell>
+   </cells>
+   <scramble times="31" />
+   <layout position="AB" />
+  </activity> 
+ </activities>
+ <mediaBag>
+  <media name="2 PONSENTIES.jpg" file="2 PONSENTIES.jpg" />
+  <media name="3 ABETS-resized2.jpg" file="3 ABETS-resized2.jpg" />
+  <media name="3 FULLES GREVOL.jpg" file="3 FULLES GREVOL.jpg" />
+  <media name="ABET AMB SAC 400.jpg" file="ABET AMB SAC 400.jpg" />
+  <media name="ABET AMB SAC.jpg" file="ABET AMB SAC.jpg" />
+  <media name="ABET I VESC.jpg" file="ABET I VESC.jpg" />
+  <media name="ACEBO BLANC.jpg" file="ACEBO BLANC.jpg" />
+  <media name="ACEBO MOLT BONIC.jpg" file="ACEBO MOLT BONIC.jpg" />
+  <media name="acebo soriano.jpg" file="acebo soriano.jpg" />
+  <media name="ACEBO.jpg" file="ACEBO.jpg" />
+  <media name="BE.jpg" file="BE.jpg" />
+  <media name="boix ranom 1-resized1.jpg" file="boix ranom 1-resized1.jpg" />
+  <media name="FLOR DE PASCUA.jpg" file="FLOR DE PASCUA.jpg" />
+  <media name="GALZERAN BONI.jpg" file="GALZERAN BONI.jpg" />
+  <media name="GAZERN AMAGAT.jpg" file="GAZERN AMAGAT.jpg" />
+  <media name="molsa 016-resized.jpg" file="molsa 016-resized.jpg" />
+  <media name="MOLSA.jpg" file="MOLSA.jpg" />
+  <media name="MUERDAGO.jpg" file="MUERDAGO.jpg" />
+  <media name="nou.jpg" file="nou.jpg" />
+  <media name="poinsnttia.jpg" file="poinsnttia.jpg" />
+  <media name="portada defintiva nom-resized.jpg" file="portada defintiva nom-resized.jpg" />
+  <media name="untitled3-resized2.jpg" file="untitled3-resized2.jpg" />
+  <media name="VESC BO.jpg" file="VESC BO.jpg" />
+  <media name="VESC BONIC GIRAT.JPG" file="VESC BONIC GIRAT.JPG" />
+  <media name="VESC I PI 2.jpg" file="VESC I PI 2.jpg" />
+  <media name="vesc4.jpg" file="vesc4.jpg" />
+  <media name="avet.mp3" file="avet.mp3" />
+  <media name="avet_angels.mp3" file="avet_angels.mp3" />
+  <media name="avet_roger.mp3" file="avet_roger.mp3" />
+  <media name="boix grevol_angels.mp3" file="boix grevol_angels.mp3" />
+  <media name="boix grèvol.mp3" file="boix grèvol.mp3" />
+  <media name="galzeran.mp3" file="galzeran.mp3" />
+  <media name="galzeran_angels.mp3" file="galzeran_angels.mp3" />
+  <media name="molsa.mp3" file="molsa.mp3" />
+  <media name="molsa_aangels.mp3" file="molsa_aangels.mp3" />
+  <media name="molsa_angels.mp3" file="molsa_angels.mp3" />
+  <media name="molsa_roger.mp3" file="molsa_roger.mp3" />
+  <media name="ponsentia_angels.mp3" file="ponsentia_angels.mp3" />
+  <media name="ponsentia_roger.mp3" file="ponsentia_roger.mp3" />
+  <media name="ponsenttia.mp3" file="ponsenttia.mp3" />
+  <media name="vesc_angels-3.mp3" file="vesc_angels-3.mp3" />
+  <media name="vesc_roger.mp3" file="vesc_roger.mp3" />
+ </mediaBag>
+</JClicProject>
+
