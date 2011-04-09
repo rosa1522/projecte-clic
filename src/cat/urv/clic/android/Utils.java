@@ -350,7 +350,7 @@ public class Utils {
 			recursiu(llistaActivities, fitxerData, activitat);
 			
 			Gson gson = new Gson(); 
-			String jsonOutput = gson..toJson(Utils.llistaActivitats); 
+			String jsonOutput = gson.toJson(Utils.llistaActivitats); 
 			
 			System.out.println("txt: "+jsonOutput);
 						
