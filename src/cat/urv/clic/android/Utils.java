@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.Date;
@@ -260,7 +261,7 @@ public class Utils {
 		}
 	}
 	
-	private static Activitat recursiu(List<?> llista, PrintStream fitxerData, Activitat activitat){	 
+	private static Activitat recursiu(List<?> llista, Activitat activitat){	 
 		if(llista.size() != 0){	
     		Iterator<?> iLlista = llista.iterator();
     		
@@ -293,9 +294,9 @@ public class Utils {
             	if(child.getChildren().size() != 0){
             		
             		if (child.getName().compareTo("activity") == 0){	
-            			recursiu(child.getChildren(), fitxerData, activitat);			//Seguim llegint si hi ha descendents 		
+            			recursiu(child.getChildren(), activitat);			//Seguim llegint si hi ha descendents 		
         			}else if (child.getName().compareTo("cells") == 0){
-        				Cells retorn = (Cells) recursiu(child.getChildren(), fitxerData, activitat);			//Seguim llegint si hi ha descendents 
+        				Cells retorn = (Cells) recursiu(child.getChildren(), activitat);			//Seguim llegint si hi ha descendents 
         				activitat.afegirCellsActivitat(retorn);
         			}
             	}
@@ -338,8 +339,12 @@ public class Utils {
 
 			// Fitxer de sortida: data.js
 		 	//PrintStream fitxerData = new PrintStream(new FileOutputStream(c.getFilesDir()+"/" + idJoc + "/data.js",false));
-			PrintStream fitxerData = new PrintStream(new FileOutputStream(c.getFilesDir()+"/data.js",false));
-							    	
+			//PrintStream fitxerData = new PrintStream(new FileOutputStream(c.getFilesDir()+"/data.js",false));
+			
+			// Fitxer de sortida: data.js
+			//c.getFilesDir()+"/" + idJoc + "/data.js"
+			PrintWriter fitxerData = new PrintWriter(new File(c.getFilesDir()+"/data.js"));
+			
 			Element raiz = doc.getRootElement();	// S'agafa l'element arrel
 			List<?> llistaActivities = raiz.getChild("activities").getChildren();
 			// Principi del fitxer json
@@ -347,13 +352,16 @@ public class Utils {
 			fitxerData.println("var tipusActivitat = [];");
 			fitxerData.println("var dadesActivitat = [];");
 			
-			recursiu(llistaActivities, fitxerData, activitat);
+			recursiu(llistaActivities, activitat);
 			
 			Gson gson = new Gson(); 
 			String jsonOutput = gson.toJson(Utils.llistaActivitats); 
 			
 			System.out.println("txt: "+jsonOutput);
-						
+			
+			// Esrivim les dades del JSON al fitxer data.js 
+			fitxerData.print(jsonOutput);
+									
 			is.close();
 			fitxerData.close();
 			
