@@ -34,8 +34,8 @@ public class IniciAplicacio extends Activity {
 	        });  
 	        System.out.println("111111111111");
 	        
-	        // Utils.llegirFitxerJClic(getApplicationContext(), "p_nadal.jclic",123);
-	        Utils.convertXMLtoJSON(getApplicationContext());
+	        Utils.llegirFitxerJClic(getApplicationContext(), "2puzzles.xml",123);
+	        //Utils.convertXMLtoJSON(getApplicationContext());
 	        System.out.println("22222222222222222");
 	        //////////////////////////////////////////
 	        // Llista

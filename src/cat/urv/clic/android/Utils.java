@@ -19,11 +19,11 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import net.sf.json.JSON;
-import net.sf.json.xml.XMLSerializer;
+//import net.sf.json.JSON;
+//import net.sf.json.xml.XMLSerializer;
 
 
-import org.apache.commons.io.IOUtils;
+//import org.apache.commons.io.IOUtils;
 
 import org.jdom.Attribute;
 import org.jdom.Document;
@@ -31,10 +31,15 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
+import com.google.gson.Gson;
+
 import android.content.Context;
 
 
 public class Utils {
+	private static Activitat activitat = null;
+	//private static Cells cells = null;
+	private static List<Activitat> llistaActivitats = null;
 	
 	public static HashJocs llegirFitxerJocsXML(Context c, String nomFitxer){
 		Document doc = null;
@@ -255,71 +260,57 @@ public class Utils {
 		}
 	}
 	
-	private static void recursiu(List<?> llista, PrintStream fitxerData){	
-		if(llista.size() != 0){		
+	private static Activitat recursiu(List<?> llista, PrintStream fitxerData, Activitat activitat){	 
+		if(llista.size() != 0){	
     		Iterator<?> iLlista = llista.iterator();
     		
     		while(iLlista.hasNext()){
-    			Element child = (Element) iLlista.next();
-    			    			
+    			Element child = (Element) iLlista.next(); 
+    			if (child.getName().compareTo("activity") == 0){	
+    				activitat = new Activitat();
+    			}else if (child.getName().compareTo("cells") == 0){
+    				activitat = new Cells();
+    			}
+    			
     			List<?> llistaAttribChild =  child.getAttributes(); 	//Llegim els atributs
     			if(llistaAttribChild.size()!=0){
 	    			Iterator<?> iAttribChild = llistaAttribChild.iterator();
 	            	while(iAttribChild.hasNext()){				
 	            		Attribute attrib = (Attribute) iAttribChild.next();
 	        			// Si estem al node "Activitat" escrivim l'inici de les taules per cada activitat
-	            		if ((child.getName().compareTo("activity") == 0) && (attrib.getName().compareTo("name")==0)){
-	            			fitxerData.println();
-	            			int indexActivitat = llista.indexOf(child) + 1;
-	            			fitxerData.println("tipusActivitat[" + indexActivitat + "] = \"" + attrib.getValue() + "\";");
-	        				fitxerData.println("dadesActivitat[" + indexActivitat + "] = {");
-	        			}else{
-	        				fitxerData.print("\"" + attrib.getName() + "\": " +attrib.getValue() + ",");
-	        			}		
-	            		
-	         
-/*	            		{"cells": {
-	            			   "rows": "2",
-	            			   "cols": "3",
-	            			   "cellWidth": "258.0",
-	            			   "cellHeight": "197.0",
-	            			   "border": "true",
-	            			   "id": "primary",
-	            			   "style": {
-	            			   	  "borderStroke": "5.2",
-	            			   	  "markerStroke": "2.7",
-	            			      "color": {
-	            			        "background": "0000XFFF",
-	            			        "inactive": "000XFFF",
-	            			        "border": "0000FF"
-	            			      }      			 
-	            			   }
-	            			   "sharper": {
-	            			      "class": "@rRectangular",
-	            			      "cols": "3",
-	            			      "rows": "2"
-	            			   }   
-	            			   "cell": [
-	            			   	  {"id": "1", "image": "asdfasd.jpg"},
-	            			   	  {"id": "1", "image": "asdfasd.jpg"},
-	            			   	  {"id": "1", "image": "asdfasd.jpg"}
-	            			   ]
-	            		}*/
-
+	            		if (child.getName().compareTo("activity") == 0){
+	            			activitat.afegirAtributActivitat(attrib.getName(),attrib.getValue());
+	        			}else if (child.getName().compareTo("cells") == 0){
+	        				activitat.afegirAtributActivitat(attrib.getName(),attrib.getValue());
+	        			}
 	            	}
-    			}else{
+    			}
+    			/*else{
     				if(child.getTextTrim().compareTo("") != 0)
     					System.out.println(child.getTextTrim());
-    			}
+    			}*/
     			
-            	if(child.getChildren().size() != 0)
-            		recursiu(child.getChildren(), fitxerData);			//Seguim llegint si hi ha descendents 
+            	if(child.getChildren().size() != 0){
+            		
+            		if (child.getName().compareTo("activity") == 0){	
+            			recursiu(child.getChildren(), fitxerData, activitat);			//Seguim llegint si hi ha descendents 		
+        			}else if (child.getName().compareTo("cells") == 0){
+        				Cells retorn = (Cells) recursiu(child.getChildren(), fitxerData, activitat);			//Seguim llegint si hi ha descendents 
+        				activitat.afegirCellsActivitat(retorn);
+        			}
+            	}
+            	
+            	if (child.getName().compareTo("activity") == 0){	
+            		Utils.llistaActivitats.add(activitat);
+    			}else if (child.getName().compareTo("cells") == 0){
+    				return activitat;
+    			}
     		}
-	  	}
-	  	
+		}
+		return null;
 	}
-	
-	public static void convertXMLtoJSON(Context c) throws IOException {
+
+/*	public static void convertXMLtoJSON(Context c) throws IOException {
 
         //InputStream is = ConvertXMLtoJSON.class.getResourceAsStream("sample-xml.xml");
         InputStream is = c.getAssets().open("p_nadal.jclic");		
@@ -330,11 +321,13 @@ public class Utils {
         
         System.out.println(json.toString());
 
-	}
+	}*/
 	
 	public static void llegirFitxerJClic(Context c, String nomFitxer, Integer idJoc){
 		Document doc = null;
 		InputStreamReader isr = null;
+		Utils.activitat = null;
+		Utils.llistaActivitats = new ArrayList<Activitat>();
 		
 		try {	
 			// Fitxer d'entrada: .jclic
@@ -354,9 +347,13 @@ public class Utils {
 			fitxerData.println("var tipusActivitat = [];");
 			fitxerData.println("var dadesActivitat = [];");
 			
-			recursiu(llistaActivities, fitxerData);
+			recursiu(llistaActivities, fitxerData, activitat);
 			
+			Gson gson = new Gson(); 
+			String jsonOutput = gson..toJson(Utils.llistaActivitats); 
 			
+			System.out.println("txt: "+jsonOutput);
+						
 			is.close();
 			fitxerData.close();
 			

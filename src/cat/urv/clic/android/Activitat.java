@@ -1,25 +1,38 @@
 package cat.urv.clic.android;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Activitat {
 
-	protected String classe;
+/*	protected String classe;
 	protected String name;
 	protected String missatgeInicial;
-	protected String missatgeFinal;
-	
+	protected String missatgeFinal;*/
 	protected List<Cells> llistaCells;
+	protected HashMap<String, Object> atributsActivitat;
 
 	public Activitat() {
-		this.classe = "";
+		this.atributsActivitat = new HashMap<String, Object>();
+		this.llistaCells = new ArrayList<Cells>();
+/*		this.classe = "";
 		this.name = "";
 		this.missatgeInicial = "";
 		this.missatgeFinal = "";
-		this.llistaCells = null;
+		this.llistaCells = null;*/
 	}
 
-	public void setClasse(String classe) {
+	public void afegirAtributActivitat(String clau, Object valor){
+		this.atributsActivitat.put(clau, valor);
+	}
+	
+	public void afegirCellsActivitat(Cells cells){
+		this.llistaCells.add(cells);
+	}
+	
+
+/*	public void setClasse(String classe) {
 		this.classe = classe;
 	}
 
@@ -37,5 +50,5 @@ public class Activitat {
 
 	public void setLlistaCells(List<Cells> llistaCells) {
 		this.llistaCells = llistaCells;
-	}
+	}*/
 }
