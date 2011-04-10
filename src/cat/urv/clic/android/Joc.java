@@ -4,12 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 public class Joc {
-
-	/*enum idioma{ alemany, angles, arauca, basc, calo, catala, espanyol, esperanto, frances, gallec, grec, italia,
-		llati, occita, portugues, rumanes, suec, xines }
-	enum nivell { infantil, primaria, secundaria, batxillerat }
-	enum area { llengues, matematiques, cienciesSocials, cienciesExperimentals, musica, visualIplastica, educacioFisica,
-		tecnologies, diversos }*/
 	
 	private Integer identificador;
 	private String nom;
