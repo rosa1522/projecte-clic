@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TableLayout android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/tableLayout3">
+        <TextView android:text="Cerca d'activitats" android:layout_height="wrap_content" android:textSize="35sp" android:id="@+id/titolCerca" android:padding="3dip" android:layout_width="wrap_content"></TextView>
+        <Spinner android:layout_height="wrap_content" android:id="@+id/spinnerArea" android:layout_width="match_parent"></Spinner>
+        <Spinner android:layout_height="wrap_content" android:id="@+id/spinnerIdioma" android:layout_width="match_parent"></Spinner>
+        <Spinner android:layout_height="wrap_content" android:id="@+id/spinnerNivell" android:layout_width="match_parent"></Spinner>
+        <TableLayout android:layout_height="match_parent" android:layout_width="wrap_content" android:id="@+id/tableLayout4" android:gravity="bottom">
+            <ImageButton android:layout_height="wrap_content" 
+            android:layout_gravity="center" style="@android:style/Widget.Button.Inset" 
+            android:src="@drawable/view" android:id="@+id/cercarjocsCercar" android:layout_width="wrap_content"></ImageButton>
+        </TableLayout>
+    </TableLayout>
+
+</LinearLayout>
+

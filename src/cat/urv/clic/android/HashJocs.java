@@ -66,6 +66,19 @@ public class HashJocs {
 	}
 	
 	// Li passem cert o fals i nomes ens tornara aquells que estiguin descarregats o no
+	public List<String> construirLlistaJocsCondicions(String nivell){
+		List<String> llistaNomsJocsCondicions = new ArrayList<String>();
+		for(Joc j: jocs.values()){
+			if (j.getNivellJoc().contains(nivell))
+			{
+				llistaNomsJocsCondicions.add(j.getNom());
+			}
+		}
+		
+		return llistaNomsJocsCondicions;
+	}
+	
+	// Li passem cert o fals i nomes ens tornara aquells que estiguin descarregats o no
 	public List<Integer> construirLlistaIdJocs(boolean descarregats){
 		List<Integer> llistaIdJocs = new ArrayList<Integer>();
 		for(Joc j: jocs.values()){
