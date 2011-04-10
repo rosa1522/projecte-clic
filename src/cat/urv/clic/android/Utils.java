@@ -39,7 +39,10 @@ import android.content.Context;
 
 public class Utils {
 	private static Activitat activitat = null;
-	//private static Cells cells = null;
+	private static Cells cells = null;
+	private static Style style = null;
+	private static Font font = null;
+	private static Color color = null;
 	private static List<Activitat> llistaActivitats = null;
 	
 	public static HashJocs llegirFitxerJocsXML(Context c, String nomFitxer){
@@ -264,13 +267,18 @@ public class Utils {
 	private static Activitat recursiu(List<?> llista, Activitat activitat){	 
 		if(llista.size() != 0){	
     		Iterator<?> iLlista = llista.iterator();
-    		
     		while(iLlista.hasNext()){
     			Element child = (Element) iLlista.next(); 
     			if (child.getName().compareTo("activity") == 0){	
     				activitat = new Activitat();
     			}else if (child.getName().compareTo("cells") == 0){
-    				activitat = new Cells();
+    				cells = new Cells();
+    			}else if (child.getName().compareTo("style") == 0){
+    				style = new Style();
+    			}else if (child.getName().compareTo("font") == 0){
+    				font = new Font();
+    			}else if (child.getName().compareTo("color") == 0){
+    				color = new Color();
     			}
     			
     			List<?> llistaAttribChild =  child.getAttributes(); 	//Llegim els atributs
@@ -278,11 +286,16 @@ public class Utils {
 	    			Iterator<?> iAttribChild = llistaAttribChild.iterator();
 	            	while(iAttribChild.hasNext()){				
 	            		Attribute attrib = (Attribute) iAttribChild.next();
-	        			// Si estem al node "Activitat" escrivim l'inici de les taules per cada activitat
 	            		if (child.getName().compareTo("activity") == 0){
 	            			activitat.afegirAtributActivitat(attrib.getName(),attrib.getValue());
 	        			}else if (child.getName().compareTo("cells") == 0){
-	        				activitat.afegirAtributActivitat(attrib.getName(),attrib.getValue());
+	        				cells.afegirAtributActivitat(attrib.getName(),attrib.getValue());
+	        			}else if (child.getName().compareTo("style") == 0){
+	        				style.afegirAtributActivitat(attrib.getName(),attrib.getValue());
+	        			}else if (child.getName().compareTo("font") == 0){
+	        				font.afegirAtributActivitat(attrib.getName(),attrib.getValue());
+	        			}else if (child.getName().compareTo("color") == 0){
+	        				color.afegirAtributActivitat(attrib.getName(),attrib.getValue());
 	        			}
 	            	}
     			}
@@ -292,19 +305,29 @@ public class Utils {
     			}*/
     			
             	if(child.getChildren().size() != 0){
-            		
             		if (child.getName().compareTo("activity") == 0){	
             			recursiu(child.getChildren(), activitat);			//Seguim llegint si hi ha descendents 		
         			}else if (child.getName().compareTo("cells") == 0){
-        				Cells retorn = (Cells) recursiu(child.getChildren(), activitat);			//Seguim llegint si hi ha descendents 
-        				activitat.afegirCellsActivitat(retorn);
+        				//Style style = (Style) recursiu(child.getChildren(), activitat);			//Seguim llegint si hi ha descendents 
+        				recursiu(child.getChildren(), activitat);	
+        				System.out.println("Tornooooooo rows: " + cells.retornaRows());
+        				activitat.afegirCellsActivitat(cells);
+        			}else if (child.getName().compareTo("style") == 0){
+        				recursiu(child.getChildren(), activitat);	
+        				System.out.println("Styleeeeeee: ");
+        				//cells.afegirFillCells(style);
         			}
-            	}
+            	}else{ 
+            		if (child.getName().compareTo("font") == 0){
+            			style.afegirFillStyle(font);
+            		}else if (child.getName().compareTo("color") == 0){
+            			//style.afegirFillStyle(color);
+            		}
+            	}	
             	
             	if (child.getName().compareTo("activity") == 0){	
-            		Utils.llistaActivitats.add(activitat);
-    			}else if (child.getName().compareTo("cells") == 0){
-    				return activitat;
+            		llistaActivitats.add(activitat);	
+            		return activitat;
     			}
     		}
 		}
@@ -327,8 +350,8 @@ public class Utils {
 	public static void llegirFitxerJClic(Context c, String nomFitxer, Integer idJoc){
 		Document doc = null;
 		InputStreamReader isr = null;
-		Utils.activitat = null;
-		Utils.llistaActivitats = new ArrayList<Activitat>();
+		activitat = null;
+		llistaActivitats = new ArrayList<Activitat>();
 		
 		try {	
 			// Fitxer d'entrada: .jclic
@@ -349,17 +372,17 @@ public class Utils {
 			List<?> llistaActivities = raiz.getChild("activities").getChildren();
 			// Principi del fitxer json
 			fitxerData.println("var maxActivitats = " + llistaActivities.size() + ";");
-			fitxerData.println("var tipusActivitat = [];");
-			fitxerData.println("var dadesActivitat = [];");
+			//fitxerData.println("var tipusActivitat = [];");
+			//fitxerData.println("var dadesActivitat = [];");
 			
 			recursiu(llistaActivities, activitat);
 			
 			Gson gson = new Gson(); 
-			String jsonOutput = gson.toJson(Utils.llistaActivitats); 
+			String jsonOutput = gson.toJson(llistaActivitats); 
 			
 			System.out.println("txt: "+jsonOutput);
 			
-			// Esrivim les dades del JSON al fitxer data.js 
+			// Escrivim les dades del JSON al fitxer data.js 
 			fitxerData.print(jsonOutput);
 									
 			is.close();
