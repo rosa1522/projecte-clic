@@ -16,7 +16,7 @@
      	android:layout_height="wrap_content" 
         android:layout_gravity="center" 
         style="@android:style/Widget.Button.Inset" 
-        android:src="@drawable/download" 
+        android:src="@drawable/view" 
         android:id="@+id/cercarjocLlista" 
         android:layout_width="wrap_content"/>  
          
