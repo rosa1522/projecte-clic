@@ -1,48 +1,29 @@
 package cat.urv.clic.android;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Cells extends Activitat{
 
-/*	protected Integer rows;
-	protected Integer cols;
-	protected Boolean border;
-	protected String imatge;
-	protected Style style;*/
+	protected List<Cells> fillsCells;
 	protected HashMap<String,Object> atributsCells;
 	
 	
 	public Cells() {
 		this.atributsCells = new HashMap<String,Object>();
-/*		this.rows = 4;
-		this.cols = 4;
-		this.border = false;
-		this.imatge = "";
-		this.style = null;*/
+		//this.fillsCells = new ArrayList<Cells>();
 	}
 
 	public void afegirAtributActivitat(String clau, Object valor){
 		this.atributsCells.put(clau, valor);
 	}
 	
+	public String retornaRows(){
+		return (String)this.atributsCells.get("rows");
+	}
 	
-/*	public void setRows(Integer rows) {
-		this.rows = rows;
+	public void afegirFillCells(Cells cell){
+		this.fillsCells.add(cell);
 	}
-
-	public void setCols(Integer cols) {
-		this.cols = cols;
-	}
-
-	public void setBorder(Boolean border) {
-		this.border = border;
-	}
-
-	public void setImatge(String imatge) {
-		this.imatge = imatge;
-	}
-
-	public void setStyle(Style style) {
-		this.style = style;
-	}*/
 }
