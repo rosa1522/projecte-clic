@@ -1,5 +1,6 @@
 package cat.urv.clic.android;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -10,7 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 
@@ -24,19 +25,22 @@ public class IniciAplicacio extends Activity {
 	        
 	        //////////////////////////////////////////
 	        // Boto
-	        Button bAfegirJoc = (Button) findViewById(R.id.afegirjoc);
+	        ImageButton bAfegirJoc = (ImageButton) findViewById(R.id.afegirjoc);
 	        // Clic del boto
     		final Intent intentBoto = new Intent(this, LlistaJocsJClic.class);			
 	        bAfegirJoc.setOnClickListener( new OnClickListener(){
 		    	public void onClick(View v) {
+		    		// Li passem la llista de tots els jocs
+		    		ArrayList<String> llistaJocs = (ArrayList<String>) ClicApplication.llistaJocs.construirLlistaJocs(false);
+		    		intentBoto.putStringArrayListExtra("llistaJocs",llistaJocs);
+
 		    		startActivity(intentBoto);		
 		    	}	        	
 	        });  
-	        System.out.println("111111111111");
 	        
 	        Utils.llegirFitxerJClic(getApplicationContext(), "2puzzles.xml",123);
 	        //Utils.convertXMLtoJSON(getApplicationContext());
-	        System.out.println("22222222222222222");
+	        
 	        //////////////////////////////////////////
 	        // Llista
 	        final ListView list = (ListView) findViewById(R.id.list_descarregats);         
