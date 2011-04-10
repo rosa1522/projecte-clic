@@ -65,11 +65,14 @@ public class HashJocs {
 		return llistaNomsJocs;
 	}
 	
-	// Li passem cert o fals i nomes ens tornara aquells que estiguin descarregats o no
-	public List<String> construirLlistaJocsCondicions(String nivell){
+	// Li passem totes les condicions de cerca i mirem els jocs que compleixen la cerca introduida
+	public List<String> construirLlistaJocsCondicions(String nivell, String idioma, String area){
 		List<String> llistaNomsJocsCondicions = new ArrayList<String>();
 		for(Joc j: jocs.values()){
-			if (j.getNivellJoc().contains(nivell))
+			// Fem la comparació (nivell.compareTo("tot") != 0) perquè no tingui en compte cap filtre si han seleccionat "Tots els ..." 
+			if (((nivell.compareTo("tot") == 0) || (j.getNivellJoc().contains(nivell))) && 
+				((idioma.compareTo("tot") == 0) || (j.getLlengua().contains(idioma)))  && 
+				((area.compareTo("tot") == 0) || (j.getAreaJoc().contains(area)))  )
 			{
 				llistaNomsJocsCondicions.add(j.getNom());
 			}

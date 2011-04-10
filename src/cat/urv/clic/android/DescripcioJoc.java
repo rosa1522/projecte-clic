@@ -40,25 +40,25 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         Iterator<String> it = joc.getLlengua().iterator();
         String str = new String();
         while(it.hasNext()){
-        	str = str + it.next().toString() + " ";
+        	str = str +  ClicApplication.llistaIdiomes.cercarNomIdioma(it.next()) + " ";
         }
         text = (TextView) findViewById(R.id.llengua);
-        text.setText("Idioma: "+str);  
+        text.setText("Idioma: "+ str);  
  
         // Nivell
         it = joc.getNivellJoc().iterator();
         str = new String();
         while(it.hasNext()){
-        	str = str + it.next().toString() + " ";
+        	str = str + ClicApplication.llistaNivells.cercarNomNivell(it.next()) + " ";
         }
         text = (TextView) findViewById(R.id.nivellJoc);
-        text.setText("Nivell: "+str);  
+        text.setText("Nivell: "+ str);  
         
         // Area
         it = joc.getAreaJoc().iterator();
         str = new String();
         while(it.hasNext()){
-        	str = str + it.next().toString() + " ";
+        	str = str + ClicApplication.llistaArees.cercarNomArea(it.next()) + " ";
         }
         text = (TextView) findViewById(R.id.areaJoc);
         text.setText("Àrea: "+str);  
