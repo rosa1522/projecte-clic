@@ -21,6 +21,10 @@
         			android:label="@string/app_name"
 					android:theme="@android:style/Theme.NoTitleBar">
         </activity>
+        <activity android:name=".CercarJocs"
+        			android:label="@string/app_name"
+					android:theme="@android:style/Theme.NoTitleBar">
+        </activity>
         <activity android:name=".Prova4_Vista"
         			android:label="@string/app_name"
 					android:theme="@android:style/Theme.NoTitleBar">

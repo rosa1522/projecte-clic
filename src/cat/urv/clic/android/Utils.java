@@ -13,8 +13,10 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -65,7 +67,14 @@ public class Utils {
             	 
             	Integer identificador = Integer.valueOf(e.getChild("identificador").getText());
             	String nom = e.getChild("nom").getText();
-            	Date dataPublicacio = Date.valueOf(e.getChild("dataPublicacio").getText());
+            	
+            	SimpleDateFormat dataFormat = new SimpleDateFormat("dd/MM/yy");
+            	String dataString = e.getChild("dataPublicacio").getText();
+            	Date dataPublicacio = dataFormat.parse(dataString);
+            	           	
+            	System.out.println("DATA " + dataPublicacio);
+            	//Date dataPublicacio = e.getChild("dataPublicacio").getText();
+ 
             	
             	// Llengua
             	List<String> llengues =  new ArrayList<String>();
@@ -92,9 +101,14 @@ public class Utils {
             	}
             	
             	String ruta = e.getChild("ruta").getText();
-
+            	String clic = e.getChild("clic").getText();
+            	String img = e.getChild("img").getText();
+            	String centre = e.getChild("centre").getText();
+            	String autors = e.getChild("autors").getText();
+            	            	
 				// Afegim el joc
-				Joc dadesJoc = new Joc(identificador, nom, dataPublicacio, llengues, nivells, arees, ruta, false);
+				Joc dadesJoc = new Joc(identificador, nom, dataPublicacio, llengues, nivells, arees, ruta,
+									   clic, img, centre, autors, false);
 				llistaJocs.afegirJoc(dadesJoc);
 			}
 		} catch (FileNotFoundException e1) {
@@ -102,6 +116,9 @@ public class Utils {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (JDOMException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return llistaJocs;

@@ -18,33 +18,44 @@ public final class R {
         public static final int play=0x7f020004;
     }
     public static final class id {
-        public static final int afegirjoc=0x7f06000a;
-        public static final int areaJoc=0x7f060006;
-        public static final int dataPublicacio=0x7f060003;
-        public static final int go_button=0x7f06000f;
-        public static final int instalar =0x7f060008;
-        public static final int listView1=0x7f060000;
-        public static final int list_descarregats=0x7f060009;
-        public static final int list_jocs=0x7f06000b;
-        public static final int llengua=0x7f060004;
-        public static final int next=0x7f06000c;
-        public static final int nivellJoc=0x7f060005;
-        public static final int tableLayout1=0x7f060001;
-        public static final int tableLayout2=0x7f060007;
-        public static final int titolJoc=0x7f060002;
-        public static final int url=0x7f06000e;
-        public static final int vistaweb=0x7f06000d;
-        public static final int webView=0x7f060011;
-        public static final int webview_compontent=0x7f060010;
+        public static final int afegirjoc=0x7f060012;
+        public static final int areaJoc=0x7f06000d;
+        public static final int cercarjocLlista=0x7f060015;
+        public static final int cercarjocsCercar=0x7f060006;
+        public static final int dataPublicacio=0x7f06000a;
+        public static final int go_button=0x7f060019;
+        public static final int instalar =0x7f06000f;
+        public static final int listView1=0x7f060007;
+        public static final int list_descarregats=0x7f060011;
+        public static final int list_jocs=0x7f060014;
+        public static final int llengua=0x7f06000b;
+        public static final int next=0x7f060016;
+        public static final int nivellJoc=0x7f06000c;
+        public static final int spinnerArea=0x7f060002;
+        public static final int spinnerIdioma=0x7f060003;
+        public static final int spinnerNivell=0x7f060004;
+        public static final int tableLayout1=0x7f060008;
+        public static final int tableLayout2=0x7f06000e;
+        public static final int tableLayout3=0x7f060000;
+        public static final int tableLayout4=0x7f060005;
+        public static final int tableLayout5=0x7f060010;
+        public static final int tableLayout6=0x7f060013;
+        public static final int titolCerca=0x7f060001;
+        public static final int titolJoc=0x7f060009;
+        public static final int url=0x7f060018;
+        public static final int vistaweb=0x7f060017;
+        public static final int webView=0x7f06001b;
+        public static final int webview_compontent=0x7f06001a;
     }
     public static final class layout {
-        public static final int clicarllista=0x7f030000;
-        public static final int descripciojoc=0x7f030001;
-        public static final int inici=0x7f030002;
-        public static final int llistajocsjclic=0x7f030003;
-        public static final int main=0x7f030004;
-        public static final int vista=0x7f030005;
-        public static final int webview=0x7f030006;
+        public static final int cercarjocs=0x7f030000;
+        public static final int clicarllista=0x7f030001;
+        public static final int descripciojoc=0x7f030002;
+        public static final int inici=0x7f030003;
+        public static final int llistajocsjclic=0x7f030004;
+        public static final int main=0x7f030005;
+        public static final int vista=0x7f030006;
+        public static final int webview=0x7f030007;
     }
     public static final class string {
         public static final int afegirjoc=0x7f050003;

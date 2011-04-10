@@ -5,16 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ListView android:id="@+id/list_descarregats"
+<TableLayout android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/tableLayout5">
+   
+	<ListView 
+		android:id="@+id/list_descarregats"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1.0" />
 
-    <Button
-    	android:id="@+id/afegirjoc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/afegirjoc" />
-
+    <ImageButton 
+     	android:layout_height="wrap_content" 
+        android:layout_gravity="center" 
+        style="@android:style/Widget.Button.Inset" 
+        android:src="@drawable/download" 
+        android:id="@+id/afegirjoc" 
+        android:layout_width="wrap_content"/>  
+         
+</TableLayout> 
 </LinearLayout>
    

@@ -19,9 +19,15 @@ public class Joc {
 	private List<String> areaJoc;
 	private Boolean descarregat;
 	private String ruta;
+	private String clic;
+	private String img;
+	private String centre;
+	private String autors;
+     	
 	
 	public Joc (Integer identificador, String nom, Date dataPublicacio,List<String> llengua, List<String> nivellJoc, 
-			List<String> areaJoc, String ruta, Boolean descarregat) {
+			List<String> areaJoc, String ruta, String clic, String img, String centre, String autors,
+			Boolean descarregat) {
 		this.identificador = identificador;
 		this.nom = nom;
 		this.dataPublicacio = dataPublicacio;	// Format de la data ANY-MES-DIA i separat amb guions
@@ -29,7 +35,11 @@ public class Joc {
 		this.nivellJoc = nivellJoc;
 		this.areaJoc = areaJoc;
 		this.descarregat = false;    // Es cert si el joc esta descarregat al mobil.
-		this.ruta = ruta;		 // Path d'on es trobara l'arxiu del joc comprimit.
+		this.ruta = ruta;		 
+		this.clic = clic;		 	// Path d'on es trobara l'arxiu del joc comprimit.
+		this.img = img;		 
+		this.centre = centre;		 
+		this.autors = autors;		 
 		this.descarregat = descarregat;
 	}
 	
@@ -60,5 +70,16 @@ public class Joc {
 	public String getRuta() {
 		return ruta;
 	}
-	
+	public String getClic() {
+		return clic;
+	}
+	public String getImg() {
+		return img;
+	}
+	public String getCentre() {
+		return centre;
+	}
+	public String getAutors() {
+		return autors;
+	}
 }

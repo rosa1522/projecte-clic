@@ -15,11 +15,11 @@ import android.widget.TextView;
 
 public class DescripcioJoc extends Activity implements OnClickListener{
 	
-	ProgressDialog mDialog1;
+	//ProgressDialog mDialog1;
 	private Bundle bundle;
 	private ImageButton bInstalarJoc;
 	
-	private static final int DIALOG1_KEY = 0;
+	//private static final int DIALOG1_KEY = 0;
 	 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,8 +34,8 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         text.setText(joc.getNom());  
         
         text = (TextView) findViewById(R.id.dataPublicacio);
-        text.setText("Data: "+joc.getDataPublicacio().toString());  
-
+        text.setText("Data: "+joc.getDataPublicacio().toString());
+        
         // Llengua
         Iterator<String> it = joc.getLlengua().iterator();
         String str = new String();
@@ -80,11 +80,11 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 		// Si el joc no està instal·lat, l'hem de descarregat i canviar la imatge del botó perquè
 		// l'usuario torni a donar al botó per poder jugar
 		if (!ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getDescarregat()) {
-			showDialog(DIALOG1_KEY);
+			//showDialog(DIALOG1_KEY);
 			String idJoc =  Integer.toString(bundle.getInt("idJoc"));
-			String ruta =  ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getRuta();
+			String clicZip =  ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getClic();
 			
-			Utils.descarregarFitxer(getApplicationContext(), ruta, idJoc);
+			Utils.descarregarFitxer(getApplicationContext(), clicZip, idJoc);
 			Utils.descomprimirFitxer(getApplicationContext(), idJoc);
 	                
 	        Utils.creacioActivitat(getApplicationContext(),idJoc);
@@ -107,7 +107,7 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 	
 	}
 
-	 @Override
+	/* @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
             case DIALOG1_KEY: {
@@ -119,5 +119,5 @@ public class DescripcioJoc extends Activity implements OnClickListener{
             }
         }
         return null;
-    }
+    }*/
 }
