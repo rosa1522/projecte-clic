@@ -1,13 +1,14 @@
 package cat.urv.clic.android;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 
 public class Nivells {
 
-	protected Hashtable<String, String> nivells;
+	private Hashtable<String, String> nivells;
+	private Array nomsNivells[];
 	
 	public Nivells() {
 		nivells = new Hashtable<String, String>();
