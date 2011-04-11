@@ -33,18 +33,19 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         TextView text = (TextView) findViewById(R.id.titolJoc);
         text.setText(joc.getNom());  
         
-        text = (TextView) findViewById(R.id.dataPublicacio);
-        text.setText("Data: "+joc.getDataPublicacio().toString());
+        // Autor
+        text = (TextView) findViewById(R.id.autorsJoc);
+        text.setText(joc.getAutors().toString().trim());
         
-        // Llengua
-        Iterator<String> it = joc.getLlengua().iterator();
+        // Area
+        Iterator<String>it = joc.getAreaJoc().iterator();
         String str = new String();
         while(it.hasNext()){
-        	str = str +  ClicApplication.llistaIdiomes.cercarNomIdioma(it.next()) + " ";
+        	str = str + ClicApplication.llistaArees.cercarNomArea(it.next()) + " ";
         }
-        text = (TextView) findViewById(R.id.llengua);
-        text.setText("Idioma: "+ str);  
- 
+        text = (TextView) findViewById(R.id.areaJoc);
+        text.setText(": "+str);  
+        
         // Nivell
         it = joc.getNivellJoc().iterator();
         str = new String();
@@ -52,16 +53,26 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         	str = str + ClicApplication.llistaNivells.cercarNomNivell(it.next()) + " ";
         }
         text = (TextView) findViewById(R.id.nivellJoc);
-        text.setText("Nivell: "+ str);  
+        text.setText(": "+ str);  
+                
+        // Data
+        text = (TextView) findViewById(R.id.dataPublicacio);
+        text.setText(": "+joc.getDataPublicacio().toString());
         
-        // Area
-        it = joc.getAreaJoc().iterator();
+        // Llengua
+        it = joc.getLlengua().iterator();
         str = new String();
         while(it.hasNext()){
-        	str = str + ClicApplication.llistaArees.cercarNomArea(it.next()) + " ";
+        	str = str +  ClicApplication.llistaIdiomes.cercarNomIdioma(it.next()) + " ";
         }
-        text = (TextView) findViewById(R.id.areaJoc);
-        text.setText("Àrea: "+str);  
+        text = (TextView) findViewById(R.id.llengua);
+        text.setText(": "+ str);  
+ 
+        // Centre
+        text = (TextView) findViewById(R.id.centre);
+        text.setText(": "+joc.getCentre().toString().trim());
+        
+
         
         // Boto
         bInstalarJoc = (ImageButton) findViewById(R.id.instalar);

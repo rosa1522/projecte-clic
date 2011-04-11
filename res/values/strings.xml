@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Clic</string>
-    <string name="hello">Pantalla principal de l\'aplicacio</string>
-    <string name="next">Llista</string>    
-    <string name="afegirjoc">Afegir joc</string><string name="vistaweb">Vista web</string>
-    <string name="go_button">endavant</string>
+    <string name="app_name">Clic</string><string name="vistaweb">Vista web</string>
+    <string name="idioma">Idioma</string>
+    <string name="area">Àrea</string>
+    <string name="nivell">Nivell</string>
+    <string name="centre">Centre</string>
+    <string name="titol">Títol</string>
+    <string name="data">Data</string>
+    <string name="autor">Autor/a</string>
     
 </resources>
