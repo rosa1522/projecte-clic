@@ -1,6 +1,7 @@
 package cat.urv.clic.android;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,6 +19,7 @@ public class LlistaJocsJClic extends Activity{
 	
 	private Intent intent = null;
 	private Bundle bundle;
+	private ListView list; 
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,7 @@ public class LlistaJocsJClic extends Activity{
 	        ArrayList<String> llistaJocs = bundle.getStringArrayList("llistaJocs");
 	        
 	        // Llista
-	        final ListView list = (ListView) findViewById(R.id.list_jocs);
+	        list = (ListView) findViewById(R.id.list_jocs);
 	        	                
 	        // Demanem la llista de jocs NO DESCARREGATS  
 	        ArrayAdapter<String> adp = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, llistaJocs);
@@ -63,6 +65,14 @@ public class LlistaJocsJClic extends Activity{
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+    
+    @Override
+    public void onRestart(){
+    	super.onRestart();
+    	List<String> llistaJocs = ClicApplication.llistaJocs.construirLlistaJocs(false);	   
+        ArrayAdapter<String> adp = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, llistaJocs);
+        list.setAdapter(adp); 
     }
 }
 

@@ -17,6 +17,8 @@ import android.widget.ListView;
 
 public class IniciAplicacio extends Activity {
 		
+	private ListView list;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	try {
@@ -38,12 +40,12 @@ public class IniciAplicacio extends Activity {
 		    	}	        	
 	        });  
 	        
-	        Utils.llegirFitxerJClic(getApplicationContext(), "2puzzles.xml",123);
+	        //Utils.llegirFitxerJClic(getApplicationContext(), "2puzzles.xml",123);
 	        //Utils.convertXMLtoJSON(getApplicationContext());
 	        
 	        //////////////////////////////////////////
 	        // Llista
-	        final ListView list = (ListView) findViewById(R.id.list_descarregats);         
+	        list = (ListView) findViewById(R.id.list_descarregats);         
 	        //Demanem la llista de jocs DESCARREGATS
 	        List<String> llistaJocs = ClicApplication.llistaJocs.construirLlistaJocs(true);	   
 	        ArrayAdapter<String> adp = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, llistaJocs);
@@ -68,5 +70,13 @@ public class IniciAplicacio extends Activity {
         }
     }
 	
+    @Override
+    public void onRestart(){
+    	super.onRestart();
+    	List<String> llistaJocs = ClicApplication.llistaJocs.construirLlistaJocs(true);	   
+        ArrayAdapter<String> adp = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, llistaJocs);
+        list.setAdapter(adp); 
+    }
+    
 }
 
