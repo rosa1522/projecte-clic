@@ -3,8 +3,6 @@ package cat.urv.clic.android;
 import java.util.Iterator;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;

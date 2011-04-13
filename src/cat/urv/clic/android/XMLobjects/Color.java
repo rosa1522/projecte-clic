@@ -1,4 +1,4 @@
-package cat.urv.clic.android;
+package cat.urv.clic.android.XMLobjects;
 
 import java.util.HashMap;
 

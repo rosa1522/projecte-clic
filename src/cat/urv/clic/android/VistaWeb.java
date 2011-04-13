@@ -15,26 +15,5 @@ public class VistaWeb extends Activity {
     	WebView web = (WebView) findViewById(R.id.webView);
         web.getSettings().setJavaScriptEnabled(true);
         web.loadUrl("file:///android_asset/templates/index.html");
-
-        
-        //web.loadUrl("http://www.google.com");
-        /*
-        final WebView webview = (WebView)findViewById(R.id.webView);  
-        // JavaScript must be enabled if you want it to work, obviously 
-        webview.getSettings().setJavaScriptEnabled(true);  
-          
-        // WebViewClient must be set BEFORE calling loadUrl! 
-        webview.setWebViewClient(new WebViewClient() {  
-            @Override  
-            public void onPageFinished(WebView view, String url)  
-            {  
-                webview.loadUrl("javascript:(function() { " +  
-                        "document.getElementsByTagName('body')[0].style.color = 'red'; " +  
-                        "})()");  
-            }  
-        });  
-          
-        webview.loadUrl("http://code.google.com/android");  
-        */
     }
 }
