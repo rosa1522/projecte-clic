@@ -4,8 +4,25 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent">
   
-<TableLayout android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/tableLayout6">
+<TableLayout 
+	android:layout_width="match_parent" 
+	android:layout_height="match_parent" 
+	android:id="@+id/tableLayout6">
    
+   	<TextView 
+		android:text="@string/afegirjoc" 
+		android:textSize="30sp"
+		android:id="@+id/titolLlistaJocs" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content"
+		android:padding="3dip"/>
+	
+	<View
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+        
+    <View android:layout_height="7dip" />
+        
 	<ListView 
 		android:id="@+id/list_jocs" 
 		android:layout_width="match_parent"

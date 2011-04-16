@@ -31,9 +31,6 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         TextView text = (TextView) findViewById(R.id.titolJoc);
         text.setText(joc.getNom());  
         
-        // Autor
-        text = (TextView) findViewById(R.id.autorsJoc);
-        text.setText(joc.getAutors().toString().trim());
         
         // Area
         Iterator<String>it = joc.getAreaJoc().iterator();
@@ -64,7 +61,11 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         	str = str +  ClicApplication.llistaIdiomes.cercarNomIdioma(it.next()) + " ";
         }
         text = (TextView) findViewById(R.id.llengua);
-        text.setText(": "+ str);  
+        text.setText(": "+ str);
+        
+        // Autor
+        text = (TextView) findViewById(R.id.autor);
+        text.setText(": "+joc.getAutors().toString().trim());
  
         // Centre
         text = (TextView) findViewById(R.id.centre);

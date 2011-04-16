@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Clic</string><string name="vistaweb">Vista web</string>
     <string name="idioma">Idioma</string>
     <string name="area">Àrea</string>
     <string name="nivell">Nivell</string>
@@ -8,5 +7,9 @@
     <string name="titol">Títol</string>
     <string name="data">Data</string>
     <string name="autor">Autor/a</string>
+    <string name="cercajoc">Cerca de jocs</string>
+    <string name="descripciojoc">Descripció del joc</string>
+    <string name="afegirjoc">Afegir un joc</string>
+    <string name="inici">Juga amb ...</string>
     
 </resources>

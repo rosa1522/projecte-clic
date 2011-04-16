@@ -1,46 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="cat.urv.clic.android">
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <application android:icon="@drawable/aplicacio" android:label="@string/app_name" android:name=".ClicApplication">
+    
+    <application android:icon="@drawable/aplicacio" android:name=".ClicApplication">
+        
         <activity android:name=".IniciAplicacio"
-                  android:label="@string/app_name">
+                  android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>     
+        </activity>  
+  
         <activity android:name=".LlistaJocsJClic"
-        			android:label="@string/app_name"
-					android:theme="@android:style/Theme.NoTitleBar">
+				  android:theme="@android:style/Theme.NoTitleBar">
         </activity> 
+        
         <activity android:name=".DescripcioJoc"
-        			android:label="@string/app_name"
 					android:theme="@android:style/Theme.NoTitleBar">
         </activity> 
+        
         <activity android:name=".VistaWeb"
-        			android:label="@string/app_name"
 					android:theme="@android:style/Theme.NoTitleBar">
         </activity>
+        
         <activity android:name=".CercarJocs"
-        			android:label="@string/app_name"
-					android:theme="@android:style/Theme.NoTitleBar">
+				  android:theme="@android:style/Theme.NoTitleBar">
         </activity>
-        <activity android:name=".Prova4_Vista"
-        			android:label="@string/app_name"
-					android:theme="@android:style/Theme.NoTitleBar">
-        </activity>
-        <activity android:name=".Prova1_LlistaClics"
-        			android:label="@string/app_name">
-        </activity>
-        <activity android:name=".Prova5_LlistaJocs"
-        			android:label="@string/app_name">
-        </activity>
-        <activity android:name=".Prova2_ClicarLlista"
-        			android:label="@string/app_name">
-        </activity>
-        <activity android:name=".Prova3_Inici"
-        		  android:label="@string/app_name">
-        </activity>
+
     </application>
     
     <dependencies>
