@@ -27,12 +27,17 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
+import com.google.gson.Gson;
+
 import android.content.Context;
 import cat.urv.clic.android.XMLobjects.Activitat;
 import cat.urv.clic.android.XMLobjects.Cell;
 import cat.urv.clic.android.XMLobjects.CellList;
 import cat.urv.clic.android.XMLobjects.Clic;
+import cat.urv.clic.android.XMLobjects.Item;
 import cat.urv.clic.android.XMLobjects.RecursiuXML;
+import cat.urv.clic.android.XMLobjects.Sequence;
+import cat.urv.clic.android.XMLobjects.Settings;
 
 
 public class Utils {
@@ -171,8 +176,7 @@ public class Utils {
 	   }	    
 	}
 		
-	private static void copiaFitxer_InputStreamFile(InputStream in, File out) throws IOException   {  
-		
+	private static void copiaFitxer_InputStreamFile(InputStream in, File out) throws IOException   { 
 		FileOutputStream fos = new FileOutputStream(out);
 
 		// Lectura del fitxer 
@@ -272,11 +276,6 @@ public class Utils {
 		}
 	}
 	
-	
-	
-	
-	
-
 /*	public static void convertXMLtoJSON(Context c) throws IOException {
 
         //InputStream is = ConvertXMLtoJSON.class.getResourceAsStream("sample-xml.xml");
@@ -289,8 +288,6 @@ public class Utils {
         System.out.println(json.toString());
 
 	}*/
-	
-	
 	
 	private static void recursiuXML(RecursiuXML objecteActual, Element nodeActual, String stringActual)
 	{
@@ -308,8 +305,10 @@ public class Utils {
     		}
 		}
 		
-		//Desprem mirem el contingut del tag. P.ex: <p> XXXXX <p>
-		//FALTA FER
+		//Desprem mirem el contingut del tag. p, title: ex: <p> XXXXX <p>
+		if(nodeActual.getTextTrim().compareTo("")!=0){
+			objecteActual.afegirAtribut(nodeActual.getName(), nodeActual.getTextTrim());
+		}
 		
 		//I despres mirem els fills del tag - Aqui entra la recursivitat
 		List<?> llistaFills =  nodeActual.getChildren(); 	//Llegim els fills
@@ -342,21 +341,13 @@ public class Utils {
 		}	
 	}
 	
-	
-	
-	
-	
 	public static void llegirFitxerJClic(Context c, String nomFitxer){
 		Document doc = null;
 		InputStreamReader isr = null;
 		
-		//Primer de tot creem un objecte de tipus clic que tindra dades generiques
-		//I despres una llista de totes les activitats que llegirem
-		//Penseu que hi ha informaci— important al principi a part de les activitats
-		//per exemple l'ordre de les activitats esta al principi entre els tags sequence
-		//Aixo es guardaria dins l'objecte clic
 		Clic clic = new Clic();
-		
+		Sequence sequence;
+		Settings settings = new Settings();
 		try {	
 			// Fitxer d'entrada: .jclic
 			InputStream is = c.getAssets().open(nomFitxer);									
@@ -366,7 +357,7 @@ public class Utils {
 
 			// Fitxer de sortida: data.js
 		 	//PrintStream fitxerData = new PrintStream(new FileOutputStream(c.getFilesDir()+"/" + idJoc + "/data.js",false));
-			//PrintStream fitxerData = new PrintStream(new FileOutputStream(c.getFilesDir()+"/data.js",false));
+			PrintStream fitxerData = new PrintStream(new FileOutputStream(c.getFilesDir()+"/data.js",false));
 			
 			// Fitxer de sortida: data.js
 			//c.getFilesDir()+"/" + idJoc + "/data.js"
@@ -383,45 +374,69 @@ public class Utils {
 				if (currentNode.getName().equals("activities")) {
 					List<?> llistaActivities = currentNode.getChildren();
 					Iterator<?> actList = llistaActivities.iterator();
+					// Indiquem el numero d'activitats del fitxer
+					fitxerData.println("var maxActivitats = " + llistaActivities.size() + ";");
 					while ( actList.hasNext() ){
 						//Creem una activitat
 						Activitat objecteActivitat = new Activitat();
 						Element nodeActivitat = (Element) actList.next();;
-						System.out.println( nodeActivitat.getName() );
+						System.out.println("-----ACTIVITAT: "+nodeActivitat.getName() );
 					
 						//Carreguem tot el material a la nova activitat
 						recursiuXML(objecteActivitat,nodeActivitat, "");
 						//Afegim l'activitat ja plena a la llista d'activitats del clic
 						clic.afegirActivitat(objecteActivitat);
 					}
-				} else {
-					//Cridem recursivament i guardem els parametres on toqui
+				} else if (currentNode.getName().equals("sequence")) {
+					List<?> llistaItems = currentNode.getChildren();
+					Iterator<?> itList = llistaItems.iterator();
+					sequence = new Sequence(llistaItems.size());
+					while ( itList.hasNext() ){
+						//Creem un Item
+						Item item = new Item();
+						Element nodeItem = (Element) itList.next();;
+						System.out.println("---------SEQUENCE:  " +nodeItem.getName() );
+					
+						//Carreguem tot els atributs a l'item
+						recursiuXML(item,nodeItem, "");
+						//Afegim l'item ja ple a la taula de sequence del clic
+						sequence.afegirItem(item);
+					}
+					clic.afegirSequence(sequence);
+				}else if (currentNode.getName().equals("settings")) {
+					List<?> llistaSettings = currentNode.getChildren();
+					Iterator<?> setList = llistaSettings.iterator();
+					while ( setList.hasNext() ){
+						Element nodeSetting = (Element) setList.next();
+						if((nodeSetting.getName().compareTo("revision")!=0)&&(nodeSetting.getName().compareTo("description")!=0)){
+							System.out.println("---------SETTINGS:  " + nodeSetting.getName() );
+							recursiuXML(settings,nodeSetting, nodeSetting.getName());
+						}else if (nodeSetting.getName().compareTo("description")==0){
+							//Si es descripcio es guarda en una taula perque sorti en l'ordre correcte.
+							List<?> llistaFills =  nodeSetting.getChildren(); 	//Llegim els fills
+							Iterator<?> fill = llistaFills.iterator();
+							settings.midaDescripcio(llistaFills.size());
+							while(fill.hasNext()){
+								Element fillActual = (Element) fill.next();
+								settings.afegirDescripcioSetting(fillActual.getText());
+							}					
+						}
+					}
+					clic.afegirSettings(settings);
 				}
 			}
-		 
+
+			//Creem el fitxer JSON
+			Gson gson = new Gson(); 
+			String jsonOutput = gson.toJson(clic); 
 			
-			//List<?> llistaActivities = raiz.getChild("activities").getChildren();
-			// Principi del fitxer json
-			//fitxerData.println("var maxActivitats = " + llistaActivities.size() + ";");
-			//fitxerData.println("var tipusActivitat = [];");
-			//fitxerData.println("var dadesActivitat = [];");
-			
-			
-			
-			//recursiu(llistaActivities, activitat);
-			
-			//Gson gson = new Gson(); 
-			//String jsonOutput = gson.toJson(llistaActivitats); 
-			
-			//System.out.println("txt: "+jsonOutput);
+			System.out.println("txt: "+jsonOutput);
 			
 			// Escrivim les dades del JSON al fitxer data.js 
-			//fitxerData.print(jsonOutput);
+			fitxerData.print(jsonOutput);
 									
-			//is.close();
-			//fitxerData.close();
-			
-
+			is.close();
+			fitxerData.close();
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (IOException e) {

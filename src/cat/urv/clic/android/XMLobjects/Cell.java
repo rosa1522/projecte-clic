@@ -8,7 +8,6 @@ public class Cell implements RecursiuXML {
 	
 	public Cell() {
 		this.atributs = new HashMap<String,Object>();
-		//this.fillsCells = new ArrayList<Cells>();
 	}
 
 	public void afegirAtribut(String clau, Object valor){

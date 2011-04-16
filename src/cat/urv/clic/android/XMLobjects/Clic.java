@@ -6,9 +6,12 @@ import java.util.List;
 
 public class Clic implements RecursiuXML {
 
-	protected List<Activitat> activitats;
 	protected HashMap<String, Object> atributs;
+	protected Settings settings;
+	protected Sequence sequence;
+	protected List<Activitat> activitats;
 
+	
 	public Clic() {
 		this.atributs = new HashMap<String, Object>();
 		this.activitats = new ArrayList<Activitat>();
@@ -22,6 +25,14 @@ public class Clic implements RecursiuXML {
 		this.activitats.add(activitat);
 	}
 
+	public void afegirSettings(Settings set){
+		this.settings = set;
+	}
+	
+	public void afegirSequence(Sequence seq){
+		this.sequence = seq;
+	}
+	
 	public void afegirCell(Cell cell) { return; }
 	public void afegirCells(CellList celllist) { return; }
 

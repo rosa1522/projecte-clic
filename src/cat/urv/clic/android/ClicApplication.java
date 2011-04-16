@@ -26,7 +26,7 @@ public class ClicApplication extends Application {
         // Llegim el fitxer descarregats.xml i marquem els jocs que hi hagi aqui com a descarregats
         Utils.marcarJocsDescarregats(getApplicationContext());
 
-        Utils.llegirFitxerJClic(getApplicationContext(), "p_nadal.jclic");
+        Utils.llegirFitxerJClic(getApplicationContext(), "2puzzles.xml");
         
         super.onCreate();
 	}
