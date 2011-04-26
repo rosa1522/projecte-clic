@@ -430,10 +430,10 @@ public class Utils {
 			Gson gson = new Gson(); 
 			String jsonOutput = gson.toJson(clic); 
 			
-			System.out.println("txt: "+jsonOutput);
+			//System.out.println("txt: "+jsonOutput);
 			
 			// Escrivim les dades del JSON al fitxer data.js 
-			fitxerData.print(jsonOutput);
+			fitxerData.print("var dadesActivitat="+jsonOutput);
 									
 			is.close();
 			fitxerData.close();
