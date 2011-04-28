@@ -96,25 +96,7 @@ public class HashJocs {
 		
 		return llistaIdJocs;
 	}
-	
-/*	public List<Integer> llistaIdentificadorJocs(){
-		List<Integer> llistaIdJocs = new ArrayList<Integer>();
-		for(Joc j: jocs.values()){
-			llistaIdJocs.add(j.getIdentificador());  
-		}
 		
-		return llistaIdJocs;
-	}*/
-	
-/*	public List<String> canviLlistaIdNom(List<Integer> llistaId){
-		List<String> llistaNoms = new ArrayList<String>();
-		Iterator<Integer> it = llistaId.iterator();
-		while(it.hasNext()){
-			llistaNoms.add(this.jocs.get(it.next()).getNom());
-		}
-		return llistaNoms;
-	}*/
-	
 	public Integer midaHash(){
 		return jocs.size();
 	}

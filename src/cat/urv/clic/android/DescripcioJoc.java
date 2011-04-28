@@ -1,5 +1,6 @@
 package cat.urv.clic.android;
 
+import java.text.SimpleDateFormat;
 import java.util.Iterator;
 
 import android.app.Activity;
@@ -11,13 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 
-/*File fichero = new File(ruta + ".");
-String[] lista_archivos = fichero.list();
-for(int i = 0; i < lista_archivos.length; i++)
-{
-    if(lista_archivos[i].endsWith("txt"))
-    {}  */
-    
+   
 public class DescripcioJoc extends Activity implements OnClickListener{
 	
 	//ProgressDialog mDialog1;
@@ -57,9 +52,10 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         text = (TextView) findViewById(R.id.nivellJoc);
         text.setText(": "+ str);  
                 
-        // Data
+        // Data        
+        SimpleDateFormat formatData = new SimpleDateFormat("dd/MM/yy");    	
         text = (TextView) findViewById(R.id.dataPublicacio);
-        text.setText(": "+joc.getDataPublicacio().toString());
+        text.setText(": "+ formatData.format(joc.getDataPublicacio()));
         
         // Llengua
         it = joc.getLlengua().iterator();
@@ -74,10 +70,17 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         text = (TextView) findViewById(R.id.autor);
         text.setText(": "+joc.getAutors().toString().trim());
  
-        // Centre
-        text = (TextView) findViewById(R.id.centre);
-        text.setText(": "+joc.getCentre().toString().trim());
-        
+        // Centre        
+        if (joc.getCentre().toString().trim().compareTo("") == 0) {
+        	// Si no hi ha cap centre seleccionat posem invisible el títol del centre
+        	text = (TextView) findViewById(R.id.nomcentre);
+        	text.setVisibility(View.INVISIBLE);
+        	text = (TextView) findViewById(R.id.centre);
+        	text.setVisibility(View.INVISIBLE);
+        }else{
+        	text = (TextView) findViewById(R.id.centre);
+        	text.setText(": "+joc.getCentre().toString().trim());
+        } 
 
         
         // Boto
@@ -117,8 +120,10 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 			
 			//removeDialog(DIALOG1_KEY);
 		}else{
+    		// Passem l'identificador del joc que volem jugar	
 			Intent intent = null;
-			intent = new Intent(this, VistaWeb.class);			
+			intent = new Intent(this, VistaWeb.class);		
+			intent.putExtra("idJoc",bundle.getInt("idJoc"));
 			startActivity(intent);	
 		}
 	

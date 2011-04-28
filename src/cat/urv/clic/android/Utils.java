@@ -71,9 +71,6 @@ public class Utils {
             	String dataString = e.getChild("dataPublicacio").getText();
             	Date dataPublicacio = dataFormat.parse(dataString);
             	           	
-            	//System.out.println("DATA " + dataPublicacio);
-            	//Date dataPublicacio = e.getChild("dataPublicacio").getText();
- 
             	
             	// Llengua
             	List<String> llengues =  new ArrayList<String>();
@@ -266,7 +263,7 @@ public class Utils {
 			copiaFitxer_InputStreamFile (forigen, fdesti);
 			
 			// Generem el data1.js, data2.js, data2.js, ...
-			
+	        llegirFitxerJClic(c, idJoc);
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -341,28 +338,47 @@ public class Utils {
 		}	
 	}
 	
-	public static void llegirFitxerJClic(Context c, String nomFitxer){
-		Document doc = null;
-		InputStreamReader isr = null;
+	public static String obtenirNomFitxer(Context c, String idJoc) throws IOException {
+
+		String nomFitxerJclic = null;
 		
+		File fitxer = new File(c.getFilesDir() + "/" + idJoc + "/.");			
+		String[] llista_arxius = fitxer.list();
+		int i = 0;
+		boolean fitxerTrobat = false;
+		while((i < llista_arxius.length) && (!fitxerTrobat))
+		{
+		    if(llista_arxius[i].endsWith("jclic"))
+		    {
+		    	nomFitxerJclic = llista_arxius[i];
+		    	fitxerTrobat = true;
+		    }  
+		    i++;
+		}
+		
+		return nomFitxerJclic;
+	}
+	
+	public static void llegirFitxerJClic(Context c, String idJoc){
+		Document doc = null;
+		InputStreamReader inputStrReader = null;
 		Clic clic = new Clic();
 		Sequence sequence;
 		Settings settings = new Settings();
+		
 		try {	
-			// Fitxer d'entrada: .jclic
-			InputStream is = c.getAssets().open(nomFitxer);									
-			isr = new InputStreamReader(is);
+			
+			// Obrim el fitxer .jclic	
+			String nomFitxerJclic = obtenirNomFitxer(c, idJoc);
+			inputStrReader = new InputStreamReader(new FileInputStream(c.getFilesDir()+ "/" + idJoc + "/" + nomFitxerJclic));
+			
 			SAXBuilder builder = new SAXBuilder(false);
-			doc = builder.build(isr);
+			doc = builder.build(inputStrReader);
 
 			// Fitxer de sortida: data.js
-		 	//PrintStream fitxerData = new PrintStream(new FileOutputStream(c.getFilesDir()+"/" + idJoc + "/data.js",false));
-			PrintStream fitxerData = new PrintStream(new FileOutputStream(c.getFilesDir()+"/data.js",false));
+		 	PrintStream fitxerData = new PrintStream(new FileOutputStream(c.getFilesDir()+ "/" + idJoc + "/data.js",false));
 			
-			// Fitxer de sortida: data.js
-			//c.getFilesDir()+"/" + idJoc + "/data.js"
-			//PrintWriter fitxerData = new PrintWriter(new File(c.getFilesDir()+"/data.js"));
-	
+		 	// Llegim el fitxer .jclic
 			Element raiz = doc.getRootElement();	// S'agafa l'element arrel
 
 			List<?> nodeList = raiz.getChildren();
@@ -435,8 +451,9 @@ public class Utils {
 			// Escrivim les dades del JSON al fitxer data.js 
 			fitxerData.print("var dadesActivitat="+jsonOutput);
 									
-			is.close();
 			fitxerData.close();
+			inputStrReader.close();
+			
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (IOException e) {

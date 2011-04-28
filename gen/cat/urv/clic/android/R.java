@@ -23,22 +23,23 @@ public final class R {
         public static final int view=0x7f020009;
     }
     public static final class id {
-        public static final int afegirjoc=0x7f060023;
+        public static final int afegirjoc=0x7f060024;
         public static final int areaJoc=0x7f06000f;
         public static final int autor=0x7f06001b;
-        public static final int centre=0x7f06001d;
-        public static final int cercarjocLlista=0x7f060027;
+        public static final int centre=0x7f06001e;
+        public static final int cercarjocLlista=0x7f060028;
         public static final int cercarjocsCercar=0x7f060009;
         public static final int dataPublicacio=0x7f060015;
         public static final int editAutor=0x7f060007;
         public static final int editTitol=0x7f060006;
-        public static final int instalar =0x7f06001f;
-        public static final int list_descarregats=0x7f060022;
-        public static final int list_jocs=0x7f060026;
+        public static final int instalar =0x7f060020;
+        public static final int list_descarregats=0x7f060023;
+        public static final int list_jocs=0x7f060027;
         public static final int llengua=0x7f060018;
         public static final int nivellJoc=0x7f060012;
         public static final int nomareaJoc=0x7f06000e;
-        public static final int nomcentre=0x7f06001a;
+        public static final int nomautor=0x7f06001a;
+        public static final int nomcentre=0x7f06001d;
         public static final int nomdataPublicacio=0x7f060014;
         public static final int nomllengua=0x7f060017;
         public static final int nomnivellJoc=0x7f060011;
@@ -46,11 +47,11 @@ public final class R {
         public static final int spinnerIdioma=0x7f060004;
         public static final int spinnerNivell=0x7f060005;
         public static final int tableLayout1=0x7f06000a;
-        public static final int tableLayout2=0x7f06001e;
+        public static final int tableLayout2=0x7f06001f;
         public static final int tableLayout3=0x7f060000;
         public static final int tableLayout4=0x7f060008;
-        public static final int tableLayout5=0x7f060020;
-        public static final int tableLayout6=0x7f060024;
+        public static final int tableLayout5=0x7f060021;
+        public static final int tableLayout6=0x7f060025;
         public static final int tableRowArea=0x7f06000d;
         public static final int tableRowAutor=0x7f060019;
         public static final int tableRowCentre=0x7f06001c;
@@ -60,10 +61,10 @@ public final class R {
         public static final int titolArea=0x7f060002;
         public static final int titolCerca=0x7f060001;
         public static final int titolDescripcioJoc=0x7f06000b;
-        public static final int titolInici=0x7f060021;
+        public static final int titolInici=0x7f060022;
         public static final int titolJoc=0x7f06000c;
-        public static final int titolLlistaJocs=0x7f060025;
-        public static final int webView=0x7f060028;
+        public static final int titolLlistaJocs=0x7f060026;
+        public static final int webView=0x7f060029;
     }
     public static final class layout {
         public static final int cercarjocs=0x7f030000;
