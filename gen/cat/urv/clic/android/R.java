@@ -14,10 +14,13 @@ public final class R {
         public static final int afegir=0x7f020000;
         public static final int aplicacio=0x7f020001;
         public static final int aplicacio1=0x7f020002;
-        public static final int download=0x7f020003;
-        public static final int icon=0x7f020004;
-        public static final int play=0x7f020005;
-        public static final int view=0x7f020006;
+        public static final int donw=0x7f020003;
+        public static final int download=0x7f020004;
+        public static final int download_copia=0x7f020005;
+        public static final int icon=0x7f020006;
+        public static final int import1=0x7f020007;
+        public static final int play=0x7f020008;
+        public static final int view=0x7f020009;
     }
     public static final class id {
         public static final int afegirjoc=0x7f060023;
