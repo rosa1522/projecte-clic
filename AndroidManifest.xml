@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="cat.urv.clic.android">
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     
-    <application android:icon="@drawable/aplicacio" android:name=".ClicApplication">
+    <application android:icon="@drawable/aplicacio" android:label = "@string/nomAplicacio" android:name=".ClicApplication">
         
         <activity android:name=".IniciAplicacio"
                   android:theme="@android:style/Theme.NoTitleBar">
