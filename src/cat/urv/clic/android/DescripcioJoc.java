@@ -11,6 +11,13 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 
+/*File fichero = new File(ruta + ".");
+String[] lista_archivos = fichero.list();
+for(int i = 0; i < lista_archivos.length; i++)
+{
+    if(lista_archivos[i].endsWith("txt"))
+    {}  */
+    
 public class DescripcioJoc extends Activity implements OnClickListener{
 	
 	//ProgressDialog mDialog1;
