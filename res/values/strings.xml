@@ -11,5 +11,6 @@
     <string name="descripciojoc">Descripció del joc</string>
     <string name="afegirjoc">Afegir un joc</string>
     <string name="inici">Juga amb ...</string>
+    <string name="nomAplicacio">JClic</string>
     
 </resources>
