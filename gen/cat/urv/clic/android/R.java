@@ -81,6 +81,7 @@ public final class R {
         public static final int idioma=0x7f050000;
         public static final int inici=0x7f05000a;
         public static final int nivell=0x7f050002;
+        public static final int nomAplicacio=0x7f05000b;
         public static final int titol=0x7f050004;
     }
     public static final class xml {
