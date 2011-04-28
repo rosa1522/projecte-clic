@@ -1,5 +1,6 @@
 package cat.urv.clic.android;
 
+import java.text.SimpleDateFormat;
 import java.util.Iterator;
 
 import android.app.Activity;
@@ -50,9 +51,10 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         text = (TextView) findViewById(R.id.nivellJoc);
         text.setText(": "+ str);  
                 
-        // Data
+        // Data        
+        SimpleDateFormat formatData = new SimpleDateFormat("dd/MM/yy");    	
         text = (TextView) findViewById(R.id.dataPublicacio);
-        text.setText(": "+joc.getDataPublicacio().toString());
+        text.setText(": "+ formatData.format(joc.getDataPublicacio()));
         
         // Llengua
         it = joc.getLlengua().iterator();
@@ -67,10 +69,17 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         text = (TextView) findViewById(R.id.autor);
         text.setText(": "+joc.getAutors().toString().trim());
  
-        // Centre
-        text = (TextView) findViewById(R.id.centre);
-        text.setText(": "+joc.getCentre().toString().trim());
-        
+        // Centre        
+        if (joc.getCentre().toString().trim().compareTo("") == 0) {
+        	// Si no hi ha cap centre seleccionat posem invisible el títol del centre
+        	text = (TextView) findViewById(R.id.nomcentre);
+        	text.setVisibility(View.INVISIBLE);
+        	text = (TextView) findViewById(R.id.centre);
+        	text.setVisibility(View.INVISIBLE);
+        }else{
+        	text = (TextView) findViewById(R.id.centre);
+        	text.setText(": "+joc.getCentre().toString().trim());
+        } 
 
         
         // Boto

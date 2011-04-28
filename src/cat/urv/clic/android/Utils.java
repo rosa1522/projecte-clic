@@ -71,9 +71,6 @@ public class Utils {
             	String dataString = e.getChild("dataPublicacio").getText();
             	Date dataPublicacio = dataFormat.parse(dataString);
             	           	
-            	//System.out.println("DATA " + dataPublicacio);
-            	//Date dataPublicacio = e.getChild("dataPublicacio").getText();
- 
             	
             	// Llengua
             	List<String> llengues =  new ArrayList<String>();
@@ -266,7 +263,7 @@ public class Utils {
 			copiaFitxer_InputStreamFile (forigen, fdesti);
 			
 			// Generem el data1.js, data2.js, data2.js, ...
-			
+	        llegirFitxerJClic(c, idJoc);
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -341,7 +338,7 @@ public class Utils {
 		}	
 	}
 	
-	public static void llegirFitxerJClic(Context c, String nomFitxer){
+	public static void llegirFitxerJClic(Context c, String idJoc){
 		Document doc = null;
 		InputStreamReader isr = null;
 		
@@ -349,15 +346,16 @@ public class Utils {
 		Sequence sequence;
 		Settings settings = new Settings();
 		try {	
-			// Fitxer d'entrada: .jclic
-			InputStream is = c.getAssets().open(nomFitxer);									
+			// Fitxer d'entrada: .jclic			
+			FileInputStream is = c.openFileInput("*.jclic");									
 			isr = new InputStreamReader(is);
+			
 			SAXBuilder builder = new SAXBuilder(false);
 			doc = builder.build(isr);
 
 			// Fitxer de sortida: data.js
-		 	//PrintStream fitxerData = new PrintStream(new FileOutputStream(c.getFilesDir()+"/" + idJoc + "/data.js",false));
-			PrintStream fitxerData = new PrintStream(new FileOutputStream(c.getFilesDir()+"/data.js",false));
+		 	PrintStream fitxerData = new PrintStream(new FileOutputStream(c.getFilesDir()+ "/" + idJoc + "/data.js",false));
+			
 			
 			// Fitxer de sortida: data.js
 			//c.getFilesDir()+"/" + idJoc + "/data.js"
