@@ -12,13 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 
-/*File fichero = new File(ruta + ".");
-String[] lista_archivos = fichero.list();
-for(int i = 0; i < lista_archivos.length; i++)
-{
-    if(lista_archivos[i].endsWith("txt"))
-    {}  */
-    
+   
 public class DescripcioJoc extends Activity implements OnClickListener{
 	
 	//ProgressDialog mDialog1;
@@ -126,8 +120,10 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 			
 			//removeDialog(DIALOG1_KEY);
 		}else{
+    		// Passem l'identificador del joc que volem jugar	
 			Intent intent = null;
-			intent = new Intent(this, VistaWeb.class);			
+			intent = new Intent(this, VistaWeb.class);		
+			intent.putExtra("idJoc",bundle.getInt("idJoc"));
 			startActivity(intent);	
 		}
 	

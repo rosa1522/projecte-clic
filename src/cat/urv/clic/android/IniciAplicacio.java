@@ -39,10 +39,7 @@ public class IniciAplicacio extends Activity {
 		    		startActivity(intentBoto);		
 		    	}	        	
 	        });  
-	        
-	        //Utils.llegirFitxerJClic(getApplicationContext(), "2puzzles.xml",123);
-	        //Utils.convertXMLtoJSON(getApplicationContext());
-	        
+	        	        
 	        //////////////////////////////////////////
 	        // Llista
 	        list = (ListView) findViewById(R.id.list_descarregats);         
