@@ -189,23 +189,27 @@ public class Utils {
 		fos.close();
 	}
 	
-	public static void descarregarFitxer(Context c, String ruta, String idJoc) {
+	public static boolean descarregarFitxer(Context c, String ruta, String idJoc) {
+		boolean hiHaConnexio = false;
+		
 		try {
 			// Url del joc
 			URL url = new URL(ruta);
 			
 			// Obrim la connexió
 			URLConnection urlCon = url.openConnection();
-
+			
 			// S'obté l'inputStream del joc i s'obre el zip local
 			InputStream is =  urlCon.getInputStream();
-
 			File fdesti = new File(c.getFilesDir() + "/" + idJoc + ".zip");
-			copiaFitxer_InputStreamFile(is, fdesti);		
+			copiaFitxer_InputStreamFile(is, fdesti);
 			
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}	
+			hiHaConnexio = true;
+			
+		} catch (IOException e){
+			hiHaConnexio = false;
+		}
+		return hiHaConnexio;
 	}
 		
 	public static void descomprimirFitxer(Context c, String idJoc){
@@ -253,6 +257,29 @@ public class Utils {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}	
+	}
+	
+	public static void descarregarImatgeJoc(Context c, String ruta, String idJoc) {
+		// Url del joc
+		URL url;
+		try {
+			url = new URL(ruta);
+	
+			// Obrim la connexió		
+			URLConnection urlCon = url.openConnection();
+		
+			// S'obté l'inputStream del joc i es descarrega la imatge del joc
+			InputStream is =  urlCon.getInputStream();
+	
+			// A la imatge del joc li posem el nom de l'identificador
+			File fdesti = new File(c.getFilesDir() + "/" + idJoc + "/" + idJoc + ".jpg");
+			copiaFitxer_InputStreamFile(is, fdesti);	
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 		
 	public static void creacioActivitat(Context c, String idJoc) {						

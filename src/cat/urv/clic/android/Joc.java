@@ -14,13 +14,13 @@ public class Joc {
 	private Boolean descarregat;
 	private String ruta;
 	private String clic;
-	private String img;
+	private String imatge;
 	private String centre;
 	private String autors;
      	
 	
 	public Joc (Integer identificador, String nom, Date dataPublicacio,List<String> llengua, List<String> nivellJoc, 
-			List<String> areaJoc, String ruta, String clic, String img, String centre, String autors,
+			List<String> areaJoc, String ruta, String clic, String imatge, String centre, String autors,
 			Boolean descarregat) {
 		this.identificador = identificador;
 		this.nom = nom;
@@ -31,7 +31,7 @@ public class Joc {
 		this.descarregat = false;    // Es cert si el joc esta descarregat al mobil.
 		this.ruta = ruta;		 
 		this.clic = clic;		 	// Path d'on es trobara l'arxiu del joc comprimit.
-		this.img = img;		 
+		this.imatge = imatge;		 
 		this.centre = centre;		 
 		this.autors = autors;		 
 		this.descarregat = descarregat;
@@ -67,8 +67,8 @@ public class Joc {
 	public String getClic() {
 		return clic;
 	}
-	public String getImg() {
-		return img;
+	public String getImatge() {
+		return imatge;
 	}
 	public String getCentre() {
 		return centre;
@@ -76,5 +76,5 @@ public class Joc {
 	public String getAutors() {
 		return autors;
 	}
-	
+
 }

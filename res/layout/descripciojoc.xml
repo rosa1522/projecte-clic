@@ -3,8 +3,8 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical"
     android:gravity="center"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
     
 <TableLayout 
     android:layout_width="wrap_content" 
@@ -145,23 +145,32 @@
 			android:text="TextView" 
 			android:textSize="19sp"
 			android:id="@+id/centre" 
-			android:layout_width="wrap_content" 
+			android:layout_width="fill_parent" 
 			android:layout_height="wrap_content"
 			android:padding="3dip"/>
 	</TableRow>
-		
 	
-<TableLayout
-	android:gravity="bottom"
-    android:id="@+id/tableLayout2" 
-    android:layout_height="match_parent">
-    <ImageButton android:id="@+id/instalar " 
-	    android:layout_width="wrap_content" 
-	    android:layout_gravity="center" 
-	    android:layout_height="wrap_content" 
-	    style="@android:style/Widget.Button.Inset" 
-	    android:src="@drawable/download">
-    </ImageButton>
-</TableLayout>
+    <View android:layout_height="30dip" />
+    
+    <ImageView 	 
+    	android:layout_height="220sp" 
+    	android:layout_width="400sp" 
+    	android:adjustViewBounds="true"
+    	android:id="@+id/imatgeJoc">
+    </ImageView>
+	
+	<TableLayout
+		android:gravity="bottom"
+	    android:id="@+id/tableLayout3" 
+	    android:layout_height="match_parent">
+	    <ImageButton android:id="@+id/instalar " 
+		    android:layout_width="wrap_content" 
+		    android:layout_gravity="center" 
+		    android:layout_height="wrap_content" 
+		    style="@android:style/Widget.Button.Inset" 
+		    android:src="@drawable/download">
+	    </ImageButton>
+	</TableLayout>
+
 </TableLayout>
 </LinearLayout>
