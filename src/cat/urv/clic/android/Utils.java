@@ -34,15 +34,11 @@ import cat.urv.clic.android.XMLobjects.Activitat;
 import cat.urv.clic.android.XMLobjects.Cell;
 import cat.urv.clic.android.XMLobjects.CellList;
 import cat.urv.clic.android.XMLobjects.Clic;
-import cat.urv.clic.android.XMLobjects.Item;
 import cat.urv.clic.android.XMLobjects.RecursiuXML;
 import cat.urv.clic.android.XMLobjects.Sequence;
 import cat.urv.clic.android.XMLobjects.Settings;
 
-
 public class Utils {
-	
-	
 	public static HashJocs llegirFitxerJocsXML(Context c, String nomFitxer){
 		Document doc = null;
 		InputStreamReader isr = null;
@@ -70,7 +66,6 @@ public class Utils {
             	SimpleDateFormat dataFormat = new SimpleDateFormat("dd/MM/yy");
             	String dataString = e.getChild("dataPublicacio").getText();
             	Date dataPublicacio = dataFormat.parse(dataString);
-            	           	
             	
             	// Llengua
             	List<String> llengues =  new ArrayList<String>();
@@ -150,7 +145,6 @@ public class Utils {
 	}
 	
 	public static void exportarJocsDescarregatsXML(Context c) {
-	    		
 		try{			
 	    	PrintStream ps = new PrintStream(new FileOutputStream(c.getFilesDir()+"/descarregats.xml",false));
 				
@@ -167,7 +161,6 @@ public class Utils {
 	    	}
 	    	ps.println("</descarregats>");
 	    	ps.close();
-		   
 	   }catch (Exception e){
 		   System.out.println(e.getMessage());
 	   }	    
@@ -202,7 +195,6 @@ public class Utils {
 
 			File fdesti = new File(c.getFilesDir() + "/" + idJoc + ".zip");
 			copiaFitxer_InputStreamFile(is, fdesti);		
-			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}	
@@ -223,8 +215,7 @@ public class Utils {
 			directori.mkdir();
 			
 			while((entry = zis.getNextEntry()) != null) {
-				System.out.println("Extracting: " +entry);
-				
+				//**Extracting				
 				int count;
 				byte data[] = new byte[BUFFER];
 				
@@ -249,7 +240,6 @@ public class Utils {
 			
 			// Quan ja hem descomprimit les dades eliminem el fitxer .zip
 			fitxerZip.delete();
-			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}	
@@ -264,7 +254,6 @@ public class Utils {
 			
 			// Generem el data1.js, data2.js, data2.js, ...
 	        llegirFitxerJClic(c, idJoc);
-			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} 
@@ -272,19 +261,6 @@ public class Utils {
 			e.printStackTrace();
 		}
 	}
-	
-/*	public static void convertXMLtoJSON(Context c) throws IOException {
-
-        //InputStream is = ConvertXMLtoJSON.class.getResourceAsStream("sample-xml.xml");
-        InputStream is = c.getAssets().open("p_nadal.jclic");		
-        String xml = IOUtils.toString(is);
-        
-        XMLSerializer xmlSerializer = new XMLSerializer(); 
-        JSON json = xmlSerializer.read( xml );  
-        
-        System.out.println(json.toString());
-
-	}*/
 	
 	private static void recursiuXML(RecursiuXML objecteActual, Element nodeActual, String stringActual)
 	{
@@ -295,10 +271,8 @@ public class Utils {
     		Attribute attrib = (Attribute) atribut.next();
     		if (stringActual.equals("")) {
     			objecteActual.afegirAtribut(attrib.getName(), attrib.getValue());
-    			System.out.println(attrib.getName()+" : "+attrib.getValue());
     		} else {
     			objecteActual.afegirAtribut(stringActual+"-"+attrib.getName(), attrib.getValue());
-    			System.out.println(stringActual+"-"+attrib.getName()+" : "+attrib.getValue());
     		}
 		}
 		
@@ -315,16 +289,16 @@ public class Utils {
 			
 			if(fillActual.getName().equals("cells")) {
 				CellList listCells = new CellList();
-				System.out.println("*** Creada nova cell list");
+				//*** Creada nova cell list
 				recursiuXML(listCells,fillActual, "");
-				System.out.println("*** Guardant dades a la nova cell list");
+				//*** Guardant dades a la nova cell list
 				objecteActual.afegirCells(listCells);
 				
 			} else if(fillActual.getName().equals("cell")) {
 				Cell cell = new Cell();
-				System.out.println("*** Creada nova cell");
+				//*** Creada nova cell
 				recursiuXML(cell,fillActual, "");
-				System.out.println("*** Guardant dades a la nova cell");
+				//*** Guardant dades a la nova cell
 				objecteActual.afegirCell(cell);
 				
 			} else {
@@ -339,7 +313,6 @@ public class Utils {
 	}
 	
 	public static String obtenirNomFitxer(Context c, String idJoc) throws IOException {
-
 		String nomFitxerJclic = null;
 		
 		File fitxer = new File(c.getFilesDir() + "/" + idJoc + "/.");			
@@ -367,7 +340,6 @@ public class Utils {
 		Settings settings = new Settings();
 		
 		try {	
-			
 			// Obrim el fitxer .jclic	
 			String nomFitxerJclic = obtenirNomFitxer(c, idJoc);
 			inputStrReader = new InputStreamReader(new FileInputStream(c.getFilesDir()+ "/" + idJoc + "/" + nomFitxerJclic));
@@ -385,7 +357,6 @@ public class Utils {
 			Iterator<?> inodeList = nodeList.iterator();
 			while ( inodeList.hasNext() ){	
 				Element currentNode = (Element) inodeList.next();
-				System.out.println( currentNode.getName() );
 				
 				if (currentNode.getName().equals("activities")) {
 					List<?> llistaActivities = currentNode.getChildren();
@@ -396,27 +367,21 @@ public class Utils {
 						//Creem una activitat
 						Activitat objecteActivitat = new Activitat();
 						Element nodeActivitat = (Element) actList.next();;
-						System.out.println("-----ACTIVITAT: "+nodeActivitat.getName() );
 					
 						//Carreguem tot el material a la nova activitat
 						recursiuXML(objecteActivitat,nodeActivitat, "");
 						//Afegim l'activitat ja plena a la llista d'activitats del clic
-						clic.afegirActivitat(objecteActivitat);
+						clic.afegirActivitat(nodeActivitat.getAttributeValue("name"),objecteActivitat);
 					}
 				} else if (currentNode.getName().equals("sequence")) {
 					List<?> llistaItems = currentNode.getChildren();
 					Iterator<?> itList = llistaItems.iterator();
 					sequence = new Sequence(llistaItems.size());
 					while ( itList.hasNext() ){
-						//Creem un Item
-						Item item = new Item();
-						Element nodeItem = (Element) itList.next();;
-						System.out.println("---------SEQUENCE:  " +nodeItem.getName() );
+						Element node = (Element) itList.next();;
 					
-						//Carreguem tot els atributs a l'item
-						recursiuXML(item,nodeItem, "");
 						//Afegim l'item ja ple a la taula de sequence del clic
-						sequence.afegirItem(item);
+						sequence.afegirItem(node.getAttributeValue("name"));
 					}
 					clic.afegirSequence(sequence);
 				}else if (currentNode.getName().equals("settings")) {
@@ -425,7 +390,6 @@ public class Utils {
 					while ( setList.hasNext() ){
 						Element nodeSetting = (Element) setList.next();
 						if((nodeSetting.getName().compareTo("revision")!=0)&&(nodeSetting.getName().compareTo("description")!=0)){
-							System.out.println("---------SETTINGS:  " + nodeSetting.getName() );
 							recursiuXML(settings,nodeSetting, nodeSetting.getName());
 						}else if (nodeSetting.getName().compareTo("description")==0){
 							//Si es descripcio es guarda en una taula perque sorti en l'ordre correcte.
@@ -444,13 +408,21 @@ public class Utils {
 
 			//Creem el fitxer JSON
 			Gson gson = new Gson(); 
-			String jsonOutput = gson.toJson(clic); 
-			
-			//System.out.println("txt: "+jsonOutput);
+			String jsonOutputSettings = gson.toJson(clic.getSettings()); 
 			
 			// Escrivim les dades del JSON al fitxer data.js 
-			fitxerData.print("var dadesActivitat="+jsonOutput);
-									
+			fitxerData.print("var dadesActivitat={\"settings\":"+jsonOutputSettings);
+			fitxerData.print(", \"activitats\":[");
+			String[] taulaNoms = clic.getSequence().getTaulaNoms();
+			Integer index = clic.getSequence().getIndex();
+			String jsonOutputActivitat;
+			for(int j=0; j < index; j++){
+				jsonOutputActivitat = gson.toJson(clic.retornaActivitat(taulaNoms[j]));
+				fitxerData.print(jsonOutputActivitat);
+				if(j<index-1)
+					fitxerData.print(",");
+			}
+			fitxerData.print("]}");
 			fitxerData.close();
 			inputStrReader.close();
 			
@@ -463,80 +435,3 @@ public class Utils {
 		}
 	}
 }
-
-// LLEGIR .JCLIC SENSE RECURSSIU
-/*while (iActivities.hasNext()){
-Element activity = (Element)iActivities.next(); // Primer fill que tingui com a nom "activity"
-List<?> llistaAttrib = activity.getAttributes();
-Iterator<?> iAtrib = llistaAttrib.iterator();
-while(iAtrib.hasNext()){						//Atributs d'"activity"
-	Attribute attrib = (Attribute) iAtrib.next();
-	System.out.print(attrib.getName());
-	System.out.println("  "+attrib.getValue());
-
-}
-//Element cells = activity.getChild("cells");		//Fill d'activity = "cells"
-//if(activity.getChildren().size() != 0){	
-Iterator<?> illistaChildrenActivity = activity.getChildren().iterator();
-while(illistaChildrenActivity.hasNext()){
-	Element childActivity = (Element) illistaChildrenActivity.next();
-	if((childActivity.getName().compareTo("cells")==0)||(childActivity.getName().compareTo("document")==0)){
-		List<?> llistaAttribCells = childActivity.getAttributes();
-    	Iterator<?> iAtribCells = llistaAttribCells.iterator();
-    	while(iAtribCells.hasNext()){					//Atributs de "cells o document"
-    		Attribute attrib = (Attribute) iAtribCells.next();
-    		System.out.print(attrib.getName());
-    		System.out.println("  "+attrib.getValue());
-    	}
- 
-    	
-    //	if(childActivity.getChildren().size() != 0){	
-    	List<?> llistaCells = childActivity.getChildren();		//Fills de "cells o document"
-    	Iterator<?> iCells = llistaCells.iterator();
-    	while(iCells.hasNext()){
-    		Element valorCells = (Element)iCells.next();
-    		List<?> llistaAttribChildrenCells = valorCells.getAttributes();
-        	Iterator<?> iAtribChildrenCells = llistaAttribChildrenCells.iterator();
-        	while(iAtribChildrenCells.hasNext()){		//Atributs dels fills de "cells"
-        		Attribute attrib = (Attribute) iAtribChildrenCells.next();
-        		System.out.print(attrib.getName());
-        		System.out.println("  "+attrib.getValue());
-        	}
-        	
-        	
-        	
-        	if(valorCells.getChildren().size() != 0){		
-        		List<?> llistaChildrenCell = valorCells.getChildren();	
-        		Iterator<?> iChildrenCell = llistaChildrenCell.iterator();
-        		while(iChildrenCell.hasNext()){
-        			Element childrenCell = (Element) iChildrenCell.next();
-        			List<?> llistaAttribChildrenCell =  childrenCell.getAttributes();
-        			Iterator<?> iAtribChildrenCell = llistaAttribChildrenCell.iterator();
-                	while(iAtribChildrenCell.hasNext()){					//Atributs dels fills "cell"
-                		Attribute attrib = (Attribute) iAtribChildrenCell.next();
-                		System.out.print(attrib.getName());
-                		System.out.println("  "+attrib.getValue());
-                	}
-                	
-                	
-                	
-                	if(childrenCell.getChildren().size() != 0){		
-                		List<?> llistaNetsCell = childrenCell.getChildren();	
-                		Iterator<?> illistaNetsCell = llistaNetsCell.iterator();
-                		while(illistaNetsCell.hasNext()){
-                			Element netCell = (Element) illistaNetsCell.next();
-                			List<?> llistaAttribNetCell =  netCell.getAttributes();
-                			Iterator<?> illistaAttribNetCell = llistaAttribNetCell.iterator();
-                        	while(illistaAttribNetCell.hasNext()){					//Atributs dels nets "cell"
-                        		Attribute attrib = (Attribute) illistaAttribNetCell.next();
-                        		System.out.print(attrib.getName());
-                        		System.out.println("  "+attrib.getValue());
-                        	}
-                		}
-                	}
-        		}
-        	}
-    	}
-	}
-}
-}*/

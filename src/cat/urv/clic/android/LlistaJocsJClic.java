@@ -38,7 +38,6 @@ public class LlistaJocsJClic extends Activity{
 	        ArrayAdapter<String> adp = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, llistaJocs);
 	        list.setAdapter(adp);     
 	 
-	        
 	        // Clic de la llista
 	        intent = new Intent(this, DescripcioJoc.class);	
 	        list.setOnItemClickListener( new OnItemClickListener(){
