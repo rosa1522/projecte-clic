@@ -2,22 +2,28 @@ package cat.urv.clic.android.XMLobjects;
 
 public class Sequence {
 	
-	Item[] taulaItem;
+	String[] taulaNoms;
 	Integer index;
 	
 	public Sequence(Integer maxim){
 		this.index = 0;
-		this.taulaItem = new Item[maxim];
+		this.taulaNoms = new String[maxim];
 	}
 	
 	public void proximContador(){
 		this.index = this.index + 1;
 	}
 	
-	public void afegirItem(Item item){
-		System.out.println("Abansssss");
-		this.taulaItem[this.index] = item;
+	public void afegirItem(String name){
+		this.taulaNoms[this.index] = name;
 		proximContador();
-		System.out.println("Despresssssssssssssssssss");
+	}
+	
+	public String[] getTaulaNoms(){
+		return this.taulaNoms;
+	}
+	
+	public Integer getIndex(){
+		return this.index;
 	}
 }

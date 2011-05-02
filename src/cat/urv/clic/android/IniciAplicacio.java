@@ -39,7 +39,8 @@ public class IniciAplicacio extends Activity {
 		    		startActivity(intentBoto);		
 		    	}	        	
 	        });  
-	        	        
+	        Utils.llegirFitxerJClic(getApplicationContext(), "");
+	    
 	        //////////////////////////////////////////
 	        // Llista
 	        list = (ListView) findViewById(R.id.list_descarregats);         
