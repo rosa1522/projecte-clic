@@ -110,7 +110,6 @@ public class Utils {
 		} catch (JDOMException e) {
 			e.printStackTrace();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return llistaJocs;
@@ -120,7 +119,7 @@ public class Utils {
 		Document doc = null;
 		InputStreamReader isr = null;
 
-		try {			
+		try {	
 			FileInputStream is = c.openFileInput("descarregats.xml");									
 			isr = new InputStreamReader(is);
 
@@ -137,11 +136,8 @@ public class Utils {
             	ClicApplication.llistaJocs.modificarJocADescarregat(Integer.parseInt(e.getText()));            	
 			}
 		} catch (FileNotFoundException e1)  {
-			e1.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
 		} catch (JDOMException e) {
-			e.printStackTrace();
 		}
 	}
 	

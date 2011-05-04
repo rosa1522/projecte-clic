@@ -35,7 +35,7 @@ public class Idioma {
 		this.idiomes.put("pt", "portuguès");		
 		this.idiomes.put("ro", "romanès");		
 		this.idiomes.put("sv", "suec");
-		this.idiomes.put("ba", "zh");
+		this.idiomes.put("zh", "xinès");
 		
 		this.nomsIdiomes[0] = "Tots els idiomes";
 		this.nomsIdiomes[1] = "alemany";
@@ -55,7 +55,7 @@ public class Idioma {
 		this.nomsIdiomes[15] =  "portuguès";		
 		this.nomsIdiomes[16] =  "romanès";		
 		this.nomsIdiomes[17] =  "suec";
-		this.nomsIdiomes[18] =  "zh";
+		this.nomsIdiomes[18] =  "xinès";
 	}
 
 	public String cercarIdIdioma(String nomIdioma){

@@ -56,7 +56,7 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         it = joc.getNivellJoc().iterator();
         str = new String();
         while(it.hasNext()){
-        	str = str + ClicApplication.llistaNivells.cercarNomNivell(it.next()) + " ";
+        	str = str + ClicApplication.llistaNivells.cercarNomNivell(it.next()) + " " ;
         }
         text = (TextView) findViewById(R.id.nivellJoc);
         text.setText(": "+ str);  
