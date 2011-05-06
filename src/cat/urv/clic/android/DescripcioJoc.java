@@ -47,7 +47,11 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         Iterator<String>it = joc.getAreaJoc().iterator();
         String str = new String();
         while(it.hasNext()){
-        	str = str + ClicApplication.llistaArees.cercarNomArea(it.next()) + " ";
+        	if (str.equals("")){
+        		str = ClicApplication.llistaArees.cercarNomArea(it.next());
+        	}else{
+        		str = str + ", " + ClicApplication.llistaArees.cercarNomArea(it.next());
+        	}
         }
         text = (TextView) findViewById(R.id.areaJoc);
         text.setText(": "+str);  
@@ -56,7 +60,11 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         it = joc.getNivellJoc().iterator();
         str = new String();
         while(it.hasNext()){
-        	str = str + ClicApplication.llistaNivells.cercarNomNivell(it.next()) + " " ;
+        	if (str.equals("")){
+        		str = ClicApplication.llistaNivells.cercarNomNivell(it.next());
+        	}else{
+        		str = str + ", " + ClicApplication.llistaNivells.cercarNomNivell(it.next());
+        	}
         }
         text = (TextView) findViewById(R.id.nivellJoc);
         text.setText(": "+ str);  
@@ -70,7 +78,11 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         it = joc.getLlengua().iterator();
         str = new String();
         while(it.hasNext()){
-        	str = str +  ClicApplication.llistaIdiomes.cercarNomIdioma(it.next()) + " ";
+        	if (str.equals("")){
+        		str = ClicApplication.llistaIdiomes.cercarNomIdioma(it.next());
+        	}else{
+        		str = str + ", " + ClicApplication.llistaIdiomes.cercarNomIdioma(it.next());
+        	}
         }
         text = (TextView) findViewById(R.id.llengua);
         text.setText(": "+ str);

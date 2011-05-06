@@ -18,26 +18,26 @@ public class Area {
 
 	public void afegirTotesArees(){
 		this.arees.put("tot", "Totes les àrees");
-		this.arees.put("lleng", "llengües");
-		this.arees.put("mat", "matemàtiques");		
-		this.arees.put("soc", "ciències socials");
-		this.arees.put("exp", "ciències experimentals");		
-		this.arees.put("mus", "música");
-		this.arees.put("vip", "visual i plàstica");
-		this.arees.put("ef", "educació física");		
-		this.arees.put("tec", "tecnologies");		
-		this.arees.put("div", "diversos");
+		this.arees.put("lleng", "Llengües");
+		this.arees.put("mat", "Matemàtiques");		
+		this.arees.put("soc", "Ciències socials");
+		this.arees.put("exp", "Ciències experimentals");		
+		this.arees.put("mus", "Música");
+		this.arees.put("vip", "Visual i plàstica");
+		this.arees.put("ef", "Educació física");		
+		this.arees.put("tec", "Tecnologies");		
+		this.arees.put("div", "Diversos");
 		
 		this.nomsArees[0] = "Totes les àrees";
-		this.nomsArees[1] = "llengües";
-		this.nomsArees[2] = "matemàtiques";
-		this.nomsArees[3] = "ciències socials";
-		this.nomsArees[4] = "ciències experimentals";		
-		this.nomsArees[5] = "música";		
-		this.nomsArees[6] = "visual i plàstica";
-		this.nomsArees[7] = "educació física";		
-		this.nomsArees[8] = "tecnologies";		
-		this.nomsArees[9] = "diversos";	
+		this.nomsArees[1] = "Llengües";
+		this.nomsArees[2] = "Matemàtiques";
+		this.nomsArees[3] = "Ciències socials";
+		this.nomsArees[4] = "Ciències experimentals";		
+		this.nomsArees[5] = "Música";		
+		this.nomsArees[6] = "Visual i plàstica";
+		this.nomsArees[7] = "Educació física";		
+		this.nomsArees[8] = "Tecnologies";		
+		this.nomsArees[9] = "Diversos";	
 
 	}
 

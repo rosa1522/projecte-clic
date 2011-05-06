@@ -18,16 +18,16 @@ public class Nivell {
 
 	public void afegirTotsNivells(){
 		this.nivells.put("tot", "Tots els nivells");
-		this.nivells.put("ei", "infantil (3-6)");
-		this.nivells.put("ep", "primària (6-12)");
-		this.nivells.put("eso", "secundària (12-16)");
-		this.nivells.put("ba", "batxillerat (16-18)");
+		this.nivells.put("ei", "Infantil (3-6)");
+		this.nivells.put("ep", "Primària (6-12)");
+		this.nivells.put("eso", "Secundària (12-16)");
+		this.nivells.put("ba", "Batxillerat (16-18)");
 
 		this.nomsNivells[0] = "Tots els nivells";
-		this.nomsNivells[1] = "infantil (3-6)";
-		this.nomsNivells[2] = "primària (6-12)";
-		this.nomsNivells[3] = "secundària (12-16)";
-		this.nomsNivells[4] = "batxillerat (16-18)";
+		this.nomsNivells[1] = "Infantil (3-6)";
+		this.nomsNivells[2] = "Primària (6-12)";
+		this.nomsNivells[3] = "Secundària (12-16)";
+		this.nomsNivells[4] = "Batxillerat (16-18)";
 	}
 	
 	public String cercarIdNivell(String nomNivell){
