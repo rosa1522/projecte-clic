@@ -1,98 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:gravity="center"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     
     <TableLayout 
     	android:layout_width="match_parent" 
     	android:layout_height="match_parent" 
-    	android:id="@+id/tableLayout3">
-        
-        <TextView 
+    	android:id="@+id/tableGeneral">
+    	
+    	<TextView 
         	android:text="@string/cercajoc" 
         	android:layout_height="wrap_content" 
-        	android:textSize="30sp" 
+        	android:textSize="25sp" 
         	android:id="@+id/titolCerca" 
         	android:padding="3dip" 
         	android:layout_width="wrap_content"/>
-        
+	        	
         <View
 	        android:layout_height="2dip"
 	        android:background="#FF909090" />
-	    
+	        
 	    <View
         	android:layout_height="7dip" />
-        
-       	<TextView 
-       		android:text="@string/area" 
-       		android:layout_height="wrap_content" 
-       		android:textSize="18sp" android:id="@+id/titolArea" 
-       		android:padding="3dip" 
-       		android:layout_width="wrap_content"/>     
-       		   
-        <Spinner 
-        	android:layout_height="wrap_content" 
-        	android:id="@+id/spinnerArea" 
-        	android:layout_width="match_parent"/>
-                  
-        <TextView 
-        	android:text="@string/idioma" 
-        	android:layout_height="wrap_content" 
-        	android:textSize="18sp" 
-        	android:id="@+id/titolArea" 
-        	android:padding="3dip" 
-        	android:layout_width="wrap_content"/>
+        	       
+	    <LinearLayout 
+			android:id="@+id/linearSpinners" 
+			android:orientation="horizontal"
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content">   
+	    	
+	    	<TableLayout 
+		    	android:layout_width="340sp" 
+		    	android:layout_height="match_parent" 
+		    	android:id="@+id/tableArea">
+		       	<TextView 
+		       		android:text="@string/area" 
+		       		android:layout_height="wrap_content" 
+		       		android:textSize="18sp" 
+		       		android:id="@+id/titolArea" 
+		       		android:padding="3dip" 
+		       		android:layout_width="wrap_content"/>  
+		       		
+		       	<Spinner 
+		        	android:layout_height="wrap_content" 
+		        	android:id="@+id/spinnerArea" 
+		        	android:layout_width="250sp"/>  
+	       	</TableLayout>  
+
+        		
+	    	<TableLayout 
+		    	android:layout_width="340sp" 
+		    	android:layout_height="match_parent" 
+		    	android:id="@+id/tableIdioma">
+	                  
+		        <TextView 
+		        	android:text="@string/idioma" 
+		        	android:layout_height="wrap_content" 
+		        	android:textSize="18sp" 
+		        	android:id="@+id/titolArea" 
+		        	android:padding="3dip" 
+		        	android:layout_width="wrap_content"/>
+		        	
+		        <Spinner 
+		        	android:layout_height="wrap_content" 
+		        	android:id="@+id/spinnerIdioma" 
+		        	android:layout_width="250sp"/>
+	       	</TableLayout>  
+		</LinearLayout>
+		
+		<LinearLayout 
+			android:id="@+id/linearSpinners2" 
+			android:orientation="vertical"
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content">   
+		    	
+			<TableLayout 
+		    	android:layout_width="680sp" 
+		    	android:layout_height="match_parent" 
+		    	android:id="@+id/tableNivell">
+		    	
+		        <TextView 
+		        	android:text="@string/nivell" 
+		        	android:layout_height="wrap_content" 
+		        	android:textSize="18sp" 
+		        	android:id="@+id/titolNivell" 
+		        	android:padding="3dip" 
+		        	android:layout_width="wrap_content"/>
+		        	
+		        <Spinner 
+		        	android:layout_height="wrap_content" 
+		        	android:id="@+id/spinnerNivell" 
+		        	android:layout_width="550sp"/>	  
+        	</TableLayout>      
+	    </LinearLayout>
+	    
+	    <View android:layout_height="3dip" />
         	
-        <Spinner 
-        	android:layout_height="wrap_content" 
-        	android:id="@+id/spinnerIdioma" 
-        	android:layout_width="match_parent"/>
+	    <LinearLayout 
+			android:id="@+id/linearEditText" 
+			android:orientation="horizontal"
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content">   
+			
+		    <TableLayout 
+		    	android:layout_width="340sp" 
+		    	android:layout_height="match_parent" 
+		    	android:id="@+id/tableTitol"
+		    	android:paddingRight="3dip">
+       	
+		       	<TextView 
+		        	android:text="@string/titol" 
+		        	android:layout_height="wrap_content" 
+		        	android:textSize="18sp" 
+		        	android:id="@+id/titolTitol" 
+		        	android:padding="3dip" 
+		        	android:layout_width="wrap_content"/>
+		        	
+		        <EditText 
+		        	android:id="@+id/editTitol" 
+		        	android:layout_width="wrap_content" 
+		        	android:layout_height="wrap_content"/>
+        	</TableLayout>
         
-        <TextView 
-        	android:text="@string/nivell" 
-        	android:layout_height="wrap_content" 
-        	android:textSize="18sp" 
-        	android:id="@+id/titolArea" 
-        	android:padding="3dip" 
-        	android:layout_width="wrap_content"/>
-        	
-        <Spinner 
-        	android:layout_height="wrap_content" 
-        	android:id="@+id/spinnerNivell" 
-        	android:layout_width="match_parent"/>
-        
-        <TextView 
-        	android:text="@string/titol" 
-        	android:layout_height="wrap_content" 
-        	android:textSize="18sp" 
-        	android:id="@+id/titolArea" 
-        	android:padding="3dip" 
-        	android:layout_width="wrap_content"/>
-        	
-        <EditText 
-        	android:id="@+id/editTitol" 
-        	android:layout_width="wrap_content" 
-        	android:layout_height="wrap_content"/>
-        
-        <TextView 
-        	android:text="@string/autor" 
-        	android:layout_height="wrap_content" 
-        	android:textSize="18sp" 
-        	android:id="@+id/titolArea" 
-        	android:padding="3dip" 
-        	android:layout_width="wrap_content"/>
-        	
-        <EditText
-        	android:id="@+id/editAutor" 
-        	android:layout_width="wrap_content" 
-        	android:layout_height="wrap_content"/>
+        	<TableLayout 
+		    	android:layout_width="340sp" 
+		    	android:layout_height="match_parent" 
+		    	android:id="@+id/tableAutor">
+		        <TextView 
+		        	android:text="@string/autor" 
+		        	android:layout_height="wrap_content" 
+		        	android:textSize="18sp" 
+		        	android:id="@+id/titolAutor" 
+		        	android:padding="3dip" 
+		        	android:layout_width="wrap_content"/>
+		        	
+		        <EditText
+		        	android:id="@+id/editAutor" 
+		        	android:layout_width="wrap_content" 
+		        	android:layout_height="wrap_content"/>
+        	</TableLayout>
+       </LinearLayout>
+       
        
         <TableLayout 
         	android:layout_height="match_parent" 
         	android:layout_width="wrap_content" 
-        	android:id="@+id/tableLayout4" 
+        	android:id="@+id/tableBotoCercar" 
         	android:gravity="bottom">            
             
             <ImageButton 

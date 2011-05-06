@@ -54,7 +54,7 @@
         	android:text="@string/nivell" 
         	android:layout_height="wrap_content" 
         	android:textSize="18sp" 
-        	android:id="@+id/titolArea" 
+        	android:id="@+id/titolNivell" 
         	android:padding="3dip" 
         	android:layout_width="wrap_content"/>
         	
@@ -67,7 +67,7 @@
         	android:text="@string/titol" 
         	android:layout_height="wrap_content" 
         	android:textSize="18sp" 
-        	android:id="@+id/titolArea" 
+        	android:id="@+id/titolTitol" 
         	android:padding="3dip" 
         	android:layout_width="wrap_content"/>
         	
@@ -80,7 +80,7 @@
         	android:text="@string/autor" 
         	android:layout_height="wrap_content" 
         	android:textSize="18sp" 
-        	android:id="@+id/titolArea" 
+        	android:id="@+id/titolAutor" 
         	android:padding="3dip" 
         	android:layout_width="wrap_content"/>
         	
