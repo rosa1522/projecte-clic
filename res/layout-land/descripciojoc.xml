@@ -6,200 +6,175 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-<ScrollView 
-  	android:id="@+id/scrollView1" 
-  	android:layout_width="fill_parent" 
-  	android:layout_height="fill_parent" 
-  	android:fillViewport="true">
+	<ScrollView android:id="@+id/scrollView1" android:layout_width="fill_parent" android:layout_height="fill_parent" android:fillViewport="true">
+		<LinearLayout android:id="@+id/linearLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent">
+			<TableLayout android:layout_width="wrap_content" android:id="@+id/tableLayout1" android:layout_height="match_parent">
 
-	<LinearLayout 
-		android:id="@+id/linearLayout1" 
-		android:layout_width="fill_parent" 
-		android:layout_height="fill_parent">
-
-<TableLayout 
-    android:layout_width="wrap_content" 
-    android:id="@+id/tableLayout1" 
-    android:layout_height="match_parent">
-
-	<TextView 
-		android:text="@string/descripciojoc" 
-		android:textSize="25sp"
-		android:id="@+id/titolDescripcioJoc" 
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content"
-		android:padding="3dip"/>
+				<TextView android:text="@string/descripciojoc" 
+						android:textSize="25sp"
+						android:id="@+id/titolDescripcioJoc" 
+						android:layout_width="wrap_content" 
+						android:layout_height="wrap_content"
+						android:padding="3dip"/>
 	
-	<View
-        android:layout_height="2dip"
-        android:background="#FF909090" />
-   
-    <View android:layout_height="7dip" />
+				<View android:layout_height="2dip" android:background="#FF909090" />
+    			<View android:layout_height="7dip" />
         
-	<TextView 
-		android:text="TextView" 
-		android:textSize="21sp"
-		android:id="@+id/titolJoc" 
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content"
-		android:padding="3dip"/>
-	
-    <View
-        android:layout_height="7dip" />
-
-	<TableRow android:id="@+id/tableRowArea" android:layout_width="350sp" android:layout_height="wrap_content">  
-	<TableLayout 
-    android:layout_width="wrap_content" 
-    android:id="@+id/tableLayout1" 
-    android:layout_height="match_parent">
-
-    <TableRow android:id="@+id/tableRowArea" android:layout_width="wrap_content" android:layout_height="wrap_content">        
-		<TextView 
-			android:text="@string/area"
-			android:textSize="18sp"
-			android:textStyle="bold"
-			android:id="@+id/nomareaJoc" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"
-			android:padding="3dip"/>
+				<TextView 
+						android:text="TextView" 
+						android:textSize="21sp"
+						android:id="@+id/titolJoc" 
+						android:layout_width="wrap_content" 
+						android:layout_height="wrap_content"
+						android:padding="3dip"/>
 					
-		<TextView 
-			android:text="TextView" 
-			android:textSize="16sp"
-			android:id="@+id/areaJoc" 
-			android:layout_width="350sp" 
-			android:layout_height="wrap_content"
-			android:paddingBottom="3dip"/>
-	</TableRow>
+    			<View android:layout_height="7dip" />
 
+				<TableRow android:id="@+id/tableRowArea" android:layout_width="350sp" android:layout_height="wrap_content">  
+					<TableLayout 
+						    android:layout_width="wrap_content" 
+						    android:id="@+id/tableLayout1" 
+						    android:layout_height="match_parent">
+						<TableRow android:id="@+id/tableRowArea" android:layout_width="wrap_content" android:layout_height="wrap_content">        
+							<TextView 
+								android:text="@string/area"
+								android:textSize="18sp"
+								android:textStyle="bold"
+								android:id="@+id/nomareaJoc" 
+								android:layout_width="wrap_content" 
+								android:layout_height="wrap_content"
+								android:padding="3dip"/>
+						
+							<TextView 
+								android:text="TextView" 
+								android:textSize="16sp"
+								android:id="@+id/areaJoc" 
+								android:layout_width="350sp" 
+								android:layout_height="wrap_content"
+								android:paddingBottom="3dip"/>
+						</TableRow>
 	
-	<TableRow android:id="@+id/tableRowNivell" android:layout_width="wrap_content" android:layout_height="wrap_content">
-		<TextView 
-			android:text="@string/nivell"
-			android:textSize="18sp"
-			android:textStyle="bold"
-			android:id="@+id/nomnivellJoc" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"
-			android:padding="3dip"/>
-				
-		<TextView 
-			android:text="TextView" 
-			android:textSize="16sp"
-			android:id="@+id/nivellJoc" 
-			android:layout_width="350sp" 
-			android:layout_height="wrap_content"
-			android:paddingBottom="3dip"/>
-	</TableRow>
+						<TableRow android:id="@+id/tableRowNivell" android:layout_width="wrap_content" android:layout_height="wrap_content">
+							<TextView 
+								android:text="@string/nivell"
+								android:textSize="18sp"
+								android:textStyle="bold"
+								android:id="@+id/nomnivellJoc" 
+								android:layout_width="wrap_content" 
+								android:layout_height="wrap_content"
+								android:padding="3dip"/>
+									
+							<TextView 
+								android:text="TextView" 
+								android:textSize="16sp"
+								android:id="@+id/nivellJoc" 
+								android:layout_width="350sp" 
+								android:layout_height="wrap_content"
+								android:paddingBottom="3dip"/>
+						</TableRow>
+		
+						<TableRow android:id="@+id/tableRowData" android:layout_width="wrap_content" android:layout_height="wrap_content">
+							<TextView 
+								android:text="@string/data"
+								android:textSize="18sp"
+								android:textStyle="bold"
+								android:id="@+id/nomdataPublicacio" 
+								android:layout_width="wrap_content" 
+								android:layout_height="wrap_content"
+								android:padding="3dip"/>
+									
+							<TextView 
+								android:text="TextView" 
+								android:textSize="16sp"
+								android:id="@+id/dataPublicacio" 
+								android:layout_width="350sp" 
+								android:layout_height="wrap_content"
+								android:paddingBottom="3dip"/>
+						</TableRow>
 	
-	<TableRow android:id="@+id/tableRowData" android:layout_width="wrap_content" android:layout_height="wrap_content">
-		<TextView 
-			android:text="@string/data"
-			android:textSize="18sp"
-			android:textStyle="bold"
-			android:id="@+id/nomdataPublicacio" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"
-			android:padding="3dip"/>
-				
-		<TextView 
-			android:text="TextView" 
-			android:textSize="16sp"
-			android:id="@+id/dataPublicacio" 
-			android:layout_width="350sp" 
-			android:layout_height="wrap_content"
-			android:paddingBottom="3dip"/>
-	</TableRow>
-
-	<TableRow android:id="@+id/tableRowIdioma" android:layout_width="wrap_content" android:layout_height="wrap_content">
-		<TextView 
-			android:text="@string/idioma"
-			android:textSize="18sp"
-			android:textStyle="bold"
-			android:id="@+id/nomllengua" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"
-			android:padding="3dip"/>
-				
-		<TextView 
-			android:text="TextView" 
-			android:textSize="16sp"
-			android:id="@+id/llengua" 
-			android:layout_width="350sp" 
-			android:layout_height="wrap_content"
-			android:paddingBottom="3dip"/>
-	</TableRow>
+						<TableRow android:id="@+id/tableRowIdioma" android:layout_width="wrap_content" android:layout_height="wrap_content">
+							<TextView 
+								android:text="@string/idioma"
+								android:textSize="18sp"
+								android:textStyle="bold"
+								android:id="@+id/nomllengua" 
+								android:layout_width="wrap_content" 
+								android:layout_height="wrap_content"
+								android:padding="3dip"/>
+									
+							<TextView 
+								android:text="TextView" 
+								android:textSize="16sp"
+								android:id="@+id/llengua" 
+								android:layout_width="350sp" 
+								android:layout_height="wrap_content"
+								android:paddingBottom="3dip"/>
+						</TableRow>
+		
+						<TableRow android:id="@+id/tableRowIdioma" android:layout_width="wrap_content" android:layout_height="wrap_content">
+							<TextView 
+								android:text="@string/autor"
+								android:textSize="18sp"
+								android:textStyle="bold"
+								android:id="@+id/nomautor" 
+								android:layout_width="wrap_content" 
+								android:layout_height="wrap_content"
+								android:padding="3dip"/>
+										
+							<TextView 
+								android:text="TextView" 
+								android:textSize="16sp"
+								android:id="@+id/autor" 
+								android:layout_width="350sp" 
+								android:layout_height="wrap_content"
+								android:paddingBottom="3dip"/>
+						</TableRow>
+		
+						<TableRow android:id="@+id/tableRowCentre" android:layout_width="wrap_content" android:layout_height="wrap_content">
+							<TextView 
+								android:text="@string/centre"
+								android:textSize="18sp"
+								android:textStyle="bold"
+								android:id="@+id/nomcentre" 
+								android:layout_width="wrap_content" 
+								android:layout_height="wrap_content"
+								android:padding="3dip"/>
+										
+							<TextView 
+								android:text="TextView" 
+								android:textSize="16sp"
+								android:id="@+id/centre" 
+								android:layout_width="350sp" 
+								android:layout_height="wrap_content"
+								android:paddingBottom="3dip"/>
+						</TableRow>
+					</TableLayout>	
+			
+					<TableLayout android:layout_width="wrap_content" android:id="@+id/tableLayout2" android:layout_height="match_parent">    
+					    <TableRow android:gravity="right">
+					   		<ImageView 	 
+					    		android:layout_height="160sp" 
+					    		android:layout_width="250sp" 
+					    		android:adjustViewBounds="true"
+					    		android:id="@+id/imatgeJoc">
+					    	</ImageView>
+					    </TableRow>
+		 			</TableLayout>
+		 		</TableRow>	
 	
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:orientation="horizontal"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content">
-		<TextView 
-			android:text="@string/autor"
-			android:textSize="18sp"
-			android:textStyle="bold"
-			android:id="@+id/nomautor" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"
-			android:padding="3dip"/>
-					
-		<TextView 
-			android:text="TextView" 
-			android:textSize="16sp"
-			android:id="@+id/autor" 
-			android:layout_width="350sp" 
-			android:layout_height="wrap_content"
-			android:paddingBottom="3dip"/>
-	</LinearLayout>
-	
-	<TableRow android:id="@+id/tableRowCentre" android:layout_width="wrap_content" android:layout_height="wrap_content">
-		<TextView 
-			android:text="@string/centre"
-			android:textSize="18sp"
-			android:textStyle="bold"
-			android:id="@+id/nomcentre" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"
-			android:padding="3dip"/>
-					
-		<TextView 
-			android:text="TextView" 
-			android:textSize="16sp"
-			android:id="@+id/centre" 
-			android:layout_width="350sp" 
-			android:layout_height="wrap_content"
-			android:paddingBottom="3dip"/>
-	</TableRow>
-	</TableLayout>	
-
-	<TableLayout 
-    android:layout_width="wrap_content" 
-    android:id="@+id/tableLayout2" 
-    android:layout_height="match_parent">    
-    <TableRow android:gravity="right">
-   	 	<ImageView 	 
-    		android:layout_height="160sp" 
-    		android:layout_width="250sp" 
-    		android:adjustViewBounds="true"
-    		android:id="@+id/imatgeJoc">
-    	</ImageView>
-    	</TableRow>
- 	</TableLayout>
- 	</TableRow>
-	<TableLayout
-		android:gravity="bottom"
-	    android:id="@+id/tableLayout3"
-	    android:layout_height="match_parent">
-	    <ImageButton android:id="@+id/instalar " 
-		    android:layout_width="wrap_content" 
-		    android:layout_gravity="center" 
-		    android:layout_height="wrap_content" 
-		    style="@android:style/Widget.Button.Inset" 
-		    android:src="@drawable/download">
-	    </ImageButton>
-	</TableLayout>
-	
-</TableLayout>
+				<TableLayout
+					android:gravity="bottom"
+			    	android:id="@+id/tableLayout3"
+			    	android:layout_height="match_parent">
+				    <ImageButton android:id="@+id/instalar " 
+					    android:layout_width="wrap_content" 
+					    android:layout_gravity="center" 
+					    android:layout_height="wrap_content" 
+					    style="@android:style/Widget.Button.Inset" 
+					    android:src="@drawable/download">
+				    </ImageButton>
+				</TableLayout>	
+			</TableLayout>
 		</LinearLayout>
 	</ScrollView>
 </LinearLayout>
