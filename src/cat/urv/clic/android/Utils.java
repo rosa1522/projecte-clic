@@ -276,7 +276,7 @@ public class Utils {
 			File fdesti = new File(c.getFilesDir() + "/" + idJoc +"/index.html");				
 			copiaFitxer_InputStreamFile (forigen, fdesti);
 			
-			// Generem el data1.js, data2.js, data2.js, ...
+			// Generem el data.js
 	        llegirFitxerJClic(c, idJoc);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

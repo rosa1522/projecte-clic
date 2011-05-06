@@ -39,12 +39,11 @@ public class IniciAplicacio extends Activity {
 		    		startActivity(intentBoto);		
 		    	}	        	
 	        });  
-	        Utils.llegirFitxerJClic(getApplicationContext(), "");
 	    
 	        //////////////////////////////////////////
 	        // Llista
 	        list = (ListView) findViewById(R.id.list_descarregats);         
-	        //Demanem la llista de jocs DESCARREGATS
+	        // Demanem la llista de jocs DESCARREGATS
 	        List<String> llistaJocs = ClicApplication.llistaJocs.construirLlistaJocs(true);	   
 	        ArrayAdapter<String> adp = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, llistaJocs);
 	        list.setAdapter(adp);       	   	
