@@ -5,7 +5,18 @@
     android:gravity="center"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    
+
+<ScrollView 
+  	android:id="@+id/scrollView1" 
+  	android:layout_width="fill_parent" 
+  	android:layout_height="fill_parent" 
+  	android:fillViewport="true">
+
+	<LinearLayout 
+		android:id="@+id/linearLayout1" 
+		android:layout_width="fill_parent" 
+		android:layout_height="fill_parent">
+
 <TableLayout 
     android:layout_width="wrap_content" 
     android:id="@+id/tableLayout1" 
@@ -57,7 +68,8 @@
 			android:textSize="16sp"
 			android:id="@+id/areaJoc" 
 			android:layout_width="350sp" 
-			android:layout_height="wrap_content"/>
+			android:layout_height="wrap_content"
+			android:paddingBottom="3dip"/>
 	</TableRow>
 
 	
@@ -76,7 +88,8 @@
 			android:textSize="16sp"
 			android:id="@+id/nivellJoc" 
 			android:layout_width="350sp" 
-			android:layout_height="wrap_content"/>
+			android:layout_height="wrap_content"
+			android:paddingBottom="3dip"/>
 	</TableRow>
 	
 	<TableRow android:id="@+id/tableRowData" android:layout_width="wrap_content" android:layout_height="wrap_content">
@@ -94,7 +107,8 @@
 			android:textSize="16sp"
 			android:id="@+id/dataPublicacio" 
 			android:layout_width="350sp" 
-			android:layout_height="wrap_content"/>
+			android:layout_height="wrap_content"
+			android:paddingBottom="3dip"/>
 	</TableRow>
 
 	<TableRow android:id="@+id/tableRowIdioma" android:layout_width="wrap_content" android:layout_height="wrap_content">
@@ -112,7 +126,8 @@
 			android:textSize="16sp"
 			android:id="@+id/llengua" 
 			android:layout_width="350sp" 
-			android:layout_height="wrap_content"/>
+			android:layout_height="wrap_content"
+			android:paddingBottom="3dip"/>
 	</TableRow>
 	
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -133,7 +148,8 @@
 			android:textSize="16sp"
 			android:id="@+id/autor" 
 			android:layout_width="350sp" 
-			android:layout_height="wrap_content"/>
+			android:layout_height="wrap_content"
+			android:paddingBottom="3dip"/>
 	</LinearLayout>
 	
 	<TableRow android:id="@+id/tableRowCentre" android:layout_width="wrap_content" android:layout_height="wrap_content">
@@ -151,7 +167,8 @@
 			android:textSize="16sp"
 			android:id="@+id/centre" 
 			android:layout_width="350sp" 
-			android:layout_height="wrap_content"/>
+			android:layout_height="wrap_content"
+			android:paddingBottom="3dip"/>
 	</TableRow>
 	</TableLayout>	
 
@@ -183,4 +200,6 @@
 	</TableLayout>
 	
 </TableLayout>
+		</LinearLayout>
+	</ScrollView>
 </LinearLayout>
