@@ -48,11 +48,20 @@ public class HashJocs {
 	}
 
 	public void modificarJocADescarregat(Integer id){
-		// Abans de marcar el joc com a modificat, ens assegurem que el codi del joc existeixi
+		// Abans de marcar el joc com a descarregat, ens assegurem que el codi del joc existeixi
 		Joc joc = jocs.get(id);
 		if (joc != null){
 			joc.setDescarregat(true);
 			jocsNom.get(joc.getNom()).setDescarregat(true);
+		}
+	}
+	
+	public void modificarJocANODescarregat(Integer id){
+		// Abans de marcar el joc com a NO descarregat, ens assegurem que el codi del joc existeixi
+		Joc joc = jocs.get(id);
+		if (joc != null){
+			joc.setDescarregat(false);
+			jocsNom.get(joc.getNom()).setDescarregat(false);
 		}
 	}
 	
