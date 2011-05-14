@@ -446,7 +446,7 @@ public class Utils {
 				if(j<index-1)
 					fitxerData.print(",");
 			}
-			fitxerData.print("]}");
+			fitxerData.print("]};");
 			fitxerData.close();
 			inputStrReader.close();
 			
