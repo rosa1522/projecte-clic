@@ -1,7 +1,11 @@
-function Peca(ctxt,id,img,posx,posy,w,h,insidePointx,insidePointy,insideSizew,insideSizeh,colocaciox,colocacioy)
+function randOrd(){
+	return (Math.round(Math.random())-0.5); 
+} 
+
+function Peca(ctxt,id,img,posx,posy,w,h,insidePointx,insidePointy,insideSizew,insideSizeh,colocaciox,colocacioy,showH,showW)
 {
    this.ctxt = ctxt;
-   this.id = 'image'+id;
+   this.id = id;
    this.img = img;
    this.posx = posx;
    this.posy = posy;
@@ -13,12 +17,43 @@ function Peca(ctxt,id,img,posx,posy,w,h,insidePointx,insidePointy,insideSizew,in
    this.insideSizeh = insideSizeh;
    this.colocaciox = colocaciox;
    this.colocacioy = colocacioy;
-   this.depth = 0;   
+   this.depth = 0;  
+   this.iniposx=posx;
+   this.iniposy=posy;
+   this.colocada=false;
+   this.showH=showH;
+   this.showW=showW;
+   this.numPeca;
 
+   this.setPosx = function(x){
+	   this.posx = x;
+	   this.iniposx = x;
+   };
+   
+   this.getPosx = function(){
+	   return this.posx;
+   };
+   
+   this.setPosy = function(y){
+	   this.posy = y;
+	   this.iniposy = y;
+   };
+   
+   this.getPosy = function(){
+	   return this.posy;
+   };
+   
+   this.setNumPeca = function(numPeca){
+	   this.numPeca = numPeca;
+   };
+   
    //Renders the image in the screen
-   this.draw = function() {
-	   this.ctxt.drawImage(this.img,this.insidePointx,
-			   			this.insidePointy,this.insideSizew,this.insideSizeh,this.posx,this.posy,this.w,this.h);
+   this.draw2 = function() {
+	   this.ctxt.drawImage(this.img,this.posx,this.posy,this.showW,this.showH);
+	};
+	
+	this.draw = function() {
+		this.ctxt.drawImage(this.img,this.insidePointx,this.insidePointy,this.insideSizew,this.insideSizeh,this.posx,this.posy,this.showW,this.showH);
 	};
 	
 	//Checks if the point x,y is inside the image
@@ -56,58 +91,187 @@ function Peca(ctxt,id,img,posx,posy,w,h,insidePointx,insidePointy,insideSizew,in
 
 }
 
-function createPeca(ctxt, myImage, lines,cols,imageSize,basePosition,colocaciox,colocacioy)
+function ImageMemory(ctxt,id,img,showW,showH)
+{
+   this.ctxt = ctxt;
+   this.id = id;
+   this.img = img;
+   this.posx;
+   this.posy;
+   this.depth = 0;
+   this.showH=showH;
+   this.showW=showW;
+   this.colocada=false;
+   this.numPeca;
+   this.hidden=true;
+   this.llocPeca;
+   
+   this.setPosx = function(x){
+	   this.posx = x;
+   };
+   
+   this.setPosy = function(y){
+	   this.posy = y;
+   };
+   
+   this.setNumPeca = function(numPeca){
+	   this.numPeca = numPeca;
+   };
+   
+   this.llocPeca = function(llocPeca){
+	   this.llocPeca = llocPeca;
+   };
+   
+   this.setHidden = function(hidden){
+	   this.hidden = hidden;
+   };
+   
+   //Renders the image in the screen
+   this.draw = function(colorhidden) {
+	   if (!this.hidden){
+		   this.ctxt.drawImage(this.img,this.posx,this.posy,this.showW,this.showH);
+	   }else{
+		   //this.ctxt.fillStyle = "#FF6666";
+		   this.ctxt.fillStyle = colorhidden;
+		   this.ctxt.fillRect(this.posx,this.posy,this.showW-0.01,this.showH-0.01);
+	   }
+	};
+	
+	//Checks if the point x,y is inside the image
+	this.isInside = function(x,y){
+		if (x>=this.posx && x<=(this.posx+this.showW) 
+				&& y>=this.posy && y<=(this.posy+this.showH)) return true;
+		return false;
+	};
+
+	//Activates the image as a draggable element
+	this.setDraggable = function(){
+		//Save some data
+		this.previousDepth= this.depth;
+		this.depth=20;
+		this.startX = this.posx;
+		this.startY = this.posy;
+	};
+	
+	//Sets the depth of the image
+	//Depth must be an integer value between 0 (back) and 20 (front)
+	this.setDepth = function(depth){
+		this.depth = depth;
+	};
+	
+	//Deactivates the image as a draggable element
+	this.unsetDraggable = function(){
+		this.depth= this.previousDepth;
+	};
+	
+	//Drags the image according to a relative increment
+	this.drag = function(incX,incY){
+		this.posx =  this.startX-incX;
+		this.posy =  this.startY-incY;
+	};
+}
+
+function createPeca(ctxt,myImage,lines,cols,imageSize,basePosition,imageColocation,imageShow)
 {
     var incrY = imageSize.height/lines;
     var incrX = imageSize.width/cols;
+    var incrShowY = imageShow.h/lines;
+    var incrShowX = imageShow.w/cols;
     var theX = basePosition.x;
     var theY = basePosition.y;
     var peces = new Array();
     var id_img=0;
-    for(var i = 0;i < lines;i++) {
-        for(var j = 0;j < cols;j++) { 
-        	peces.push(new Peca(ctxt, id_img, myImage,theX,theY,incrX,incrY,(j*incrX),(i*incrY),incrX,incrY,colocaciox+(j*incrX),colocacioy+(i*incrY)));
-            theY += incrY;
+    for(var i=0;i<lines;i++) { 
+        for(var j=0;j<cols;j++) { 
+        	peces.push(new Peca(ctxt, id_img, myImage,theX,theY,incrShowX,incrShowY,(j*incrX),(i*incrY),incrX,incrY,imageColocation.x+(j*incrShowX),imageColocation.y+(i*incrShowY),incrShowY,incrShowX));
+        	theX += incrShowX;
             id_img++;
         }
-        theY = basePosition.y;
-        theX +=  incrX;
+        theX = basePosition.x;
+        theY +=  incrShowY;
     }
-       
     return peces;
 }
 
+function arrodonir(quantitat, decimals) {
+	var quantitat = parseFloat(quantitat);
+	var decimals = parseFloat(decimals);
+	decimals = (!decimals ? decimals : decimals);
+	return Math.round(quantitat * Math.pow(10, decimals)) / Math.pow(10, decimals);
+}
 
-function Grid(ctxt, lines,cols,imageSize,basePosition)
-{
+function Grid(ctxt,lines,cols,imageSize,basePosition,iniPosition)
+{	
 	this.ctxt = ctxt;
-    this.incrY = imageSize.height/lines;//75
-    this.incrX = imageSize.width/cols;//75
-    this.theX = basePosition.x;//600
-    this.theY = basePosition.y;//100
+	this.lines = lines;
+	this.cols = cols;
+	this.imageW = imageSize.width;
+	this.imageH = imageSize.height;
+    this.incrY2 = imageSize.height/lines;//220/3 = 73.333
+    this.incrX2 = imageSize.width/cols;//220/3 = 73.333
+    this.incrY=arrodonir(this.incrY2,4);
+    this.incrX=arrodonir(this.incrX2,4);
+    this.theX = basePosition.x;//518
+    this.theY = basePosition.y;//185
+    this.iniX = iniPosition.x;
+    this.iniY = iniPosition.y;
+    this.ww;
+    this.hh;
 	
 	//Renders the board in the screen
-	this.draw = function() {
-		for (var x = this.theX; x < (this.theX+(cols+1)*this.incrX); x += this.incrX) {
+	this.draw = function(colorlinies) {
+		this.ctxt.beginPath(0,0,80,80);
+		for (var x = this.theX; x < (this.theX+((this.cols+1)*this.incrX)); x += this.incrX) {
 			this.ctxt.moveTo(x, this.theY);
-			this.ctxt.lineTo(x, this.theY+imageSize.width);
+			this.ctxt.lineTo(x, this.theY+this.imageH);
 		}
-		   
-		for (var y = this.theY; y < (this.theY+(lines+1)*this.incrY); y += this.incrY) {
+		for (var y = this.theY; y < (this.theY+((this.lines+1)*this.incrY)); y += this.incrY) {
 			this.ctxt.moveTo(this.theX, y);
-			this.ctxt.lineTo(this.theX+imageSize.height, y);
-		}
-		   
-		this.ctxt.strokeStyle = "#000";
-		this.ctxt.stroke();
+			this.ctxt.lineTo(this.theX+this.imageW, y);
+		}  
+		this.ctxt.strokeStyle = colorlinies;
+		this.ctxt.stroke();	
+	};
+	
+	this.drawFonsInactiu = function(colorinactiu) {
+		 this.ctxt.fillStyle = colorinactiu;
+		 this.ctxt.fillRect(this.theX,this.theY,this.imageW,this.imageH);
+	};
+	
+	this.drawFons = function(colorfonsalt,colorfonsbaix,canvasWidth,canvasHeight,gradiente){
+		var my_gradient = this.ctxt.createLinearGradient(0, 0, 0, gradiente);
+		my_gradient.addColorStop(1, colorfonsalt);
+		my_gradient.addColorStop(0, colorfonsbaix);
+		this.ctxt.fillStyle = my_gradient;
+		this.ctxt.fillRect(0, 0, canvasWidth, canvasHeight);
+	};
+	
+	this.drawFonsGrid = function(colorfonsalt,colorfonsbaix,canvasWidth,canvasHeight,gradiente,x,y){
+		var my_gradient = this.ctxt.createLinearGradient(y, x, gradiente, 0);
+		my_gradient.addColorStop(1, colorfonsalt);
+		my_gradient.addColorStop(0, colorfonsbaix);
+		this.ctxt.fillStyle = my_gradient;
+		this.ctxt.fillRect(x, y, canvasWidth, canvasHeight);
+	};
+	
+	this.drawFonsJoc = function(colorfonsjoc,dist,margin) {
+		 this.ctxt.fillStyle = colorfonsjoc;
+		 
+		 if (dist == "AB" || dist == "BA"){
+			 this.ww = (this.imageW*2)+(margin*2)+12;
+			 this.hh = this.imageH+(margin*2);
+		 }else if(dist == "0"){
+			 this.ww = this.imageW+(margin*2);
+			 this.hh = this.imageH+(margin*2);
+		 }else{
+			 this.ww = this.imageW+(margin*2);
+			 this.hh = (this.imageH*2)+(margin*2)+12;
+		 }
+
+		 this.ctxt.fillRect(this.iniX-margin,this.iniY-margin,this.ww,this.hh);
 	};
 }
 
-
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
 function ImageData(id,context,src)
 {
 	this.context=context;
@@ -171,12 +335,6 @@ function ImageData(id,context,src)
 	};
 } 
 
-
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-//A collection of images
 function ImageSet()
 {
 	this.images = new Array(20);
@@ -193,7 +351,48 @@ function ImageSet()
 		var i,depth;
 		for(depth=0;depth<21;depth++){
 			for (i=0;i<this.num_images;i++){
-				if(this.images[i].depth==depth) this.images[i].draw();
+				if(this.images[i].depth==depth){
+					this.images[i].draw();
+				}
+			}
+		}
+	};
+	
+	//Returns the most frontal image at position x,y
+	this.getFrontImage = function(x, y){
+		var img = 'notfound';
+		var currentdepth = 0;
+	 	
+		for (i=0;i<this.num_images;i++){
+			if(this.images[i].isInside(x,y) && 
+			   this.images[i].depth>=currentdepth) {
+				img = this.images[i];
+				currentdepth = this.images[i].depth;
+			}
+		}	
+		return img;
+	};
+}
+
+function ImageSetMemory()
+{
+	this.images = new Array(20);
+	this.num_images = 0;
+	
+	//Adds an image to the collection
+	this.add = function(image){
+		this.images[this.num_images]=image;
+		this.num_images++;
+	};
+	
+	// Draws all the images (maintaining the order)
+	this.draw = function(colorhidden){
+		var i,depth;
+		for(depth=0;depth<21;depth++){
+			for (i=0;i<this.num_images;i++){
+				if(this.images[i].depth==depth){
+					this.images[i].draw(colorhidden);
+				}
 			}
 		}
 	};
