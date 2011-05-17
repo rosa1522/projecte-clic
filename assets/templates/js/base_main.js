@@ -2,11 +2,12 @@ function iniciaActivitat(canvas,num) {
 	var act;
 	//Posar aqui tots els tipus d'activitat que hi hagi
 	
-	if (dadesActivitat.activitats[num].atributsActivitat.class == "@puzzles.DoublePuzzle") { act = new PuzzleDoble(); }
-	else if (dadesActivitat.activitats[num].atributsActivitat.class == "@puzzles.ExchangePuzzle") { act = new PuzzleIntercanvi(); }
-	else if (dadesActivitat.activitats[num].atributsActivitat.class == "@memory.MemoryGame") { act = new Memoria(); }
-	else if (dadesActivitat.activitats[num].atributsActivitat.class == "@panels.InformationScreen") { act = new PanelInformation(); }
+	if (dadesActivitat.activitats[num].atributsActivitat.classe == "@puzzles.DoublePuzzle") { act = new PuzzleDoble(); }
+	else if (dadesActivitat.activitats[num].atributsActivitat.classe == "@puzzles.ExchangePuzzle") { act = new PuzzleIntercanvi(); }
+	else if (dadesActivitat.activitats[num].atributsActivitat.classe == "@memory.MemoryGame") { act = new Memoria(); }
+	else if (dadesActivitat.activitats[num].atributsActivitat.classe == "@panels.InformationScreen") { act = new PanelInformation(); }
 	
+	window.console.log("Iniciant activitat");
 	//Inicialitzar l'activitat
 	act.init(canvas, dadesActivitat.activitats[num]);
 	return act;
