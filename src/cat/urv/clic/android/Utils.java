@@ -178,9 +178,25 @@ public class Utils {
 		in.close();
 		fos.close();
 	}
-	
-	public static boolean descarregarFitxer(Context c, String ruta, String idJoc) {
+
+	public static boolean testConnexi—(Context c, String ruta, String idJoc) {
 		boolean hiHaConnexio = false;
+		
+		try {
+			// Url del joc
+			URL url = new URL(ruta);			
+			// Obrim la connexió
+			url.openConnection();
+			hiHaConnexio = true;
+
+		} catch (IOException e){
+			hiHaConnexio = false;
+		}
+		return hiHaConnexio;
+	}
+		
+	
+	public static void descarregarFitxer(Context c, String ruta, String idJoc) {
 		
 		try {
 			// Url del joc
@@ -193,12 +209,9 @@ public class Utils {
 			InputStream is =  urlCon.getInputStream();
 			File fdesti = new File(c.getFilesDir() + "/" + idJoc + ".zip");
 			copiaFitxer_InputStreamFile(is, fdesti);
-			hiHaConnexio = true;
 			
-		} catch (IOException e){
-			hiHaConnexio = false;
-		}
-		return hiHaConnexio;
+		} catch (IOException e){ }
+		return;
 	}
 		
 	public static void descomprimirFitxer(Context c, String idJoc){
@@ -272,7 +285,7 @@ public class Utils {
 	public static void creacioActivitat(Context c, String idJoc) {						
 		try {
 			// Copiem el index.html
-			InputStream forigen =  c.getAssets().open("index_assets.html");							
+			InputStream forigen =  c.getAssets().open("templates/index_assets.html");							
 			File fdesti = new File(c.getFilesDir() + "/" + idJoc +"/index.html");				
 			copiaFitxer_InputStreamFile (forigen, fdesti);
 			

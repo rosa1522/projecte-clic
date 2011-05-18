@@ -3,13 +3,18 @@
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     
     <application android:icon="@drawable/aplicacio" android:label = "@string/nomAplicacio" android:name=".ClicApplication">
-        
-        <activity android:name=".IniciAplicacio"
-                  android:theme="@android:style/Theme.NoTitleBar">
+                
+        <activity android:name=".SplashScreen"
+				  android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+ 
+        <activity android:name=".IniciAplicacio"
+                  android:theme="@android:style/Theme.NoTitleBar">
+
         </activity>  
   
         <activity android:name=".LlistaJocsJClic"

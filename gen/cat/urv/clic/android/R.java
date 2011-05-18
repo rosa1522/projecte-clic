@@ -8,27 +8,45 @@
 package cat.urv.clic.android;
 
 public final class R {
+    public static final class anim {
+        public static final int fadein=0x7f040000;
+    }
     public static final class attr {
     }
     public static final class drawable {
         public static final int afegir=0x7f020000;
         public static final int aplicacio=0x7f020001;
-        public static final int download=0x7f020002;
-        public static final int icon=0x7f020003;
-        public static final int play=0x7f020004;
-        public static final int view=0x7f020005;
+        public static final int cuadre=0x7f020002;
+        public static final int cuadre2=0x7f020003;
+        public static final int deim=0x7f020004;
+        public static final int download=0x7f020005;
+        public static final int icon=0x7f020006;
+        public static final int logo=0x7f020007;
+        public static final int nivell_ba=0x7f020008;
+        public static final int nivell_ei=0x7f020009;
+        public static final int nivell_ep=0x7f02000a;
+        public static final int nivell_es=0x7f02000b;
+        public static final int nivell_no=0x7f02000c;
+        public static final int nivell_tot=0x7f02000d;
+        public static final int play=0x7f02000e;
+        public static final int view=0x7f02000f;
+        public static final int xtec=0x7f020010;
     }
     public static final class id {
         public static final int afegirjoc=0x7f060039;
         public static final int areaJoc=0x7f06001e;
         public static final int autor=0x7f06002a;
         public static final int centre=0x7f06002d;
-        public static final int cercarjocLlista=0x7f06003d;
+        public static final int cercarjocLlista=0x7f060041;
         public static final int cercarjocsCercar=0x7f06000c;
         public static final int dataPublicacio=0x7f060024;
         public static final int editAutor=0x7f06000a;
         public static final int editTitol=0x7f060008;
+        public static final int imageView1=0x7f060042;
+        public static final int imatgeArea=0x7f06003c;
+        public static final int imatgeIdioma=0x7f06003a;
         public static final int imatgeJoc=0x7f06002e;
+        public static final int imatgeNivell=0x7f06003b;
         public static final int instalar =0x7f06002f;
         public static final int linearArea=0x7f06001c;
         public static final int linearAutor=0x7f060028;
@@ -41,9 +59,10 @@ public final class R {
         public static final int linearSpinners=0x7f06000e;
         public static final int linearSpinners2=0x7f060011;
         public static final int list_descarregats=0x7f060038;
-        public static final int list_jocs=0x7f06003c;
+        public static final int list_jocs=0x7f060040;
         public static final int llengua=0x7f060027;
         public static final int nivellJoc=0x7f060021;
+        public static final int nomJoc=0x7f06003d;
         public static final int nomareaJoc=0x7f06001d;
         public static final int nomautor=0x7f060029;
         public static final int nomcentre=0x7f06002c;
@@ -64,7 +83,7 @@ public final class R {
         public static final int tableLayout3=0x7f060000;
         public static final int tableLayout4=0x7f06000b;
         public static final int tableLayout5=0x7f060036;
-        public static final int tableLayout6=0x7f06003a;
+        public static final int tableLayout6=0x7f06003e;
         public static final int tableNivell=0x7f060012;
         public static final int tableRowArea=0x7f060030;
         public static final int tableRowCentre=0x7f060034;
@@ -78,17 +97,19 @@ public final class R {
         public static final int titolDescripcioJoc=0x7f06001a;
         public static final int titolInici=0x7f060037;
         public static final int titolJoc=0x7f06001b;
-        public static final int titolLlistaJocs=0x7f06003b;
+        public static final int titolLlistaJocs=0x7f06003f;
         public static final int titolNivell=0x7f060005;
         public static final int titolTitol=0x7f060007;
-        public static final int webView=0x7f06003e;
+        public static final int webView=0x7f060043;
     }
     public static final class layout {
         public static final int cercarjocs=0x7f030000;
         public static final int descripciojoc=0x7f030001;
         public static final int inici=0x7f030002;
-        public static final int llistajocsjclic=0x7f030003;
-        public static final int webview=0x7f030004;
+        public static final int joc_entry=0x7f030003;
+        public static final int llistajocsjclic=0x7f030004;
+        public static final int splash=0x7f030005;
+        public static final int webview=0x7f030006;
     }
     public static final class string {
         public static final int afegirjoc=0x7f050009;
@@ -103,9 +124,5 @@ public final class R {
         public static final int nivell=0x7f050002;
         public static final int nomAplicacio=0x7f05000b;
         public static final int titol=0x7f050004;
-    }
-    public static final class xml {
-        public static final int jocs=0x7f040000;
-        public static final int llistajocs=0x7f040001;
     }
 }
