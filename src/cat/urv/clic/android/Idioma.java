@@ -44,18 +44,18 @@ public class Idioma {
 		this.nomsIdiomes[4] = "Basc";		
 		this.nomsIdiomes[5] = "Caló";		
 		this.nomsIdiomes[6] = "Català";
-		this.nomsIdiomes[7] =  "Espanyol";		
-		this.nomsIdiomes[8] =  "Esperanto";		
-		this.nomsIdiomes[9] =  "Francès";
-		this.nomsIdiomes[10] =  "Gallec";		
-		this.nomsIdiomes[11] =  "Grec";
-		this.nomsIdiomes[12] =  "Italià";		
+		this.nomsIdiomes[7] = "Espanyol";		
+		this.nomsIdiomes[8] = "Esperanto";		
+		this.nomsIdiomes[9] = "Francès";
+		this.nomsIdiomes[10] = "Gallec";		
+		this.nomsIdiomes[11] = "Grec";
+		this.nomsIdiomes[12] = "Italià";		
 		this.nomsIdiomes[13] = "Llatí";
-		this.nomsIdiomes[14] =  "Occità";		
-		this.nomsIdiomes[15] =  "Portuguès";		
-		this.nomsIdiomes[16] =  "Romanès";		
-		this.nomsIdiomes[17] =  "Suec";
-		this.nomsIdiomes[18] =  "Xinès";
+		this.nomsIdiomes[14] = "Occità";		
+		this.nomsIdiomes[15] = "Portuguès";		
+		this.nomsIdiomes[16] = "Romanès";		
+		this.nomsIdiomes[17] = "Suec";
+		this.nomsIdiomes[18] = "Xinès";
 	}
 
 	public String cercarIdIdioma(String nomIdioma){

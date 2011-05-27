@@ -179,7 +179,7 @@ public class Utils {
 		fos.close();
 	}
 
-	public static boolean testConnexi—(Context c, String ruta, String idJoc) {
+	public static boolean testConnexio(Context c, String ruta, String idJoc) {
 		boolean hiHaConnexio = false;
 		
 		try {

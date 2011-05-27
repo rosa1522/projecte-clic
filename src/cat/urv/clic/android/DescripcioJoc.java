@@ -147,7 +147,7 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 			rutaImatge =  ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getImatge();
 
 			
-			if ( Utils.testConnexi—(getApplicationContext(), clicZip, idJoc) ) {
+			if ( Utils.testConnexio(getApplicationContext(), clicZip, idJoc) ) {
 				progressDialog = ProgressDialog.show(this, "", "Descarregant...", false, false);
 				DownloadThread dt = new DownloadThread(handler);
 				dt.start();		
