@@ -186,12 +186,15 @@ public class Utils {
 			// Url del joc
 			URL url = new URL(ruta);			
 			// Obrim la connexió
-			url.openConnection();
+			URLConnection urlCon = url.openConnection();
+			InputStream is =  urlCon.getInputStream();
+			
 			hiHaConnexio = true;
 
 		} catch (IOException e){
 			hiHaConnexio = false;
 		}
+		System.out.println("CONNEXIO" + hiHaConnexio);
 		return hiHaConnexio;
 	}
 		
