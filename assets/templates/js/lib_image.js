@@ -2,6 +2,13 @@ function randOrd(){
 	return (Math.round(Math.random())-0.5); 
 } 
 
+function arrodonir(quantitat, decimals) {
+	var quantitat = parseFloat(quantitat);
+	var decimals = parseFloat(decimals);
+	decimals = (!decimals ? decimals : decimals);
+	return Math.round(quantitat * Math.pow(10, decimals)) / Math.pow(10, decimals);
+}
+
 function Peca(ctxt,id,img,posx,posy,w,h,insidePointx,insidePointy,insideSizew,insideSizeh,colocaciox,colocacioy,showH,showW)
 {
    this.ctxt = ctxt;
@@ -91,6 +98,132 @@ function Peca(ctxt,id,img,posx,posy,w,h,insidePointx,insidePointy,insideSizew,in
 
 }
 
+function ImageAssociation(ctxt,id,nom,showW,showH)
+{
+   this.ctxt = ctxt;
+   this.id = id;
+   this.nom = nom;
+   this.posx;
+   this.posy;
+   this.depth = 0;
+   this.showH=showH;
+   this.showW=showW;
+   this.colocada=false;
+   this.hidden=false;
+   this.numPeca;
+   this.llocPeca;
+   this.color;
+   
+   this.setPosx = function(x){
+	   this.posx = x;
+   };
+   
+   this.setPosy = function(y){
+	   this.posy = y;
+   };
+   
+   this.setNumPeca = function(numPeca){
+	   this.numPeca = numPeca;
+   };
+   
+   this.llocPeca = function(llocPeca){
+	   this.llocPeca = llocPeca;
+   };
+   
+   this.setColocada = function(colocada){
+	   this.colocada = colocada;
+   };
+   
+   this.setColor = function(color){
+	   this.color = color;
+   };
+   
+   //A l'invers per poder utilitzar el memoryImage
+   this.draw = function(colorFonsNoms) {
+	   var line, dibline, aa;
+	   if (!this.hidden){
+		   this.ctxt.fillStyle = this.color;
+		   this.ctxt.fillRect(this.posx, this.posy, this.showW, this.showH);   
+		   this.ctxt.fillStyle = "black";
+		   if (android){ 
+			   this.ctxt.font = "7pt Arial";
+		   }else{ 
+			   this.ctxt.font = "11pt Arial"; 
+		   }
+		   this.ctxt.font = "11pt Arial";
+		   this.ctxt.textAlign = "center";
+		   this.ctxt.textBaseline = "middle";
+
+		   ////////////////////////////////////////////////////
+		   var metric = this.ctxt.measureText(this.nom).width;
+		   
+		   if(metric > this.showW){ 
+			   	aa = arrodonir(metric/this.showW,0);
+			   	line = aa;
+		   		var measure = (this.nom.length/aa);
+		   		var o = (this.showH/aa)/2;
+		   		var incH = (this.showH/aa);
+		   }else{ 
+			   line = 1; 
+			   aa = 2;
+			   var measure = this.nom.length;
+			   var incH = (this.showH/aa);
+			   var o = incH;
+		   }
+
+		   var inc = measure;
+		   var name = this.nom.substring(0,measure);
+
+		   for (var i=1; i<=line; i++){
+			   image = this.ctxt.fillText(name,this.posx+(this.showW/2), this.posy+o);
+			   name = this.nom.substring(measure,measure+inc);
+			   measure+=measure;
+			   o+=incH;
+		   }
+	   }else{
+		   this.ctxt.fillStyle = this.color;
+		   this.ctxt.fillRect(this.posx,this.posy,this.showW-0.01,this.showH-0.01);
+	   }
+   };
+	
+   this.setHidden = function(hidden){
+	   this.hidden = hidden;
+   };
+   
+	//Checks if the point x,y is inside the image
+	this.isInside = function(x,y){
+		if (x>=this.posx && x<=(this.posx+this.showW) 
+				&& y>=this.posy && y<=(this.posy+this.showH)) return true;
+		return false;
+	};
+
+	//Activates the image as a draggable element
+	this.setDraggable = function(){
+		//Save some data
+		this.previousDepth= this.depth;
+		this.depth=20;
+		this.startX = this.posx;
+		this.startY = this.posy;
+	};
+	
+	//Sets the depth of the image
+	//Depth must be an integer value between 0 (back) and 20 (front)
+	this.setDepth = function(depth){
+		this.depth = depth;
+	};
+	
+	//Deactivates the image as a draggable element
+	this.unsetDraggable = function(){
+		this.depth= this.previousDepth;
+	};
+	
+	//Drags the image according to a relative increment
+	this.drag = function(incX,incY){
+		this.posx =  this.startX-incX;
+		this.posy =  this.startY-incY;
+	};
+}
+
 function ImageMemory(ctxt,id,img,showW,showH)
 {
    this.ctxt = ctxt;
@@ -122,6 +255,10 @@ function ImageMemory(ctxt,id,img,showW,showH)
 	   this.llocPeca = llocPeca;
    };
    
+   this.setColocada = function(colocada){
+	   this.colocada = colocada;
+   };
+   
    this.setHidden = function(hidden){
 	   this.hidden = hidden;
    };
@@ -131,7 +268,6 @@ function ImageMemory(ctxt,id,img,showW,showH)
 	   if (!this.hidden){
 		   this.ctxt.drawImage(this.img,this.posx,this.posy,this.showW,this.showH);
 	   }else{
-		   //this.ctxt.fillStyle = "#FF6666";
 		   this.ctxt.fillStyle = colorhidden;
 		   this.ctxt.fillRect(this.posx,this.posy,this.showW-0.01,this.showH-0.01);
 	   }
@@ -193,13 +329,6 @@ function createPeca(ctxt,myImage,lines,cols,imageSize,basePosition,imageColocati
     return peces;
 }
 
-function arrodonir(quantitat, decimals) {
-	var quantitat = parseFloat(quantitat);
-	var decimals = parseFloat(decimals);
-	decimals = (!decimals ? decimals : decimals);
-	return Math.round(quantitat * Math.pow(10, decimals)) / Math.pow(10, decimals);
-}
-
 function Grid(ctxt,lines,cols,imageSize,basePosition,iniPosition)
 {	
 	this.ctxt = ctxt;
@@ -209,7 +338,7 @@ function Grid(ctxt,lines,cols,imageSize,basePosition,iniPosition)
 	this.imageH = imageSize.height;
     this.incrY2 = imageSize.height/lines;//220/3 = 73.333
     this.incrX2 = imageSize.width/cols;//220/3 = 73.333
-    this.incrY=arrodonir(this.incrY2,4);
+    this.incrY=arrodonir(this.incrY2,4);	
     this.incrX=arrodonir(this.incrX2,4);
     this.theX = basePosition.x;//518
     this.theY = basePosition.y;//185
@@ -218,17 +347,24 @@ function Grid(ctxt,lines,cols,imageSize,basePosition,iniPosition)
     this.ww;
     this.hh;
 	
-	//Renders the board in the screen
+	/** Renders the board in the screen **/
 	this.draw = function(colorlinies) {
-		this.ctxt.beginPath(0,0,80,80);
-		for (var x = this.theX; x < (this.theX+((this.cols+1)*this.incrX)); x += this.incrX) {
+		this.ctxt.beginPath(0,0,0,0);
+
+		var x = this.theX;
+		for (var y = 0; y < (this.cols+1); y++) {
 			this.ctxt.moveTo(x, this.theY);
 			this.ctxt.lineTo(x, this.theY+this.imageH);
+			x+=this.incrX;
 		}
-		for (var y = this.theY; y < (this.theY+((this.lines+1)*this.incrY)); y += this.incrY) {
+		
+		var y = this.theY;
+		for (var x = 0; x < (this.lines+1); x++ ) {
 			this.ctxt.moveTo(this.theX, y);
 			this.ctxt.lineTo(this.theX+this.imageW, y);
-		}  
+			y+=this.incrY;
+		} 
+		
 		this.ctxt.strokeStyle = colorlinies;
 		this.ctxt.stroke();	
 	};
@@ -240,8 +376,12 @@ function Grid(ctxt,lines,cols,imageSize,basePosition,iniPosition)
 	
 	this.drawFons = function(colorfonsalt,colorfonsbaix,canvasWidth,canvasHeight,gradiente){
 		var my_gradient = this.ctxt.createLinearGradient(0, 0, 0, gradiente);
-		my_gradient.addColorStop(1, colorfonsalt);
-		my_gradient.addColorStop(0, colorfonsbaix);
+		if (gradiente == "0"){
+			my_gradient=colorfonsalt;
+		}else{
+			my_gradient.addColorStop(1, colorfonsalt);
+			my_gradient.addColorStop(0, colorfonsbaix);
+		}
 		this.ctxt.fillStyle = my_gradient;
 		this.ctxt.fillRect(0, 0, canvasWidth, canvasHeight);
 	};

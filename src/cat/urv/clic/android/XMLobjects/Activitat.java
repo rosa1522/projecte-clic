@@ -17,6 +17,11 @@ public class Activitat implements RecursiuXML {
 	}
 
 	public void afegirAtribut(String clau, Object valor){
+		// Canviem els class per classe perquè la part de l'HTML5 no tingui
+		// problemes al llegir-ho
+		if (clau == "class"){
+			clau = "classe";
+		}
 		this.atributsActivitat.put(clau, valor);
 	}
 	
