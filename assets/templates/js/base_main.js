@@ -18,13 +18,21 @@ function iniciaActivitat(canvas,num) {
 	else if (dadesActivitat.activitats[num].atributsActivitat.classe == "@panels.InformationScreen") 
 			{   if (dadesActivitat.activitats[num].celllist[0].cell.length != 0){
 					var media = dadesActivitat.activitats[num].celllist[0].cell[0].atributs['media-type'];
-					if(media=="RUN_CLIC_ACTIVITY" || media=="RUN_CLIC_PACKAGE") return "NO";
+					if(media == "RUN_CLIC_ACTIVITY" || media == "RUN_CLIC_PACKAGE") return "NO";
 					else act = new PanelInformation();	
 				}else{
 					act = new PanelInformation();
 				}
 			}
-	else if (dadesActivitat.activitats[num].atributsActivitat.classe == "@associations.SimpleAssociation") { act = new SimpleAssociation(); }
+	else if (dadesActivitat.activitats[num].atributsActivitat.classe == "@associations.SimpleAssociation") {
+		if (dadesActivitat.activitats[num].celllist[0].cell.length != 0){
+			var media = dadesActivitat.activitats[num].celllist[0].cell[0].atributs['media-type'];
+			if(media == "PLAY_AUDIO") return "NO";
+			else act = new SimpleAssociation(); 
+		}else{
+			act = new SimpleAssociation(); 
+		}	
+	}
 	else {
 		return "NO";
 	}
@@ -55,40 +63,42 @@ while (activitatActual == "NO"){
 }
 
 var mainLoop = function () {	
-	var ultima;
+	var ultima, aux;
 	
 	/** Mirem si hi ha algun event a la interficie d'usuari **/
 	uiClic = UI.checkClics();
 	if (uiClic == "next")
 	{	
 		/** Mirem si podem avançar a la seguent activitat **/
-		if (numActivitat < maxActivitats-1) 
-		{
+		if (numActivitat < maxActivitats-1) { //0<-->8  MaxActivitats=10
 			/** Tanquem l'activitat anterior **/
 			activitatActual.end();
 			
 			/** I comencem la nova **/
-			numActivitat++;
+			numActivitat++; //9
 			activitatActual=iniciaActivitat(canvas, numActivitat);
-			var aux = numActivitat;
 			
-			while (activitatActual == "NO" && numActivitat < maxActivitats-1){	
+			while (activitatActual == "NO" && numActivitat < maxActivitats-1){	//no entra
 				numActivitat++;
 				activitatActual=iniciaActivitat(canvas, numActivitat);
 			}
-			
-			if (activitatActual == "NO") numActivitat = aux;
-			else if(numActivitat == maxActivitats){ 
-				activitatActual=iniciaActivitat(canvas, ultima);
-				activitatActual.run(canvasControl);
-				numActivitat = ultima;
-			}
+			if (activitatActual != "NO") aux = numActivitat; 
+		}	
+		if (activitatActual == "NO"){ //la guardo
+			numActivitat = aux; //a auxiliar
+			//activitatActual=iniciaActivitat(canvas, numActivitat); //inicio la activitat
+		}
+		if(numActivitat == maxActivitats-1){ //9 --9
+			activitatActual=iniciaActivitat(canvas, numActivitat);
+			activitatActual.run(canvasControl);
+			numActivitat = aux;
 		}
 	} 
 	else if (uiClic == "previous") {
 		/** Mirem si podem anar a l'activitat anterior **/
 		if (numActivitat > 0) 
 		{
+			if (activitatActual == "NO") numActivitat = aux;
 			/** Tanquem l'activitat anterior **/
 			activitatActual.end();
 			
@@ -121,9 +131,12 @@ var mainLoop = function () {
 	}
 	
 	/** Despres actualitzem l'activitat que tenim en progres **/
-	if (activitatActual != "NO"){  ultima = numActivitat; activitatActual.run(canvasControl);}
-	else{numActivitat++;}
-	
+	if (activitatActual != "NO"){  
+		ultima = numActivitat; 
+		activitatActual.run(canvasControl);
+	//}else{
+		//numActivitat++;
+	}
 };
 
 // START MAINLOOP

@@ -27,7 +27,11 @@ function PanelInformation()
 	var segons = 0;
 	var aciertos = 0;
 	var colocades = 0;
-	var lines, cols, w, h, x, y, imgw, imgh, grid, showW, showH, gridAx, gridAy, reprodSo, arxiuSo, gridFons, imatgefons;
+	var w = 0;
+	var h = 0;
+	var gridAx = 0;
+	var gridAy = 0;
+	var lines, cols, x, y, imgw, imgh, grid, showW, showH, reprodSo, arxiuSo, gridFons, imatgefons;
 	var colorlinies, colorfonsjoc, colorfonsalt, colorfonsbaix, gradiente, background, colorbaix, coloralt, grad, marg, image;
 	
 	/**
@@ -147,14 +151,14 @@ function PanelInformation()
 		
 		grid = new Grid(context, lines, cols, {width:w,height:h}, {x:gridAx,y:gridAy}, {x:gridAx,y:gridAy});
 
-		if (imatgefons!=""){
+		if (imatgefons){
 			for (var i=0;i<8;i++){
 				for (var j=0;j<8;j++){
 					context.drawImage(img,j*imgw,i*imgh,imgw,imgh);
 				}
 			}
 		}else{
-			if (colorfonsalt!=""){
+			if (colorfonsalt){
 				gridFons.drawFonsGrid(colorfonsalt, colorfonsbaix, canvasWidth, canvasHeight, canvasHeight, 0, 0);
 			}
 			if (!gradiente){
@@ -165,12 +169,12 @@ function PanelInformation()
 		}
 
 		if (grad){
-			if (colorfonsjoc!="") grid.drawFonsJoc(colorfonsjoc, "0", margin);
-			if (colorlinies!="") grid.drawFonsJoc(colorlinies, "0", marg);
-			if (coloralt!="") grid.drawFonsGrid(coloralt, colorbaix, w, h, h, gridAx, gridAy);
+			if (colorfonsjoc) grid.drawFonsJoc(colorfonsjoc, "0", margin);
+			if (colorlinies) grid.drawFonsJoc(colorlinies, "0", marg);
+			if (coloralt) grid.drawFonsGrid(coloralt, colorbaix, w, h, grad, gridAx, gridAy);
 		}else{
-			if (colorfonsjoc!="") grid.drawFonsJoc(colorfonsjoc, "0", margin);
-			if (colorlinies!="") grid.drawFonsJoc(colorlinies, "0", 2);
+			if (colorfonsjoc) grid.drawFonsJoc(colorfonsjoc, "0", margin);
+			if (colorlinies) grid.drawFonsJoc(colorlinies, "0", 2);
 		}
 		
 		image = document.getElementById('image');
@@ -199,3 +203,4 @@ function PanelInformation()
 		return;
 	};
 }
+

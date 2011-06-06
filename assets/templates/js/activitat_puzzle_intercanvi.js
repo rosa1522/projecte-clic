@@ -359,3 +359,4 @@ function PuzzleIntercanvi(){
 		return;
 	};
 }
+

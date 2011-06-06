@@ -28,7 +28,7 @@ function SimpleAssociation()
 	var aciertos = 0;
 	var colocades=0;
 	var numPeca=1;
-	var lines, cols, w, h, grid, peces, dist, arxiuSoFi, reprodSoFi, reprodSo;
+	var lines, cols, w, h, w2, h2, grid, peces, dist, arxiuSoFi, reprodSoFi, reprodSo;
 	var colorlinies, colorhidden, colorfons, colorFonsNoms, background;
 	var theX, theY, incrShowX, incrShowY, capes, numPrimer, numSegon;
 	
@@ -37,14 +37,19 @@ function SimpleAssociation()
 	 */
 	this.init = function(canvas, activityData)
 	{
-		/** Inicialitzar el canvas **/
+		/** S'inicialitza el canvas **/
 		canvasWidth  = canvas.width;
 		canvasHeight = canvas.height;
 		context = canvas.getContext("2d");
-		w=100; h=100;
 		
-		/** Agafem les dades del fitxer data.js **/
+		/** S'agafen les dades necessaries del fitxer data.js **/
 		
+		w=arrodonir(activityData.celllist[0].atributs.cellWidth,2);
+		h=arrodonir(activityData.celllist[0].atributs.cellHeight,2);
+		
+		w2=arrodonir(activityData.celllist[1].atributs.cellWidth,2); if(w2 > w) w = w2;
+		h2=arrodonir(activityData.celllist[1].atributs.cellHeight,2); if(h2 > h) h = h2;
+
 		dist = activityData.atributsActivitat['layout-position'];
 		
 		colorhidden = activityData.celllist[0].cell[0].atributs['style-color-inactive'];
@@ -85,60 +90,26 @@ function SimpleAssociation()
 		colorFonsNomsSota = "AAFFAA";
 		
 		/**
-		 * A partir del layout-position calculem:
-		 *	 w: amplada general
-		 *	 h: alçada general
-		 *	 incrShowX: amplada peça
-		 *	 incrShowY: alçada peça
+		 * El tauler de joc depenent de la distribucio que tingui
+		 * s'adapta a unes mides que es puguin mostrar les dades
+		 * adaptades a la pantalla correctament.
 		 */
+		
 		if ((dist == "AB")||(dist == "BA")){
 			lines=activityData.celllist[0].atributs.rows;
 			cols=activityData.celllist[0].atributs.cols*2;
-				
-			incrShowY=(canvasHeight-24)/lines;
-			aux=h-incrShowY;
-			h=(canvasHeight-24);
-			incrShowX=w-aux;
-			w=incrShowX*cols;
-			if(((w*cols)+24) > canvasWidth){
-				w = 100;
-				h = 100;
-				incrShowX = (canvasWidth-24)/cols;
-				aux = w - incrShowX;
-				w = incrShowX*cols;
-				incrShowY = h - aux;
-				h = incrShowY * lines;
-			}
-			/*if(((h*lines)+24) > canvasHeight){
-				w = 100;
-				h = 100;
-				incrShowY = (canvasHeight-24)/lines;
-				aux = h - incrShowY;
-				h = incrShowY*lines;
-				incrShowX = w - aux;
-				w = incrShowX * cols;
-			}*/
 		}
+		
 		if ((dist == "AUB")||(dist == "BUA")){
 			lines=activityData.celllist[0].atributs.rows*2;
 			cols=activityData.celllist[0].atributs.cols;
- 
-			incrShowX=(canvasWidth-24)/cols; 
-			aux=w-incrShowX;
-			w=(canvasWidth-24);
-			incrShowY=h-aux;
-			h=incrShowY*lines;
-			//musculs SI , pirates NO
-			/*if(((h*lines)+24) > canvasHeight){
-				w = 100;
-				h = 100;
-				incrShowY = (canvasHeight-24)/lines;
-				aux = h - incrShowY;
-				h = incrShowY*lines;
-				incrShowX = w - aux;
-				w = incrShowX * cols;
-			}*/
 		}
+		
+		xy=adaptarGrid(canvasWidth,canvasHeight,w,h,lines,cols);
+		incrShowX = xy[0];
+		incrShowY = xy[1];
+		h=incrShowY*lines;
+		w=incrShowX*cols;
 		
 		gridAx=(canvasWidth-w)/2;
 		gridAy=(canvasHeight-h)/2;
@@ -424,3 +395,4 @@ function SimpleAssociation()
 		return;
 	};
 }
+

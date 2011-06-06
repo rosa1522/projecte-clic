@@ -20,15 +20,17 @@ function Memoria(){
 	var x = new Array();
 	var y = new Array();
 	var ordArray = new Array();
+	var xy = new Array();
 	var numPrimer, numSegon;
 	var primerClic = false;
 	var segonClic = false;
 	var tercerClic = false;
+	var passat = false;
 	var idPrimer = 'none';
 	var idSegon = 'none';
 	var numPeca=1;
 	var colorlinies, colorhidden, colorfons, background;
-	var theX, theY, incrShowX, incrShowY;
+	var theX, theY, incrShowX, incrShowY, aux;
 	var control = "0x";
 	var intentos = 0;
 	var segons = 0;
@@ -36,20 +38,18 @@ function Memoria(){
 	var arxiuSoFi, reprodSoFi, reprodSo;
 	
 	//Funcio per a inicialitzar l'activitat a partir de les seves dades
-	this.init = function(canvas, activityData){
-		//Inicialitzar el canvas
+	this.init = function(canvas, activityData)
+	{
+		/** S'inicialitza el canvas **/
+		
 		canvasWidth  = canvas.width;
 		canvasHeight = canvas.height;
 		context = canvas.getContext("2d");
 		
-		/**
-		 * Agafem les dades del fitxer data.js
-		 */
-
-		//w=activityData.celllist[0].atributs.cellWidth;
-		//h=activityData.celllist[0].atributs.cellHeight;
-		w=100;
-		h=70;
+		/** S'agafen les dades necessaries del fitxer data.js **/
+		
+		w=arrodonir(activityData.celllist[0].atributs.cellWidth,0);
+		h=arrodonir(activityData.celllist[0].atributs.cellHeight,0);
 		
 		dist = activityData.atributsActivitat['layout-position'];
 		
@@ -85,33 +85,26 @@ function Memoria(){
 		arxiuSoFi = activityData.cell[1].atributs['media-file'];
 		
 		/**
-		 * A partir del layout-position calculem:
-		 *	 w: amplada general
-		 *	 h: alçada general
-		 *	 incrShowX: amplada peça
-		 *	 incrShowY: alçada peça
+		 * El tauler de joc depenent de la distribucio que tingui
+		 * s'adapta a unes mides que es puguin mostrar les dades
+		 * adaptades a la pantalla correctament.
 		 */
 		
 		if ((dist == "AB")||(dist == "BA")){
-			lines=activityData.celllist[0].atributs.rows*4;
-			cols=activityData.celllist[0].atributs.cols/2;
-				
-			incrShowY=(canvasHeight-24)/lines;
-			aux=h-incrShowY;
-			h=(canvasHeight-24);
-			incrShowX=w-aux;
-			w=incrShowX*cols;
+			lines=activityData.celllist[0].atributs.rows;
+			cols=activityData.celllist[0].atributs.cols*2;
 		}
+		
 		if ((dist == "AUB")||(dist == "BUA")){
 			lines=activityData.celllist[0].atributs.rows*2;
 			cols=activityData.celllist[0].atributs.cols;
- 
-			incrShowX=(canvasWidth-24)/cols; 
-			aux=w-incrShowX;
-			w=(canvasWidth-24);
-			incrShowY=h-aux;
-			h=incrShowY*lines;
 		}
+		
+		xy=adaptarGrid(canvasWidth,canvasHeight,w,h,lines,cols);
+		incrShowX = xy[0];
+		incrShowY = xy[1];
+		h=incrShowY*lines;
+		w=incrShowX*cols;
 		
 		gridAx=(canvasWidth-w)/2;
 		gridAy=(canvasHeight-h)/2;
@@ -309,3 +302,4 @@ function Memoria(){
 		return;
 	};
 }
+

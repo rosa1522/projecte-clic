@@ -24,3 +24,4 @@ if ( navigator.userAgent.match(/(iPad|Android)/i) != null)  {
 	document.addEventListener('touchmove', fprevent, false);
 	document.addEventListener('touchend', fprevent, false);		
 }
+
