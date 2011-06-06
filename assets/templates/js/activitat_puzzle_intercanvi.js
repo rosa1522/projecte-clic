@@ -6,7 +6,7 @@ function PuzzleIntercanvi(){
 	var context;
 	var canvasWidth;
 	var canvasHeight;
-	var myText = new Text();
+	//var myText = new Text();
 	
 	//Variables especifiques d'aquesta activitat
 	this.frontImage='none';
@@ -29,12 +29,13 @@ function PuzzleIntercanvi(){
 	this.idSegon = 'none';
 	var my_gradient;
 	this.colorlinies;
-	var colorfons, colorinactiu, colorfonsjoc, colorfonsalt, colorfonsbaix, gradiente;
+	var colorfons, colorinactiu, colorfonsjoc, colorfonsalt, colorfonsbaix, gradiente, background;
 	var control = "0x";
 	var intentos = 0;
 	var segons = 0;
 	var aciertos = 0;
 	var arxiuSoFi, reprodSoFi, reprodSo;
+	var grid;
 	
 	//Funcio per a inicialitzar l'activitat a partir de les seves dades
 	this.init = function(canvas, activityData){
@@ -42,25 +43,31 @@ function PuzzleIntercanvi(){
 		canvasWidth  = canvas.width;
 		canvasHeight = canvas.height;
 		context = canvas.getContext("2d");
+		context2 = canvas.getContext("2d");
 		
 		//Inicialitzar la font
-		myText.context = context;
-		myText.face = vector_battle;
+		//myText.context = context;
+		//myText.face = vector_battle;
 		
 		//Inicialitzar les imatges
 		var myImage = new Image();
 		
 		colorfonsbaix = activityData.atributsActivitat['settings-container-gradient-dest'];
-		colorfonsbaix = "#"+colorfonsbaix.replace(control,"");
+		if (colorfonsbaix) colorfonsbaix = "#"+colorfonsbaix.replace(control,"");
 		
 		colorfonsalt = activityData.atributsActivitat['settings-container-gradient-source'];
-		colorfonsalt = "#"+colorfonsalt.replace(control,"");
+		if (colorfonsalt) colorfonsalt = "#"+colorfonsalt.replace(control,"");
 		
 		gradiente = activityData.atributsActivitat['settings-container-gradient-angle'];
 		
 		margin = activityData.atributsActivitat['settings-margin'];
 		
+		background = activityData.atributsActivitat['settings-container-bgColor'];
+		if (!background) background="#FFFFFF"; 
+		background = "#"+background.replace(control,"");
+		
 		colorfonsjoc = activityData.atributsActivitat['settings-window-bgColor'];
+		if (!colorfonsjoc) colorfonsjoc="#FFFFFF"; 
 		colorfonsjoc = "#"+colorfonsjoc.replace(control,"");
 		
 		this.colorlinies = activityData.celllist[0].atributs['style-color-border'];
@@ -70,8 +77,8 @@ function PuzzleIntercanvi(){
 		reprodSo = activityData.cell[0].atributs['media-type'];
 		reprodSoFi = activityData.cell[1].atributs['media-type'];
 		
-		arxiuSo = "./images/" + activityData.cell[0].atributs['media-file'];
-		arxiuSoFi = "./images/" + activityData.cell[1].atributs['media-file'];
+		arxiuSo = activityData.cell[0].atributs['media-file'];
+		arxiuSoFi = activityData.cell[1].atributs['media-file'];
 		
 		myImage.onload = function() {
 			
@@ -101,10 +108,10 @@ function PuzzleIntercanvi(){
 			
 			lines=activityData.celllist[0].atributs.rows;
 			cols=activityData.celllist[0].atributs.cols;
-				
+
 			peces = createPeca(context, myImage, lines, cols, {width:w,height:h}, {x:gridAx,y:gridAy}, {x:gridAx,y:gridAy}, {w:showW,h:showH});
 			
-			grid = new Grid(context, lines, cols, {width:showW,height:showH}, {x:gridAx,y:gridAy}, {x:gridAx,y:gridAy});
+			
 			
 			/*****************DESORDENAR PECES*************************/ 
 			for (var o=0;o<lines*cols;o++){
@@ -130,8 +137,8 @@ function PuzzleIntercanvi(){
 			} 
 		};
 		
-		myImage.src = "./images/" + activityData.celllist[0].atributs.image;
-/*
+		myImage.src = activityData.celllist[0].atributs.image;
+		/*
 		if (reprodSo == "PLAY_AUDIO")
 		{			
 			soundManager.url = "./sound/swf/";
@@ -143,6 +150,7 @@ function PuzzleIntercanvi(){
 				soundManager.play(arxiuSo);
 			});
 		}*/
+		
 	};
 	
 	//Aqui dins va el codi de l'activitat
@@ -150,7 +158,8 @@ function PuzzleIntercanvi(){
 		contextControl = canvasControl.getContext("2d");
 		context.clearRect(0, 0, canvasWidth, canvasHeight);
 		segons++;
-
+		grid = new Grid(context, lines, cols, {width:showW,height:showH}, {x:gridAx,y:gridAy}, {x:gridAx,y:gridAy});
+		
 		if(DragData.active)
 		{  
 			if(this.frontImage=='none'){	
@@ -160,7 +169,7 @@ function PuzzleIntercanvi(){
 			
 			//MIRAR SI S'HA CLICAT FORA DEL PANELL
 			if (DragData.currentPosX >= gridAx && DragData.currentPosX < gridAx+w && DragData.currentPosY >= gridAy && DragData.currentPosY < gridAy+h){
-				primerClic = true;
+				primerClic = true;				
 				if (segonClic==true){
 					this.idSegon = this.frontImage.id;
 					tercerClic=true;
@@ -216,23 +225,39 @@ function PuzzleIntercanvi(){
 		//COMPROVAR ESTAT ACTIVITAT
 		if(colocades==lines*cols){
 			this.acabat=true;
-			if (reprodSoFi == "PLAY_AUDIO") soundManager.play(arxiuSoFi);
+			//if (reprodSoFi == "PLAY_AUDIO") soundManager.play(arxiuSoFi);
 		}
 		
 		//DRAW THE IMAGE
-		grid.drawFons(colorfonsalt, colorfonsbaix, canvasWidth, canvasHeight, gradiente);
+		if (!gradiente){
+			grid.drawFons(background, 0, canvasWidth, canvasHeight, 0);
+		}else{
+			grid.drawFons(colorfonsalt, colorfonsbaix, canvasWidth, canvasHeight, gradiente);
+		}
 		grid.drawFonsJoc(colorfonsjoc, "0", margin);
 		myImages.draw();
 		grid.draw(this.colorlinies);
 		
 		contextControl.fillStyle = "black";
 		contextControl.font = "14pt Arial";
-		contextControl.fillText(aciertos, 890, 60);
-		contextControl.fillText(intentos, 940, 60);
-		
 		tiempo = segons/20;
 		tiempo = arrodonir(tiempo,0);
-		contextControl.fillText(tiempo, 990, 60);
+		
+		if (android){
+			contextControl.fillText(aciertos, 22, 250);
+			contextControl.fillText(intentos, 22, 300);
+			contextControl.fillText(tiempo, 24, 350);
+		}else{
+			contextControl.fillText(aciertos, 890, 60);
+			contextControl.fillText(intentos, 940, 60);
+			contextControl.fillText(tiempo, 990, 60);
+		}
+		
+		if(segonClic){
+			context.lineWidth = "5.0";
+			context.strokeRect(myImages.images[this.idPrimer].posx,myImages.images[this.idPrimer].posy,(showW/cols),(showH/lines));
+			context.lineWidth = "1.0";
+		}
 	};
 	
 	//Aquest funcio s'ha de cridar un cop s'ha acabat l'activitat i es canvia a una altra

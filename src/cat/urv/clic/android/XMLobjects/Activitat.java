@@ -17,6 +17,7 @@ public class Activitat implements RecursiuXML {
 	}
 
 	public void afegirAtribut(String clau, Object valor){
+		if (clau=="class") { clau="classe"; }
 		this.atributsActivitat.put(clau, valor);
 	}
 	

@@ -6,7 +6,7 @@ function Memoria(){
 	var context;
 	var canvasWidth;
 	var canvasHeight;
-	var myText = new Text();
+	//var myText = new Text();
 	
 	//Variables especifiques d'aquesta activitat
 	var frontImage='none';
@@ -28,7 +28,7 @@ function Memoria(){
 	var idPrimer = 'none';
 	var idSegon = 'none';
 	var numPeca=1;
-	var colorlinies, colorhidden, colorfons;
+	var colorlinies, colorhidden, colorfons, background;
 	var theX, theY, incrShowX, incrShowY;
 	var control = "0x";
 	var intentos = 0;
@@ -44,32 +44,39 @@ function Memoria(){
 		context = canvas.getContext("2d");
 		
 		//Inicialitzar la font
-		myText.context = context;
-		myText.face = vector_battle;
+		//myText.context = context;
+		//myText.face = vector_battle;
 		
 		/**
 		 * Agafem les dades del fitxer data.js
 		 */
 
-		w=activityData.celllist[0].atributs.cellWidth;
-		h=activityData.celllist[0].atributs.cellHeight;
+		//w=activityData.celllist[0].atributs.cellWidth;
+		//h=activityData.celllist[0].atributs.cellHeight;
+		w=100;
+		h=70;
 		
 		dist = activityData.atributsActivitat['layout-position'];
 		
 		colorhidden = activityData.celllist[0].atributs['style-color-inactive'];
-		colorhidden = "#"+colorhidden.replace(control,"");
+		if (colorhidden) colorhidden = "#"+colorhidden.replace(control,"");
 		
 		colorfonsbaix = activityData.atributsActivitat['settings-container-gradient-dest'];
-		colorfonsbaix = "#"+colorfonsbaix.replace(control,"");
+		if (colorfonsbaix) colorfonsbaix = "#"+colorfonsbaix.replace(control,"");
 		
 		colorfonsalt = activityData.atributsActivitat['settings-container-gradient-source'];
-		colorfonsalt = "#"+colorfonsalt.replace(control,"");
+		if (colorfonsalt) colorfonsalt = "#"+colorfonsalt.replace(control,"");
 		
 		gradiente = activityData.atributsActivitat['settings-container-gradient-angle'];
 		
 		margin = activityData.atributsActivitat['settings-margin'];
 		
+		background = activityData.atributsActivitat['settings-container-bgColor'];
+		if (!background) background="#FFFFFF"; 
+		background = "#"+background.replace(control,"");
+		
 		colorfonsjoc = activityData.atributsActivitat['settings-window-bgColor'];
+		if (!colorfonsjoc) colorfonsjoc ="#FFFFFF";
 		colorfonsjoc = "#"+colorfonsjoc.replace(control,"");
 		
 		colorlinies = activityData.celllist[0].atributs['style-color-border'];
@@ -120,8 +127,9 @@ function Memoria(){
 		
 		var id_img=0;
 		var peces = new Array();
+		var ll = activityData.celllist[0].cell.length;
 		
-		for(var i=0; i<6; i++){
+		for(var i=0; i<ll; i++){
 			
 			var myImage = new Image();
 			
@@ -178,12 +186,10 @@ function Memoria(){
 		 * Pintem el tauler de peces.
 		 */
 		
-		grid = new Grid(context, lines, cols, {width:w,height:h}, {x:gridAx,y:gridAy}, {x:gridAx,y:gridAy});
-		
 		for (var o=0;o<peces.length;o++){	
 			myImages.add(peces[o]);
 		}
-		
+		/*
 		if (reprodSo == "PLAY_AUDIO")
 		{	
 			soundManager.url = "./sound/swf/";
@@ -194,15 +200,16 @@ function Memoria(){
 				soundManager.createSound(arxiuSoFi,arxiuSoFi);
 				soundManager.play(arxiuSo);
 			});
-		}
+		}*/
 	};
 	
 	//Aqui dins va el codi de l'activitat
 	this.run = function() {
 		context.clearRect(0, 0, canvasWidth, canvasHeight);
 		segons++;
-
 		context.strokeRect(gridAx,gridAy,w,h);
+
+		grid = new Grid(context, lines, cols, {width:w,height:h}, {x:gridAx,y:gridAy}, {x:gridAx,y:gridAy});
 		
 		//LLEGIR DADES USUARI
 		if(DragData.active)
@@ -212,9 +219,10 @@ function Memoria(){
 				if(frontImage!='notfound') frontImage.setDraggable();
 			}
 
-			if (DragData.currentPosX >= gridAx && DragData.currentPosX < gridAx+w && DragData.currentPosY >= gridAy && DragData.currentPosY < gridAy+h){
+			if (DragData.currentPosX >= gridAx && DragData.currentPosX < gridAx+w && 
+					DragData.currentPosY >= gridAy && DragData.currentPosY < gridAy+h){
 				primerClic = true;
-				if (segonClic==true){
+				if (segonClic==true && myImages.images[frontImage.id].colocada==false){
 					idSegon = frontImage.id;
 					myImages.images[idSegon].setHidden(false);
 					
@@ -228,14 +236,17 @@ function Memoria(){
 		//Disable the current active image
 		}else{
 
-			if (DragData.currentPosX >= gridAx && DragData.currentPosX < gridAx+w && DragData.currentPosY >= gridAy && DragData.currentPosY < gridAy+h){
-				if(tercerClic==true)
-				{
-					if(numPrimer != numSegon){
+			if (DragData.currentPosX >= gridAx && DragData.currentPosX < gridAx+w && 
+					DragData.currentPosY >= gridAy && DragData.currentPosY < gridAy+h){
+				if(tercerClic==true){
+					if(numPrimer != numSegon || idPrimer == idSegon){
 						myImages.images[idPrimer].setHidden(true);
 						myImages.images[idSegon].setHidden(true);
 					}else{
+						myImages.images[idPrimer].setColocada(true);
+						myImages.images[idSegon].setColocada(true);
 						colocades++;
+						aciertos++;
 					}
 					
 					segonClic = false;
@@ -243,9 +254,10 @@ function Memoria(){
 					tercerClic = false;
 					idPrimer='none';
 					idSegon='none';
+					intentos++;
 				}
 				
-				if(primerClic==true){
+				if(primerClic==true && myImages.images[frontImage.id].colocada==false){
 					idPrimer = frontImage.id;
 					myImages.images[idPrimer].setHidden(false);
 					segonClic = true;
@@ -264,23 +276,34 @@ function Memoria(){
 			this.acabat=true;
 			if (reprodSoFi == "PLAY_AUDIO"){
 				soundManager.play(arxiuSoFi);
+				reprodSoFi = "false";
 			}
 		}
 		
 		//DRAW THE IMAGE
-		grid.drawFons(colorfonsalt, colorfonsbaix, canvasWidth, canvasHeight, gradiente);
+		if (!gradiente){
+			grid.drawFons(background, 0, canvasWidth, canvasHeight, 0);
+		}else{
+			grid.drawFons(colorfonsalt, colorfonsbaix, canvasWidth, canvasHeight, gradiente);
+		}
 		grid.drawFonsJoc(colorfonsjoc, "0", margin);
 		myImages.draw(colorhidden);
 		grid.draw(colorlinies);
 		
 		contextControl.fillStyle = "black";
 		contextControl.font = "14pt Arial";
-		contextControl.fillText(aciertos, 890, 60);
-		contextControl.fillText(intentos, 940, 60);
-		
 		tiempo = segons/20;
 		tiempo = arrodonir(tiempo,0);
-		contextControl.fillText(tiempo, 990, 60);
+		
+		if (android){
+			contextControl.fillText(aciertos, 35, 250);
+			contextControl.fillText(intentos, 35, 300);
+			contextControl.fillText(tiempo, 30, 350);
+		}else{
+			contextControl.fillText(aciertos, 890, 60);
+			contextControl.fillText(intentos, 940, 60);
+			contextControl.fillText(tiempo, 990, 60);
+		}
 		
 	};
 	
