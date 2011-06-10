@@ -47,9 +47,11 @@ public class Utils {
 		HashJocs llistaJocs = new HashJocs();
 
 		try {			
+			// Obtenim el fitxer jocs.xml de dintre l'aplicació
 			InputStream is = c.getAssets().open(nomFitxer);									
 			isr = new InputStreamReader(is);
 
+			// Llegim el fitxer xml
 			SAXBuilder builder = new SAXBuilder(false);
 			doc = builder.build(isr);
 
@@ -388,8 +390,9 @@ public class Utils {
 			doc = builder.build(inputStrReader);
 
 			// Fitxer de sortida: data.js
-		 	PrintStream fitxerData = new PrintStream(new FileOutputStream(c.getFilesDir()+ "/" + idJoc + "/data.js",false));
+		 	PrintStream fitxerData = new PrintStream((new FileOutputStream(c.getFilesDir()+ "/" + idJoc + "/data.js",false)),false, "UTF-8");
 			
+		 	
 		 	// Llegim el fitxer .jclic
 			Element raiz = doc.getRootElement();	// S'agafa l'element arrel
 
