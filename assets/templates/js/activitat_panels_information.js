@@ -186,14 +186,14 @@ function PanelInformation()
 		tiempo = arrodonir(tiempo,0);
 		
 		if (android){
-			contextControl.fillText(aciertos, 40, 250);
-			contextControl.fillText(intentos, 40, 300);
-			contextControl.fillText(tiempo, 40, 350);
+			contextControl.fillText(aciertos, 40, 240);
+			contextControl.fillText(intentos, 40, 290);
+			contextControl.fillText(tiempo, 40, 340);
 			context.drawImage(image,gridAx,gridAy,w,h);
 		}else{
-			contextControl.fillText(aciertos, 890, 60);
-			contextControl.fillText(intentos, 940, 60);
-			contextControl.fillText(tiempo, 990, 60);
+			contextControl.fillText(aciertos, 890, 50);
+			contextControl.fillText(intentos, 940, 50);
+			contextControl.fillText(tiempo, 990, 50);
 			context.drawImage(image,gridAx,gridAy,w,h);
 		}
 	};

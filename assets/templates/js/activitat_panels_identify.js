@@ -1,6 +1,5 @@
 /**
  * ACTIVITAT PUZZLE
- * @author Noelia Tuset
  */
 function PanelIdentify(){
 	//Variables del canvas
@@ -280,14 +279,15 @@ function PanelIdentify(){
 		tiempo = segons/20;
 		tiempo = arrodonir(tiempo,0);
 		
+		
 		if (android){
-			contextControl.fillText(aciertos, 40, 250);
-			contextControl.fillText(intentos, 40, 300);
-			contextControl.fillText(tiempo, 40, 350);
+			contextControl.fillText(aciertos, 40, 240);
+			contextControl.fillText(intentos, 40, 290);
+			contextControl.fillText(tiempo, 40, 340);
 		}else{
-			contextControl.fillText(aciertos, 890, 60);
-			contextControl.fillText(intentos, 940, 60);
-			contextControl.fillText(tiempo, 990, 60);
+			contextControl.fillText(aciertos, 890, 50);
+			contextControl.fillText(intentos, 940, 50);
+			contextControl.fillText(tiempo, 990, 50);
 		}
 		
 	};

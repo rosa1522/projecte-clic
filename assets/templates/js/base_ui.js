@@ -14,15 +14,17 @@ function UserInterface()
 	//Imatges
 	if (android) {
 		var ctrlImages = [
-			              { "src" : 'file:///android_asset/templates/images/orange_left.png', "posx" : 10, "posy" : 10, "w" : 60, "h" : 60},
-			              { "src" : 'file:///android_asset/templates/images/orange_right.png', "posx" : 10, "posy" : 70, "w" : 60, "h" : 60},
-			              { "src" : 'file:///android_asset/templates/images/orange_update.png', "posx" : 10, "posy" : 130, "w" : 60, "h" : 60},
+			              { "src" : 'file:///android_asset/templates/images/orange_left.png', "posx" : 10, "posy" : 5, "w" : 60, "h" : 60},
+			              { "src" : 'file:///android_asset/templates/images/orange_right.png', "posx" : 10, "posy" : 65, "w" : 60, "h" : 60},
+			              { "src" : 'file:///android_asset/templates/images/orange_update.png', "posx" : 10, "posy" : 125, "w" : 60, "h" : 60},
+			              { "src" : 'file:///android_asset/templates/images/inf.png', "posx" : 50, "posy" : 345, "w" : 30, "h" : 30},
 			         ];		
 	} else {
 		var ctrlImages = [
-			              { "src" : 'file:///android_asset/templates/images/orange_left.png', "posx" : 10, "posy" : 10, "w" : 80, "h" : 80},
-			              { "src" : 'file:///android_asset/templates/images/orange_right.png', "posx" : 110, "posy" : 10, "w" : 80, "h" : 80},
-			              { "src" : 'file:///android_asset/templates/images/orange_update.png', "posx" : 210, "posy" : 10, "w" : 80, "h" : 80},
+			              { "src" : 'file:///android_asset/templates/images/orange_left.png', "posx" : 5, "posy" : 10, "w" : 80, "h" : 80},
+			              { "src" : 'file:///android_asset/templates/images/orange_right.png', "posx" : 105, "posy" : 10, "w" : 80, "h" : 80},
+			              { "src" : 'file:///android_asset/templates/images/orange_update.png', "posx" : 205, "posy" : 10, "w" : 80, "h" : 80},
+			              { "src" : 'file:///android_asset/templates/images/inf.png', "posx" : 980, "posy" : 60, "w" : 40, "h" : 40},
 			         ];		
 	}
 
@@ -60,9 +62,9 @@ function UserInterface()
 			context.fillStyle = "black";
 			context.font = "9pt Arial";
 			context.textAlign = "center";
-			context.fillText("encerts", 40, 225);
-			context.fillText("intents", 40, 275);
-			context.fillText("temps", 40, 325);
+			context.fillText("encerts", 40, 215);
+			context.fillText("intents", 40, 265);
+			context.fillText("temps", 40, 315);
 			
 		} else {
 			
@@ -103,9 +105,9 @@ function UserInterface()
 			}
 			
 			context.font = "9pt Arial";
-			context.fillText("encerts", 890, 30);
-			context.fillText("intents", 940, 30);
-			context.fillText("temps", 990, 30);
+			context.fillText("encerts", 890, 20);
+			context.fillText("intents", 940, 20);
+			context.fillText("temps", 990, 20);
 		}
 		
 		myimages.draw();  
@@ -123,6 +125,7 @@ function UserInterface()
 				if( clicked.id == 'image0'){ControlData.active=false; return "previous";}
 				if( clicked.id == 'image1'){ControlData.active=false; return "next";}
 				if( clicked.id == 'image2'){ControlData.active=false; return "update";}
+				if( clicked.id == 'image3'){ControlData.active=false; return "info";}
 			}	
 		} else {
 			clicked='none';

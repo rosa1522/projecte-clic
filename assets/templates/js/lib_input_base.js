@@ -1,7 +1,4 @@
-/**
- * @author Noelia Tuset
- */
- 
+//S'han de treure quan estigui executant-se sobre ios o android
 var ipad=false;
 var android=false;
 

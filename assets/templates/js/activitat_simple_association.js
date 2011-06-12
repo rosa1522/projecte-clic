@@ -31,6 +31,7 @@ function SimpleAssociation()
 	var lines, cols, w, h, w2, h2, grid, peces, dist, arxiuSoFi, reprodSoFi, reprodSo;
 	var colorlinies, colorhidden, colorfons, colorFonsNoms, background;
 	var theX, theY, incrShowX, incrShowY, capes, numPrimer, numSegon;
+	var fet=false;
 	
 	/**
 	 * Funcio per a inicialitzar l'activitat a partir de les seves dades
@@ -45,11 +46,11 @@ function SimpleAssociation()
 		
 		/** S'agafen les dades necessaries del fitxer data.js **/
 		
-		w=arrodonir(activityData.celllist[0].atributs.cellWidth,2);
-		h=arrodonir(activityData.celllist[0].atributs.cellHeight,2);
+		w=arrodonir(activityData.celllist[0].atributs.cellWidth,0);
+		h=arrodonir(activityData.celllist[0].atributs.cellHeight,0);
 		
-		w2=arrodonir(activityData.celllist[1].atributs.cellWidth,2); if(w2 > w) w = w2;
-		h2=arrodonir(activityData.celllist[1].atributs.cellHeight,2); if(h2 > h) h = h2;
+		w2=arrodonir(activityData.celllist[1].atributs.cellWidth,0); if(w2 > w) w = w2;
+		h2=arrodonir(activityData.celllist[1].atributs.cellHeight,0); if(h2 > h) h = h2;
 
 		dist = activityData.atributsActivitat['layout-position'];
 		
@@ -299,7 +300,7 @@ function SimpleAssociation()
 	this.run = function(){
 		contextControl = canvasControl.getContext("2d");
 		context.clearRect(0, 0, canvasWidth, canvasHeight);
-		context.strokeRect(gridAx,gridAy,w,h);
+		//context.strokeRect(gridAx,gridAy,w,h);
 		
 		if(DragData.active){
 			if(frontImage=='none'){	
@@ -346,29 +347,32 @@ function SimpleAssociation()
 				frontImage='none';
 			}
 			primerClic = false;
-		}	
+		}
 		
 		//COMPROVAR ESTAT ACTIVITAT
 		if(colocades==(numPeca-1)){
 			this.acabat=true;
-			context.canvas.style.cursor = 'url(./images/ok.cur), crosshair';
+			context.canvas.style.cursor = 'url(./images/ok.cur)';
+			if(!fet){
+				alert("Completed "+"./images/ok.png"+"hello");
+				fet=true;
+			}
 			/*if (reprodSoFi == "PLAY_AUDIO"){
 				soundManager.play(arxiuSoFi);
 				reprodSoFi = "false";
 			}*/
 		}else{
+			//DRAW THE IMAGE
+			if (!gradiente){
+				grid.drawFons(background, 0, canvasWidth, canvasHeight, 0);
+			}else{
+				grid.drawFons(colorfonsalt, colorfonsbaix, canvasWidth, canvasHeight, gradiente);
+			}
+			grid.drawFonsJoc(colorfonsjoc, "0", margin);
+			myImages.draw(colorFonsNoms);
+			grid.draw(colorlinies);
 			segons++;
 		}
-		
-		//DRAW THE IMAGE
-		if (!gradiente){
-			grid.drawFons(background, 0, canvasWidth, canvasHeight, 0);
-		}else{
-			grid.drawFons(colorfonsalt, colorfonsbaix, canvasWidth, canvasHeight, gradiente);
-		}
-		grid.drawFonsJoc(colorfonsjoc, "0", margin);
-		myImages.draw(colorFonsNoms);
-		grid.draw(colorlinies);
 
 		contextControl.fillStyle = "black";
 		contextControl.font = "14pt Arial";
@@ -377,13 +381,13 @@ function SimpleAssociation()
 		tiempo = arrodonir(tiempo,0);
 		
 		if (android){
-			contextControl.fillText(aciertos, 40, 250);
-			contextControl.fillText(intentos, 40, 300);
-			contextControl.fillText(tiempo, 40, 350);
+			contextControl.fillText(aciertos, 40, 240);
+			contextControl.fillText(intentos, 40, 290);
+			contextControl.fillText(tiempo, 40, 340);
 		}else{
-			contextControl.fillText(aciertos, 890, 60);
-			contextControl.fillText(intentos, 940, 60);
-			contextControl.fillText(tiempo, 990, 60);
+			contextControl.fillText(aciertos, 890, 50);
+			contextControl.fillText(intentos, 940, 50);
+			contextControl.fillText(tiempo, 990, 50);
 		}
 		
 		if(segonClic){

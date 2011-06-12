@@ -1,7 +1,3 @@
-/**
- * @author Noelia Tuset
- */
-
 function randOrd(){
 	return (Math.round(Math.random())-0.5); 
 }
@@ -11,25 +7,30 @@ function adaptarGrid(canvasWidth,canvasHeight,w,h,lines,cols){
 	var aux, incrShowX, incrShowY;
 	var passat = false;
 	
-	if((h*lines) > (canvasHeight-24)){
+	if(android){
 		incrShowY = (canvasHeight-24)/lines; 
-		aux = h - incrShowY;
-		incrShowX = w - aux;
-		passat = true;
-	}
-	if(passat){
-		h=incrShowY;
-		w=incrShowX;
-	}
-	if((w*cols) > (canvasWidth-24)){
 		incrShowX = (canvasWidth-24)/cols;
-		aux = w - incrShowX;
-		incrShowY = h - aux;
-		passat = true;
-	}
-	if(!passat){
-		incrShowY=h;
-		incrShowX=w;
+	}else{
+		if((h*lines) > (canvasHeight-24)){
+			incrShowY = (canvasHeight-24)/lines; 
+			aux = h - incrShowY;
+			incrShowX = w - aux;
+			passat = true;
+		}
+		if(passat){
+			h=incrShowY;
+			w=incrShowX;
+		}
+		if((w*cols) > (canvasWidth-24)){
+			incrShowX = (canvasWidth-24)/cols;
+			aux = w - incrShowX;
+			incrShowY = h - aux;
+			passat = true;
+		}
+		if(!passat){
+			incrShowY=h;
+			incrShowX=w;
+		}
 	}
 	
 	xy.push(incrShowX);

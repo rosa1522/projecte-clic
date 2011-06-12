@@ -117,6 +117,34 @@ var mainLoop = function () {
 	else if (uiClic == "update") {
 		activitatActual=iniciaActivitat(canvas, numActivitat);
 	}
+	else if (uiClic == "info") {
+		var projecte = dadesActivitat.settings.atributsActivitat.title;
+		var area = dadesActivitat.settings.atributsActivitat['descriptors-area'];
+		var nivell = dadesActivitat.settings.atributsActivitat['descriptors-level'];
+		var autor = dadesActivitat.settings.atributsActivitat['author-name'];
+		var org_nom = dadesActivitat.settings.atributsActivitat['organitzation-name'];
+		var org_ciutat = dadesActivitat.settings.atributsActivitat['organitzation-city'];
+		var org_estat = dadesActivitat.settings.atributsActivitat['organitzation-state'];
+		var llenguatge = dadesActivitat.settings.atributsActivitat.language;
+		var descripcio = " "+dadesActivitat.settings.descripcio;
+		
+		if(!area){ area =""; }else{ area="** Area:\n"+area+"\n"; } 
+		if(!nivell){ nivell =""; }else{ nivell="** Nivell:\n"+nivell+"\n"; } 
+		if(!autor){ autor =""; }else{ autor="** Autor:\n"+autor+"\n"; } 
+		if(!llenguatge){ llenguatge =""; }else{ llenguatge="** Llenguatge:\n"+llenguatge+"\n"; } 
+		if(!org_nom){ org_nom =""; }else{ org_nom ="** Organització:\n"+org_nom+"\n"; } 
+		if(!org_ciutat){ org_ciutat =""; }else{ org_ciutat ="\n"+org_ciutat+"\n"; } 
+		if(!org_estat){ org_estat =""; }else{ org_estat ="\n"+org_estat+"\n"; } 
+		if(!descripcio){ descripcio =""; }
+		else{
+			descripcio = descripcio.replace(/<ul>/g,"");
+			descripcio = descripcio.replace(/<li>/g,"");
+			descripcio = descripcio.replace(/<\/ul>/g,"");
+			descripcio="** Descripció:\n"+descripcio;
+		} 
+		
+		alert("** Projecte:\n"+projecte+"\n"+area+nivell+autor+org_nom+org_ciutat+org_estat+llenguatge+descripcio);
+	}
 
 	if (activitatActual.acabat){
 		UI.draw(1,numActivitat);
