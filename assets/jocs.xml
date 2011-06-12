@@ -729,8 +729,7 @@
 	    <centre>CEIP Mossèn Cinto
 	Folgueroles (Osona)
 	</centre>
-	    <autors>
-	M.Alba Ruiz Gurt </autors>
+	    <autors>M.Alba Ruiz Gurt </autors>
 	</joc>
 	<joc>
 	    <identificador>3611</identificador>
@@ -774,8 +773,7 @@
 	    <centre>IES La Pedrera Blanca
 	Chiclana (Andalucía)
 	</centre>
-	    <autors>
-	Francisco Martín Garzón </autors>
+	    <autors>Francisco Martín Garzón </autors>
 	</joc>
 	<joc>
 	    <identificador>3607</identificador>
@@ -4401,17 +4399,8 @@
 	    <ruta>http://clic.xtec.cat/db/act_ca.jsp?id=3590</ruta>
 	    <clic>http://clic.xtec.cat/projects/instrume/jclic/instrume.jclic.zip</clic>
 	    <img>http://clic.xtec.cat/gifs/instrume.jpg</img>
-	    <centre>
-	Tarragona
-	</centre>
-	    <autors>
-	Alèxia Sánchez
-	 
-	, Bea Hernández
-	 
-	, Laura Martínez
-	 
-	 i Miriam Vinaixa </autors>
+	    <centre>Tarragona</centre>
+	    <autors>Alèxia Sánchez, Bea Hernández, Laura Martínez i Miriam Vinaixa </autors>
 	</joc>
 	<joc>
 	    <identificador>3588</identificador>
@@ -5300,8 +5289,7 @@
 	    <centre>Colegio Reina Elizabeth
 	México
 	</centre>
-	    <autors>
-	Leonid Medina Trejo </autors>
+	    <autors>Leonid Medina Trejo </autors>
 	</joc>
 	<joc>
 	    <identificador>3511</identificador>
@@ -6088,8 +6076,7 @@
 	    <centre>CP Asturias
 	Gijón (Asturias)
 	</centre>
-	    <autors>
-	Leonor A. Fernández González </autors>
+	    <autors>Leonor A. Fernández González </autors>
 	</joc>
 	<joc>
 	    <identificador>3440</identificador>
