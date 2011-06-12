@@ -23,21 +23,17 @@ import android.widget.TextView;
 
 
 public class DescripcioJoc extends Activity implements OnClickListener{
-
-	//private static final int DIALOG1_KEY = 0;
 	private static final int DIALOG_CONNEXIO = 1;
 	private static final int DIALOG_JOC_NO_DESCARREGAT = 2;
-	//ProgressDialog mDialog1;
+
 	private Bundle bundle;
 	private ImageButton bInstalarJoc;
 
-	// JORDI : PER A GESTIONAR EL TEMA DEL PROCESSDIALOG;
 	ProgressDialog progressDialog;
 	String clicZip;
 	String rutaImatge;
 	String idJoc;
 
-	//private static final int DIALOG1_KEY = 0;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -133,19 +129,16 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 
 
 
-	// JORDI: A PARTIR D'AQUI HE POSAT ELS CANVIS PER AL DIALEG DE DESCARREGA
 	// Clic del boto
 	public void onClick(View v) {
 
 		// Si el joc no està instal·lat, l'hem de descarregat i canviar la imatge del botó perquè
-		// l'usuario torni a donar al botó per poder jugar
+		// l'usuari no torni a donar al botó per poder jugar
+		System.out.println("DESCARREGAT" + ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getDescarregat());
 		if (!ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getDescarregat()) {
-			//showDialog(DIALOG1_KEY);		
-			//ARA AIXO SON VARIABLES GLOBALS
 			idJoc =  Integer.toString(bundle.getInt("idJoc"));
 			clicZip =  ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getClic();
 			rutaImatge =  ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getImatge();
-
 			
 			if ( Utils.testConnexio(getApplicationContext(), clicZip, idJoc) ) {
 				progressDialog = ProgressDialog.show(this, "", "Descarregant...", false, false);
@@ -157,7 +150,6 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 			}			
 			//removeDialog(DIALOG1_KEY);
 		}else{
-
 			// Primer ens assegurem que la carpeta del joc seleccionat existeixi
 			// sinó existeix mostrem un missatge perquè se'l tornin a descarregar
 			File file = new File (getFilesDir() + "/" + bundle.getInt("idJoc"));
@@ -171,7 +163,7 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 				// Passem l'identificador del joc que volem jugar	
 				Intent intent = null;
 				intent = new Intent(this, VistaWeb.class);		
-				intent.putExtra("idJoc",bundle.getInt("idJoc"));
+				intent.putExtra("idJoc", bundle.getInt("idJoc"));
 				startActivity(intent);	
 			}
 
@@ -179,31 +171,33 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 
 	}
 
+	
 	@Override
-	protected Dialog onCreateDialog(int id) {
-		switch (id) {
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+	        case DIALOG_CONNEXIO: {                               
+                AlertDialog.Builder alert = new AlertDialog.Builder(this); 
+                alert.setMessage("No hi ha connexió a Internet per poder descarregar el joc.");  
+                alert.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {  
+                      public void onClick(DialogInterface dialog, int whichButton) {}
+                });  
+                alert.show();
+                break;
+            }
+	         case DIALOG_JOC_NO_DESCARREGAT: {                               
+	             AlertDialog.Builder alert = new AlertDialog.Builder(this); 
+	             alert.setMessage("El joc no està disponible. Sisplau torni a descarregar-lo.");  
+	             alert.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {  
+	                   public void onClick(DialogInterface dialog, int whichButton) {}
+	             });  
+	             alert.show();
+	             break;
+	         }
+        }
+        return null;
+    }
 
-		case DIALOG_CONNEXIO: {                               
-			AlertDialog.Builder alert = new AlertDialog.Builder(this); 
-			alert.setMessage("No hi ha connexió a Internet per poder descarregar el joc.");  
-			alert.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {  
-				public void onClick(DialogInterface dialog, int whichButton) {}
-			});  
-			alert.show();
-		}
-
-		case DIALOG_JOC_NO_DESCARREGAT: {                               
-			AlertDialog.Builder alert = new AlertDialog.Builder(this); 
-			alert.setMessage("El joc no està disponible. Sisplau torni a descarregar-lo.");  
-			alert.setPositiveButton("Acceptar", new DialogInterface.OnClickListener() {  
-				public void onClick(DialogInterface dialog, int whichButton) {}
-			});  
-			alert.show();
-		} 
-		}
-		return null;
-	}
-
+	
 	// Define the Handler that receives messages from the thread and update the progress
 	final Handler handler = new Handler() {
 		public void handleMessage(Message msg) {

@@ -43,6 +43,7 @@ function PanelInformation()
 		canvasWidth  = canvas.width;
 		canvasHeight = canvas.height;
 		context = canvas.getContext("2d");
+		context.canvas.style.cursor = "pointer";
 
 		/** Agafem les dades del fitxer data.js **/
 		colorfonsbaix = activityData.atributsActivitat['settings-container-gradient-dest'];
@@ -180,13 +181,14 @@ function PanelInformation()
 		image = document.getElementById('image');
 		contextControl.fillStyle = "black";
 		contextControl.font = "14pt Arial";
+		contextControl.textAlign = "center";
 		tiempo = segons/20;
 		tiempo = arrodonir(tiempo,0);
 		
 		if (android){
-			contextControl.fillText(aciertos, 35, 250);
-			contextControl.fillText(intentos, 35, 300);
-			contextControl.fillText(tiempo, 30, 350);
+			contextControl.fillText(aciertos, 40, 250);
+			contextControl.fillText(intentos, 40, 300);
+			contextControl.fillText(tiempo, 40, 350);
 			context.drawImage(image,gridAx,gridAy,w,h);
 		}else{
 			contextControl.fillText(aciertos, 890, 60);

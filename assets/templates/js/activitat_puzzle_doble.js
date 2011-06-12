@@ -1,13 +1,12 @@
 /**
  * ACTIVITAT PUZZLE
+ * @author Noelia Tuset
  */
 function PuzzleDoble(){
 	//Variables del canvas
 	var context;
 	var canvasWidth;
 	var canvasHeight;
-	//var myText = new Text();
-	var grid;
 	
 	//Variables especifiques d'aquesta activitat
 	var frontImage='none';
@@ -17,6 +16,7 @@ function PuzzleDoble(){
 	var myImages = new ImageSet();
 	var peces;
 	var dist;
+	var grid;
 	var x = new Array();
 	var y = new Array();
 	var ordArray = new Array();
@@ -28,8 +28,6 @@ function PuzzleDoble(){
 	var segons = 0;
 	var aciertos = 0;
 	var arxiuSoFi, reprodSoFi, reprodSo, joc;
-	var theX, theY;
-	var myImagesMem = new ImageSetMemory();
 	
 	//Funcio per a inicialitzar l'activitat a partir de les seves dades
 	this.init = function(canvas, activityData){
@@ -37,10 +35,7 @@ function PuzzleDoble(){
 		canvasWidth  = canvas.width;
 		canvasHeight = canvas.height;
 		context = canvas.getContext("2d");
-		
-		//Inicialitzar la font
-		//myText.context = context;
-		//myText.face = vector_battle;
+		context.canvas.style.cursor = "pointer";
 		
 		//Inicialitzar les imatges
 		var myImage = new Image();
@@ -48,10 +43,10 @@ function PuzzleDoble(){
 		dist = activityData.atributsActivitat['layout-position'];
 		
 		colorfonsbaix = activityData.atributsActivitat['settings-container-gradient-dest'];
-		colorfonsbaix = "#"+colorfonsbaix.replace(control,"");
+		if(colorfonsbaix) colorfonsbaix = "#"+colorfonsbaix.replace(control,"");
 		
 		colorfonsalt = activityData.atributsActivitat['settings-container-gradient-source'];
-		colorfonsalt = "#"+colorfonsalt.replace(control,"");
+		if(colorfonsalt) colorfonsalt = "#"+colorfonsalt.replace(control,"");
 		
 		gradiente = activityData.atributsActivitat['settings-container-gradient-angle'];
 		
@@ -72,7 +67,7 @@ function PuzzleDoble(){
 		if (!colorinactiu) colorinactiu = "0x00000";
 		colorinactiu = "#"+colorinactiu.replace(control,"");
 		
-		reprodSo = activityData.cell[0].atributs['media-type'];
+		/*reprodSo = activityData.cell[0].atributs['media-type'];
 		reprodSoFi = activityData.cell[1].atributs['media-type'];
 		
 		arxiuSo = activityData.cell[0].atributs['media-file'];
@@ -80,15 +75,14 @@ function PuzzleDoble(){
 		
 		joc = activityData.celllist[0].atributs['shaper-class'];
 		
-		if (joc == "@ClassicJigSaw"){
+		if (joc == "@ClassicJigSaw"){*/
 		
 			myImage.onload = function() {
 				imageLoaded = true;
-				var w=myImage.width;
-				var h=myImage.height;
-				var showW=myImage.width;
-				var showH=myImage.height;
-				var gridAx, gridAy, gridBx, gridBy;
+				w=myImage.width;
+				h=myImage.height;
+				showW=myImage.width;
+				showH=myImage.height;
 	
 				if (dist == "AB"){
 					gridAx=(canvasWidth-(w+w+12))/2;
@@ -184,101 +178,8 @@ function PuzzleDoble(){
 			};
 			
 			myImage.src = activityData.celllist[0].atributs.image;
-
-		}else {
 			
-			w=activityData.celllist[0].atributs.cellWidth;
-			h=activityData.celllist[0].atributs.cellHeight;
-			
-			/**
-			 * A partir del layout-position calculem:
-			 *	 w: amplada general
-			 *	 h: alçada general
-			 *	 incrShowX: amplada peça
-			 *	 incrShowY: alçada peça
-			 */
-			
-			if ((dist == "AB")||(dist == "BA")){
-				lines=activityData.celllist[0].atributs.rows*4;
-				cols=activityData.celllist[0].atributs.cols/2;
-					
-				incrShowY=(canvasHeight-24)/lines;
-				aux=h-incrShowY;
-				h=(canvasHeight-24);
-				incrShowX=w-aux;
-				w=incrShowX*cols;
-			}
-			if ((dist == "AUB")||(dist == "BUA")){
-				lines=activityData.celllist[0].atributs.rows*2;
-				cols=activityData.celllist[0].atributs.cols;
-	 
-				incrShowX=(canvasWidth-24)/cols; 
-				aux=w-incrShowX;
-				w=(canvasWidth-24);
-				incrShowY=h-aux;
-				h=incrShowY*lines;
-			}
-			
-			gridAx=(canvasWidth-w)/2;
-			gridAy=(canvasHeight-h)/2;
-
-			/**
-			 * Carreguem les imatges a la array Peces.
-			 */
-			
-			var id_img=0;
-			var peces = new Array();
-			var ll = activityData.celllist[0].cell.length;
-
-			for(var i=0; i<ll; i++){
-				
-				var myImage = new Image();
-				
-				myImage.onload = function() {
-					imageLoaded = true;
-				};
-
-				myImage.src = activityData.celllist[0].cell[i].atributs.image;
-				var novaPeca = new ImageMemory(context, id_img, myImage,incrShowX,incrShowY);
-				novaPeca.setNumPeca(myImage.src);
-				peces.push(novaPeca);
-				id_img++;
-			}
-
-			/**
-			 * Desordenem les peces.
-			 */
-			
-			for (var o=0;o<ll;o++){
-				ordArray[o]=o;
-			}
-			
-			//Si es columnes varies
-			theX = gridAx;
-			theY = gridAy;
 		
-			for(var i=0;i<ll;i++) { 
-		        x[i]=theX;
-		        y[i]=theY;
-		        theX += incrShowX;
-		    }
-			
-			ordArray.sort( randOrd );
-			
-			for (var o=0;o<ll;o++){
-				peces[o].setPosx(x[ordArray[o]]);
-				peces[o].setPosy(y[ordArray[o]]);
-			}	
-
-			/**
-			 * Pintem el tauler de peces.
-			 */
-			
-			for (var o=0;o<ll;o++){	
-				myImagesMem.add(peces[o]);
-				myImagesMem.images[o].setHidden(false);
-			}
-		}
 		/*
 		if (reprodSo == "PLAY_AUDIO")
 		{
@@ -299,65 +200,58 @@ function PuzzleDoble(){
 		context.clearRect(0, 0, canvasWidth, canvasHeight);
 		segons++;
 		
-		if (joc == "@ClassicJigSaw"){
-			grid = new Grid(context, lines, cols, {width:showW,height:showH}, {x:gridBx,y:gridBy}, {x:gridAx,y:gridAy});
-		}else{
-			grid = new Grid(context, lines, cols, {width:w,height:h}, {x:gridAx,y:gridAy}, {x:gridAx,y:gridAy});
-		}
+		grid = new Grid(context, lines/1, cols/1, {width:showW,height:showH}, {x:gridBx,y:gridBy}, {x:gridAx,y:gridAy});
 		
 		//LLEGIR DADES USUARI
 		if(DragData.active)
 		{ 
-			if (joc == "@ClassicJigSaw"){
-				//Choose the selected image and activate it
-				if(frontImage=='none'){	
-					frontImage=myImages.getFrontImage(DragData.startPosX, DragData.startPosY);
-					if(frontImage!='notfound') frontImage.setDraggable();
-					
-				}
-				//Move the dragged image around
-				if(frontImage!='notfound' && !frontImage.colocada){
-					frontImage.drag(DragData.startPosX-DragData.currentPosX, DragData.startPosY-DragData.currentPosY);
-				}
+			//Choose the selected image and activate it
+			if(frontImage=='none'){	
+				frontImage=myImages.getFrontImage(DragData.startPosX, DragData.startPosY);
+				if(frontImage!='notfound') frontImage.setDraggable();
+				
 			}
-			
+			//Move the dragged image around
+			if(frontImage!='notfound' && !frontImage.colocada){
+				frontImage.drag(DragData.startPosX-DragData.currentPosX, DragData.startPosY-DragData.currentPosY);
+			}
+	
 		//Disable the current active image
 		}else{
-			
-			if (joc == "@ClassicJigSaw"){
-				if (!frontImage.colocada){	//per col·locar-la no h a d'estar col·locada
-					if (DragData.currentPosX>=(frontImage.colocaciox)&&DragData.currentPosX<=(frontImage.colocaciox+frontImage.w)&&
-							DragData.currentPosY>=(frontImage.colocacioy)&&DragData.currentPosY<=(frontImage.colocacioy+frontImage.h)){
-						frontImage.posx=frontImage.colocaciox;
-						frontImage.posy=frontImage.colocacioy;
-						colocades++;
-						frontImage.colocada=true;
-						intentos++;
-					}else if(frontImage != 'none'){	//Si no es col·loca on toca torna a posició inicial
-						frontImage.posx=frontImage.iniposx;
-						frontImage.posy=frontImage.iniposy;
-						intentos++;
-					}
-				}else{
-					//si ja estava col·locada torna a col·locar-se bé!!
+
+			if (!frontImage.colocada){	//per col·locar-la no h a d'estar col·locada
+				if (DragData.currentPosX>=(frontImage.colocaciox)&&DragData.currentPosX<=(frontImage.colocaciox+frontImage.w)&&
+						DragData.currentPosY>=(frontImage.colocacioy)&&DragData.currentPosY<=(frontImage.colocacioy+frontImage.h)){
 					frontImage.posx=frontImage.colocaciox;
 					frontImage.posy=frontImage.colocacioy;
+					colocades++;
+					frontImage.colocada=true;
+					intentos++;
+				}else if(frontImage != 'none'){	//Si no es col·loca on toca torna a posició inicial
+					frontImage.posx=frontImage.iniposx;
+					frontImage.posy=frontImage.iniposy;
+					intentos++;
 				}
-					
-				if(frontImage!='none'){
-					if(frontImage!='notfound') frontImage.unsetDraggable();
-					frontImage='none';
-				}
+			}else{
+				//si ja estava col·locada torna a col·locar-se bé!!
+				frontImage.posx=frontImage.colocaciox;
+				frontImage.posy=frontImage.colocacioy;
+			}
+				
+			if(frontImage!='none'){
+				if(frontImage!='notfound') frontImage.unsetDraggable();
+				frontImage='none';
 			}
 		}
 		
+
 		//COMPROVAR ESTAT ACTIVITAT
 		if(colocades==lines*cols){
 			this.acabat=true;
-			if (reprodSoFi == "PLAY_AUDIO"){
-				soundManager.play(arxiuSoFi);
-				reprodSoFi = "false";
-			}
+			context.canvas.style.cursor = 'url(./images/ok.cur), wait';
+			//if (reprodSoFi == "PLAY_AUDIO") soundManager.play(arxiuSoFi);
+		}else{
+			segons++;
 		}
 		
 		//DRAW THE IMAGE
@@ -367,32 +261,27 @@ function PuzzleDoble(){
 		}else{
 			grid.drawFons(colorfonsalt, colorfonsbaix, canvasWidth, canvasHeight, gradiente);
 		}
-		//if (joc == "@ClassicJigSaw"){
-			grid.drawFonsJoc(colorfonsjoc, dist, margin);
-			grid.drawFonsInactiu(colorinactiu);
-			myImages.draw();
-			grid.draw(colorlinies);
-		/*}else{
-			grid.drawFonsJoc(colorfonsjoc, "0", margin);
-			grid.drawFonsInactiu(colorinactiu);
-			myImagesMem.draw();
-			grid.draw(colorlinies);
-		}*/
-			
+
+		grid.drawFonsJoc(colorfonsjoc, dist, margin);
+		grid.drawFonsInactiu(colorinactiu);
+		myImages.draw();
+		grid.draw(colorlinies);
+
 		contextControl.fillStyle = "black";
 		contextControl.font = "14pt Arial";
+		contextControl.textAlign = "center";
 		tiempo = segons/20;
 		tiempo = arrodonir(tiempo,0);
 			
-		//if (android){
-			contextControl.fillText(colocades, 35, 250);
-			contextControl.fillText(intentos, 35, 300);
-			contextControl.fillText(tiempo, 30, 350);
-		/*}else{
+		if (android){
+			contextControl.fillText(colocades, 40, 250);
+			contextControl.fillText(intentos, 40, 300);
+			contextControl.fillText(tiempo, 40, 350);
+		}else{
 			contextControl.fillText(colocades, 890, 60);
 			contextControl.fillText(intentos, 940, 60);
 			contextControl.fillText(tiempo, 990, 60);
-		}*/
+		}
 	};
 	
 	//Aquest funcio s'ha de cridar un cop s'ha acabat l'activitat i es canvia a una altra

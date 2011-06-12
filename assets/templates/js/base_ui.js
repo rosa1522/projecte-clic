@@ -27,6 +27,7 @@ function UserInterface()
 	}
 
 	var myimages = new ImageSet();
+	var myimages2 = new ImageSet();
 	var clicked;
 	
 	this.init = function(canvas,num) 
@@ -58,9 +59,10 @@ function UserInterface()
 			context.fillRect(0,0,80,375);
 			context.fillStyle = "black";
 			context.font = "9pt Arial";
-			context.fillText("aciertos", 22, 220);
-			context.fillText("intentos", 22, 270);
-			context.fillText("tiempo", 24, 320);
+			context.textAlign = "center";
+			context.fillText("encerts", 40, 225);
+			context.fillText("intents", 40, 275);
+			context.fillText("temps", 40, 325);
 			
 		} else {
 			
@@ -72,22 +74,38 @@ function UserInterface()
 			context.fillStyle = "black";
 			context.font = "18pt " + fontt;
 			context.textAlign = "center";
-			context.textBaseline = "middle";
 			
 			var text = dadesActivitat.activitats[numActivitat].cell[numCell].atributs.p;
 			var imsrc = dadesActivitat.activitats[numActivitat].cell[0].atributs.image;
-	
-			if (text) context.fillText(text, x, y);
 			
+			/** Quan el text es massa gran el tallem en dos files **/
+			if (text)
+			{
+				var metric = context.measureText(text).width;
+			   
+				if(metric > 550){ 
+					var name = text.substring(0,37);
+			   		context.fillText(name,x, y-20);
+			   		var name = text.substring(38,metric);
+			   		context.fillText(name,x, y+20);
+				}else{ 
+				   	context.fillText(text,x, y);
+				}
+			}
+			
+			/** Si l'enunciat de l'activitat es una imatge **/
 			if(imsrc){
 				var img = new ImageData(i,context,imsrc);
 				img.setPosition(x-150,y-40);
 				img.setSize(300,80);
-				myimages.add(img);
+				myimages2.add(img);
+				myimages2.draw(); 
 			}
 			
 			context.font = "9pt Arial";
-			context.fillText("encerts   intents   temps", 940, 30);
+			context.fillText("encerts", 890, 30);
+			context.fillText("intents", 940, 30);
+			context.fillText("temps", 990, 30);
 		}
 		
 		myimages.draw();  

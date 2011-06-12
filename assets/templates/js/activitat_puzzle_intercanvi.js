@@ -1,5 +1,6 @@
 /**
  * ACTIVITAT PUZZLE
+ * @author Noelia Tuset
  */
 function PuzzleIntercanvi(){
 	//Variables del canvas
@@ -11,6 +12,7 @@ function PuzzleIntercanvi(){
 	//Variables especifiques d'aquesta activitat
 	this.frontImage='none';
 	var colocades=0;
+	var colocades2=0;
 	this.acabat=false;
 	var lines,cols;
 	var w,h;
@@ -43,7 +45,7 @@ function PuzzleIntercanvi(){
 		canvasWidth  = canvas.width;
 		canvasHeight = canvas.height;
 		context = canvas.getContext("2d");
-		context2 = canvas.getContext("2d");
+		context.canvas.style.cursor = "pointer";
 		
 		//Inicialitzar les imatges
 		var myImage = new Image();
@@ -70,11 +72,11 @@ function PuzzleIntercanvi(){
 		if (!colorlinies) colorlinies = "#FFFF66";
 		colorlinies = "#"+colorlinies.replace(control,"");
 		
-		reprodSo = activityData.cell[0].atributs['media-type'];
+		/*reprodSo = activityData.cell[0].atributs['media-type'];
 		reprodSoFi = activityData.cell[1].atributs['media-type'];
 		
 		arxiuSo = activityData.cell[0].atributs['media-file'];
-		arxiuSoFi = activityData.cell[1].atributs['media-file'];
+		arxiuSoFi = activityData.cell[1].atributs['media-file'];*/
 		
 		imageAtallar = activityData.celllist[0].atributs.image;
 		
@@ -88,25 +90,24 @@ function PuzzleIntercanvi(){
 				imageLoaded = true;
 				w=myImage.width;
 				h=myImage.height;
-				showW=myImage.width;
-				showH=myImage.height;
-				
-				gridAx=(canvasWidth-w-50)/2;
-				gridAy=(canvasHeight-h-50)/2;
-				
+				showW=arrodonir(w,0);
+				showH=arrodonir(h,0);
+
 				if(w > (canvasWidth-50)){
-					showW=w-(w-(canvasWidth-50));
-					showH=h;
-					if(h > (canvasHeight-50)) showH=h-(w-(canvasWidth-50));
-					gridAx=25; 
-					gridAy=(canvasHeight-showH)/2; 
+					showW=w-(w-canvasWidth-50);
+					showH=h-(w-canvasWidth-50);
+					//if(h > (canvasHeight-50)) showH=h-(w-(canvasWidth));
+					gridAx=((canvasWidth-showW-50)/2)+25; 
+					gridAy=((canvasHeight-showH-50)/2)+25;
 				}
 				else if(h > (canvasHeight-50)){
 					showH=h-(h-(canvasHeight-50));
-					showW = w;
-					if(w > (canvasWidth-50)) showW=w-(h-(canvasHeight-50));
-					gridAx=(canvasWidth-showW)/2; 
-					gridAy=25; 
+					showW=canvasWidth-50;
+					gridAx=((canvasWidth-showW-50)/2)+25; 
+					gridAy=((canvasHeight-showH-50)/2)+25; 
+				}else{
+					gridAx=((canvasWidth-w)/2);
+					gridAy=((canvasHeight-h)/2);
 				}
 	
 				peces = createPeca(context, myImage, lines, cols, {width:w,height:h}, {x:gridAx,y:gridAy}, {x:gridAx,y:gridAy}, {w:showW,h:showH});
@@ -178,6 +179,7 @@ function PuzzleIntercanvi(){
 				myImage.src = activityData.celllist[0].cell[i].atributs.image;
 				var novaPecaImatges = new ImageMemory(context, id_img, myImage,showW,showH);
 				novaPecaImatges.setNumPeca(numPeca);
+				novaPecaImatges.llocPeca=i;
 				pecesSegon.push(novaPecaImatges);
 				id_img++;
 				numPeca++;
@@ -242,81 +244,105 @@ function PuzzleIntercanvi(){
 	this.run = function(canvasControl) {
 		contextControl = canvasControl.getContext("2d");
 		context.clearRect(0, 0, canvasWidth, canvasHeight);
-		segons++;
 
 		if (imageAtallar)
 		{
 			grid = new Grid(context, lines, cols, {width:showW,height:showH}, {x:gridAx,y:gridAy}, {x:gridAx,y:gridAy});
+			w=showW;
+			h=showH;
 		}else{
 			grid = new Grid(context, lines, cols, {width:w,height:h}, {x:gridAx,y:gridAy}, {x:gridAx,y:gridAy});
 		}
 		
-		if(DragData.active)
-		{  
-			if(this.frontImage=='none'){	
-				this.frontImage=myImages.getFrontImage(DragData.startPosX, DragData.startPosY);
-				if(this.frontImage!='notfound') this.frontImage.setDraggable();
-			}
-			
-			//MIRAR SI S'HA CLICAT FORA DEL PANELL
-			if (DragData.currentPosX >= gridAx && DragData.currentPosX < gridAx+w && DragData.currentPosY >= gridAy && DragData.currentPosY < gridAy+h){
-				primerClic = true;				
-				if (segonClic==true){
-					this.idSegon = this.frontImage.id;
-					tercerClic=true;
-				}else{
-					this.idPrimer=this.frontImage.id;
+		if(colocades < lines*cols)
+		{
+			if(DragData.active)
+			{  
+				if(this.frontImage=='none'){	
+					this.frontImage=myImages.getFrontImage(DragData.startPosX, DragData.startPosY);
+					if(this.frontImage!='notfound') this.frontImage.setDraggable();
 				}
-			}
-		}else{
-
-			colocades=0;
-			
-			//MIRAR SI S'HA CLICAT FORA DEL PANELL
-			if (DragData.currentPosX >= gridAx && DragData.currentPosX < gridAx+w && DragData.currentPosY >= gridAy && DragData.currentPosY < gridAy+h){
-				if(tercerClic==true)
-				{
-					var auxX = myImages.images[this.idPrimer].posx;
-					var auxY = myImages.images[this.idPrimer].posy;
-					
-					myImages.images[this.idPrimer].setPosx(myImages.images[this.idSegon].posx);
-					myImages.images[this.idPrimer].setPosy(myImages.images[this.idSegon].posy);
-					
-					myImages.images[this.idSegon].setPosx(auxX);
-					myImages.images[this.idSegon].setPosy(auxY);
-	
-					segonClic = false;
-					primerClic = false;
-					tercerClic = false;
-					this.idPrimer='none';
-					this.idSegon='none';
-					
-					intentos++;
-					
-					//COMPROVAR SI ESTAN TOTES COL·LOCADES
-					for (var i=0; i<lines*cols;i++){
-						if (myImages.images[i].posx==myImages.images[i].colocaciox 
-								&& myImages.images[i].posy==myImages.images[i].colocacioy){
-							colocades++;	
-						}
+				
+				//MIRAR SI S'HA CLICAT FORA DEL PANELL
+				if (DragData.currentPosX >= gridAx && DragData.currentPosX < gridAx+w 
+						&& DragData.currentPosY >= gridAy && DragData.currentPosY < gridAy+h){
+					primerClic = true;				
+					if (segonClic==true){
+						this.idSegon = this.frontImage.id;
+						tercerClic=true;
+					}else{
+						this.idPrimer=this.frontImage.id;
 					}
-					aciertos = colocades;
 				}
-				if(primerClic==true){
-					segonClic = true;
+			}else{
+				//MIRAR SI S'HA CLICAT FORA DEL PANELL
+				if (DragData.currentPosX >= gridAx && DragData.currentPosX < gridAx+w 
+						&& DragData.currentPosY >= gridAy && DragData.currentPosY < gridAy+h){
+					if(tercerClic==true)
+					{
+						var auxX = myImages.images[this.idPrimer].posx;
+						var auxY = myImages.images[this.idPrimer].posy;
+						
+						myImages.images[this.idPrimer].setPosx(myImages.images[this.idSegon].posx);
+						myImages.images[this.idPrimer].setPosy(myImages.images[this.idSegon].posy);
+						
+						var p = myImages.images[this.idSegon].llocPeca;
+						myImages.images[this.idSegon].llocPeca = myImages.images[this.idPrimer].llocPeca;
+						myImages.images[this.idPrimer].llocPeca = p;
+						
+						myImages.images[this.idSegon].setPosx(auxX);
+						myImages.images[this.idSegon].setPosy(auxY);
+		
+						segonClic = false;
+						primerClic = false;
+						tercerClic = false;
+						this.idPrimer='none';
+						this.idSegon='none';
+						
+						intentos++;
+						
+						//Si és una imatge està tallada comptar quantes peces estan al seu lloc
+						if(imageAtallar){
+							colocades2=0;
+							for (var i=0; i<lines*cols;i++){
+								if(myImages.images[i].llocPeca == i){
+									colocades2++;	
+								}
+							}
+							aciertos = colocades2;
+						}
+						
+					}
+					if(primerClic==true){
+						segonClic = true;
+					}
 				}
+				
+				if(this.frontImage!='none'){
+					if(this.frontImage!='notfound') this.frontImage.unsetDraggable();
+					this.frontImage='none';
+				}	
 			}
 			
-			if(this.frontImage!='none'){
-				if(this.frontImage!='notfound') this.frontImage.unsetDraggable();
-				this.frontImage='none';
-			}	
-		}		
-		
+			colocades=0;
+			//COMPROVAR SI ESTAN TOTES COL·LOCADES
+			if(!imageAtallar){
+				for (var i=0; i<lines*cols;i++){
+					if (myImages.images[i].posx==x[i] && myImages.images[i].posy==y[i]){
+						colocades++;	
+					}
+				}
+				aciertos = colocades;
+			}
+			
+		}
 		//COMPROVAR ESTAT ACTIVITAT
-		if(colocades==lines*cols){
+		if(colocades==lines*cols || colocades2 == lines*cols){
 			this.acabat=true;
+			context.canvas.style.cursor = 'url(./images/ok.cur), wait';
 			//if (reprodSoFi == "PLAY_AUDIO") soundManager.play(arxiuSoFi);
+		}else{
+			segons++;
 		}
 		
 		//DRAW THE IMAGE
@@ -331,13 +357,14 @@ function PuzzleIntercanvi(){
 		
 		contextControl.fillStyle = "black";
 		contextControl.font = "14pt Arial";
+		contextControl.textAlign = "center";
 		tiempo = segons/20;
 		tiempo = arrodonir(tiempo,0);
 		
 		if (android){
-			contextControl.fillText(aciertos, 22, 250);
-			contextControl.fillText(intentos, 22, 300);
-			contextControl.fillText(tiempo, 24, 350);
+			contextControl.fillText(aciertos, 40, 250);
+			contextControl.fillText(intentos, 40, 300);
+			contextControl.fillText(tiempo, 40, 350);
 		}else{
 			contextControl.fillText(aciertos, 890, 60);
 			contextControl.fillText(intentos, 940, 60);

@@ -1,56 +1,70 @@
 /**
- * ACTIVITAT PANEL INFORMATION SCREEN
+ * ACTIVITAT PUZZLE
  * @author Noelia Tuset
  */
-function PanelIdentify()
-{
+function PanelIdentify(){
+	//Variables del canvas
 	var context;
 	var canvasWidth;
 	var canvasHeight;
 	
-	/** Variables especifiques d'aquesta activitat **/
-	this.frontImage = 'none';
-	this.acabat = false;
-	this.idPrimer = 'none';
-	this.idSegon = 'none';
-	
+	//Variables especifiques d'aquesta activitat
+	var frontImage='none';
+	var colocades=0;
+	this.acabat=false;
+	var lines,cols;
+	var w,h;
+	var myImages = new ImageSetMemory();
+	var grid, jugar;
+	var dist;
 	var x = new Array();
 	var y = new Array();
-	var myImages = new ImageSetMemory();
-	var peces = new Array();
 	var ordArray = new Array();
-	var myImage = new Image();
-	var img = new Image();
+	var xy = new Array();
+	var numPrimer, numSegon;
 	var primerClic = false;
 	var segonClic = false;
 	var tercerClic = false;
+	var passat = false;
+	var idPrimer = 'none';
+	var idSegon = 'none';
+	var numPeca=1;
+	var colorlinies, colorhidden, colorfons, background;
+	var theX, theY, incrShowX, incrShowY, aux;
 	var control = "0x";
 	var intentos = 0;
 	var segons = 0;
 	var aciertos = 0;
+	var encerts = 0;
 	var colocades = 0;
-	var lines, cols, w, h, x, y, incrShowX, incrShowY, grid, showW, showH, gridAx, gridAy, reprodSo, arxiuSo;
-	var colorFonsNoms, colorlinies, colorfonsjoc, colorfonsalt, colorfonsbaix, gradiente, background, colorbaix, coloralt, grad, marg, image;
+	var arxiuSoFi, reprodSoFi, reprodSo;
 	
-	/**
-	 * Funcio per a inicialitzar l'activitat a partir de les seves dades
-	 */
+	//Funcio per a inicialitzar l'activitat a partir de les seves dades
 	this.init = function(canvas, activityData)
-	{
-		/** Inicialitzar el canvas **/
+	{		
+		/** S'inicialitza el canvas **/
+		
 		canvasWidth  = canvas.width;
 		canvasHeight = canvas.height;
 		context = canvas.getContext("2d");
-
-		/** Agafem les dades del fitxer data.js **/
+		context.canvas.style.cursor = "pointer";
+		
+		/** S'agafen les dades necessaries del fitxer data.js **/
+		
+		w=arrodonir(activityData.celllist[0].atributs.cellWidth,0);
+		h=arrodonir(activityData.celllist[0].atributs.cellHeight,0);
+		
+		dist = activityData.atributsActivitat['layout-position'];
+		
+		colorhidden = activityData.celllist[0].atributs['style-color-inactive'];
+		if (colorhidden) colorhidden = "#"+colorhidden.replace(control,"");
+		
 		colorfonsbaix = activityData.atributsActivitat['settings-container-gradient-dest'];
 		if (colorfonsbaix) colorfonsbaix = "#"+colorfonsbaix.replace(control,"");
 		
 		colorfonsalt = activityData.atributsActivitat['settings-container-gradient-source'];
 		if (colorfonsalt) colorfonsalt = "#"+colorfonsalt.replace(control,"");
 		
-		imatgefons = activityData.atributsActivitat['settings-container-image-name'];
-
 		gradiente = activityData.atributsActivitat['settings-container-gradient-angle'];
 		
 		margin = activityData.atributsActivitat['settings-margin'];
@@ -60,67 +74,61 @@ function PanelIdentify()
 		background = "#"+background.replace(control,"");
 		
 		colorfonsjoc = activityData.atributsActivitat['settings-window-bgColor'];
-		if (!colorfonsjoc) colorfonsjoc = "0xFFFFFF";
+		if (!colorfonsjoc) colorfonsjoc ="#FFFFFF";
 		colorfonsjoc = "#"+colorfonsjoc.replace(control,"");
 		
-		reprodSo = activityData.cell[0].atributs['media-type'];
-		
-		arxiuSo = activityData.cell[0].atributs['media-file'];
-		
 		colorlinies = activityData.celllist[0].atributs['style-color-border'];
-		if (!colorlinies) colorlinies = "0x111111";
+		if (!colorlinies) colorlinies = "#00000";
 		colorlinies = "#"+colorlinies.replace(control,"");
 		
-		colorbaix = activityData.celllist[0].atributs['style-gradient-dest'];
-		if (colorbaix) colorbaix = "#"+colorbaix.replace(control,"");
+		/*reprodSo = activityData.cell[0].atributs['media-type'];
+		reprodSoFi = activityData.cell[1].atributs['media-type'];
 		
-		coloralt = activityData.celllist[0].atributs['style-gradient-source'];
-		if (coloralt) coloralt = "#"+coloralt.replace(control,"");
-
-		grad = activityData.celllist[0].atributs['style-gradient-angle'];
-		
-		marg = activityData.celllist[0].atributs['style-borderStroke'];
+		arxiuSo = activityData.cell[0].atributs['media-file'];
+		arxiuSoFi = activityData.cell[1].atributs['media-file'];*/
 		
 		colorFonsNoms = "FFFFFF";
-			
+		colorFonsNomsSota = "AAFFAA";
+		
+		/**
+		 * El tauler de joc depenent de la distribucio que tingui
+		 * s'adapta a unes mides que es puguin mostrar les dades
+		 * adaptades a la pantalla correctament.
+		 */
+		
 		lines=activityData.celllist[0].atributs.rows;
 		cols=activityData.celllist[0].atributs.cols;
-
-		//gridFons = new Grid(context, 1, 1, {width:canvasWidth,height:canvasHeight}, {x:0,y:0}, {x:0,y:0});
 		
-		/** ocupació **/
-		w = arrodonir (activityData.celllist[0].atributs.cellWidth,0);
-		h = arrodonir (activityData.celllist[0].atributs.cellHeight,0);
-		
-		if((h*lines) > (canvasHeight-24)){
-			w = w - (h - (canvasHeight-24));
-			h = canvasHeight-24;
-		}else if (w*cols > canvasWidth-24){
-			h = h - (w - (canvasWidth-24));
-			w = canvasWidth-24;
-		}
-		incrShowX = w;
-		incrShowY = h;
-		
-		h = h*lines;
-		w = w*cols;
+		xy=adaptarGrid(canvasWidth,canvasHeight,w,h,lines,cols);
+		incrShowX = xy[0];
+		incrShowY = xy[1];
+		h=incrShowY*lines;
+		w=incrShowX*cols;
 		
 		gridAx=(canvasWidth-w)/2;
 		gridAy=(canvasHeight-h)/2;
-		/****/
+
+		/**
+		 * Carreguem les imatges o textos a la array Peces.
+		 */
 		
-		//grid = new Grid(context, lines, cols, {width:w,height:h}, {x:gridAx,y:gridAy}, {x:gridAx,y:gridAy});
-		
+		var peces = new Array();
 		var id_img=0;
-		var pecesPrimer = new Array();
-		var quantitat = activityData.celllist[0].cell.length; //noms
+		var numPrimer = activityData.celllist[0].cell.length; //noms
 		
-		for(var i=0; i<quantitat; i++){
+		for(var i=0; i<numPrimer; i++)
+		{
 			var hihaText = activityData.celllist[0].cell[i].atributs.p;
-			if(hihaText){
-				var novaPeca = new ImageAssociation(context, id_img, hihaText,incrShowX,incrShowY);
+			
+			if (hihaText)
+			{
+				var nomImage = activityData.celllist[0].cell[i].atributs.p;
+				var novaPeca = new ImageAssociation(context, id_img, nomImage,incrShowX,incrShowY);
+				novaPeca.setNumPeca(activityData.celllist[0].cell[i].atributs.id);
+				novaPeca.setHidden(false);
 				novaPeca.setColor(colorFonsNoms);
-				pecesPrimer.push(novaPeca);
+				peces.push(novaPeca);
+				id_img++;
 			}else{
 				var myImage = new Image();
 				
@@ -130,127 +138,158 @@ function PanelIdentify()
 	
 				myImage.src = activityData.celllist[0].cell[i].atributs.image;
 				var novaPecaImatges = new ImageMemory(context, id_img, myImage,incrShowX,incrShowY);
-				pecesPrimer.push(novaPecaImatges);
+				novaPecaImatges.setNumPeca(activityData.celllist[0].cell[i].atributs.id);
+				novaPecaImatges.setHidden(false);
+				peces.push(novaPecaImatges);
+				id_img++;
 			}
-			id_img++;
+		}
+
+		/**
+		 * Desordenem les peces.
+		 */
+	
+		for (var o=0;o<lines*cols;o++){
+			ordArray[o]=o;
 		}
 		
 		theX = gridAx;
 		theY = gridAy;
-		o=0;
-		if (lines > 1){
-			for(var i=0; i<lines; i++){ 
-	        	x[o]=theX;
-	        	y[o]=theY;
-	        	theY += incrShowY;
-	            o++;
-		    }
-		}else{
-			for(var i=0; i<cols; i++){ 
+		var o = 0;
+	    
+		for(var i=0;i<lines;i++) { 
+	        for(var j=0;j<cols;j++) { 
 	        	x[o]=theX;
 	        	y[o]=theY;
 	        	theX += incrShowX;
 	            o++;
-		    }
+	        }
+	        theX = gridAx;
+	        theY +=  incrShowY;
+	    }
+		
+		jugar = activityData.celllist[0].atributs.id;
+		
+		if(jugar){	
+			ordArray.sort( randOrd );
+		
+			for (var o=0;o<peces.length;o++){
+				peces[o].setPosx(x[ordArray[o]]);
+				peces[o].setPosy(y[ordArray[o]]);
+				peces[o].llocPeca=ordArray[o];
+				if (peces[o].numPeca == "1"){
+					encerts++;
+				}
+			}	
+		}else{
+			for (var o=0;o<numPrimer;o++){
+				peces[o].setPosx(x[o]);
+				peces[o].setPosy(y[o]);
+			}
 		}
 		
-		for (var o=0;o<pecesPrimer.length;o++){
-			pecesPrimer[o].setPosx(x[o]);
-			pecesPrimer[o].setPosy(y[o]);
-		}
+		/**
+		 * Pintem el tauler de peces.
+		 */
 		
-		for (var o=0;o<pecesPrimer.length;o++){
-			pecesPrimer[o].setHidden(false);
-			myImages.add(pecesPrimer[o]);
-		}		
+		for (var o=0;o<peces.length;o++){	
+			myImages.add(peces[o]);
+		}
 
 		/*
-		var rutaImatgeSenseCela = activityData.celllist[0].atributs.image;
-		
-		if (rutaImatgeSenseCela){
-			myImage.src = rutaImatgeSenseCela;
-			document.getElementById('image').src = rutaImatgeSenseCela;
-		}else{
-			var rutaImatgeCela = activityData.celllist[0].cell[1].atributs.image;
-			myImage.src = rutaImatgeCela;
-			document.getElementById('image').src = rutaImatgeCela;	
-		}
-		
-		// Carrega imatge del fons del joc
-		if (imatgefons){
-			img.onload = function(){
-				imgw=img.width;
-				imgh=img.height;	
-			};
-			img.src = imatgefons;
-		}
-		*/
-		/** Reprodueix el so de l'activitat **/
-		/*if (reprodSo == "PLAY_AUDIO")
-		{
+		if (reprodSo == "PLAY_AUDIO")
+		{	
 			soundManager.url = "./sound/swf/";
 			soundManager.flashVersion = 9;
 			soundManager.useFlashBlock = false;
-			
 			soundManager.onready(function() {
 				soundManager.createSound(arxiuSo,arxiuSo);
+				soundManager.createSound(arxiuSoFi,arxiuSoFi);
 				soundManager.play(arxiuSo);
 			});
 		}*/
 	};
 	
-	this.run = function(canvasControl) 
-	{
+	//Aqui dins va el codi de l'activitat
+	this.run = function() {
 		contextControl = canvasControl.getContext("2d");
 		context.clearRect(0, 0, canvasWidth, canvasHeight);
-		segons++;
-	
-		grid = new Grid(context, lines, cols, {width:w,height:h}, {x:gridAx,y:gridAy}, {x:gridAx,y:gridAy});
+		context.strokeRect(gridAx,gridAy,w,h);
 
-		if (imatgefons){
-			for (var i=0;i<8;i++){
-				for (var j=0;j<8;j++){
-					context.drawImage(img,j*imgw,i*imgh,imgw,imgh);
+		grid = new Grid(context, lines/1, cols/1, {width:w,height:h}, {x:gridAx,y:gridAy}, {x:gridAx,y:gridAy});
+		
+		//LLEGIR DADES USUARI
+		if(DragData.active)
+		{
+			if(frontImage=='none'){	
+				frontImage=myImages.getFrontImage(DragData.startPosX, DragData.startPosY);
+				if(frontImage!='notfound') frontImage.setDraggable();
+			}
+
+			if (DragData.currentPosX >= gridAx && DragData.currentPosX < gridAx+w && 
+					DragData.currentPosY >= gridAy && DragData.currentPosY < gridAy+h){
+				
+				if (frontImage!='none' && myImages.images[frontImage.id].numPeca == "1" && jugar){
+					idSegon = frontImage.id;
+					primerClic = true;	
 				}
 			}
+			
+		//Disable the current active image
 		}else{
-			if (colorfonsalt) gridFons.drawFonsGrid(colorfonsalt, colorfonsbaix, canvasWidth, canvasHeight, canvasHeight, 0, 0);
-			if (!gradiente){
-				grid.drawFons(background, 0, canvasWidth, canvasHeight, 0);
-			}else{
-				grid.drawFons(colorfonsalt, colorfonsbaix, canvasWidth, canvasHeight, gradiente);
+
+			if(primerClic==true && myImages.images[idSegon].colocada==false && jugar){
+				myImages.images[idSegon].setHidden(true);
+				colocades++;
+				aciertos++;
+				primerClic = false;
+			}
+
+			if(frontImage!='none' && jugar){
+				if(frontImage!='notfound') frontImage.unsetDraggable();
+				frontImage='none';
+				intentos++;
 			}
 		}
-/*	
-		if (grad){
-			//if (colorfonsjoc!="") grid.drawFonsJoc(colorfonsjoc, "0", margin);
-			if (colorlinies!="") grid.drawFonsJoc(colorlinies, "0", marg);
-			//if (coloralt!="") grid.drawFonsGrid(coloralt, colorbaix, w, h, h, gridAx, gridAy);
+	
+		//COMPROVAR ESTAT ACTIVITAT
+		if(colocades == encerts && colocades != 0 && jugar){
+			this.acabat=true;
+			context.canvas.style.cursor = 'url(./images/ok.cur), wait';
+			/*if (reprodSoFi == "PLAY_AUDIO"){
+				soundManager.play(arxiuSoFi);
+				reprodSoFi = "false";
+			}*/
 		}else{
-			//if (colorfonsjoc!="") grid.drawFonsJoc(colorfonsjoc, "0", margin);
-			if (colorlinies!="") grid.drawFonsJoc(colorlinies, "0", 2);
+			segons++;
 		}
-		*/
-
-		myImages.draw(colorFonsNoms);
+		
+		//DRAW THE IMAGE
+		if (!gradiente){
+			grid.drawFons(background, 0, canvasWidth, canvasHeight, 0);
+		}else{
+			grid.drawFons(colorfonsalt, colorfonsbaix, canvasWidth, canvasHeight, gradiente);
+		}
+		grid.drawFonsJoc(colorfonsjoc, "0", margin);
+		myImages.draw(colorhidden);
+		grid.draw(colorlinies);
 		
 		contextControl.fillStyle = "black";
 		contextControl.font = "14pt Arial";
+		contextControl.textAlign = "center";
 		tiempo = segons/20;
 		tiempo = arrodonir(tiempo,0);
 		
-		/*
 		if (android){
-			contextControl.fillText(aciertos, 35, 250);
-			contextControl.fillText(intentos, 35, 300);
-			contextControl.fillText(tiempo, 30, 350);
-			context.drawImage(image,gridAx,gridAy,w,h);
+			contextControl.fillText(aciertos, 40, 250);
+			contextControl.fillText(intentos, 40, 300);
+			contextControl.fillText(tiempo, 40, 350);
 		}else{
 			contextControl.fillText(aciertos, 890, 60);
 			contextControl.fillText(intentos, 940, 60);
 			contextControl.fillText(tiempo, 990, 60);
-			context.drawImage(image,gridAx,gridAy,w,h);
-		}*/
+		}
+		
 	};
 	
 	//Aquest funcio s'ha de cridar un cop s'ha acabat l'activitat i es canvia a una altra

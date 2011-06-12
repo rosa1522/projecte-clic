@@ -532,15 +532,7 @@
 	    <clic>http://clic.xtec.cat/projects/n_roma/jclic/n_roma.jclic.zip</clic>
 	    <img>http://clic.xtec.cat/gifs/n_roma.jpg</img>
 	    <centre></centre>
-	    <autors>
-	Almudena Lorente
-	 
-	, Antonio Palazón
-	 
-	, Esther R. Choque  
-	, José Carlos Padilla
-	 
-	 i Salvador Rosa
+	    <autors> Almudena Lorente, Antonio Palazón, Esther R. Choque, José Carlos Padilla i Salvador Rosa
 	</autors>
 	</joc>
 	<joc>
@@ -604,11 +596,9 @@
 	    <ruta>http://clic.xtec.cat/db/act_ca.jsp?id=3625</ruta>
 	    <clic>http://clic.xtec.cat/projects/cargols3/jclic/cargols3.jclic.zip</clic>
 	    <img>http://clic.xtec.cat/gifs/cargols3.jpg</img>
-	    <centre>ESC Acàcies
-	Barcelona
+	    <centre>ESC Acàcies	Barcelona
 	</centre>
-	    <autors>
-	Azucena Vázquez Gutiérrez </autors>
+	    <autors>Azucena Vázquez Gutiérrez </autors>
 	</joc>
 	<joc>
 	    <identificador>3623</identificador>
@@ -631,10 +621,7 @@
 	    <centre>CEIP Guillem de Balsareny
 	Balsareny (Bages)
 	</centre>
-	    <autors>
-	Jornades de Creació de materials per les NEE
-	 
-	 i Mercedes Rivera Pérez </autors>
+	    <autors>Jornades de Creació de materials per les NEE i Mercedes Rivera Pérez </autors>
 	</joc>
 	<joc>
 	    <identificador>3620</identificador>
@@ -655,9 +642,7 @@
 	    <centre>C. Casals Gràcia
 	Manlleu (Osona)
 	</centre>
-	    <autors>
-	M. Rosa Vilaró Morato  
-	 i Maria Bassagaña Faja </autors>
+	    <autors>M. Rosa Vilaró Morato i Maria Bassagaña Faja </autors>
 	</joc>
 	<joc>
 	    <identificador>3619</identificador>

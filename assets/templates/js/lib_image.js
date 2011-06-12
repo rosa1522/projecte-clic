@@ -1,3 +1,7 @@
+/**
+ * @author Noelia Tuset
+ */
+
 function randOrd(){
 	return (Math.round(Math.random())-0.5); 
 }
@@ -56,7 +60,8 @@ function Peca(ctxt,id,img,posx,posy,w,h,insidePointx,insidePointy,insideSizew,in
    this.insideSizeh = insideSizeh;
    this.colocaciox = colocaciox;
    this.colocacioy = colocacioy;
-   this.depth = 0;  
+   this.depth = 0;
+   this.llocPeca;
    this.iniposx=posx;
    this.iniposy=posy;
    this.colocada=false;
@@ -109,6 +114,8 @@ function Peca(ctxt,id,img,posx,posy,w,h,insidePointx,insidePointy,insideSizew,in
 		this.depth=20;
 		this.startX = this.posx;
 		this.startY = this.posy;
+		//this.colocaciox = posx;
+		//this.colocacioy = posy;
 	};
 	
 	//Sets the depth of the image
@@ -125,7 +132,9 @@ function Peca(ctxt,id,img,posx,posy,w,h,insidePointx,insidePointy,insideSizew,in
 	//Drags the image according to a relative increment
 	this.drag = function(incX,incY){
 		this.posx =  this.startX-incX;
+		///this.colocaciox = posx;
 		this.posy =  this.startY-incY;
+		//this.colocacioy = posy;
 	};
 
 }
@@ -156,10 +165,6 @@ function ImageAssociation(ctxt,id,nom,showW,showH)
    
    this.setNumPeca = function(numPeca){
 	   this.numPeca = numPeca;
-   };
-   
-   this.llocPeca = function(llocPeca){
-	   this.llocPeca = llocPeca;
    };
    
    this.setColocada = function(colocada){
@@ -281,10 +286,6 @@ function ImageMemory(ctxt,id,img,showW,showH)
    
    this.setNumPeca = function(numPeca){
 	   this.numPeca = numPeca;
-   };
-   
-   this.llocPeca = function(llocPeca){
-	   this.llocPeca = llocPeca;
    };
    
    this.setColocada = function(colocada){
@@ -429,18 +430,28 @@ function Grid(ctxt,lines,cols,imageSize,basePosition,iniPosition)
 	this.drawFonsJoc = function(colorfonsjoc,dist,margin) {
 		 this.ctxt.fillStyle = colorfonsjoc;
 		 
-		 if (dist == "AB" || dist == "BA"){
+		 if (dist == "AB"){
 			 this.ww = (this.imageW*2)+(margin*2)+12;
 			 this.hh = this.imageH+(margin*2);
+			 this.ctxt.fillRect(this.iniX-margin,this.iniY-margin,this.ww,this.hh);
+		 }else if(dist == "BA"){
+			 this.ww = (this.imageW*2)+(margin*2)+12;
+			 this.hh = this.imageH+(margin*2);
+			 this.ctxt.fillRect(this.theX-margin,this.theY-margin,this.ww,this.hh);
 		 }else if(dist == "0"){
 			 this.ww = this.imageW+(margin*2);
 			 this.hh = this.imageH+(margin*2);
+			 this.ctxt.fillRect(this.iniX-margin,this.iniY-margin,this.ww,this.hh);
+		 }else if(dist == "BUA"){
+			 this.ww = this.imageW+(margin*2);
+			 this.hh = (this.imageH*2)+(margin*2)+12;
+			 this.ctxt.fillRect(this.theX-margin,this.theY-margin,this.ww,this.hh);
 		 }else{
 			 this.ww = this.imageW+(margin*2);
 			 this.hh = (this.imageH*2)+(margin*2)+12;
+			 this.ctxt.fillRect(this.iniX-margin,this.iniY-margin,this.ww,this.hh);
 		 }
 
-		 this.ctxt.fillRect(this.iniX-margin,this.iniY-margin,this.ww,this.hh);
 	};
 }
 
@@ -509,7 +520,7 @@ function ImageData(id,context,src)
 
 function ImageSet()
 {
-	this.images = new Array(20);
+	this.images = new Array(120);
 	this.num_images = 0;
 	
 	//Adds an image to the collection

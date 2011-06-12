@@ -1,3 +1,7 @@
+/**
+ * @author Noelia Tuset
+ */
+ 
 var ipad=false;
 var android=false;
 
