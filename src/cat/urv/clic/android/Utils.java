@@ -196,7 +196,6 @@ public class Utils {
 		} catch (IOException e){
 			hiHaConnexio = false;
 		}
-		System.out.println("CONNEXIO" + hiHaConnexio);
 		return hiHaConnexio;
 	}
 		
