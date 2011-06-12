@@ -189,7 +189,7 @@ public class Utils {
 			URL url = new URL(ruta);			
 			// Obrim la connexió
 			URLConnection urlCon = url.openConnection();
-			InputStream is =  urlCon.getInputStream();
+			urlCon.getInputStream();
 			
 			hiHaConnexio = true;
 
@@ -234,7 +234,7 @@ public class Utils {
 			directori.mkdir();
 			
 			while((entry = zis.getNextEntry()) != null) {
-				//**Extracting				
+				// Extraiem els fitxers				
 				int count;
 				byte data[] = new byte[BUFFER];
 				
@@ -281,7 +281,6 @@ public class Utils {
 			copiaFitxer_InputStreamFile(is, fdesti);	
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -306,7 +305,7 @@ public class Utils {
 	
 	private static void recursiuXML(RecursiuXML objecteActual, Element nodeActual, String stringActual)
 	{
-		//Primer mirem els atributs del tag
+		// Primer mirem els atributs del tag
 		List<?> llistaAtributs =  nodeActual.getAttributes(); 	//Llegim els atributs
 		Iterator<?> atribut = llistaAtributs.iterator();
 		while(atribut.hasNext()){
@@ -318,12 +317,12 @@ public class Utils {
     		}
 		}
 		
-		//Desprem mirem el contingut del tag. p, title: ex: <p> XXXXX <p>
+		// Despres mirem el contingut del tag. p, title: ex: <p> XXXXX <p>
 		if(nodeActual.getTextTrim().compareTo("")!=0){
 			objecteActual.afegirAtribut(nodeActual.getName(), nodeActual.getTextTrim());
 		}
 		
-		//I despres mirem els fills del tag - Aqui entra la recursivitat
+		// I despres mirem els fills del tag - Aqui entra la recursivitat
 		List<?> llistaFills =  nodeActual.getChildren(); 	//Llegim els fills
 		Iterator<?> fill = llistaFills.iterator();
 		while(fill.hasNext()){
@@ -331,20 +330,20 @@ public class Utils {
 			
 			if(fillActual.getName().equals("cells")) {
 				CellList listCells = new CellList();
-				//*** Creada nova cell list
+				// *** Creada nova cell list
 				recursiuXML(listCells,fillActual, "");
-				//*** Guardant dades a la nova cell list
+				// *** Guardant dades a la nova cell list
 				objecteActual.afegirCells(listCells);
 				
 			} else if(fillActual.getName().equals("cell")) {
 				Cell cell = new Cell();
-				//*** Creada nova cell
+				// *** Creada nova cell
 				recursiuXML(cell,fillActual, "");
-				//*** Guardant dades a la nova cell
+				// *** Guardant dades a la nova cell
 				objecteActual.afegirCell(cell);
 				
 			} else {
-				//Si no es cap objecte nou, seguim omplint la hashing de l'objecte actual
+				// Si no es cap objecte nou, seguim omplint la hashing de l'objecte actual
 				if (stringActual.equals("")) {
 					recursiuXML(objecteActual, fillActual, fillActual.getName());	
 	    		} else {
