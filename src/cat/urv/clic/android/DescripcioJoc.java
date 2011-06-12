@@ -47,7 +47,6 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 		TextView text = (TextView) findViewById(R.id.titolJoc);
 		text.setText(joc.getNom());  
 
-
 		// Area
 		Iterator<String>it = joc.getAreaJoc().iterator();
 		String str = new String();
@@ -128,7 +127,6 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 	}	
 
 
-
 	// Clic del boto
 	public void onClick(View v) {
 
@@ -148,7 +146,6 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 			}else{
 				showDialog(DIALOG_CONNEXIO);
 			}			
-			//removeDialog(DIALOG1_KEY);
 		}else{
 			// Primer ens assegurem que la carpeta del joc seleccionat existeixi
 			// sinó existeix mostrem un missatge perquè se'l tornin a descarregar
@@ -166,9 +163,7 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 				intent.putExtra("idJoc", bundle.getInt("idJoc"));
 				startActivity(intent);	
 			}
-
 		}
-
 	}
 
 	
@@ -196,15 +191,14 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         }
         return null;
     }
-
 	
 	// Define the Handler that receives messages from the thread and update the progress
 	final Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
 
-			//Si ens arriba un missatge amb valor 100 es que ha acabat la descarrega
+			// Si ens arriba un missatge amb valor 100 es que ha acabat la descarrega
 			if (msg.arg1 >= 100){
-				//Desactivar el dialeg
+				// Desactivar el dialeg
 				progressDialog.dismiss();
 
 				// Canviar la imatge del botó
@@ -218,7 +212,6 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 		}
 	};
 
-	// Nested class that performs Data Downloading 
 	private class DownloadThread extends Thread {
 		Handler mHandler;
 

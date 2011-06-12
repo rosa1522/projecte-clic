@@ -9,13 +9,11 @@ import android.webkit.WebView;
 public class VistaWeb extends Activity {
 	private Bundle bundle;
 	
-	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     	setContentView(R.layout.webview);
-    	
-        
+    	        
     	WebView web = (WebView) findViewById(R.id.webView);
         web.getSettings().setJavaScriptEnabled(true);
         
@@ -29,7 +27,6 @@ public class VistaWeb extends Activity {
         
         bundle = getIntent().getExtras();
         bundle.getInt("idJoc");
-    	web.loadUrl("file://" + getFilesDir() + "/" +  bundle.getInt("idJoc") + "/index.html");
-        //web.loadUrl("file:///android_asset/index_assets.html");       
+    	web.loadUrl("file://" + getFilesDir() + "/" +  bundle.getInt("idJoc") + "/index.html");    
     }
 }
