@@ -5,7 +5,7 @@ import java.util.Hashtable;
 public class Idioma {
 
 	private Hashtable<String, String> idiomes;
-	private String[] nomsIdiomes;			// Taula que ens servirà per tenir la llista de noms ORDENADA 
+	private String[] nomsIdiomes;			// Taula que ens servirà per tenir-la llista de noms ORDENADA 
 	
 	public Idioma() {
 		idiomes = new Hashtable<String, String>();

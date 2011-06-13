@@ -28,7 +28,7 @@ public class Joc {
 		this.llengua = llengua;
 		this.nivellJoc = nivellJoc;
 		this.areaJoc = areaJoc;
-		this.descarregat = false;    // Es cert si el joc esta descarregat al mobil.
+		this.descarregat = false;    // Es cert si el joc està descarregat al mòbil.
 		this.ruta = ruta;		 
 		this.clic = clic;		 	// Path d'on es trobara l'arxiu del joc comprimit.
 		this.imatge = imatge;		 
