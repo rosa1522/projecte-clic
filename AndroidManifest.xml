@@ -12,6 +12,10 @@
             </intent-filter>
         </activity>
  
+        <activity android:name=".SplashScreen2"
+				  android:theme="@android:style/Theme.NoTitleBar">
+        </activity>
+         
         <activity android:name=".IniciAplicacio"
                   android:theme="@android:style/Theme.NoTitleBar">
 

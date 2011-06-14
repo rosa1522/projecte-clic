@@ -350,13 +350,13 @@ function SimpleAssociation()
 		}
 		
 		//COMPROVAR ESTAT ACTIVITAT
-		if(colocades==(numPeca-1)){
+		if(colocades==(numPeca-1))
+		{
 			this.acabat=true;
-			context.canvas.style.cursor = 'url(./images/ok.cur)';
-			if(!fet){
-				alert("Completed "+"./images/ok.png"+"hello");
-				fet=true;
-			}
+			context.canvas.style.cursor = 'url(./images/ok.cur), wait';
+			var im = new Image();
+			im.src=fitxeracabar;
+			context.drawImage(im,(canvasWidth/2)-64,(canvasHeight/2)-64,128,128);
 			/*if (reprodSoFi == "PLAY_AUDIO"){
 				soundManager.play(arxiuSoFi);
 				reprodSoFi = "false";

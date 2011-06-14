@@ -22,7 +22,9 @@ public class SplashScreen extends Activity {
 		Animation myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fadein);
 		img.startAnimation(myFadeInAnimation);  
 		
-		// Programem una tasca per tal que s'esperi una mica abans de passar a la següent activitat
+		
+		
+		// Programem una tasca per tal que s'esperi una mica abans de passar a la segï¿½ent activitat
 		// Ho fem aixi pq sino el telefon es bloquejaria si fem un sleep al thread principal
 		// Passat el temps es canvia cap a l'activity IniciAplicacio
 		Thread splashThread = new Thread() {
@@ -30,7 +32,7 @@ public class SplashScreen extends Activity {
 			public void run() {
 				try {
 					int waited = 0;
-					while (waited < 5000) {
+					while (waited < 4500) {
 						sleep(100);
 						waited += 100;
 					}
@@ -38,7 +40,7 @@ public class SplashScreen extends Activity {
 				} finally {
 					finish();
 					Intent i = new Intent();
-					i.setClassName("cat.urv.clic.android", "cat.urv.clic.android.IniciAplicacio");
+					i.setClassName("cat.urv.clic.android", "cat.urv.clic.android.SplashScreen2");
 					startActivity(i);
 				}
 			}

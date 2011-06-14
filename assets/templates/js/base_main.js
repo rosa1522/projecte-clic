@@ -42,12 +42,12 @@ function iniciaActivitat(canvas,num) {
 	return act;
 }
 
-
 var canvas = document.getElementById('canvas');
 var canvasControl = document.getElementById('canvasControl');
 var numActivitat = 0;
 var uiClic;
 var inicial, ultima;
+var fitxeracabar="file:///android_asset/templates/images/ok.png";
 
 /** Inicialitzem l'interficie d'usuari **/
 var UI = new UserInterface();
@@ -69,7 +69,7 @@ var mainLoop = function () {
 	uiClic = UI.checkClics();
 	if (uiClic == "next")
 	{	
-		/** Mirem si podem avançar a la seguent activitat **/
+		/** Mirem si podem avanï¿½ar a la seguent activitat **/
 		if (numActivitat < maxActivitats-1) {
 			/** Tanquem l'activitat anterior **/
 			activitatActual.end();
@@ -131,8 +131,8 @@ var mainLoop = function () {
 		if(!area){ area =""; }else{ area="** Area:\n"+area+"\n"; } 
 		if(!nivell){ nivell =""; }else{ nivell="** Nivell:\n"+nivell+"\n"; } 
 		if(!autor){ autor =""; }else{ autor="** Autor:\n"+autor+"\n"; } 
-		if(!llenguatge){ llenguatge =""; }else{ llenguatge="** Llenguatge:\n"+llenguatge+"\n"; } 
-		if(!org_nom){ org_nom =""; }else{ org_nom ="** Organització:\n"+org_nom+"\n"; } 
+		if(!llenguatge){ llenguatge =""; }else{ llenguatge="** Idioma:\n"+llenguatge+"\n"; } 
+		if(!org_nom){ org_nom =""; }else{ org_nom ="** Organitzaciï¿½:\n"+org_nom+"\n"; } 
 		if(!org_ciutat){ org_ciutat =""; }else{ org_ciutat ="\n"+org_ciutat+"\n"; } 
 		if(!org_estat){ org_estat =""; }else{ org_estat ="\n"+org_estat+"\n"; } 
 		if(!descripcio){ descripcio =""; }
@@ -140,10 +140,13 @@ var mainLoop = function () {
 			descripcio = descripcio.replace(/<ul>/g,"");
 			descripcio = descripcio.replace(/<li>/g,"");
 			descripcio = descripcio.replace(/<\/ul>/g,"");
-			descripcio="** Descripció:\n"+descripcio;
+			descripcio="** Descripciï¿½:\n"+descripcio;
 		} 
 		
-		alert("** Projecte:\n"+projecte+"\n"+area+nivell+autor+org_nom+org_ciutat+org_estat+llenguatge+descripcio);
+		var missatge = "** Projecte:\n"+projecte+"\n"+area+nivell+autor+org_nom+org_ciutat+org_estat+llenguatge+descripcio;
+		
+		alert(missatge);
+
 	}
 
 	if (activitatActual.acabat){

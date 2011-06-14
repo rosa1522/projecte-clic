@@ -261,26 +261,29 @@ function Memoria(){
 		}	
 	
 		//COMPROVAR ESTAT ACTIVITAT
-		if(colocades==(numPeca-1)){
+		if(colocades==(numPeca-1))
+		{
 			this.acabat=true;
-			context.canvas.style.cursor = 'url(./images/ok.cur), crosshair';
+			context.canvas.style.cursor = 'url(./images/ok.cur), wait';
+			var im = new Image();
+			im.src=fitxeracabar;
+			context.drawImage(im,(canvasWidth/2)-64,(canvasHeight/2)-64,128,128);
 			/*if (reprodSoFi == "PLAY_AUDIO"){
 				soundManager.play(arxiuSoFi);
 				reprodSoFi = "false";
 			}*/
 		}else{
 			segons++;
+			//DRAW THE IMAGE
+			if (!gradiente){
+				grid.drawFons(background, 0, canvasWidth, canvasHeight, 0);
+			}else{
+				grid.drawFons(colorfonsalt, colorfonsbaix, canvasWidth, canvasHeight, gradiente);
+			}
+			grid.drawFonsJoc(colorfonsjoc, "0", margin);
+			myImages.draw(colorhidden);
+			grid.draw(colorlinies);
 		}
-		
-		//DRAW THE IMAGE
-		if (!gradiente){
-			grid.drawFons(background, 0, canvasWidth, canvasHeight, 0);
-		}else{
-			grid.drawFons(colorfonsalt, colorfonsbaix, canvasWidth, canvasHeight, gradiente);
-		}
-		grid.drawFonsJoc(colorfonsjoc, "0", margin);
-		myImages.draw(colorhidden);
-		grid.draw(colorlinies);
 		
 		contextControl.fillStyle = "black";
 		contextControl.font = "14pt Arial";

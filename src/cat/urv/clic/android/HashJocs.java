@@ -66,8 +66,8 @@ public class HashJocs {
 	}
 	
 	// Li passem cert o fals i nomes ens tornara aquells que estiguin descarregats o no
-	public List<String> construirLlistaJocs(boolean descarregats){
-		List<String> llistaNomsJocs = new ArrayList<String>();
+	public ArrayList<String> construirLlistaJocs(boolean descarregats){
+		ArrayList<String> llistaNomsJocs = new ArrayList<String>();
 		for(Joc j: jocs.values()){
 			if (j.getDescarregat() == descarregats)
 			{
@@ -83,7 +83,7 @@ public class HashJocs {
 													  String titol, String autor){
 		List<String> llistaNomsJocsCondicions = new ArrayList<String>();
 		for(Joc j: jocs.values()){
-			// Fem la comparació (nivell.compareTo("tot") != 0) perquè no tingui en compte cap filtre si han seleccionat "Tots els ..." 
+			// Fem la comparaciï¿½ (nivell.compareTo("tot") != 0) perquï¿½ no tingui en compte cap filtre si han seleccionat "Tots els ..." 
 			if (((nivell.compareTo("tot") == 0) || (j.getNivellJoc().contains(nivell))) && 
 				((idioma.compareTo("tot") == 0) || (j.getLlengua().contains(idioma)))  && 
 				((area.compareTo("tot") == 0) || (j.getAreaJoc().contains(area)))  && 

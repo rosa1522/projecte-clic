@@ -43,19 +43,40 @@ public class LlistaJocsJClic extends Activity{
 			LayoutInflater inflater=getLayoutInflater();
 			View row=inflater.inflate(R.layout.joc_entry, parent, false);
 			TextView label=(TextView)row.findViewById(R.id.nomJoc);
-			label.setTextSize(25);
+			label.setTextSize(17);
 			label.setText(objects.get(position));
 			
 			//Poc optim!!  Estic accdint a la hash per a tots els jocs!!
 			Joc joc = ClicApplication.llistaJocs.cercarJoc(objects.get(position));
 			
+			ImageView icon=(ImageView)row.findViewById(R.id.separador);
+			icon.setImageResource(R.drawable.separador);	
 			
 			//Posem icones: Ara mateix vermell es si hi ha 1 sol valor i verd si n'hi ha varis
-			ImageView icon=(ImageView)row.findViewById(R.id.imatgeIdioma);
+			icon=(ImageView)row.findViewById(R.id.imatgeIdioma);
 			if (joc.getLlengua().size()>1 ) {
-				icon.setImageResource(R.drawable.cuadre2);
+				icon.setImageResource(R.drawable.idioma_no);
 			} else {
-				icon.setImageResource(R.drawable.cuadre);				
+				if(joc.getLlengua().get(0).equals("de")) icon.setImageResource(R.drawable.idioma_al);				
+				else if(joc.getLlengua().get(0).equals("en")) icon.setImageResource(R.drawable.idioma_an);				
+				else if(joc.getLlengua().get(0).equals("arn")) icon.setImageResource(R.drawable.idioma_ar);				
+				else if(joc.getLlengua().get(0).equals("eu")) icon.setImageResource(R.drawable.idioma_ba);				
+				else if(joc.getLlengua().get(0).equals("rmq")) icon.setImageResource(R.drawable.idioma_cl);				
+				else if(joc.getLlengua().get(0).equals("ca")) icon.setImageResource(R.drawable.idioma_ca);				
+				else if(joc.getLlengua().get(0).equals("es")) icon.setImageResource(R.drawable.idioma_es);				
+				else if(joc.getLlengua().get(0).equals("eo")) icon.setImageResource(R.drawable.idioma_eo);				
+				else if(joc.getLlengua().get(0).equals("fr")) icon.setImageResource(R.drawable.idioma_fr);				
+				else if(joc.getLlengua().get(0).equals("gl")) icon.setImageResource(R.drawable.idioma_ga);				
+				else if(joc.getLlengua().get(0).equals("el")) icon.setImageResource(R.drawable.idioma_gr);				
+				else if(joc.getLlengua().get(0).equals("it")) icon.setImageResource(R.drawable.idioma_it);				
+				else if(joc.getLlengua().get(0).equals("la")) icon.setImageResource(R.drawable.idioma_ll);				
+				else if(joc.getLlengua().get(0).equals("oc")) icon.setImageResource(R.drawable.idioma_oc);				
+				else if(joc.getLlengua().get(0).equals("pt")) icon.setImageResource(R.drawable.idioma_po);				
+				else if(joc.getLlengua().get(0).equals("ro")) icon.setImageResource(R.drawable.idioma_ro);				
+				else if(joc.getLlengua().get(0).equals("sv")) icon.setImageResource(R.drawable.idioma_su);				
+				else if(joc.getLlengua().get(0).equals("zh")) icon.setImageResource(R.drawable.idioma_xi);				
+				else if(joc.getLlengua().get(0).equals("tot")) icon.setImageResource(R.drawable.idioma_tot);	
+				else icon.setImageResource(R.drawable.idioma_no);
 			}
 			
 			icon=(ImageView)row.findViewById(R.id.imatgeNivell);
@@ -72,9 +93,19 @@ public class LlistaJocsJClic extends Activity{
 			
 			icon=(ImageView)row.findViewById(R.id.imatgeArea);
 			if (joc.getAreaJoc().size()>1 ) {
-				icon.setImageResource(R.drawable.cuadre2);
+				icon.setImageResource(R.drawable.area_no);
 			} else {
-				icon.setImageResource(R.drawable.cuadre);				
+				if(joc.getAreaJoc().get(0).equals("lleng")) icon.setImageResource(R.drawable.area_ll);				
+				else if(joc.getAreaJoc().get(0).equals("mat")) icon.setImageResource(R.drawable.area_ma);				
+				else if(joc.getAreaJoc().get(0).equals("soc")) icon.setImageResource(R.drawable.area_so);				
+				else if(joc.getAreaJoc().get(0).equals("exp")) icon.setImageResource(R.drawable.area_ex);				
+				else if(joc.getAreaJoc().get(0).equals("mus")) icon.setImageResource(R.drawable.area_mu);	
+				else if(joc.getAreaJoc().get(0).equals("vip")) icon.setImageResource(R.drawable.area_vi);	
+				else if(joc.getAreaJoc().get(0).equals("ef")) icon.setImageResource(R.drawable.area_ef);	
+				else if(joc.getAreaJoc().get(0).equals("tec")) icon.setImageResource(R.drawable.area_te);	
+				else if(joc.getAreaJoc().get(0).equals("div")) icon.setImageResource(R.drawable.area_di);	
+				else if(joc.getAreaJoc().get(0).equals("tot")) icon.setImageResource(R.drawable.area_tot);	
+				else icon.setImageResource(R.drawable.area_no);
 			}			
 
 			return row;
@@ -130,8 +161,8 @@ public class LlistaJocsJClic extends Activity{
     @Override
     public void onRestart(){
     	super.onRestart();
-    	List<String> llistaJocs = ClicApplication.llistaJocs.construirLlistaJocs(false);	   
-        ArrayAdapter<String> adp = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, llistaJocs);
+    	ArrayList<String> llistaJocs = ClicApplication.llistaJocs.construirLlistaJocs(false);	   
+        MyCustomAdapter adp = new MyCustomAdapter(this,android.R.layout.simple_list_item_1, llistaJocs);
         list.setAdapter(adp); 
     }
 }
