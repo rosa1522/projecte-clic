@@ -19,14 +19,14 @@ public class Nivell {
 	public void afegirTotsNivells(){
 		this.nivells.put("tot", "Tots els nivells");
 		this.nivells.put("ei", "Infantil (3-6)");
-		this.nivells.put("ep", "Prim√†ria (6-12)");
-		this.nivells.put("eso", "Secund√†ria (12-16)");
+		this.nivells.put("ep", "Prim‡ria (6-12)");
+		this.nivells.put("eso", "Secund‡ria (12-16)");
 		this.nivells.put("ba", "Batxillerat (16-18)");
 
 		this.nomsNivells[0] = "Tots els nivells";
 		this.nomsNivells[1] = "Infantil (3-6)";
-		this.nomsNivells[2] = "Prim√†ria (6-12)";
-		this.nomsNivells[3] = "Secund√†ria (12-16)";
+		this.nomsNivells[2] = "Prim‡ria (6-12)";
+		this.nomsNivells[3] = "Secund‡ria (12-16)";
 		this.nomsNivells[4] = "Batxillerat (16-18)";
 	}
 	

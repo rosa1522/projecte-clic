@@ -32,29 +32,25 @@ public class LlistaJocsJClic extends Activity{
 		public MyCustomAdapter(Context context, int textViewResourceId, ArrayList<String> objects) {
 			super(context, textViewResourceId, objects);
 			this.objects = objects;
-			// TODO Auto-generated constructor stub
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			// TODO Auto-generated method stub
-			//return super.getView(position, convertView, parent);
-			
-			LayoutInflater inflater=getLayoutInflater();
-			View row=inflater.inflate(R.layout.joc_entry, parent, false);
-			TextView label=(TextView)row.findViewById(R.id.nomJoc);
+			LayoutInflater inflater = getLayoutInflater();
+			View row = inflater.inflate(R.layout.joc_entry, parent, false);
+			TextView label = (TextView)row.findViewById(R.id.nomJoc);
 			label.setTextSize(17);
 			label.setText(objects.get(position));
 			
-			//Poc optim!!  Estic accdint a la hash per a tots els jocs!!
 			Joc joc = ClicApplication.llistaJocs.cercarJoc(objects.get(position));
 			
 			ImageView icon=(ImageView)row.findViewById(R.id.separador);
 			icon.setImageResource(R.drawable.separador);	
 			
-			//Posem icones: Ara mateix vermell es si hi ha 1 sol valor i verd si n'hi ha varis
-			icon=(ImageView)row.findViewById(R.id.imatgeIdioma);
-			if (joc.getLlengua().size()>1 ) {
+			// Posem icones, si té més d'un idioma posarem l'icone sense nom
+			// sinó podem les inicials de l'idioma del joc
+			icon = (ImageView)row.findViewById(R.id.imatgeIdioma);
+			if (joc.getLlengua().size() > 1 ) {
 				icon.setImageResource(R.drawable.idioma_no);
 			} else {
 				if(joc.getLlengua().get(0).equals("de")) icon.setImageResource(R.drawable.idioma_al);				
@@ -79,7 +75,7 @@ public class LlistaJocsJClic extends Activity{
 				else icon.setImageResource(R.drawable.idioma_no);
 			}
 			
-			icon=(ImageView)row.findViewById(R.id.imatgeNivell);
+			icon = (ImageView)row.findViewById(R.id.imatgeNivell);
 			if (joc.getNivellJoc().size()>1 ) {
 				icon.setImageResource(R.drawable.nivell_no);
 			} else {
@@ -91,7 +87,7 @@ public class LlistaJocsJClic extends Activity{
 				else icon.setImageResource(R.drawable.nivell_no);
 			}
 			
-			icon=(ImageView)row.findViewById(R.id.imatgeArea);
+			icon =(ImageView)row.findViewById(R.id.imatgeArea);
 			if (joc.getAreaJoc().size()>1 ) {
 				icon.setImageResource(R.drawable.area_no);
 			} else {
