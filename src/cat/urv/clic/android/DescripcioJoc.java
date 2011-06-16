@@ -192,7 +192,6 @@ public class DescripcioJoc extends Activity implements OnClickListener{
         return null;
     }
 	
-	// Define the Handler that receives messages from the thread and update the progress
 	final Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
 

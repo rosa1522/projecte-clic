@@ -1,10 +1,6 @@
 package cat.urv.clic.android;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import cat.urv.clic.android.LlistaJocsJClic.MyCustomAdapter;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -32,25 +28,19 @@ public class IniciAplicacio extends Activity {
 		public MyCustomAdapter(Context context, int textViewResourceId, ArrayList<String> objects) {
 			super(context, textViewResourceId, objects);
 			this.objects = objects;
-			// TODO Auto-generated constructor stub
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			// TODO Auto-generated method stub
-			//return super.getView(position, convertView, parent);
-			
 			LayoutInflater inflater=getLayoutInflater();
-			View row=inflater.inflate(R.layout.joc_entry, parent, false);
-			TextView label=(TextView)row.findViewById(R.id.nomJoc);
+			View row = inflater.inflate(R.layout.joc_entry, parent, false);
+			TextView label = (TextView)row.findViewById(R.id.nomJoc);
 			label.setTextSize(17);
-			label.setText(objects.get(position));
+			label.setText("  " + objects.get(position));
 			
-			//Poc optim!!  Estic accdint a la hash per a tots els jocs!!
 			Joc joc = ClicApplication.llistaJocs.cercarJoc(objects.get(position));
 			
-			ImageView icon=(ImageView)row.findViewById(R.id.separador);
-			icon.setImageResource(R.drawable.separador);	
+			ImageView icon;
 			
 			//Posem icones: Ara mateix vermell es si hi ha 1 sol valor i verd si n'hi ha varis
 			icon=(ImageView)row.findViewById(R.id.imatgeIdioma);

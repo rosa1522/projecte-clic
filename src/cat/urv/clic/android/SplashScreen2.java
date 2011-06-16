@@ -13,7 +13,7 @@ public class SplashScreen2 extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
 		
-		// Carreguem l'imatge del logo al layout
+		// Carreguem l'imatge del logotip al layout
 		ImageView img = (ImageView) findViewById(R.id.imageView1);
 		img.setImageResource(R.drawable.clic50);
 	      
@@ -22,9 +22,7 @@ public class SplashScreen2 extends Activity {
 		Animation myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fadein);
 		img.startAnimation(myFadeInAnimation);  
 		
-		
-		
-		// Programem una tasca per tal que s'esperi una mica abans de passar a la segï¿½ent activitat
+		// Programem una tasca per tal que s'esperi una mica abans de passar a la següent activitat
 		// Ho fem aixi pq sino el telefon es bloquejaria si fem un sleep al thread principal
 		// Passat el temps es canvia cap a l'activity IniciAplicacio
 		Thread splashThread = new Thread() {

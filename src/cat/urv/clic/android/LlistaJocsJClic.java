@@ -1,8 +1,6 @@
 package cat.urv.clic.android;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -40,12 +38,11 @@ public class LlistaJocsJClic extends Activity{
 			View row = inflater.inflate(R.layout.joc_entry, parent, false);
 			TextView label = (TextView)row.findViewById(R.id.nomJoc);
 			label.setTextSize(17);
-			label.setText(objects.get(position));
+			label.setText("  " + objects.get(position));
 			
 			Joc joc = ClicApplication.llistaJocs.cercarJoc(objects.get(position));
 			
-			ImageView icon=(ImageView)row.findViewById(R.id.separador);
-			icon.setImageResource(R.drawable.separador);	
+			ImageView icon;
 			
 			// Posem icones, si té més d'un idioma posarem l'icone sense nom
 			// sinó podem les inicials de l'idioma del joc

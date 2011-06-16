@@ -24,11 +24,6 @@
   		android:layout_width="30dip"
   		android:layout_height="30dip"
   		 />
-  	<ImageView
-  		android:id="@+id/separador"
-  		android:layout_width="10dip"
-  		android:layout_height="50dip"
-  		 />
    	<TextView
   		android:id="@+id/nomJoc"
   		android:layout_width="fill_parent"
