@@ -122,6 +122,7 @@ public class Utils {
 		InputStreamReader isr = null;
 
 		try {	
+			// Obtenim el fitxer descarregats.xml de dintre el dispositiu mobil
 			FileInputStream is = c.openFileInput("descarregats.xml");									
 			isr = new InputStreamReader(is);
 
@@ -146,7 +147,9 @@ public class Utils {
 	public static void exportarJocsDescarregatsXML(Context c) {
 		try{			
 	    	PrintStream ps = new PrintStream(new FileOutputStream(c.getFilesDir()+"/descarregats.xml",false));
-				
+			
+	    	// Grabem tots els identificadors dels jocs descarregats per l'usuari
+	    	// al fitxer descarregats.xml de dintre el dispositiu
 	    	List<Integer> llistaId = ClicApplication.llistaJocs.construirLlistaIdJocs(true);
 		 
 	    	ps.println("<?xml version='1.0' encoding='utf-8'?>");
@@ -187,7 +190,7 @@ public class Utils {
 		try {
 			// Url del joc
 			URL url = new URL(ruta);			
-			// Obrim la connexió
+			// Provem d'obrir la connexió d'Internet
 			URLConnection urlCon = url.openConnection();
 			urlCon.getInputStream();
 			
@@ -287,7 +290,7 @@ public class Utils {
 		
 	public static void creacioActivitat(Context c, String idJoc) {						
 		try {
-			// Copiem el index.html
+			// Copiem el fitxer index.html de dintre l'assets a la carpeta del joc estem descarregant
 			InputStream forigen =  c.getAssets().open("templates/index_assets.html");							
 			File fdesti = new File(c.getFilesDir() + "/" + idJoc +"/index.html");				
 			copiaFitxer_InputStreamFile (forigen, fdesti);
@@ -321,8 +324,8 @@ public class Utils {
 			objecteActual.afegirAtribut(nodeActual.getName(), nodeActual.getTextTrim());
 		}
 		
-		// I despres mirem els fills del tag - Aqui entra la recursivitat
-		List<?> llistaFills =  nodeActual.getChildren(); 	//Llegim els fills
+		// I despres mirem els fills del tag (recursivitat)
+		List<?> llistaFills =  nodeActual.getChildren(); 	// Llegim els fills
 		Iterator<?> fill = llistaFills.iterator();
 		while(fill.hasNext()){
 			Element fillActual = (Element) fill.next();
@@ -359,6 +362,7 @@ public class Utils {
 		String[] llista_arxius = fitxer.list();
 		int i = 0;
 		boolean fitxerTrobat = false;
+		// Busquem el fitxer amb extensió .jclic de dintre la carpeta del joc
 		while((i < llista_arxius.length) && (!fitxerTrobat))
 		{
 		    if(llista_arxius[i].endsWith("jclic"))
@@ -368,7 +372,6 @@ public class Utils {
 		    }  
 		    i++;
 		}
-		
 		return nomFitxerJclic;
 	}
 	
@@ -405,13 +408,14 @@ public class Utils {
 					// Indiquem el numero d'activitats del fitxer
 					fitxerData.println("var maxActivitats = " + llistaActivities.size() + ";");
 					while ( actList.hasNext() ){
-						//Creem una activitat
+						// Creem una activitat
 						Activitat objecteActivitat = new Activitat();
-						Element nodeActivitat = (Element) actList.next();;
+						Element nodeActivitat = (Element) actList.next();
 					
-						//Carreguem tot el material a la nova activitat
+						// Carreguem tot el material a la nova activitat
 						recursiuXML(objecteActivitat,nodeActivitat, "");
-						//Afegim l'activitat ja plena a la llista d'activitats del clic
+						
+						// Afegim l'activitat ja plena a la llista d'activitats del clic
 						clic.afegirActivitat(nodeActivitat.getAttributeValue("name"),objecteActivitat);
 					}
 				} else if (currentNode.getName().equals("sequence")) {
@@ -421,7 +425,7 @@ public class Utils {
 					while ( itList.hasNext() ){
 						Element node = (Element) itList.next();;
 					
-						//Afegim l'item ja ple a la taula de sequence del clic
+						// Afegim l'item ja ple a la taula de sequence del clic
 						sequence.afegirItem(node.getAttributeValue("name"));
 					}
 					clic.afegirSequence(sequence);
@@ -432,9 +436,9 @@ public class Utils {
 						Element nodeSetting = (Element) setList.next();
 						if((nodeSetting.getName().compareTo("revision")!=0)&&(nodeSetting.getName().compareTo("description")!=0)){
 							recursiuXML(settings,nodeSetting, nodeSetting.getName());
-						}else if (nodeSetting.getName().compareTo("description")==0){
-							//Si es descripcio es guarda en una taula perque sorti en l'ordre correcte.
-							List<?> llistaFills =  nodeSetting.getChildren(); 	//Llegim els fills
+						}else if (nodeSetting.getName().compareTo("description") == 0){
+							// Si es descripcio es guarda a una taula perque surti en l'ordre correcte
+							List<?> llistaFills =  nodeSetting.getChildren(); 	// Llegim els fills
 							Iterator<?> fill = llistaFills.iterator();
 							settings.midaDescripcio(llistaFills.size());
 							while(fill.hasNext()){
@@ -447,7 +451,7 @@ public class Utils {
 				}
 			}
 
-			//Creem el fitxer JSON
+			// Creem el fitxer JSON
 			Gson gson = new Gson(); 
 			String jsonOutputSettings = gson.toJson(clic.getSettings()); 
 			

@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Activitat implements RecursiuXML {
 
-	protected List<CellList> celllist; //Guarda llista de cel.les
-	protected List<Cell> cell; //Guarda cel.les sueltes, com per exemple la inicial i la final
+	protected List<CellList> celllist; // Guarda llista de cel.les
+	protected List<Cell> cell; // Guarda cel.les sueltes, com per exemple la inicial i la final
 	protected HashMap<String, Object> atributsActivitat;
 
 	public Activitat() {

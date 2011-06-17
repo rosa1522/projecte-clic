@@ -120,7 +120,7 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 		// Boto
 		bInstalarJoc = (ImageButton) findViewById(R.id.instalar);
 		if (joc.getDescarregat()) {
-			// Si el joc ja el tenim descarregat li posem al boto la imatge de jugar
+			// Si el joc ja el tenim descarregat li posem la imatge de jugar al boto 
 			bInstalarJoc.setImageResource(R.drawable.play);
 		};
 		bInstalarJoc.setOnClickListener( this );  
@@ -130,7 +130,7 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 	// Clic del boto
 	public void onClick(View v) {
 
-		// Si el joc no està instal·lat, l'hem de descarregat i canviar la imatge del botó perquè
+		// Si el joc no està instal·lat, l'hem de descarregar i canviar la imatge del botó perquè
 		// l'usuari no torni a donar al botó per poder jugar
 		System.out.println("DESCARREGAT" + ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getDescarregat());
 		if (!ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getDescarregat()) {
@@ -203,7 +203,7 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 				// Canviar la imatge del botó
 				bInstalarJoc.setImageResource(R.drawable.play);
 
-				// Posar la imatge de Jugar
+				// Posar la imatge del joc
 				ImageView imageView = (ImageView) findViewById(R.id.imatgeJoc);
 				BitmapDrawable bitmap = new BitmapDrawable(getFilesDir() + "/" + idJoc + "/" + idJoc + ".jpg");
 				imageView.setImageDrawable(bitmap);

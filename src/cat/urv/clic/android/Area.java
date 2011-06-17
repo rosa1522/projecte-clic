@@ -5,7 +5,7 @@ import java.util.Hashtable;
 public class Area {
 
 	private Hashtable<String, String> arees;
-	private String[] nomsArees;			// Taula que ens servirï¿½ per tenir-la llista de noms ORDENADA 
+	private String[] nomsArees;			// Taula que ens servirà per tenir la llista de noms ORDENADA 
 	
 	public Area() {
 		arees = new Hashtable<String, String>();
@@ -35,7 +35,7 @@ public class Area {
 		this.nomsArees[4] = "Ciències experimentals";		
 		this.nomsArees[5] = "Música";		
 		this.nomsArees[6] = "Visual i plàstica";
-		this.nomsArees[7] = "EducaciÃ³ física";		
+		this.nomsArees[7] = "Educació física";		
 		this.nomsArees[8] = "Tecnologies";		
 		this.nomsArees[9] = "Diversos";	
 

@@ -78,12 +78,12 @@ public class HashJocs {
 		return llistaNomsJocs;
 	}
 	
-	// Li passem totes les condicions de cerca i mirem els jocs que compleixen la cerca introduida
+	// Li passem totes les condicions de cerca i mirem els jocs que compleixen els criteris introduits
 	public List<String> construirLlistaJocsCondicions(String nivell, String idioma, String area,
 													  String titol, String autor){
 		List<String> llistaNomsJocsCondicions = new ArrayList<String>();
 		for(Joc j: jocs.values()){
-			// Fem la comparaci� (nivell.compareTo("tot") != 0) perqu� no tingui en compte cap filtre si han seleccionat "Tots els ..." 
+			// Fem la comparacio (nivell.compareTo("tot") != 0) perque no tingui en compte cap filtre si han seleccionat "Tots els ..." 
 			if (((nivell.compareTo("tot") == 0) || (j.getNivellJoc().contains(nivell))) && 
 				((idioma.compareTo("tot") == 0) || (j.getLlengua().contains(idioma)))  && 
 				((area.compareTo("tot") == 0) || (j.getAreaJoc().contains(area)))  && 

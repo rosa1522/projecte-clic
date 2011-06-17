@@ -33,17 +33,22 @@ public class IniciAplicacio extends Activity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			LayoutInflater inflater=getLayoutInflater();
+			// joc_entry es on hi ha la vista que hi haurà a cada fila de la llista
 			View row = inflater.inflate(R.layout.joc_entry, parent, false);
+			
+			// Posem el nom del joc a la vista de la fila de la llista
 			TextView label = (TextView)row.findViewById(R.id.nomJoc);
 			label.setTextSize(17);
 			label.setText("  " + objects.get(position));
 			
 			Joc joc = ClicApplication.llistaJocs.cercarJoc(objects.get(position));
 			
+			// Posem icones a la llista al costat de cada nom del joc
 			ImageView icon;
-			
-			//Posem icones: Ara mateix vermell es si hi ha 1 sol valor i verd si n'hi ha varis
-			icon=(ImageView)row.findViewById(R.id.imatgeIdioma);
+						
+			// Si el joc només té un idioma posem l'icona amb les inicials de l'idioma
+			// sino, posem l'icona sense cap inicial
+			icon = (ImageView)row.findViewById(R.id.imatgeIdioma);
 			if (joc.getLlengua().size()>1 ) {
 				icon.setImageResource(R.drawable.idioma_no);
 			} else {
@@ -69,7 +74,9 @@ public class IniciAplicacio extends Activity {
 				else icon.setImageResource(R.drawable.idioma_no);
 			}
 			
-			icon=(ImageView)row.findViewById(R.id.imatgeNivell);
+			// Si el joc només té un nivell posem l'icona amb les inicials del nivell
+			// sino, posem l'icona sense cap inicial
+			icon = (ImageView)row.findViewById(R.id.imatgeNivell);
 			if (joc.getNivellJoc().size()>1 ) {
 				icon.setImageResource(R.drawable.nivell_no);
 			} else {
@@ -81,7 +88,9 @@ public class IniciAplicacio extends Activity {
 				else icon.setImageResource(R.drawable.nivell_no);
 			}
 			
-			icon=(ImageView)row.findViewById(R.id.imatgeArea);
+			// Si el joc només té una àrea posem l'icona amb les inicials de l'àrea
+			// sino, posem l'icona sense cap inicial
+			icon = (ImageView)row.findViewById(R.id.imatgeArea);
 			if (joc.getAreaJoc().size()>1 ) {
 				icon.setImageResource(R.drawable.area_no);
 			} else {
@@ -153,6 +162,8 @@ public class IniciAplicacio extends Activity {
     @Override
     public void onRestart(){
     	super.onRestart();
+    	
+    	// S'acualitza la llista de jocs descarregats
     	ArrayList<String> llistaJocs = ClicApplication.llistaJocs.construirLlistaJocs(true);	   
         MyCustomAdapter adp = new MyCustomAdapter(this,android.R.layout.simple_list_item_1, llistaJocs);
         list.setAdapter(adp); 

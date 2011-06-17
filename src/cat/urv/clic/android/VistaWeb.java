@@ -17,6 +17,8 @@ public class VistaWeb extends Activity {
     	WebView web = (WebView) findViewById(R.id.webView);
         web.getSettings().setJavaScriptEnabled(true);
         
+        // Habilitem l'opcio per poder veure els avisos i controls d'errors de la pagina web 
+        // a la consola de l'eclipse
         web.setWebChromeClient(new WebChromeClient() {
         	  public void onConsoleMessage(String message, int lineNumber, String sourceID) {
         	    Log.d("MyApplication", message + " -- From line "

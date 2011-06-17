@@ -12,24 +12,22 @@
   	<ImageView
   		android:id="@+id/imatgeIdioma"
   		android:layout_width="30dip"
-  		android:layout_height="30dip" 
-  		/>
+  		android:layout_height="30dip" />
+  		
   	<ImageView
   		android:id="@+id/imatgeNivell"
   		android:layout_width="30dip"
-  		android:layout_height="30dip" 
-  		/>
+  		android:layout_height="30dip" />
    	<ImageView
   		android:id="@+id/imatgeArea"
   		android:layout_width="30dip"
-  		android:layout_height="30dip"
-  		 />
+  		android:layout_height="30dip"  	/>
+   
    	<TextView
   		android:id="@+id/nomJoc"
   		android:layout_width="fill_parent"
   		android:layout_height="fill_parent"
-        android:gravity="left|center_vertical"
-         />  		
+        android:gravity="left|center_vertical"/>  		
   	
   </LinearLayout>
 </FrameLayout>

@@ -5,7 +5,7 @@ import java.util.Hashtable;
 public class Nivell {
 
 	private Hashtable<String, String> nivells;
-	private String[] nomsNivells;			// Taula que ens servir� per tenir-la llista de noms ORDENADA
+	private String[] nomsNivells;			// Taula que ens servira per tenir la llista de noms ORDENADA
 	
 	public Nivell() {
 		nivells = new Hashtable<String, String>();

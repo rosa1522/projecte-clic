@@ -13,7 +13,7 @@ public class SplashScreen2 extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
 		
-		// Carreguem l'imatge del logotip al layout
+		// Carreguem la imatge del logotip al layout
 		ImageView img = (ImageView) findViewById(R.id.imageView1);
 		img.setImageResource(R.drawable.clic50);
 	      
