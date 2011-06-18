@@ -18,6 +18,7 @@ function UserInterface()
 			              { "src" : 'file:///android_asset/templates/images/orange_right.png', "posx" : 10, "posy" : 65, "w" : 60, "h" : 60},
 			              { "src" : 'file:///android_asset/templates/images/orange_update.png', "posx" : 10, "posy" : 125, "w" : 60, "h" : 60},
 			              { "src" : 'file:///android_asset/templates/images/inf.png', "posx" : 50, "posy" : 345, "w" : 30, "h" : 30},
+			              { "src" : 'file:///android_asset/templates/images/missatge.png', "posx" : 4, "posy" : 342, "w" : 30, "h" : 30},
 			         ];		
 	} else {
 		var ctrlImages = [
@@ -126,6 +127,7 @@ function UserInterface()
 				if( clicked.id == 'image1'){ControlData.active=false; return "next";}
 				if( clicked.id == 'image2'){ControlData.active=false; return "update";}
 				if( clicked.id == 'image3'){ControlData.active=false; return "info";}
+				if( clicked.id == 'image4'){ControlData.active=false; return "message";}
 			}	
 		} else {
 			clicked='none';

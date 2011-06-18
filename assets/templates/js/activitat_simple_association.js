@@ -28,7 +28,7 @@ function SimpleAssociation()
 	var aciertos = 0;
 	var colocades=0;
 	var numPeca=1;
-	var lines, cols, w, h, w2, h2, grid, peces, dist, arxiuSoFi, reprodSoFi, reprodSo;
+	var lines, cols, w, h, w2, h2, grid, peces, dist;
 	var colorlinies, colorhidden, colorfons, colorFonsNoms, background;
 	var theX, theY, incrShowX, incrShowY, capes, numPrimer, numSegon;
 	var fet=false;
@@ -82,12 +82,6 @@ function SimpleAssociation()
 		if (!colorlinies) colorlinies = "#00000";
 		colorlinies = "#"+colorlinies.replace(control,"");
 		
-		/*reprodSo = activityData.cell[0].atributs['media-type'];
-		reprodSoFi = activityData.cell[1].atributs['media-type'];
-		
-		arxiuSo = activityData.cell[0].atributs['media-file'];
-		arxiuSoFi = activityData.cell[1].atributs['media-file'];
-		*/
 		colorFonsNoms = "FFFFFF";
 		colorFonsNomsSota = "AAFFAA";
 		
@@ -282,18 +276,7 @@ function SimpleAssociation()
 			pecesSegon[o].setHidden(false);
 			myImages.add(pecesSegon[o]);
 		}
-		/*
-		if (reprodSo == "PLAY_AUDIO")
-		{	
-			soundManager.url = "./sound/swf/";
-			soundManager.flashVersion = 9;
-			soundManager.useFlashBlock = false;
-			soundManager.onready(function() {
-				soundManager.createSound(arxiuSo,arxiuSo);
-				soundManager.createSound(arxiuSoFi,arxiuSoFi);
-				soundManager.play(arxiuSo);
-			});
-		}*/
+
 	};
 	
 	//Aqui dins va el codi de l'activitat
@@ -353,14 +336,9 @@ function SimpleAssociation()
 		if(colocades==(numPeca-1))
 		{
 			this.acabat=true;
-			context.canvas.style.cursor = 'url(./images/ok.cur), wait';
 			var im = new Image();
 			im.src=fitxeracabar;
 			context.drawImage(im,(canvasWidth/2)-64,(canvasHeight/2)-64,128,128);
-			/*if (reprodSoFi == "PLAY_AUDIO"){
-				soundManager.play(arxiuSoFi);
-				reprodSoFi = "false";
-			}*/
 		}else{
 			//DRAW THE IMAGE
 			if (!gradiente){

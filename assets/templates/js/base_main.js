@@ -69,7 +69,7 @@ var mainLoop = function () {
 	uiClic = UI.checkClics();
 	if (uiClic == "next")
 	{	
-		/** Mirem si podem avanï¿½ar a la seguent activitat **/
+		/** Mirem si podem avançar a la seguent activitat **/
 		if (numActivitat < maxActivitats-1) {
 			/** Tanquem l'activitat anterior **/
 			activitatActual.end();
@@ -132,7 +132,7 @@ var mainLoop = function () {
 		if(!nivell){ nivell =""; }else{ nivell="** Nivell:\n"+nivell+"\n"; } 
 		if(!autor){ autor =""; }else{ autor="** Autor:\n"+autor+"\n"; } 
 		if(!llenguatge){ llenguatge =""; }else{ llenguatge="** Idioma:\n"+llenguatge+"\n"; } 
-		if(!org_nom){ org_nom =""; }else{ org_nom ="** Organitzaciï¿½:\n"+org_nom+"\n"; } 
+		if(!org_nom){ org_nom =""; }else{ org_nom ="** Organització:\n"+org_nom+"\n"; } 
 		if(!org_ciutat){ org_ciutat =""; }else{ org_ciutat ="\n"+org_ciutat+"\n"; } 
 		if(!org_estat){ org_estat =""; }else{ org_estat ="\n"+org_estat+"\n"; } 
 		if(!descripcio){ descripcio =""; }
@@ -140,13 +140,20 @@ var mainLoop = function () {
 			descripcio = descripcio.replace(/<ul>/g,"");
 			descripcio = descripcio.replace(/<li>/g,"");
 			descripcio = descripcio.replace(/<\/ul>/g,"");
-			descripcio="** Descripciï¿½:\n"+descripcio;
+			descripcio="** Descripció:\n"+descripcio;
 		} 
 		
 		var missatge = "** Projecte:\n"+projecte+"\n"+area+nivell+autor+org_nom+org_ciutat+org_estat+llenguatge+descripcio;
 		
 		alert(missatge);
 
+	}else if (uiClic == "message"){
+		var text = dadesActivitat.activitats[numActivitat].cell[0].atributs.p;
+
+		if (text)
+		{
+			alert(text);
+		}
 	}
 
 	if (activitatActual.acabat){
@@ -158,7 +165,7 @@ var mainLoop = function () {
 	/** Despres actualitzem l'activitat que tenim en progres **/
 	if (activitatActual != "NO"){  
 		ultima = numActivitat; 
-		activitatActual.run(canvasControl);
+		activitatActual.run();
 	}
 };
 

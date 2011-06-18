@@ -1,6 +1,6 @@
 //S'han de treure quan estigui executant-se sobre ios o android
 var ipad=false;
-var android=false;
+var android=true;
 
 //Save if we have an android or an ios device
 if ( navigator.userAgent.match(/iPad/i) != null) { ipad = true; }

@@ -35,7 +35,6 @@ function Memoria(){
 	var intentos = 0;
 	var segons = 0;
 	var aciertos = 0;
-	var arxiuSoFi, reprodSoFi, reprodSo;
 	
 	//Funcio per a inicialitzar l'activitat a partir de les seves dades
 	this.init = function(canvas, activityData)
@@ -78,13 +77,7 @@ function Memoria(){
 		colorlinies = activityData.celllist[0].atributs['style-color-border'];
 		if (!colorlinies) colorlinies = "#00000";
 		colorlinies = "#"+colorlinies.replace(control,"");
-		
-		/*reprodSo = activityData.cell[0].atributs['media-type'];
-		reprodSoFi = activityData.cell[1].atributs['media-type'];
-		
-		arxiuSo = activityData.cell[0].atributs['media-file'];
-		arxiuSoFi = activityData.cell[1].atributs['media-file'];
-		*/
+
 		/**
 		 * El tauler de joc depenent de la distribucio que tingui
 		 * s'adapta a unes mides que es puguin mostrar les dades
@@ -178,18 +171,7 @@ function Memoria(){
 		for (var o=0;o<peces.length;o++){	
 			myImages.add(peces[o]);
 		}
-		/*
-		if (reprodSo == "PLAY_AUDIO")
-		{	
-			soundManager.url = "./sound/swf/";
-			soundManager.flashVersion = 9;
-			soundManager.useFlashBlock = false;
-			soundManager.onready(function() {
-				soundManager.createSound(arxiuSo,arxiuSo);
-				soundManager.createSound(arxiuSoFi,arxiuSoFi);
-				soundManager.play(arxiuSo);
-			});
-		}*/
+
 	};
 	
 	//Aqui dins va el codi de l'activitat
@@ -264,14 +246,9 @@ function Memoria(){
 		if(colocades==(numPeca-1))
 		{
 			this.acabat=true;
-			context.canvas.style.cursor = 'url(./images/ok.cur), wait';
 			var im = new Image();
 			im.src=fitxeracabar;
 			context.drawImage(im,(canvasWidth/2)-64,(canvasHeight/2)-64,128,128);
-			/*if (reprodSoFi == "PLAY_AUDIO"){
-				soundManager.play(arxiuSoFi);
-				reprodSoFi = "false";
-			}*/
 		}else{
 			segons++;
 			//DRAW THE IMAGE

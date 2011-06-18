@@ -26,7 +26,7 @@ function PuzzleDoble(){
 	var intentos = 0;
 	var segons = 0;
 	var aciertos = 0;
-	var arxiuSoFi, reprodSoFi, reprodSo, joc;
+	var joc;
 	
 	//Funcio per a inicialitzar l'activitat a partir de les seves dades
 	this.init = function(canvas, activityData){
@@ -65,16 +65,7 @@ function PuzzleDoble(){
 		colorinactiu = activityData.celllist[0].atributs['style-color-inactive'];
 		if (!colorinactiu) colorinactiu = "0x00000";
 		colorinactiu = "#"+colorinactiu.replace(control,"");
-		
-		/*reprodSo = activityData.cell[0].atributs['media-type'];
-		reprodSoFi = activityData.cell[1].atributs['media-type'];
-		
-		arxiuSo = activityData.cell[0].atributs['media-file'];
-		arxiuSoFi = activityData.cell[1].atributs['media-file'];
-		
-		joc = activityData.celllist[0].atributs['shaper-class'];
-		
-		if (joc == "@ClassicJigSaw"){*/
+
 		
 			myImage.onload = function() {
 				imageLoaded = true;
@@ -177,20 +168,7 @@ function PuzzleDoble(){
 			};
 			
 			myImage.src = activityData.celllist[0].atributs.image;
-			
-		
-		/*
-		if (reprodSo == "PLAY_AUDIO")
-		{
-			soundManager.url = "./sound/swf/";
-			soundManager.flashVersion = 9;
-			soundManager.useFlashBlock = false;
-			soundManager.onready(function() {
-				soundManager.createSound(arxiuSo,arxiuSo);
-				soundManager.createSound(arxiuSoFi,arxiuSoFi);
-				soundManager.play(arxiuSo);
-			});
-		}*/
+
 	};
 	
 	//Aqui dins va el codi de l'activitat
@@ -247,11 +225,9 @@ function PuzzleDoble(){
 		//COMPROVAR ESTAT ACTIVITAT
 		if(colocades==lines*cols){
 			this.acabat=true;
-			context.canvas.style.cursor = 'url(./images/ok.cur), wait';
 			var im = new Image();
 			im.src=fitxeracabar;
 			context.drawImage(im,(canvasWidth/2)-64,(canvasHeight/2)-64,128,128);
-			//if (reprodSoFi == "PLAY_AUDIO") soundManager.play(arxiuSoFi);
 		}else{
 			segons++;
 			

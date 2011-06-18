@@ -36,7 +36,8 @@ function PanelIdentify(){
 	var aciertos = 0;
 	var encerts = 0;
 	var colocades = 0;
-	var arxiuSoFi, reprodSoFi, reprodSo;
+	var primeravegada=true;
+	var text;
 	
 	//Funcio per a inicialitzar l'activitat a partir de les seves dades
 	this.init = function(canvas, activityData)
@@ -79,12 +80,6 @@ function PanelIdentify(){
 		colorlinies = activityData.celllist[0].atributs['style-color-border'];
 		if (!colorlinies) colorlinies = "#00000";
 		colorlinies = "#"+colorlinies.replace(control,"");
-		
-		/*reprodSo = activityData.cell[0].atributs['media-type'];
-		reprodSoFi = activityData.cell[1].atributs['media-type'];
-		
-		arxiuSo = activityData.cell[0].atributs['media-file'];
-		arxiuSoFi = activityData.cell[1].atributs['media-file'];*/
 		
 		colorFonsNoms = "FFFFFF";
 		colorFonsNomsSota = "AAFFAA";
@@ -133,6 +128,8 @@ function PanelIdentify(){
 				
 				myImage.onload = function() {
 					imageLoaded = true;
+					incrShowX=myImage.width;
+					incrShowY=myImage.heigth;
 				};
 	
 				myImage.src = activityData.celllist[0].cell[i].atributs.image;
@@ -167,9 +164,10 @@ function PanelIdentify(){
 	        theY +=  incrShowY;
 	    }
 		
-		jugar = activityData.celllist[0].atributs.id;
+		if (activityData.celllist.length > 1) jugar = activityData.celllist[1].atributs.id;
+		else jugar="0";
 		
-		if(jugar){	
+		if(jugar=="solvedPrimary"){	
 			ordArray.sort( randOrd );
 		
 			for (var o=0;o<peces.length;o++){
@@ -195,18 +193,8 @@ function PanelIdentify(){
 			myImages.add(peces[o]);
 		}
 
-		/*
-		if (reprodSo == "PLAY_AUDIO")
-		{	
-			soundManager.url = "./sound/swf/";
-			soundManager.flashVersion = 9;
-			soundManager.useFlashBlock = false;
-			soundManager.onready(function() {
-				soundManager.createSound(arxiuSo,arxiuSo);
-				soundManager.createSound(arxiuSoFi,arxiuSoFi);
-				soundManager.play(arxiuSo);
-			});
-		}*/
+		text=activityData.cell[0].atributs.p;
+
 	};
 	
 	//Aqui dins va el codi de l'activitat
@@ -228,7 +216,7 @@ function PanelIdentify(){
 			if (DragData.currentPosX >= gridAx && DragData.currentPosX < gridAx+w && 
 					DragData.currentPosY >= gridAy && DragData.currentPosY < gridAy+h){
 				
-				if (frontImage!='none' && myImages.images[frontImage.id].numPeca == "1" && jugar){
+				if (frontImage!='none' && myImages.images[frontImage.id].numPeca == "1" && jugar=="solvedPrimary"){
 					idSegon = frontImage.id;
 					primerClic = true;	
 				}
@@ -237,14 +225,14 @@ function PanelIdentify(){
 		//Disable the current active image
 		}else{
 
-			if(primerClic==true && myImages.images[idSegon].colocada==false && jugar){
+			if(primerClic==true && myImages.images[idSegon].colocada==false && jugar=="solvedPrimary"){
 				myImages.images[idSegon].setHidden(true);
 				colocades++;
 				aciertos++;
 				primerClic = false;
 			}
 
-			if(frontImage!='none' && jugar){
+			if(frontImage!='none' && jugar=="solvedPrimary"){
 				if(frontImage!='notfound') frontImage.unsetDraggable();
 				frontImage='none';
 				intentos++;
@@ -252,16 +240,11 @@ function PanelIdentify(){
 		}
 	
 		//COMPROVAR ESTAT ACTIVITAT
-		if(colocades == encerts && colocades != 0 && jugar){
+		if(colocades == encerts && colocades != 0 && jugar=="solvedPrimary"){
 			this.acabat=true;
-			context.canvas.style.cursor = 'url(./images/ok.cur), wait';
 			var im = new Image();
 			im.src=fitxeracabar;
 			context.drawImage(im,(canvasWidth/2)-64,(canvasHeight/2)-64,128,128);
-			/*if (reprodSoFi == "PLAY_AUDIO"){
-				soundManager.play(arxiuSoFi);
-				reprodSoFi = "false";
-			}*/
 		}else{
 			segons++;
 			
@@ -274,6 +257,11 @@ function PanelIdentify(){
 			grid.drawFonsJoc(colorfonsjoc, "0", margin);
 			myImages.draw(colorhidden);
 			grid.draw(colorlinies);
+			
+			if(primeravegada && jugar=="solvedPrimary"){
+				alert (text);
+				primeravegada=false;	
+			}
 		}
 	
 		contextControl.fillStyle = "black";
@@ -282,11 +270,11 @@ function PanelIdentify(){
 		tiempo = segons/20;
 		tiempo = arrodonir(tiempo,0);
 		
-		
 		if (android){
 			contextControl.fillText(aciertos, 40, 240);
 			contextControl.fillText(intentos, 40, 290);
 			contextControl.fillText(tiempo, 40, 340);
+			
 		}else{
 			contextControl.fillText(aciertos, 890, 50);
 			contextControl.fillText(intentos, 940, 50);

@@ -31,7 +31,7 @@ function PanelInformation()
 	var h = 0;
 	var gridAx = 0;
 	var gridAy = 0;
-	var lines, cols, x, y, imgw, imgh, grid, showW, showH, reprodSo, arxiuSo, gridFons, imatgefons;
+	var lines, cols, x, y, imgw, imgh, grid, showW, showH, gridFons, imatgefons;
 	var colorlinies, colorfonsjoc, colorfonsalt, colorfonsbaix, gradiente, background, colorbaix, coloralt, grad, marg, image;
 	
 	/**
@@ -65,10 +65,6 @@ function PanelInformation()
 		colorfonsjoc = activityData.atributsActivitat['settings-window-bgColor'];
 		if (!colorfonsjoc) colorfonsjoc = "0xFFFFFF";
 		colorfonsjoc = "#"+colorfonsjoc.replace(control,"");
-		
-		reprodSo = activityData.cell[0].atributs['media-type'];
-		
-		arxiuSo = activityData.cell[0].atributs['media-file'];
 		
 		colorlinies = activityData.celllist[0].atributs['style-color-border'];
 		if (!colorlinies) colorlinies = "0x111111";
@@ -129,22 +125,10 @@ function PanelInformation()
 			};
 			img.src = imatgefons;
 		}
-		
-		/** Reprodueix el so de l'activitat **/
-		/*if (reprodSo == "PLAY_AUDIO")
-		{
-			soundManager.url = "./sound/swf/";
-			soundManager.flashVersion = 9;
-			soundManager.useFlashBlock = false;
-			
-			soundManager.onready(function() {
-				soundManager.createSound(arxiuSo,arxiuSo);
-				soundManager.play(arxiuSo);
-			});
-		}*/
+
 	};
 	
-	this.run = function(canvasControl) 
+	this.run = function() 
 	{
 		contextControl = canvasControl.getContext("2d");
 		context.clearRect(0, 0, canvasWidth, canvasHeight);

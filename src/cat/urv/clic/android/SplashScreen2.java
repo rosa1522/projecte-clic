@@ -30,7 +30,7 @@ public class SplashScreen2 extends Activity {
 			public void run() {
 				try {
 					int waited = 0;
-					while (waited < 4500) {
+					while (waited < 5000) {
 						sleep(100);
 						waited += 100;
 					}
