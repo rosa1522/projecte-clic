@@ -78,8 +78,11 @@ function UserInterface()
 			context.font = "18pt " + fontt;
 			context.textAlign = "center";
 			
-			var text = dadesActivitat.activitats[numActivitat].cell[numCell].atributs.p;
-			var imsrc = dadesActivitat.activitats[numActivitat].cell[0].atributs.image;
+			if(dadesActivitat.activitats[numActivitat].cell.length < 1) text="";
+			else{
+				text = dadesActivitat.activitats[numActivitat].cell[numCell].atributs.p;
+				imsrc = dadesActivitat.activitats[numActivitat].cell[0].atributs.image;
+			}
 			
 			/** Quan el text es massa gran el tallem en dos files **/
 			if (text)

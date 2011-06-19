@@ -2146,28 +2146,6 @@
 	Sandra Martínez García </autors>
 	</joc>
 	<joc>
-	    <identificador>3485</identificador>
-	    <nom>La xocolata</nom>
-	    <dataPublicacio>09/07/08</dataPublicacio>
-	    <llengua>
-	        <nom>ca</nom>
-	    </llengua>
-	    <nivellJoc>
-	        <nom>ei</nom>
-	    </nivellJoc>
-	    <area>
-	        <nom>div</nom>
-	    </area>
-	    <ruta>http://clic.xtec.cat/db/act_ca.jsp?id=3485</ruta>
-	    <clic>http://clic.xtec.cat/projects/xocolata/jclic/xocolata.jclic.zip</clic>
-	    <img>http://clic.xtec.cat/gifs/xocolata.jpg</img>
-	    <centre>ESC La Florida
-	Santa Perpètua de Mogoda (Vallès Occidental)
-	</centre>
-	    <autors>
-	Maite Álvarez Leo </autors>
-	</joc>
-	<joc>
 	    <identificador>3483</identificador>
 	    <nom>El joc dels colors</nom>
 	    <dataPublicacio>04/07/08</dataPublicacio>
@@ -2186,10 +2164,7 @@
 	    <centre>CEIP Pau Casals
 	Montmeló (Vallès Oriental)
 	</centre>
-	    <autors>
-	Enric J. López  
-	, Imma Palahí  
-	 i Maria Borrell </autors>
+	    <autors>Enric J. López, Imma Palahí i Maria Borrell </autors>
 	</joc>
 	<joc>
 	    <identificador>3481</identificador>
