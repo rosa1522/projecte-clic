@@ -87,15 +87,20 @@ function PuzzleIntercanvi(){
 				showH=arrodonir(h,0);
 
 				if(w > (canvasWidth-50)){
-					showW=w-(w-canvasWidth-50);
-					showH=h-(w-canvasWidth-50);
-					//if(h > (canvasHeight-50)) showH=h-(w-(canvasWidth));
+					//showW=w-(w-canvasWidth-50);
+					//showH=h-(w-canvasWidth-50);
+					showW=canvasWidth-50;
+					aux=w-showW;
+					showH=h-aux;
 					gridAx=((canvasWidth-showW-50)/2)+25; 
 					gridAy=((canvasHeight-showH-50)/2)+25;
 				}
 				else if(h > (canvasHeight-50)){
-					showH=h-(h-(canvasHeight-50));
-					showW=canvasWidth-50;
+					//showH=h-(h-(canvasHeight-50));
+					//showW=canvasWidth-50;
+					showH=canvasHeight-50;
+					aux=h-showH;
+					showW=w-aux;
 					gridAx=((canvasWidth-showW-50)/2)+25; 
 					gridAy=((canvasHeight-showH-50)/2)+25; 
 				}else{
@@ -363,6 +368,8 @@ function PuzzleIntercanvi(){
 	//Aquest funcio s'ha de cridar un cop s'ha acabat l'activitat i es canvia a una altra
 	this.end = function() {
 		delete(grid);
+		delete(peces);
+		delete(myImages);
 		//Aqui hauriem d'alliberar la memoria de les imatges (si es pot)
 		return;
 	};

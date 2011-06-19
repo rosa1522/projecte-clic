@@ -283,6 +283,9 @@ function Memoria(){
 	//Aquest funcio s'ha de cridar un cop s'ha acabat l'activitat i es canvia a una altra
 	this.end = function() {
 		delete(grid);
+		delete(xy);
+		delete(peces);
+		delete(myImages);
 		//Aqui hauriem d'alliberar la memoria de les imatges (si es pot)
 		return;
 	};

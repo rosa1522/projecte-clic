@@ -118,21 +118,10 @@ function SimpleAssociation()
 		var id_img=0;
 		var pecesPrimer = new Array();
 		var numPrimer = activityData.celllist[0].cell.length; //noms
-		var hihaText = activityData.celllist[0].cell[0].atributs.p;
+		var hihaImatge = activityData.celllist[0].cell[0].atributs.image;
 		
-		if (hihaText)
+		if (hihaImatge)
 		{
-			for(var i=0; i<numPrimer; i++)
-			{
-				var nomImage = activityData.celllist[0].cell[i].atributs.p;
-				var novaPeca = new ImageAssociation(context, id_img, nomImage,incrShowX,incrShowY);
-				novaPeca.setNumPeca(numPeca);
-				novaPeca.setColor(colorFonsNoms);
-				pecesPrimer.push(novaPeca);
-				id_img++;
-				numPeca++;	
-			}
-		}else{
 			for(var i=0; i<numPrimer; i++)
 			{
 				var myImage = new Image();
@@ -147,6 +136,17 @@ function SimpleAssociation()
 				pecesPrimer.push(novaPecaImatges);
 				id_img++;
 				numPeca++;
+			}
+		}else{
+			for(var i=0; i<numPrimer; i++)
+			{
+				var nomImage = activityData.celllist[0].cell[i].atributs.p;
+				var novaPeca = new ImageAssociation(context, id_img, nomImage,incrShowX,incrShowY);
+				novaPeca.setNumPeca(numPeca);
+				novaPeca.setColor(colorFonsNoms);
+				pecesPrimer.push(novaPeca);
+				id_img++;
+				numPeca++;	
 			}
 		}
 		
@@ -379,6 +379,8 @@ function SimpleAssociation()
 	//Aquest funcio s'ha de cridar un cop s'ha acabat l'activitat i es canvia a una altra
 	this.end = function() {
 		delete(grid);
+		delete(myImages);
+		
 		//Aqui hauriem d'alliberar la memoria de les imatges (si es pot)
 		return;
 	};
