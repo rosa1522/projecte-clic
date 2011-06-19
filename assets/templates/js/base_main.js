@@ -10,12 +10,12 @@
  */
 function iniciaActivitat(canvas,num) {
 	var act;
-	if (dadesActivitat.activitats[num].atributsActivitat.class == "@puzzles.DoublePuzzle" &&
+	if (dadesActivitat.activitats[num].atributsActivitat.classe == "@puzzles.DoublePuzzle" &&
 			dadesActivitat.activitats[num].celllist[0].atributs['shaper-class'] == "@ClassicJigSaw") { act = new PuzzleDoble(); }
-	else if (dadesActivitat.activitats[num].atributsActivitat.class == "@puzzles.ExchangePuzzle") { act = new PuzzleIntercanvi(); }
-	else if (dadesActivitat.activitats[num].atributsActivitat.class == "@memory.MemoryGame") { act = new Memoria(); }
-	else if (dadesActivitat.activitats[num].atributsActivitat.class == "@panels.Identify") { act = new PanelIdentify(); }
-	else if (dadesActivitat.activitats[num].atributsActivitat.class == "@panels.InformationScreen") 
+	else if (dadesActivitat.activitats[num].atributsActivitat.classe == "@puzzles.ExchangePuzzle") { act = new PuzzleIntercanvi(); }
+	else if (dadesActivitat.activitats[num].atributsActivitat.classe == "@memory.MemoryGame") { act = new Memoria(); }
+	else if (dadesActivitat.activitats[num].atributsActivitat.classe == "@panels.Identify") { act = new PanelIdentify(); }
+	else if (dadesActivitat.activitats[num].atributsActivitat.classe == "@panels.InformationScreen") 
 			{   if (dadesActivitat.activitats[num].celllist[0].cell.length != 0){
 					var media = dadesActivitat.activitats[num].celllist[0].cell[0].atributs['media-type'];
 					if(media == "RUN_CLIC_ACTIVITY" || media == "RUN_CLIC_PACKAGE") return "NO";
@@ -24,7 +24,7 @@ function iniciaActivitat(canvas,num) {
 					act = new PanelInformation();
 				}
 			}
-	else if (dadesActivitat.activitats[num].atributsActivitat.class == "@associations.SimpleAssociation") {
+	else if (dadesActivitat.activitats[num].atributsActivitat.classe == "@associations.SimpleAssociation") {
 		if (dadesActivitat.activitats[num].celllist[0].cell.length != 0){
 			var media = dadesActivitat.activitats[num].celllist[0].cell[0].atributs['media-type'];
 			var media2 = dadesActivitat.activitats[num].celllist[1].cell[0].atributs['media-type'];

@@ -132,7 +132,6 @@ public class DescripcioJoc extends Activity implements OnClickListener{
 
 		// Si el joc no està instal·lat, l'hem de descarregar i canviar la imatge del botó perquè
 		// l'usuari no torni a donar al botó per poder jugar
-		System.out.println("DESCARREGAT" + ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getDescarregat());
 		if (!ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getDescarregat()) {
 			idJoc =  Integer.toString(bundle.getInt("idJoc"));
 			clicZip =  ClicApplication.llistaJocs.cercarJoc(bundle.getInt("idJoc")).getClic();
